@@ -13,6 +13,10 @@
 		E67AB1E720044FF500AD83C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E67AB1E520044FF500AD83C9 /* LaunchScreen.storyboard */; };
 		E67AB1EA20044FF500AD83C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E67AB1E920044FF500AD83C9 /* main.m */; };
 		E6EF8E2F2004554700A96B04 /* KGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EF8E2E2004554700A96B04 /* KGMainViewController.m */; };
+		E6EF8E332004861100A96B04 /* ZipUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EF8E322004861100A96B04 /* ZipUtil.m */; };
+		E6EF8E392004ABAC00A96B04 /* HttpRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EF8E382004ABAC00A96B04 /* HttpRequestModel.m */; };
+		E6EF8E422004B92E00A96B04 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6EF8E3F2004B92E00A96B04 /* MBProgressHUD.bundle */; };
+		E6EF8E432004B92E00A96B04 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EF8E412004B92E00A96B04 /* MBProgressHUD+MJ.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,14 @@
 		E67AB1E920044FF500AD83C9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E6EF8E2D2004554700A96B04 /* KGMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KGMainViewController.h; sourceTree = "<group>"; };
 		E6EF8E2E2004554700A96B04 /* KGMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KGMainViewController.m; sourceTree = "<group>"; };
+		E6EF8E312004861100A96B04 /* ZipUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZipUtil.h; sourceTree = "<group>"; };
+		E6EF8E322004861100A96B04 /* ZipUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZipUtil.m; sourceTree = "<group>"; };
+		E6EF8E372004ABAC00A96B04 /* HttpRequestModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpRequestModel.h; sourceTree = "<group>"; };
+		E6EF8E382004ABAC00A96B04 /* HttpRequestModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HttpRequestModel.m; sourceTree = "<group>"; };
+		E6EF8E3A2004B4D700A96B04 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		E6EF8E3F2004B92E00A96B04 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
+		E6EF8E402004B92E00A96B04 /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
+		E6EF8E412004B92E00A96B04 /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +92,7 @@
 		E67AB1D920044FF500AD83C9 /* Kindergarten */ = {
 			isa = PBXGroup;
 			children = (
+				E6EF8E302004836800A96B04 /* Utils */,
 				E6EF8E2C2004553700A96B04 /* KGMainController */,
 				E67AB1DA20044FF500AD83C9 /* AppDelegate.h */,
 				E67AB1DB20044FF500AD83C9 /* AppDelegate.m */,
@@ -87,6 +100,7 @@
 				E67AB1E520044FF500AD83C9 /* LaunchScreen.storyboard */,
 				E67AB1E820044FF500AD83C9 /* Info.plist */,
 				E67AB1E920044FF500AD83C9 /* main.m */,
+				E6EF8E3A2004B4D700A96B04 /* PrefixHeader.pch */,
 			);
 			path = Kindergarten;
 			sourceTree = "<group>";
@@ -98,6 +112,28 @@
 				E6EF8E2E2004554700A96B04 /* KGMainViewController.m */,
 			);
 			path = KGMainController;
+			sourceTree = "<group>";
+		};
+		E6EF8E302004836800A96B04 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E6EF8E3B2004B8A800A96B04 /* MBProgressHUD */,
+				E6EF8E312004861100A96B04 /* ZipUtil.h */,
+				E6EF8E322004861100A96B04 /* ZipUtil.m */,
+				E6EF8E372004ABAC00A96B04 /* HttpRequestModel.h */,
+				E6EF8E382004ABAC00A96B04 /* HttpRequestModel.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		E6EF8E3B2004B8A800A96B04 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				E6EF8E3F2004B92E00A96B04 /* MBProgressHUD.bundle */,
+				E6EF8E402004B92E00A96B04 /* MBProgressHUD+MJ.h */,
+				E6EF8E412004B92E00A96B04 /* MBProgressHUD+MJ.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +199,7 @@
 			files = (
 				E67AB1E720044FF500AD83C9 /* LaunchScreen.storyboard in Resources */,
 				E67AB1E420044FF500AD83C9 /* Assets.xcassets in Resources */,
+				E6EF8E422004B92E00A96B04 /* MBProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,7 +258,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6EF8E432004B92E00A96B04 /* MBProgressHUD+MJ.m in Sources */,
 				E67AB1EA20044FF500AD83C9 /* main.m in Sources */,
+				E6EF8E392004ABAC00A96B04 /* HttpRequestModel.m in Sources */,
+				E6EF8E332004861100A96B04 /* ZipUtil.m in Sources */,
 				E6EF8E2F2004554700A96B04 /* KGMainViewController.m in Sources */,
 				E67AB1DC20044FF500AD83C9 /* AppDelegate.m in Sources */,
 			);
@@ -354,6 +394,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 495W836UVX;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Kindergarten/PrefixHeader.pch";
 				INFOPLIST_FILE = Kindergarten/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayanginfo.Kindergarten;
@@ -369,6 +411,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 495W836UVX;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Kindergarten/PrefixHeader.pch";
 				INFOPLIST_FILE = Kindergarten/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayanginfo.Kindergarten;
