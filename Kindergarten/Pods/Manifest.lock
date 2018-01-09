@@ -14,13 +14,16 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
+  - SSZipArchive (1.7)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0.0-beta.1)
+  - SSZipArchive
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  SSZipArchive: 63f8e11cfcc33e03e4cd666b4359ea8bd6facd0c
 
-PODFILE CHECKSUM: 7cb177baf5e74a587aa93930efab40d11361c3ce
+PODFILE CHECKSUM: 7763559b72bdbeba4cee169a479c42013bb981ef
 
 COCOAPODS: 1.2.1.rc.1
