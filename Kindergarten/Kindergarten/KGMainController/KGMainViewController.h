@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  KGMainViewController.h
 //  Kindergarten
 //
 //  Created by junfeng on 2018/1/9.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface KGMainViewController : UIViewController
 
 @end
-

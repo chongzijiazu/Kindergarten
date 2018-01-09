@@ -9,11 +9,10 @@
 /* Begin PBXBuildFile section */
 		6B8652AC7634D6474AA09999 /* libPods-Kindergarten.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A153AD5C68F05D5D4DF0B3E0 /* libPods-Kindergarten.a */; };
 		E67AB1DC20044FF500AD83C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E67AB1DB20044FF500AD83C9 /* AppDelegate.m */; };
-		E67AB1DF20044FF500AD83C9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67AB1DE20044FF500AD83C9 /* ViewController.m */; };
-		E67AB1E220044FF500AD83C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E67AB1E020044FF500AD83C9 /* Main.storyboard */; };
 		E67AB1E420044FF500AD83C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E67AB1E320044FF500AD83C9 /* Assets.xcassets */; };
 		E67AB1E720044FF500AD83C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E67AB1E520044FF500AD83C9 /* LaunchScreen.storyboard */; };
 		E67AB1EA20044FF500AD83C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E67AB1E920044FF500AD83C9 /* main.m */; };
+		E6EF8E2F2004554700A96B04 /* KGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EF8E2E2004554700A96B04 /* KGMainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,13 +22,12 @@
 		E67AB1D720044FF500AD83C9 /* Kindergarten.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kindergarten.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E67AB1DA20044FF500AD83C9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E67AB1DB20044FF500AD83C9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E67AB1DD20044FF500AD83C9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E67AB1DE20044FF500AD83C9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		E67AB1E120044FF500AD83C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E67AB1E320044FF500AD83C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E67AB1E620044FF500AD83C9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E67AB1E820044FF500AD83C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E67AB1E920044FF500AD83C9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E6EF8E2D2004554700A96B04 /* KGMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KGMainViewController.h; sourceTree = "<group>"; };
+		E6EF8E2E2004554700A96B04 /* KGMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KGMainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,17 +80,24 @@
 		E67AB1D920044FF500AD83C9 /* Kindergarten */ = {
 			isa = PBXGroup;
 			children = (
+				E6EF8E2C2004553700A96B04 /* KGMainController */,
 				E67AB1DA20044FF500AD83C9 /* AppDelegate.h */,
 				E67AB1DB20044FF500AD83C9 /* AppDelegate.m */,
-				E67AB1DD20044FF500AD83C9 /* ViewController.h */,
-				E67AB1DE20044FF500AD83C9 /* ViewController.m */,
-				E67AB1E020044FF500AD83C9 /* Main.storyboard */,
 				E67AB1E320044FF500AD83C9 /* Assets.xcassets */,
 				E67AB1E520044FF500AD83C9 /* LaunchScreen.storyboard */,
 				E67AB1E820044FF500AD83C9 /* Info.plist */,
 				E67AB1E920044FF500AD83C9 /* main.m */,
 			);
 			path = Kindergarten;
+			sourceTree = "<group>";
+		};
+		E6EF8E2C2004553700A96B04 /* KGMainController */ = {
+			isa = PBXGroup;
+			children = (
+				E6EF8E2D2004554700A96B04 /* KGMainViewController.h */,
+				E6EF8E2E2004554700A96B04 /* KGMainViewController.m */,
+			);
+			path = KGMainController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,7 +163,6 @@
 			files = (
 				E67AB1E720044FF500AD83C9 /* LaunchScreen.storyboard in Resources */,
 				E67AB1E420044FF500AD83C9 /* Assets.xcassets in Resources */,
-				E67AB1E220044FF500AD83C9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,8 +221,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E67AB1DF20044FF500AD83C9 /* ViewController.m in Sources */,
 				E67AB1EA20044FF500AD83C9 /* main.m in Sources */,
+				E6EF8E2F2004554700A96B04 /* KGMainViewController.m in Sources */,
 				E67AB1DC20044FF500AD83C9 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,14 +230,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E67AB1E020044FF500AD83C9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E67AB1E120044FF500AD83C9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E67AB1E520044FF500AD83C9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

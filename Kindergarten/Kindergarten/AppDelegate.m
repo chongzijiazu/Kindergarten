@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "KGMainViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    KGMainViewController* mainController = [[KGMainViewController alloc] init];
+    mainController.view.frame = self.window.bounds;
+    self.window.rootViewController = mainController;
+    
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
