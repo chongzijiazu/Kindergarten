@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B8652AC7634D6474AA09999 /* libPods-Kindergarten.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A153AD5C68F05D5D4DF0B3E0 /* libPods-Kindergarten.a */; };
 		E67AB1DC20044FF500AD83C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E67AB1DB20044FF500AD83C9 /* AppDelegate.m */; };
 		E67AB1DF20044FF500AD83C9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E67AB1DE20044FF500AD83C9 /* ViewController.m */; };
 		E67AB1E220044FF500AD83C9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E67AB1E020044FF500AD83C9 /* Main.storyboard */; };
@@ -16,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		72B437DF44B03AFF65C17060 /* Pods-Kindergarten.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kindergarten.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kindergarten/Pods-Kindergarten.debug.xcconfig"; sourceTree = "<group>"; };
+		A153AD5C68F05D5D4DF0B3E0 /* libPods-Kindergarten.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kindergarten.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDFB3632EC523E0959FFBCB1 /* Pods-Kindergarten.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kindergarten.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kindergarten/Pods-Kindergarten.release.xcconfig"; sourceTree = "<group>"; };
 		E67AB1D720044FF500AD83C9 /* Kindergarten.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kindergarten.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E67AB1DA20044FF500AD83C9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E67AB1DB20044FF500AD83C9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -33,17 +37,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B8652AC7634D6474AA09999 /* libPods-Kindergarten.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		152381A33AA407891AE0C2D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A153AD5C68F05D5D4DF0B3E0 /* libPods-Kindergarten.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9A9F82556832081288856DD6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				72B437DF44B03AFF65C17060 /* Pods-Kindergarten.debug.xcconfig */,
+				BDFB3632EC523E0959FFBCB1 /* Pods-Kindergarten.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E67AB1CE20044FF500AD83C9 = {
 			isa = PBXGroup;
 			children = (
 				E67AB1D920044FF500AD83C9 /* Kindergarten */,
 				E67AB1D820044FF500AD83C9 /* Products */,
+				9A9F82556832081288856DD6 /* Pods */,
+				152381A33AA407891AE0C2D2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,9 +102,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E67AB1ED20044FF500AD83C9 /* Build configuration list for PBXNativeTarget "Kindergarten" */;
 			buildPhases = (
+				7426CECE21D8EFDE3E03EE22 /* [CP] Check Pods Manifest.lock */,
 				E67AB1D320044FF500AD83C9 /* Sources */,
 				E67AB1D420044FF500AD83C9 /* Frameworks */,
 				E67AB1D520044FF500AD83C9 /* Resources */,
+				064D10206C388A5267A018CB /* [CP] Embed Pods Frameworks */,
+				3C9F57476A88A96222927C5C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -136,6 +163,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		064D10206C388A5267A018CB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kindergarten/Pods-Kindergarten-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3C9F57476A88A96222927C5C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Kindergarten/Pods-Kindergarten-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7426CECE21D8EFDE3E03EE22 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E67AB1D320044FF500AD83C9 /* Sources */ = {
@@ -278,6 +353,7 @@
 		};
 		E67AB1EE20044FF500AD83C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72B437DF44B03AFF65C17060 /* Pods-Kindergarten.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -292,6 +368,7 @@
 		};
 		E67AB1EF20044FF500AD83C9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDFB3632EC523E0959FFBCB1 /* Pods-Kindergarten.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
