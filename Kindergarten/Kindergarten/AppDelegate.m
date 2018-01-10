@@ -22,9 +22,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     //KGMainViewController* mainController = [[KGMainViewController alloc] init];
-    LoginViewController* mainController = [[LoginViewController alloc] init];
-    mainController.view.frame = self.window.bounds;
-    self.window.rootViewController = mainController;
+    LoginViewController* loginController = [[LoginViewController alloc] init];
+    loginController.view.frame = self.window.bounds;
+    UINavigationController* rootViewController = [[UINavigationController alloc] initWithRootViewController:loginController];
+    self.window.rootViewController = rootViewController;
     
     [self.window makeKeyAndVisible];
     return YES;

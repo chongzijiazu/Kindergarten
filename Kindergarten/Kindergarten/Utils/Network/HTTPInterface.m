@@ -11,9 +11,15 @@
 @implementation HTTPInterface
 
 //登录
-+ (NSString *)login
++(NSString*)login
 {
     return [baseUrlString stringByAppendingString:@"login.do"];
+}
+
+//下载指标数据
++(NSString*)downloadlevelcontent;
+{
+    return [baseUrlString stringByAppendingString:@"downloadlevelcontent.do"];
 }
 
 @end

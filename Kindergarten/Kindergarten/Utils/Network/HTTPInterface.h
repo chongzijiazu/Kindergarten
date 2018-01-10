@@ -11,6 +11,9 @@
 @interface HTTPInterface : NSObject
 
 //登录
-+ (NSString *)login;
++(NSString*)login;
+
+//下载指标数据
++(NSString*)downloadlevelcontent;
 
 @end

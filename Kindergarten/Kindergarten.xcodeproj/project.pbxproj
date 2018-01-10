@@ -11,6 +11,9 @@
 		E60461302005A20B00135F7C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E604612F2005A20B00135F7C /* LoginViewController.m */; };
 		E60461342005AE9200135F7C /* HTTPInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = E60461332005AE9200135F7C /* HTTPInterface.m */; };
 		E60461392005B6DC00135F7C /* Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = E60461382005B6DC00135F7C /* Encryption.m */; };
+		E60461412005EEE800135F7C /* level.xml in Resources */ = {isa = PBXBuildFile; fileRef = E60461402005EEE800135F7C /* level.xml */; };
+		E60461492005F86C00135F7C /* LevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60461482005F86C00135F7C /* LevelViewController.m */; };
+		E653F18A200629D200AAC54A /* DownloadManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E653F189200629D200AAC54A /* DownloadManagerViewController.m */; };
 		E67AB1DC20044FF500AD83C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E67AB1DB20044FF500AD83C9 /* AppDelegate.m */; };
 		E67AB1E420044FF500AD83C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E67AB1E320044FF500AD83C9 /* Assets.xcassets */; };
 		E67AB1E720044FF500AD83C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E67AB1E520044FF500AD83C9 /* LaunchScreen.storyboard */; };
@@ -32,6 +35,11 @@
 		E60461332005AE9200135F7C /* HTTPInterface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTTPInterface.m; sourceTree = "<group>"; };
 		E60461372005B6DC00135F7C /* Encryption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Encryption.h; sourceTree = "<group>"; };
 		E60461382005B6DC00135F7C /* Encryption.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Encryption.m; sourceTree = "<group>"; };
+		E60461402005EEE800135F7C /* level.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level.xml; sourceTree = "<group>"; };
+		E60461472005F86C00135F7C /* LevelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelViewController.h; sourceTree = "<group>"; };
+		E60461482005F86C00135F7C /* LevelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LevelViewController.m; sourceTree = "<group>"; };
+		E653F188200629D200AAC54A /* DownloadManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadManagerViewController.h; sourceTree = "<group>"; };
+		E653F189200629D200AAC54A /* DownloadManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadManagerViewController.m; sourceTree = "<group>"; };
 		E67AB1D720044FF500AD83C9 /* Kindergarten.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kindergarten.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E67AB1DA20044FF500AD83C9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E67AB1DB20044FF500AD83C9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -80,13 +88,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		E604612D2005A1D600135F7C /* Login */ = {
+		E604612D2005A1D600135F7C /* LoginController */ = {
 			isa = PBXGroup;
 			children = (
 				E604612E2005A20B00135F7C /* LoginViewController.h */,
 				E604612F2005A20B00135F7C /* LoginViewController.m */,
 			);
-			path = Login;
+			path = LoginController;
 			sourceTree = "<group>";
 		};
 		E60461312005AE4F00135F7C /* Network */ = {
@@ -118,9 +126,36 @@
 			path = MD5;
 			sourceTree = "<group>";
 		};
+		E604613F2005EEDB00135F7C /* testdata */ = {
+			isa = PBXGroup;
+			children = (
+				E60461402005EEE800135F7C /* level.xml */,
+			);
+			path = testdata;
+			sourceTree = "<group>";
+		};
+		E60461462005F85C00135F7C /* LevelController */ = {
+			isa = PBXGroup;
+			children = (
+				E60461472005F86C00135F7C /* LevelViewController.h */,
+				E60461482005F86C00135F7C /* LevelViewController.m */,
+			);
+			path = LevelController;
+			sourceTree = "<group>";
+		};
+		E653F187200629B900AAC54A /* DownloadController */ = {
+			isa = PBXGroup;
+			children = (
+				E653F188200629D200AAC54A /* DownloadManagerViewController.h */,
+				E653F189200629D200AAC54A /* DownloadManagerViewController.m */,
+			);
+			path = DownloadController;
+			sourceTree = "<group>";
+		};
 		E67AB1CE20044FF500AD83C9 = {
 			isa = PBXGroup;
 			children = (
+				E604613F2005EEDB00135F7C /* testdata */,
 				E67AB1D920044FF500AD83C9 /* Kindergarten */,
 				E67AB1D820044FF500AD83C9 /* Products */,
 				9A9F82556832081288856DD6 /* Pods */,
@@ -139,7 +174,9 @@
 		E67AB1D920044FF500AD83C9 /* Kindergarten */ = {
 			isa = PBXGroup;
 			children = (
-				E604612D2005A1D600135F7C /* Login */,
+				E653F187200629B900AAC54A /* DownloadController */,
+				E60461462005F85C00135F7C /* LevelController */,
+				E604612D2005A1D600135F7C /* LoginController */,
 				E6EF8E302004836800A96B04 /* Utils */,
 				E6EF8E2C2004553700A96B04 /* KGMainController */,
 				E67AB1DA20044FF500AD83C9 /* AppDelegate.h */,
@@ -244,6 +281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E60461412005EEE800135F7C /* level.xml in Resources */,
 				E67AB1E720044FF500AD83C9 /* LaunchScreen.storyboard in Resources */,
 				E67AB1E420044FF500AD83C9 /* Assets.xcassets in Resources */,
 				E6EF8E422004B92E00A96B04 /* MBProgressHUD.bundle in Resources */,
@@ -306,7 +344,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6EF8E432004B92E00A96B04 /* MBProgressHUD+MJ.m in Sources */,
+				E60461492005F86C00135F7C /* LevelViewController.m in Sources */,
 				E60461392005B6DC00135F7C /* Encryption.m in Sources */,
+				E653F18A200629D200AAC54A /* DownloadManagerViewController.m in Sources */,
 				E67AB1EA20044FF500AD83C9 /* main.m in Sources */,
 				E6EF8E392004ABAC00A96B04 /* HttpRequestModel.m in Sources */,
 				E60461342005AE9200135F7C /* HTTPInterface.m in Sources */,

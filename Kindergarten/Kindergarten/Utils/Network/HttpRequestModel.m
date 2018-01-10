@@ -35,16 +35,15 @@ static HttpRequestModel *requestModel = nil;
     
     HUD.labelText = @"正在加载";
     HUD.animationType = MBProgressHUDAnimationFade;
-    
     [HUD show:YES];
-    //3.判断网络状况
+    
+    //判断网络状况
     AFNetworkReachabilityManager *netManager = [AFNetworkReachabilityManager sharedManager];
     [netManager startMonitoring];  //开始监听
     [netManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status){
         if (status == AFNetworkReachabilityStatusNotReachable)
         {
             HUD.animationType = MBProgressHUDModeText;
-            
             HUD.labelText = @"无可用网络 !";
             return;
         }
@@ -90,13 +89,10 @@ static HttpRequestModel *requestModel = nil;
                 });
                 
                 HUD.animationType = MBProgressHUDModeText;
-                
                 HUD.labelText=@"请求失败,重新发送请求";
-                
             }
-            
             [HUD performSelector:@selector(removeFromSuperview)  withObject:nil afterDelay:2.0];
-            //             BLLog(@"请求失败");
+            //BLLog(@"请求失败");
             
         }];
         
@@ -128,7 +124,6 @@ static HttpRequestModel *requestModel = nil;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [tager performSelector:failure withObject:error afterDelay:1.0];
                     HUD.animationType = MBProgressHUDModeText;
-                    
                     HUD.labelText=@"请求失败,重新发送请求";
                     
                 });

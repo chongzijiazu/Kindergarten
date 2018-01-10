@@ -8,12 +8,18 @@
 
 #import "LoginViewController.h"
 #import "Encryption.h"
+#import "DownloadManagerViewController.h"
 
 @interface LoginViewController ()
 
 @end
 
 @implementation LoginViewController
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    self.navigationController.navigationBar.hidden = YES;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,7 +63,7 @@
 
 -(void)btn_login_clicked
 {
-    NSLog(@"login");
+    /*NSLog(@"login");
     NSString* username = _textField_Username.text;
     NSString* password = _textField_Password.text;
     
@@ -66,7 +72,10 @@
     password = [Encryption md5:password];
     NSDictionary *dict = @{@"account": username, @"password": password};
     
-    [HttpRequestModel httpRequest:[HTTPInterface login] withParamters:dict isPost:YES withDeletegte:self success:@selector(successLogin:) failure:@selector(failureLogin:)];
+    [HttpRequestModel httpRequest:[HTTPInterface login] withParamters:dict isPost:YES withDeletegte:self success:@selector(successLogin:) failure:@selector(failureLogin:)];*/
+    
+    DownloadManagerViewController* downloadManagerVC = [[DownloadManagerViewController alloc] init];
+    [self.navigationController pushViewController:downloadManagerVC animated:NO];
 }
 
 - (void)successLogin:(NSDictionary *)responseData
