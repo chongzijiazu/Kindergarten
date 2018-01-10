@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6B8652AC7634D6474AA09999 /* libPods-Kindergarten.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A153AD5C68F05D5D4DF0B3E0 /* libPods-Kindergarten.a */; };
+		E60461302005A20B00135F7C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E604612F2005A20B00135F7C /* LoginViewController.m */; };
+		E60461342005AE9200135F7C /* HTTPInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = E60461332005AE9200135F7C /* HTTPInterface.m */; };
+		E60461392005B6DC00135F7C /* Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = E60461382005B6DC00135F7C /* Encryption.m */; };
 		E67AB1DC20044FF500AD83C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E67AB1DB20044FF500AD83C9 /* AppDelegate.m */; };
 		E67AB1E420044FF500AD83C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E67AB1E320044FF500AD83C9 /* Assets.xcassets */; };
 		E67AB1E720044FF500AD83C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E67AB1E520044FF500AD83C9 /* LaunchScreen.storyboard */; };
@@ -23,6 +26,12 @@
 		72B437DF44B03AFF65C17060 /* Pods-Kindergarten.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kindergarten.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kindergarten/Pods-Kindergarten.debug.xcconfig"; sourceTree = "<group>"; };
 		A153AD5C68F05D5D4DF0B3E0 /* libPods-Kindergarten.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kindergarten.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDFB3632EC523E0959FFBCB1 /* Pods-Kindergarten.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kindergarten.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kindergarten/Pods-Kindergarten.release.xcconfig"; sourceTree = "<group>"; };
+		E604612E2005A20B00135F7C /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		E604612F2005A20B00135F7C /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		E60461322005AE9200135F7C /* HTTPInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPInterface.h; sourceTree = "<group>"; };
+		E60461332005AE9200135F7C /* HTTPInterface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTTPInterface.m; sourceTree = "<group>"; };
+		E60461372005B6DC00135F7C /* Encryption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Encryption.h; sourceTree = "<group>"; };
+		E60461382005B6DC00135F7C /* Encryption.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Encryption.m; sourceTree = "<group>"; };
 		E67AB1D720044FF500AD83C9 /* Kindergarten.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kindergarten.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E67AB1DA20044FF500AD83C9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E67AB1DB20044FF500AD83C9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -71,6 +80,44 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E604612D2005A1D600135F7C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				E604612E2005A20B00135F7C /* LoginViewController.h */,
+				E604612F2005A20B00135F7C /* LoginViewController.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		E60461312005AE4F00135F7C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E6EF8E372004ABAC00A96B04 /* HttpRequestModel.h */,
+				E6EF8E382004ABAC00A96B04 /* HttpRequestModel.m */,
+				E60461322005AE9200135F7C /* HTTPInterface.h */,
+				E60461332005AE9200135F7C /* HTTPInterface.m */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E60461352005B2A900135F7C /* ZipUtil */ = {
+			isa = PBXGroup;
+			children = (
+				E6EF8E312004861100A96B04 /* ZipUtil.h */,
+				E6EF8E322004861100A96B04 /* ZipUtil.m */,
+			);
+			path = ZipUtil;
+			sourceTree = "<group>";
+		};
+		E60461362005B69B00135F7C /* MD5 */ = {
+			isa = PBXGroup;
+			children = (
+				E60461372005B6DC00135F7C /* Encryption.h */,
+				E60461382005B6DC00135F7C /* Encryption.m */,
+			);
+			path = MD5;
+			sourceTree = "<group>";
+		};
 		E67AB1CE20044FF500AD83C9 = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +139,7 @@
 		E67AB1D920044FF500AD83C9 /* Kindergarten */ = {
 			isa = PBXGroup;
 			children = (
+				E604612D2005A1D600135F7C /* Login */,
 				E6EF8E302004836800A96B04 /* Utils */,
 				E6EF8E2C2004553700A96B04 /* KGMainController */,
 				E67AB1DA20044FF500AD83C9 /* AppDelegate.h */,
@@ -117,11 +165,10 @@
 		E6EF8E302004836800A96B04 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E60461362005B69B00135F7C /* MD5 */,
+				E60461352005B2A900135F7C /* ZipUtil */,
+				E60461312005AE4F00135F7C /* Network */,
 				E6EF8E3B2004B8A800A96B04 /* MBProgressHUD */,
-				E6EF8E312004861100A96B04 /* ZipUtil.h */,
-				E6EF8E322004861100A96B04 /* ZipUtil.m */,
-				E6EF8E372004ABAC00A96B04 /* HttpRequestModel.h */,
-				E6EF8E382004ABAC00A96B04 /* HttpRequestModel.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -259,9 +306,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6EF8E432004B92E00A96B04 /* MBProgressHUD+MJ.m in Sources */,
+				E60461392005B6DC00135F7C /* Encryption.m in Sources */,
 				E67AB1EA20044FF500AD83C9 /* main.m in Sources */,
 				E6EF8E392004ABAC00A96B04 /* HttpRequestModel.m in Sources */,
+				E60461342005AE9200135F7C /* HTTPInterface.m in Sources */,
 				E6EF8E332004861100A96B04 /* ZipUtil.m in Sources */,
+				E60461302005A20B00135F7C /* LoginViewController.m in Sources */,
 				E6EF8E2F2004554700A96B04 /* KGMainViewController.m in Sources */,
 				E67AB1DC20044FF500AD83C9 /* AppDelegate.m in Sources */,
 			);

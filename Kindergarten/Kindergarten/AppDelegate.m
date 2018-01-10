@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "KGMainViewController.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +21,8 @@
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    KGMainViewController* mainController = [[KGMainViewController alloc] init];
+    //KGMainViewController* mainController = [[KGMainViewController alloc] init];
+    LoginViewController* mainController = [[LoginViewController alloc] init];
     mainController.view.frame = self.window.bounds;
     self.window.rootViewController = mainController;
     

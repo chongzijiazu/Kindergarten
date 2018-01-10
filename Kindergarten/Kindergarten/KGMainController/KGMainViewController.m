@@ -32,14 +32,14 @@
 -(void)btn_Test_Clicked
 {
     //Document路径
-    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+    //NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
     //NSString* newDirecPath = [documentPath stringByAppendingString:@"/001-001001-001001001-1"];
     //BOOL isgood = [[NSFileManager defaultManager] createDirectoryAtPath:newDirecPath withIntermediateDirectories:YES attributes:nil error:nil];
     //newDirecPath = [newDirecPath stringByAppendingPathComponent:@"001-001001-001001001-1.txt"];
     
     //BOOL isgood = [[NSFileManager defaultManager] createFileAtPath:newDirecPath contents:[@"hello" dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
     //BOOL isgood = [ZipUtil UZipArchive:@"001-001001-001001001-1.zip"];
-    NSLog(@"%@",documentPath);
+    //NSLog(@"%@",documentPath);
 }
 
 - (void)didReceiveMemoryWarning {
