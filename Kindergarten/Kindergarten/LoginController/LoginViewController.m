@@ -34,7 +34,7 @@
     _textField_Username.textColor = [UIColor blackColor];
     _textField_Username.font = [UIFont systemFontOfSize:20];
     _textField_Username.backgroundColor = [UIColor whiteColor];
-    _textField_Username.clearsOnBeginEditing = YES; //当重复开始编辑时候 清除文字
+    _textField_Username.clearsOnBeginEditing = NO; //当重复开始编辑时候 清除文字
     _textField_Username.secureTextEntry = NO;//文字密文（暗文） 该属性通常用于设置密码输入框
     _textField_Username.textAlignment = NSTextAlignmentLeft;//文字输入时的对齐方式
     [_textField_Username setAutocorrectionType:UITextAutocorrectionTypeNo];//关闭自动纠错功能
@@ -49,7 +49,7 @@
     _textField_Password.textColor = [UIColor blackColor];
     _textField_Password.font = [UIFont systemFontOfSize:20];
     _textField_Password.backgroundColor = [UIColor whiteColor];
-    _textField_Password.clearsOnBeginEditing = YES; //当重复开始编辑时候 清除文字
+    _textField_Password.clearsOnBeginEditing = NO; //当重复开始编辑时候 清除文字
     _textField_Password.secureTextEntry = NO;//文字密文（暗文） 该属性通常用于设置密码输入框
     _textField_Password.textAlignment = NSTextAlignmentLeft;//文字输入时的对齐方式
     [self.view addSubview:_textField_Password];

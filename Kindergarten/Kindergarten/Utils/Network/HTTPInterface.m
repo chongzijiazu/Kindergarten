@@ -22,4 +22,21 @@
     return [baseUrlString stringByAppendingString:@"downloadlevelcontent.do"];
 }
 
+//下载评估试卷
++(NSString*)downloadpapercontent;
+{
+    return [baseUrlString stringByAppendingString:@"downloadpapercontent.do"];
+}
+
+//下载公式
++(NSString*)downloadformulacontent
+{
+    return [baseUrlString stringByAppendingString:@"downloadformulacontent.do"];}
+
+//下载证据数据
++(NSString*)downloadattachmentcontent
+{
+    return [baseUrlString stringByAppendingString:@"downloadattachmentcontent.do"];
+}
+
 @end

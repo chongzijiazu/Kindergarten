@@ -11,6 +11,13 @@
 @interface DownloadManagerViewController : UIViewController
 {
     UIProgressView* _downloadProgress; //下载进度
+    UILabel* _lbl_downloadState;//下载状态（示例：1/4）
+    int _currentDownloadCount;//当前下载第几个
+    NSMutableArray* _downloadArray;//需要下载的文件数组
 }
 @property(nonatomic,retain)UIProgressView* downloadProgress;
+@property(nonatomic,retain)UILabel* lbl_downloadState;
+@property(nonatomic,assign)int currentDownloadCount;
+@property(nonatomic,retain)NSMutableArray* downloadArray;
+
 @end

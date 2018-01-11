@@ -16,15 +16,22 @@
 @implementation DownloadManagerViewController
 
 @synthesize downloadProgress=_downloadProgress;
+@synthesize lbl_downloadState=_lbl_downloadState;
+@synthesize currentDownloadCount=_currentDownloadCount;
+@synthesize downloadArray=_downloadArray;
 
--(void)viewDidLayoutSubviews
+-(void)viewDidAppear:(BOOL)animated
 {
     //[self downloadLevelcontent:[HTTPInterface downloadlevelcontent]];
-    [self downloadDataFrom:[HTTPInterface downloadlevelcontent] toFilename:@"level.zip"];
+    [self downloadEvalutionData]; //下载评估资源
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //初始化数据
+    self.currentDownloadCount = 1;//重置当前下载个数
+    self.downloadArray = [[NSMutableArray alloc] initWithObjects:@"level.zip",@"paper.zip",@"formula.zip",@"processed.zip", nil];
+    
     // Do any additional setup after loading the view.
     self.downloadProgress = [[UIProgressView alloc] init];
     self.downloadProgress.frame = CGRectMake(self.view.frame.size.width/2-100, self.view.frame.size.height/2, 200, 40);
@@ -35,7 +42,6 @@
     //手动设置圆角
     self.downloadProgress.layer.masksToBounds = YES;
     self.downloadProgress.layer.cornerRadius = 2.5;
-    
     //设置进度条宽高
     CGAffineTransform transform1 = CGAffineTransformMakeScale(1.0f, 5.0f);
     self.downloadProgress.transform = transform1;
@@ -43,46 +49,57 @@
     self.downloadProgress.trackImage = [UIImage imageNamed:@""];//设置进度条的背景图片
     self.downloadProgress.progressImage = [UIImage imageNamed:@""];//设置进度条上进度的背景图片
     [self.downloadProgress setProgress:0.0 animated:YES];//设置进度值并显示动画
-    
     [self.view addSubview:self.downloadProgress];
+    
+    self.lbl_downloadState = [[UILabel alloc] init];
+    self.lbl_downloadState.frame = CGRectMake(self.view.frame.size.width/2-100, self.view.frame.size.height/2+20, 200, 20);
+    self.lbl_downloadState.text = @"正在下载评估资源（1/4)";
+    [self.view addSubview:self.lbl_downloadState];
 }
 
-//下载评估指标数据
--(void)downloadLevelcontent:(NSString*)downloadUrl
+//下载评估数据
+-(void)downloadEvalutionData
 {
-    AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadUrl]];
-    
-    NSURLSessionDownloadTask* download = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
-        //下载进度
-        //NSLog(@"%f",1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.downloadProgress.progress =1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount;
-        });
-        
-        
-    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        //保存的文件路径
-        NSString *fullPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"level.zip"];
-        return [NSURL fileURLWithPath:fullPath];
-    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-        NSLog(@"%@",filePath);
-        
-        if (error==nil) {
-            self.downloadProgress.progress = 1;
+    if (self.downloadArray!=nil && self.downloadArray.count>0)
+    {
+        NSString* tempStr = [self.downloadArray objectAtIndex:0];
+        if ([tempStr isEqualToString:@"level.zip"])
+        {
+            //下载评估指标体系
+            [self downloadDataFrom:[HTTPInterface downloadlevelcontent] toFilename:@"level.zip"];
+        }
+        else if ([tempStr isEqualToString:@"paper.zip"])
+        {
+            //下载评估试卷
+            [self downloadDataFrom:[HTTPInterface downloadpapercontent] toFilename:@"paper.zip"];
+        }
+        else if([tempStr isEqualToString:@"formula.zip"])
+        {
+            //下载公式数据
+            [self downloadDataFrom:[HTTPInterface downloadformulacontent] toFilename:@"formula.zip"];
+        }
+        else if([tempStr isEqualToString:@"processed.zip"])
+        {
+            //下载证据数据
+            [self downloadDataFrom:[HTTPInterface downloadpapercontent] toFilename:@"processed.zip"];
+        }
+    }
+    else
+    {
+        if(self.currentDownloadCount == 4)//下载完成
+        {
+            //进行下一步操作
         }
         else
         {
-            NSLog(@"下载失败：%@",error);
+            //正常情况下，不会出现此逻辑，在下载出错后会做处理
         }
-       
-    }];
-    //执行Task
-    [download resume];
+    }
 }
 
 -(void)downloadDataFrom:(NSString*)fromUrl toFilename:(NSString*)toFilename
 {
+    
     //下载
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
@@ -101,11 +118,19 @@
         NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
         return [documentsDirectoryURL URLByAppendingPathComponent:toFilename];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-        if (error) {
+        if (error)
+        {
             NSLog(@"Error:%@",error);
+            //[self showAlertView:@"下载失败"];
+            
         }
         else
         {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.lbl_downloadState.text =  [NSString  stringWithFormat:@"%@%d%@",@"正在下载评估资源(", self.currentDownloadCount++,@"/4)"];
+            });
+            [self.downloadArray removeObject:toFilename]; //移除下载完成的文件
+            [self downloadEvalutionData]; //下载下一个文件
             NSLog(@"File downloaded to: %@", filePath);
         }
     }];
@@ -133,6 +158,18 @@
     [uploadTask resume];
 }
 
+- (void)showAlertView:(NSString *)message
+{
+    NSString *title = @"提示";
+    UIAlertController *alertController;
+    alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        [self.navigationController popViewControllerAnimated:NO];
+                                       }];
+    [alertController addAction:OKAction];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -147,5 +184,39 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+/*//下载评估指标数据
+-(void)downloadLevelcontent:(NSString*)downloadUrl
+{
+    AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadUrl]];
+    
+    NSURLSessionDownloadTask* download = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        //下载进度
+        //NSLog(@"%f",1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.downloadProgress.progress =1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount;
+        });
+        
+        
+    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+        //保存的文件路径
+        NSString *fullPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"level.zip"];
+        return [NSURL fileURLWithPath:fullPath];
+    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+        NSLog(@"%@",filePath);
+        
+        if (error==nil) {
+            self.downloadProgress.progress = 1;
+        }
+        else
+        {
+            NSLog(@"下载失败：%@",error);
+        }
+        
+    }];
+    //执行Task
+    [download resume];
+}*/
 
 @end
