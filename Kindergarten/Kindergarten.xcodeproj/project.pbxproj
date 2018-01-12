@@ -13,6 +13,15 @@
 		E60461392005B6DC00135F7C /* Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = E60461382005B6DC00135F7C /* Encryption.m */; };
 		E60461412005EEE800135F7C /* level.xml in Resources */ = {isa = PBXBuildFile; fileRef = E60461402005EEE800135F7C /* level.xml */; };
 		E60461492005F86C00135F7C /* LevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60461482005F86C00135F7C /* LevelViewController.m */; };
+		E61AAB612008514700424DCE /* LevelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = E61AAB602008514700424DCE /* LevelNode.m */; };
+		E61AAB642008522B00424DCE /* LevelTableCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = E61AAB632008522B00424DCE /* LevelTableCreator.m */; };
+		E638B9E520074EF800685670 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = E638B9E420074EF800685670 /* index.html */; };
+		E638B9E9200752C300685670 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = E638B9E8200752C300685670 /* index.js */; };
+		E638B9EB200754E100685670 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = E638B9EA200754E100685670 /* index.css */; };
+		E638B9EE20075BA800685670 /* WebViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E638B9ED20075BA800685670 /* WebViewModel.m */; };
+		E638B9F020075BF800685670 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E638B9EF20075BF800685670 /* JavaScriptCore.framework */; };
+		E638B9F22007644D00685670 /* CallEach.html in Resources */ = {isa = PBXBuildFile; fileRef = E638B9F12007644D00685670 /* CallEach.html */; };
+		E638B9F420076D6F00685670 /* CallCameraJS.js in Resources */ = {isa = PBXBuildFile; fileRef = E638B9F320076D6F00685670 /* CallCameraJS.js */; };
 		E653F18A200629D200AAC54A /* DownloadManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E653F189200629D200AAC54A /* DownloadManagerViewController.m */; };
 		E67AB1DC20044FF500AD83C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E67AB1DB20044FF500AD83C9 /* AppDelegate.m */; };
 		E67AB1E420044FF500AD83C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E67AB1E320044FF500AD83C9 /* Assets.xcassets */; };
@@ -38,6 +47,18 @@
 		E60461402005EEE800135F7C /* level.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level.xml; sourceTree = "<group>"; };
 		E60461472005F86C00135F7C /* LevelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelViewController.h; sourceTree = "<group>"; };
 		E60461482005F86C00135F7C /* LevelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LevelViewController.m; sourceTree = "<group>"; };
+		E61AAB5F2008514700424DCE /* LevelNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelNode.h; sourceTree = "<group>"; };
+		E61AAB602008514700424DCE /* LevelNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LevelNode.m; sourceTree = "<group>"; };
+		E61AAB622008522B00424DCE /* LevelTableCreator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelTableCreator.h; sourceTree = "<group>"; };
+		E61AAB632008522B00424DCE /* LevelTableCreator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LevelTableCreator.m; sourceTree = "<group>"; };
+		E638B9E420074EF800685670 /* index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		E638B9E8200752C300685670 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		E638B9EA200754E100685670 /* index.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
+		E638B9EC20075BA800685670 /* WebViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewModel.h; sourceTree = "<group>"; };
+		E638B9ED20075BA800685670 /* WebViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewModel.m; sourceTree = "<group>"; };
+		E638B9EF20075BF800685670 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		E638B9F12007644D00685670 /* CallEach.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = CallEach.html; sourceTree = "<group>"; };
+		E638B9F320076D6F00685670 /* CallCameraJS.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = CallCameraJS.js; sourceTree = "<group>"; };
 		E653F188200629D200AAC54A /* DownloadManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadManagerViewController.h; sourceTree = "<group>"; };
 		E653F189200629D200AAC54A /* DownloadManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadManagerViewController.m; sourceTree = "<group>"; };
 		E67AB1D720044FF500AD83C9 /* Kindergarten.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kindergarten.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E638B9F020075BF800685670 /* JavaScriptCore.framework in Frameworks */,
 				6B8652AC7634D6474AA09999 /* libPods-Kindergarten.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,6 +96,7 @@
 		152381A33AA407891AE0C2D2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E638B9EF20075BF800685670 /* JavaScriptCore.framework */,
 				A153AD5C68F05D5D4DF0B3E0 /* libPods-Kindergarten.a */,
 			);
 			name = Frameworks;
@@ -130,6 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				E60461402005EEE800135F7C /* level.xml */,
+				E638B9F12007644D00685670 /* CallEach.html */,
+				E638B9F320076D6F00685670 /* CallCameraJS.js */,
 			);
 			path = testdata;
 			sourceTree = "<group>";
@@ -137,10 +162,50 @@
 		E60461462005F85C00135F7C /* LevelController */ = {
 			isa = PBXGroup;
 			children = (
+				E61AAB5E2008512F00424DCE /* LevelTable */,
 				E60461472005F86C00135F7C /* LevelViewController.h */,
 				E60461482005F86C00135F7C /* LevelViewController.m */,
+				E638B9EC20075BA800685670 /* WebViewModel.h */,
+				E638B9ED20075BA800685670 /* WebViewModel.m */,
 			);
 			path = LevelController;
+			sourceTree = "<group>";
+		};
+		E61AAB5E2008512F00424DCE /* LevelTable */ = {
+			isa = PBXGroup;
+			children = (
+				E61AAB5F2008514700424DCE /* LevelNode.h */,
+				E61AAB602008514700424DCE /* LevelNode.m */,
+				E61AAB622008522B00424DCE /* LevelTableCreator.h */,
+				E61AAB632008522B00424DCE /* LevelTableCreator.m */,
+			);
+			path = LevelTable;
+			sourceTree = "<group>";
+		};
+		E638B9E320074EE300685670 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E638B9E7200752A500685670 /* js */,
+				E638B9E62007529E00685670 /* css */,
+				E638B9E420074EF800685670 /* index.html */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E638B9E62007529E00685670 /* css */ = {
+			isa = PBXGroup;
+			children = (
+				E638B9EA200754E100685670 /* index.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		E638B9E7200752A500685670 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				E638B9E8200752C300685670 /* index.js */,
+			);
+			path = js;
 			sourceTree = "<group>";
 		};
 		E653F187200629B900AAC54A /* DownloadController */ = {
@@ -174,6 +239,7 @@
 		E67AB1D920044FF500AD83C9 /* Kindergarten */ = {
 			isa = PBXGroup;
 			children = (
+				E638B9E320074EE300685670 /* View */,
 				E653F187200629B900AAC54A /* DownloadController */,
 				E60461462005F85C00135F7C /* LevelController */,
 				E604612D2005A1D600135F7C /* LoginController */,
@@ -281,8 +347,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E638B9E520074EF800685670 /* index.html in Resources */,
+				E638B9F420076D6F00685670 /* CallCameraJS.js in Resources */,
 				E60461412005EEE800135F7C /* level.xml in Resources */,
 				E67AB1E720044FF500AD83C9 /* LaunchScreen.storyboard in Resources */,
+				E638B9E9200752C300685670 /* index.js in Resources */,
+				E638B9EB200754E100685670 /* index.css in Resources */,
+				E638B9F22007644D00685670 /* CallEach.html in Resources */,
 				E67AB1E420044FF500AD83C9 /* Assets.xcassets in Resources */,
 				E6EF8E422004B92E00A96B04 /* MBProgressHUD.bundle in Resources */,
 			);
@@ -343,6 +414,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E61AAB612008514700424DCE /* LevelNode.m in Sources */,
 				E6EF8E432004B92E00A96B04 /* MBProgressHUD+MJ.m in Sources */,
 				E60461492005F86C00135F7C /* LevelViewController.m in Sources */,
 				E60461392005B6DC00135F7C /* Encryption.m in Sources */,
@@ -350,8 +422,10 @@
 				E67AB1EA20044FF500AD83C9 /* main.m in Sources */,
 				E6EF8E392004ABAC00A96B04 /* HttpRequestModel.m in Sources */,
 				E60461342005AE9200135F7C /* HTTPInterface.m in Sources */,
+				E638B9EE20075BA800685670 /* WebViewModel.m in Sources */,
 				E6EF8E332004861100A96B04 /* ZipUtil.m in Sources */,
 				E60461302005A20B00135F7C /* LoginViewController.m in Sources */,
+				E61AAB642008522B00424DCE /* LevelTableCreator.m in Sources */,
 				E6EF8E2F2004554700A96B04 /* KGMainViewController.m in Sources */,
 				E67AB1DC20044FF500AD83C9 /* AppDelegate.m in Sources */,
 			);

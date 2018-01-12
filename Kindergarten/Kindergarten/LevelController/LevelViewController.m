@@ -7,9 +7,16 @@
 //
 
 #import "LevelViewController.h"
-#import "XMLDictionary.h"
+#import "WebViewModel.h"
+#import "LevelTableCreator.h"
 
 @interface LevelViewController ()
+{
+    NSString* _levelTable;
+}
+
+@property (nonatomic, strong) WebViewModel* model;
+@property (nonatomic, strong) JSContext *jsContext;
 
 @end
 
@@ -19,10 +26,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //NSString* levelXMLPath = [[NSBundle mainBundle] pathForResource:@"level" ofType:@"xml"];
-    //NSDictionary* dicLevel = [self getDictionaryFromXML:levelXMLPath];
+    NSString* levelXMLPath = [[NSBundle mainBundle] pathForResource:@"level" ofType:@"xml"];
+    _levelTable = [LevelTableCreator CreateTreeFromLevelXML:levelXMLPath];
+    //NSLog(@"%@",levelTable);
     
-    //NSLog(@"%@",dicLevel);
+    NSString* basePath = [[NSBundle mainBundle] bundlePath];//mainBundle path
+    NSURL* baseURL = [NSURL fileURLWithPath:basePath];
+    NSLog(@"%@",basePath);
+    
+    //index.html path
+    //NSString* htmlPath =[NSString stringWithFormat:@"%@/CallEach.html",basePath];
+    NSString* htmlPath =[NSString stringWithFormat:@"%@/index.html",basePath];
+    NSString* htmlString = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
+    //loading local content
+    [self.webView loadHTMLString:htmlString baseURL:baseURL];
+    
+    [self.view addSubview:self.webView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,20 +50,44 @@
     
 }
 
-//根据xml文件的路径，将xml文件转化成dictionary
--(NSDictionary*)getDictionaryFromXML:(NSString*)filePath
-{
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        NSData* data = [NSData dataWithContentsOfFile:filePath];
-        XMLDictionaryParser* parser = [[XMLDictionaryParser alloc] init];
-        NSDictionary* dicXML = [parser dictionaryWithData:data];
-        
-        return dicXML;
+- (UIWebView *)webView {
+    if (_webView == nil) {
+        _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+        _webView.scrollView.bounces = NO;
+        //self.webView.scrollView.showsHorizontalScrollIndicator = NO;
+        //self.webView.scrollView.scrollEnabled = NO;
+        [self.webView sizeToFit];
+        //忽略web页面与_WebView组件的大小关系如果设置为YES可以执行缩放，但是web页面加载出来的时候，就会缩小到UIWebView组件的大小
+        //_webView.scalesPageToFit = NO;
+        _webView.delegate = self;
     }
-    else //文件不存在
-    {
-        return nil;
+    
+    return _webView;
+}
+
+#pragma mark - UIWebViewDelegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    self.jsContext = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    
+    WebViewModel *model  = [[WebViewModel alloc] init];
+    self.jsContext[@"CallEachModel"] = model;
+    model.jsContext = self.jsContext;
+    model.webView = self.webView;
+    model.currentVC = self;
+    self.model = model;
+    
+    self.jsContext.exceptionHandler = ^(JSContext *context, JSValue *exceptionValue) {
+        context.exception = exceptionValue;
+        NSLog(@"异常信息：%@", exceptionValue);
+    };
+    
+    if (_levelTable!=nil && _levelTable.length>0) {
+        [model ocCallJS:@"func2" withString:_levelTable];
     }
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    
 }
 
 /*

@@ -8,6 +8,7 @@
 
 #import "DownloadManagerViewController.h"
 #import "AFNetworking.h"
+#import "LevelViewController.h"
 
 @interface DownloadManagerViewController ()
 
@@ -20,10 +21,17 @@
 @synthesize currentDownloadCount=_currentDownloadCount;
 @synthesize downloadArray=_downloadArray;
 
+//测试用
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    LevelViewController* levelVC = [[LevelViewController alloc] init];
+    [self.navigationController pushViewController:levelVC animated:NO];
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     //[self downloadLevelcontent:[HTTPInterface downloadlevelcontent]];
-    [self downloadEvalutionData]; //下载评估资源
+    //[self downloadEvalutionData]; //下载评估资源
 }
 
 - (void)viewDidLoad {

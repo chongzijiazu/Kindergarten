@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>O与JSC相互调用</title>
+        <style type="text/css">
+            * {
+                font-size: 40px;
+            }
+        </style>
+        
+        
+        <script type="text/javascript">
+            
+            var func1 = function() {
+                alert("[func1]: Im a js Alert !!");
+            }
+        
+        var func2 = function(argument) {
+            document.getElementById('func2span').innerHTML = argument['title']+'arc4random:'+argument['message'];
+        }
+        
+        var func3 = function(argument){
+            document.getElementById('func2span').innerHTML = argument['title']+'arc4random:'+argument['message'];
+            
+            var input=document.getElementById('jsCallOCWithString');
+            input.onclick(argument['title']);
+        }
+        
+            </script>
+        
+    </head>
+    
+    <body>
+        
+        
+        
+        <div style="margin-top: 100px">
+            <h1>jsCallOC </h1>
+            <input type="button" value="jsCallOC" onclick="CallEachModel.jsCallOC()"> <br/>
+                <input type="button" value="jsCallOCWithString" onclick="CallEachModel.jsCallOCWithString('myjsString')" id="jsCallOCWithString"><br/>
+                    <input type="button" value="jsCallOCWithTitle:message" onclick="CallEachModel.jsCallOCWithTitleMessage('myjsTitle','myjsMessage')"><br/>
+                        <input type="button" value="jsCallOCWithDictionary" onclick="CallEachModel.jsCallOCWithDictionary({'title': 'myjsTitle', 'message': 'myjsmessage', 'age': 30})"><br/>
+                            <input type="button" value="jsCallOCWithArray" onclick="CallEachModel.jsCallOCWithArray(['myjsTitle','myjsmessage'])"><br/>
+        </div>
+        
+        <br/>
+        <div>
+            <span id="func2span" style="color: red; font-size: 50px;">changeThisText</span>
+        </div>
+        <br/>
+        
+        <div>
+            <h1>jsOCCallEach </h1>
+            <input id="ocCallJSAndJSCallOCWithParams" type="button" value="ocCallJSAndJSCallOCWithParams "
+                onclick="CallEachModel.ocCallJSAndJSCallOCWithParams({'title': 'jstitle', 'message':'myjsmessage'})"><br/>
+                
+                <input type="button" value="jsCallObjcAndObjcCallJsWithParams"
+                    onclick="CallEachModel.jsCallOCAndOCCallJSWithParams({'title': 'jstitle', 'message':'myjsmessage'})"><br/>
+        </div>
+        
+        
+        <div>
+            <br/><br/>
+            <a href="bill.html">nextPage</a>
+        </div>
+        
+        
+        
+    </body>
+</html>
+

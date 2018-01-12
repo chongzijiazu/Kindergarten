@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LevelViewController : UIViewController
+@interface LevelViewController : UIViewController<UIWebViewDelegate>
+{
+    UIWebView* _webView;
+}
 
+@property(strong,nonatomic)UIWebView* webView;
 
 @end

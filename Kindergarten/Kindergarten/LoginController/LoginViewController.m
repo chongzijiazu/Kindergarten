@@ -9,12 +9,18 @@
 #import "LoginViewController.h"
 #import "Encryption.h"
 #import "DownloadManagerViewController.h"
+#import "AppDelegate.h"
 
 @interface LoginViewController ()
 
 @end
 
 @implementation LoginViewController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+
+}
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -153,6 +159,13 @@
         [MBProgressHUD showSuccess:@"登录成功"];
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
+            
+            interfaceOrientation == UIInterfaceOrientationLandscapeRight );
 }
 
 /*
