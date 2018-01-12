@@ -35,10 +35,11 @@
 
 @end
 
-@interface WebViewModel : NSObject <WebViewJSExport>
+@interface LoginWebViewModel : NSObject <WebViewJSExport>
 
 @property (nonatomic, weak) JSContext *jsContext;
 @property (nonatomic, weak) UIWebView *webView;
 @property (nonatomic, weak) UIViewController *currentVC;
 
 @end
+

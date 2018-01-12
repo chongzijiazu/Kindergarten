@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController<UIWebViewDelegate>
 {
     UITextField* _textField_Username;
     UITextField* _textField_Password;
+    UIWebView* _webView;
 }
 
+@property(strong,nonatomic)UIWebView* webView;
+
+-(void)loginByUsername:(NSString*)username andPassword:(NSString*)password;
 @end

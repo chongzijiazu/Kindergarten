@@ -10,8 +10,13 @@
 #import "Encryption.h"
 #import "DownloadManagerViewController.h"
 #import "AppDelegate.h"
+#import "LevelViewController.h"
+#import "LoginWebViewModel.h"
 
 @interface LoginViewController ()
+
+@property (nonatomic, strong) LoginWebViewModel* model;
+@property (nonatomic, strong) JSContext *jsContext;
 
 @end
 
@@ -19,19 +24,19 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    self.navigationController.navigationBar.hidden = YES;
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.navigationController.navigationBar.hidden=YES;
     // Do any additional setup after loading the view.
+    /*self.view.backgroundColor = [UIColor lightGrayColor];
     _textField_Username = [[UITextField alloc] init];
     _textField_Username.frame = CGRectMake(self.view.frame.size.width/2-150, self.view.frame.size.height/2-100, 300, 40);
     _textField_Username.placeholder = @"用户名";
@@ -64,78 +69,153 @@
     btn_login.frame = CGRectMake(self.view.frame.size.width/2-50, self.view.frame.size.height/2-100+60+60, 100, 40);
     [btn_login setTitle:@"登录" forState:UIControlStateNormal];
     [btn_login addTarget:self action:@selector(btn_login_clicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn_login];
+    [self.view addSubview:btn_login];*/
+    
+    [self initView];
 }
 
--(void)btn_login_clicked
+-(void)initView
 {
-    /*NSLog(@"login");
-    NSString* username = _textField_Username.text;
-    NSString* password = _textField_Password.text;
+    //加载页面
+    NSString* basePath = [[NSBundle mainBundle] bundlePath];
+    basePath = [basePath stringByAppendingString:@"/app"];
+    NSURL* baseURL = [NSURL fileURLWithPath:basePath];
+    NSLog(@"%@",basePath);
     
+
+    NSString* htmlPath =[NSString stringWithFormat:@"%@/login.html",basePath];
+    NSString* htmlString = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
+    [self.webView loadHTMLString:htmlString baseURL:baseURL];
+    [self.view addSubview:self.webView];
+}
+
+-(void)loginByUsername:(NSString*)username andPassword:(NSString*)password
+{
+    //添加用户名、密码验证（待完善）
+    
+    NSLog(@"login");
     NSData* usernameData = [username dataUsingEncoding:NSUTF8StringEncoding];
     username = [usernameData base64EncodedStringWithOptions:1];
     password = [Encryption md5:password];
     NSDictionary *dict = @{@"account": username, @"password": password};
     
-    [HttpRequestModel httpRequest:[HTTPInterface login] withParamters:dict isPost:YES withDeletegte:self success:@selector(successLogin:) failure:@selector(failureLogin:)];*/
+    __weak typeof (self) weakSelf = self;
+    
+    [HttpRequestModel httpRequest:[HTTPInterface login] withParamters:dict isPost:YES success:^(id  _Nullable responseObject)
+     {
+         if ([responseObject isKindOfClass:[NSDictionary class]])
+         {
+             NSDictionary  *responseData = (NSDictionary *)responseObject;
+             
+             NSLog(@"%@",responseData);
+             /*weakSelf.listDeatilArray = [NSMutableArray array];
+             [weakSelf.listDeatilArray removeAllObjects];
+             [weakSelf.firstArray removeAllObjects];
+             [weakSelf.secondArray removeAllObjects];
+             if ([responseData[@"success"] boolValue] && [responseData[@"entity"] isKindOfClass:[NSDictionary class]])
+             {
+                 NSDictionary *tempDict = responseData[@"entity"];
+                 
+                 
+                 if ([tempDict[@"courseKpoints"] isKindOfClass:[NSArray class]])
+                     weakSelf.listDeatilArray = tempDict[@"courseKpoints"];
+                 if (weakSelf.listDeatilArray.count != 0)
+                 {
+                     
+                     NSMutableArray *oneArray = [NSMutableArray array];
+                     [oneArray removeAllObjects];
+                     
+                     NSMutableArray *twoArray = [NSMutableArray array];
+                     [twoArray removeAllObjects];
+                     
+                     for (int i = 0; i < weakSelf.listDeatilArray.count; i++)
+                     {
+                         NSDictionary *oneDict = weakSelf.listDeatilArray[i];
+                         //二级目录名
+                         NSString *name = oneDict[@"name"];
+                         [oneArray addObject:name];
+                         NSMutableDictionary *isOpenDict = [NSMutableDictionary dictionary];
+                         if ([oneDict[@"childKpoints"] isKindOfClass:[NSArray class]])
+                         {
+                             NSArray *childKpoints = oneDict[@"childKpoints"];
+                             
+                             [isOpenDict setObject:childKpoints forKey:@"array1"];
+                             if (i == 0)
+                             {
+                                 [isOpenDict setObject:@(YES) forKey:@"isOpen" ];
+                             }
+                             else
+                             {
+                                 [isOpenDict setObject:@(NO) forKey:@"isOpen" ];
+                             }
+                             [twoArray addObject:isOpenDict];
+                         }
+                     }
+                     weakSelf.firstArray = [oneArray mutableCopy];
+                     
+                     weakSelf.secondArray = [twoArray mutableCopy];
+                     
+                 }
+             }
+             
+             [weakSelf.listTableView reloadData];*/
+             
+             
+             
+         }
+         
+     } failure:^(NSError * _Nonnull error) {
+         
+         [self showAlertView:@"登录失败"];
+     }];
+    
+    /*//模拟登录（应放倒登录成功操作）
+    [userDefault setObject:@"111111" forKey:@"ticketid"];
     
     DownloadManagerViewController* downloadManagerVC = [[DownloadManagerViewController alloc] init];
-    [self.navigationController pushViewController:downloadManagerVC animated:NO];
+    [self.navigationController pushViewController:downloadManagerVC animated:NO];*/
 }
 
-- (void)successLogin:(NSDictionary *)responseData
-{
-    if ([responseData[@"message"] isEqualToString:@"登录成功"])
-    {
-        /*NSDictionary *entity = responseData[@"entity"];
-        NSDictionary *tempDict = entity[@"user"];
-        
-        //用户Id
-        NSString *userId = [NSString stringWithFormat:@"%@", tempDict[@"id"]];
-        
-        if ([userId length])
-            [userDefault setObject:userId forKey:@"USERID"];
-        
-        NSString *casUserId = [NSString stringWithFormat:@"%@", tempDict[@"casUserId"]];
-        if ([casUserId length])
-            [userDefault setObject:casUserId forKey:@"casUserId"];
-        
-        if ([tempDict.allKeys containsObject:@"nickname"])
-            [userDefault setObject:tempDict[@"nickname"] forKey:@"nickname"];
-        
-        if ([tempDict.allKeys containsObject:@"email"])
-            [userDefault setObject:tempDict[@"email"] forKey:@"email"];
-        
-        if ([tempDict.allKeys containsObject:@"mobile"])
-            [userDefault setObject:tempDict[@"mobile"] forKey:@"mobile"];
-        
-        if ([entity.allKeys containsObject:@"memTime"])
-            [userDefault setObject:entity[@"memTime"] forKey:@"cookieTime"];
-        
-        BLLog(@"cookieTime----%@", [userDefault objectForKey:@"cookieTime"]);
-        
-        [userDefault synchronize];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSuccess" object:self userInfo:nil];
-        
-        
-        [self showAlertView:responseData[@"message"]];*/
-    }
-    else
-    {
-        [self showAlertView:responseData[@"message"]];
-    }
-}
-
-- (void)failureLogin:(NSDictionary *)responseData
-{
-    
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UIWebView *)webView {
+    if (_webView == nil) {
+        _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+        _webView.scrollView.bounces = NO;
+        self.webView.scrollView.showsHorizontalScrollIndicator = NO;
+        //self.webView.scrollView.scrollEnabled = NO;
+        [self.webView sizeToFit];
+        //忽略web页面与_WebView组件的大小关系如果设置为YES可以执行缩放，但是web页面加载出来的时候，就会缩小到UIWebView组件的大小
+        //_webView.scalesPageToFit = YES;
+        _webView.delegate = self;
+    }
+    
+    return _webView;
+}
+
+#pragma mark - UIWebViewDelegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    self.jsContext = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    
+    LoginWebViewModel *model  = [[LoginWebViewModel alloc] init];
+    self.jsContext[@"CallEachModel"] = model;
+    model.jsContext = self.jsContext;
+    model.webView = self.webView;
+    model.currentVC = self;
+    self.model = model;
+    
+    self.jsContext.exceptionHandler = ^(JSContext *context, JSValue *exceptionValue) {
+        context.exception = exceptionValue;
+        NSLog(@"异常信息：%@", exceptionValue);
+    };
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    
 }
 
 - (void)showAlertView:(NSString *)message
@@ -161,12 +241,6 @@
     }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
-            
-            interfaceOrientation == UIInterfaceOrientationLandscapeRight );
-}
 
 /*
 #pragma mark - Navigation

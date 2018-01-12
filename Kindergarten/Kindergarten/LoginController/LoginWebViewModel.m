@@ -6,10 +6,13 @@
 //  Copyright © 2018年 Huayang inc. All rights reserved.
 //
 
-#import "WebViewModel.h"
+#import "LoginWebViewModel.h"
 #import "UploadViewController.h"
+#import "DownloadManagerViewController.h"
+#import "Encryption.h"
+#import "LoginViewController.h"
 
-@implementation WebViewModel
+@implementation LoginWebViewModel
 
 
 #pragma mark - jsCallOC
@@ -32,12 +35,12 @@
         [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             //清空ticketid
-             [userDefault setObject:@"" forKey:@"ticketid"];
-             
-             //清理本地数据（文件及数据库）
-             
-             //回到根视图控制器
-             [self.currentVC.navigationController popToRootViewControllerAnimated:NO];
+            [userDefault setObject:@"" forKey:@"ticketid"];
+            
+            //清理本地数据（文件及数据库）
+            
+            //回到根视图控制器
+            [self.currentVC.navigationController popToRootViewControllerAnimated:NO];
             
         }]];
         
@@ -58,14 +61,22 @@
     });
 }
 - (void)jsCallOCWithTitle:(NSString *)title message:(NSString *)msg {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-                                                        message:msg
-                                                       delegate:nil
-                                              cancelButtonTitle:@"I konw"
-                                              otherButtonTitles:nil, nil];
-        [alert show];
-    });
+    /*dispatch_async(dispatch_get_main_queue(), ^{
+     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+     message:msg
+     delegate:nil
+     cancelButtonTitle:@"I konw"
+     otherButtonTitles:nil, nil];
+     [alert show];
+     });*/
+    /*//模拟登录（应放倒登录成功操作）
+    [userDefault setObject:@"111111" forKey:@"ticketid"];
+    
+    DownloadManagerViewController* downloadManagerVC = [[DownloadManagerViewController alloc] init];
+    [self.currentVC.navigationController pushViewController:downloadManagerVC animated:NO];*/
+    LoginViewController* loginVC = (LoginViewController*)self.currentVC;
+    [loginVC loginByUsername:title andPassword:msg];
+    
 }
 
 
@@ -101,13 +112,13 @@
 
 #pragma mark - OCCallJS
 - (void)ocCallJS {
-    JSValue *jsFunc = self.jsContext[@"func1"];
-    [jsFunc callWithArguments:nil];
+    //JSValue *jsFunc = self.jsContext[@"func1"];
+    //[jsFunc callWithArguments:nil];
 }
 
 - (void)ocCallJS:(NSString*)functionname withString:(NSString *)string {
-    JSValue *jsFunc = self.jsContext[functionname];
-    [jsFunc callWithArguments:@[string]];
+    //JSValue *jsFunc = self.jsContext[functionname];
+    //[jsFunc callWithArguments:@[string]];
 }
 
 - (void)ocCallJSWithTitle:(NSString *)title message:(NSString *)message {
@@ -122,3 +133,4 @@
 }
 
 @end
+

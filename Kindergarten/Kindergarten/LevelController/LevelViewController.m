@@ -12,7 +12,7 @@
 
 @interface LevelViewController ()
 {
-    NSString* _levelTable;
+    NSString* _levelTable;//评估指标数据表（页面需要格式）
 }
 
 @property (nonatomic, strong) WebViewModel* model;
@@ -25,23 +25,52 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationController.navigationBar.hidden = YES;
     
+    BOOL isgood = [self readViewNeededData];//读取页面所需数据
+    if (isgood) {
+        //加载页面
+        NSString* basePath = [[NSBundle mainBundle] bundlePath];
+        basePath = [basePath stringByAppendingString:@"/app"];
+        NSURL* baseURL = [NSURL fileURLWithPath:basePath];
+        NSLog(@"%@",basePath);
+        
+        //index.html path
+        //NSString* htmlPath =[NSString stringWithFormat:@"%@/CallEach.html",basePath];
+        NSString* htmlPath =[NSString stringWithFormat:@"%@/asslevel.html",basePath];
+        NSString* htmlString = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
+        [self.webView loadHTMLString:htmlString baseURL:baseURL];
+        [self.view addSubview:self.webView];
+        
+        //页面加载完成后，向页面发送所需的数据（在页面加载完成事件中完成）
+    }
+    else//读取本地数据失败，可能数据已损坏，需重新登录系统下载数据
+    {
+        //清空本地数据，做等处操作(待完善)
+        [userDefault setObject:@"" forKey:@"ticketid"];
+        
+        //回到登录页面
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
+}
+
+//读取页面所需数据
+-(BOOL)readViewNeededData
+{
+    //读取院所信息数据
+    //读取评估时间
+    //读取个人信息
+    
+    //读取评估指标数据
     NSString* levelXMLPath = [[NSBundle mainBundle] pathForResource:@"level" ofType:@"xml"];
     _levelTable = [LevelTableCreator CreateTreeFromLevelXML:levelXMLPath];
-    //NSLog(@"%@",levelTable);
+    if (_levelTable==nil || [_levelTable isEqualToString:@""]) {
+        //读取指标数据失败
+        return false;
+    }
     
-    NSString* basePath = [[NSBundle mainBundle] bundlePath];//mainBundle path
-    NSURL* baseURL = [NSURL fileURLWithPath:basePath];
-    NSLog(@"%@",basePath);
     
-    //index.html path
-    //NSString* htmlPath =[NSString stringWithFormat:@"%@/CallEach.html",basePath];
-    NSString* htmlPath =[NSString stringWithFormat:@"%@/index.html",basePath];
-    NSString* htmlString = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
-    //loading local content
-    [self.webView loadHTMLString:htmlString baseURL:baseURL];
-    
-    [self.view addSubview:self.webView];
+    return true;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,11 +83,11 @@
     if (_webView == nil) {
         _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
         _webView.scrollView.bounces = NO;
-        //self.webView.scrollView.showsHorizontalScrollIndicator = NO;
+        self.webView.scrollView.showsHorizontalScrollIndicator = NO;
         //self.webView.scrollView.scrollEnabled = NO;
         [self.webView sizeToFit];
         //忽略web页面与_WebView组件的大小关系如果设置为YES可以执行缩放，但是web页面加载出来的时候，就会缩小到UIWebView组件的大小
-        //_webView.scalesPageToFit = NO;
+        //_webView.scalesPageToFit = YES;
         _webView.delegate = self;
     }
     
@@ -81,7 +110,7 @@
         NSLog(@"异常信息：%@", exceptionValue);
     };
     
-    if (_levelTable!=nil && _levelTable.length>0) {
+    if (_levelTable!=nil && _levelTable.length>0) { //向页面发送评估指标数据
         [model ocCallJS:@"func2" withString:_levelTable];
     }
 }

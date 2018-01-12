@@ -32,6 +32,7 @@
 {
     //[self downloadLevelcontent:[HTTPInterface downloadlevelcontent]];
     //[self downloadEvalutionData]; //下载评估资源
+    self.downloadProgress.progress=0.5;//测试用
 }
 
 - (void)viewDidLoad {
@@ -54,8 +55,8 @@
     CGAffineTransform transform1 = CGAffineTransformMakeScale(1.0f, 5.0f);
     self.downloadProgress.transform = transform1;
     
-    self.downloadProgress.trackImage = [UIImage imageNamed:@""];//设置进度条的背景图片
-    self.downloadProgress.progressImage = [UIImage imageNamed:@""];//设置进度条上进度的背景图片
+    //self.downloadProgress.trackImage = [UIImage imageNamed:@""];//设置进度条的背景图片
+    //self.downloadProgress.progressImage = [UIImage imageNamed:@""];//设置进度条上进度的背景图片
     [self.downloadProgress setProgress:0.0 animated:YES];//设置进度值并显示动画
     [self.view addSubview:self.downloadProgress];
     
@@ -110,6 +111,7 @@
     
     //下载
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.timeoutIntervalForRequest = 30; //设置请求超时时间
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
     NSURL *URL = [NSURL URLWithString:fromUrl];
@@ -129,7 +131,7 @@
         if (error)
         {
             NSLog(@"Error:%@",error);
-            //[self showAlertView:@"下载失败"];
+            [self showAlertView:@"下载失败,是否从新下载评估数据"];
             
         }
         else
@@ -146,35 +148,27 @@
     [downloadTask resume];
 }
 
--(void)uploadDataFrom:(NSString*)fromFilePath toUrl:(NSString*)toUrl
-{
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
-    NSURL *URL = [NSURL URLWithString:toUrl];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    
-    NSURL *filePath = [NSURL fileURLWithPath:fromFilePath];
-    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:filePath progress:nil completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        } else {
-            NSLog(@"Success: %@ %@", response, responseObject);
-        }
-    }];
-    //重新开始上传
-    [uploadTask resume];
-}
-
 - (void)showAlertView:(NSString *)message
 {
     NSString *title = @"提示";
     UIAlertController *alertController;
     alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        [self.navigationController popViewControllerAnimated:NO];
+        //清空已下载数据（待完善）
+        //从新下载数据
+        [self downloadEvalutionData];
+        
                                        }];
     [alertController addAction:OKAction];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        //下载失败，取消下载后，将清空个人登录信息数据(ticketid,院所信息等（待完善）)
+        [userDefault setObject:@"" forKey:@"ticketid"];
+        
+        [self.navigationController popViewControllerAnimated:NO];
+    }]];
+    
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
