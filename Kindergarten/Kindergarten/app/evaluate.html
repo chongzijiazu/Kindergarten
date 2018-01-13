@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Kindergarten</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <script src="jquery/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <style>
+	#table > thead > tr > th,
+	#table > thead > tr > td {
+	  padding-top: 8px;
+	  padding-bottom: 8px;
+	  padding-right: 8px;
+	  padding-left:8px;
+	  line-height: 1.42857143;
+	  vertical-align: middle;
+	  border-top: 1px solid #ddd;
+	  text-align:center; 
+	  margin:auto;
+	}
+	
+	#table > tbody > tr > th,
+	#table > tfoot > tr > th,
+	#table > tbody > tr > td,
+	#table > tfoot > tr > td {
+	  padding-top: 8px;
+	  padding-bottom: 8px;
+	  padding-right: 8px;
+	  padding-left:8px;
+	  line-height: 1.42857143;
+	  vertical-align: middle;
+	  border-top: 1px solid #ddd;
+	  text-align:left; 
+	  margin:auto;
+	}
+	.nav>li>a:focus, .nav>li>a:hover {
+		text-decoration: none;
+		background-color: #68cbd0;
+	}
+	.nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
+		border-color: #337ab7;
+		background-color: #68cbd0;
+	}
+  </style>
+</head>
+<body style="background-color:#f5f5f5">
+	<header class="main-header" style="background-color:#68cbd0;margin-bottom:5px;">
+		<table style="width:100%">
+			<tr>
+				<td style="width:25%">
+					<!-- left -->
+					<img src="images/logo.png" class="logo" style="margin-left:20px;">
+					  <!-- mini logo for sidebar mini 50x50 pixels -->
+					  <span class="logo-mini"><b>求真</b></span>
+					  <span class="logo-mini"><b>务实</b></span>
+					  <span class="logo-mini"><b>弘道</b></span>
+					  <span class="logo-mini"><b>创新</b></span>
+					</img>
+				</td>
+				<td style="text-align:center;width:50%">
+					<!-- middle-->
+					<span class="logo" style="font-size:25px;"><b>幼儿园办园行为督导评估系统</b></span>
+				</td>
+				<td style="width:25%;text-align:right;">
+					<!-- right-->
+					<!--<span class="logo" style="margin-right:20px;">
+						<img src="images/modify.png"></img>
+					</span>
+					<span class="logo" style="margin-right:20px;">
+						<img src="images/help.png"></img>
+					</span>-->
+					<span>
+					<ul class="nav navbar-nav" style="text-align:right;">
+					<li>
+						<div class="logo" style="margin-right:20px;">
+							<img src="images/modify.png"></img>
+						</div>
+					</li>
+					<li>
+						<div class="logo" >
+							<img src="images/help.png"></img>
+						</div>
+					</li>
+					 <li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="display:inline;">
+						  <!-- The user image in the navbar-->
+						  <img src="images/person.png" class="logo">
+						  <!-- hidden-xs hides the username on small devices so only the image appears. -->
+						  <span class="hidden-xs"><b>谁的青春不疯狂</b></span>
+						</a>
+						<ul class="dropdown-menu" style="width:250px;">
+						  <!-- Menu Body -->
+						  <li>
+							<div class="row">
+							  <div class="col-xs-4" style="text-align:right">
+								姓名：
+							  </div>
+							  <div class="col-xs-4" style="text-align:left">
+								张三丰
+							  </div>
+							</div>
+							<li class="divider"></li>
+							<div class="row">
+							  <div class="col-xs-4" style="text-align:right">
+								手机号：
+							  </div>
+							  <div class="col-xs-4" style="text-align:left">
+								15816253443
+							  </div>
+							</div>
+							<li class="divider"></li>
+							<div class="row">
+							  <div class="col-xs-4" style="text-align:right">
+								EMail：
+							  </div>
+							  <div class="col-xs-4" style="text-align:left">
+								du.xiaohan@qq.com
+							  </div>
+							</div>
+							<!-- /.row -->
+						  </li>
+						  <!-- Menu Footer-->
+						  <li class="user-footer">
+							<div class="pull-left" style="padding-left:50px;">
+							  <a href="#" class="btn btn-default btn-flat">修改</a>
+							</div>
+							<div class="pull-right" style="padding-right:50px;">
+							  <a href="#" class="btn btn-default btn-flat">退出</a>
+							</div>
+						  </li>
+						</ul>
+					  </li>
+					</ul>
+					</span>
+					<!--<img src="images/person.png" class="logo">
+						<span class="logo-mini"><b>谁的青春不疯狂</b></span>
+					</img>-->
+				</td>
+			</tr>
+		</table>
+  </header>
+  <div class="container" style="width:100%;margin:0px auto;">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<table class="table table-condensed">
+				<thead>
+				  <tr>
+					 <td style="width:68px;vertical-align:middle">
+						<img src="images/school.png"></img>
+					</td>
+					<td style="vertical-align:middle">
+						<div style="font-size:18px;color:#FF9F4B;">
+							名称：
+						</div>
+						<div style="font-size:18px;background-color:#FFE4CC;padding:5px;border:1px solid #FF9F4B;border-radius:10px;">中国国防装备部郑州军分区附属第一幼儿园</div>
+					</td>
+					<td style="width:68px;vertical-align:middle"><img src="images/asslevel.png"></img> </td>
+					<td style="vertical-align:middle;">
+						<div style="font-size:18px;color:#73C8F7;">
+							指标：
+						</div>
+						<div style="font-size:18px;background-color:#E2F7FF;padding:5px;border:1px solid #73C8F7;border-radius:10px;">A1环境支持/B1园舍与场地/C1园舍C1园舍建筑C1园舍建筑C1园舍建筑建筑</div></td>
+					<td style="width:60px;vertical-align:middle">
+						<img src="images/back.png"></img>
+					</td>
+					<!--<td style="width:60px;">
+						<img src="images/submit.png"></img>
+						<span>确认开始</span>
+					</td>-->
+				  </tr>
+				</thead>
+			  </table>
+		</div>
+	</div>
+  </div>
+  <div class="container" style="width:100%;margin:0px auto;">
+	<div class="panel panel-default">
+		<div class="panel-body row row-eq-height" style="padding:10px;text-align:right">
+			<div class="col-xs-8">
+			</div>
+			<label class="control-label col-xs-2" for="name" style="padding-right:0px;width:150px;vertical-align:middle;padding-top:7px;">查看其它评估数据：</label>
+			<div class="col-xs-2">
+				<select class="form-control">
+					<option>自评*</option>
+					<option>督评*</option>
+					<option>复评1</option>
+					<option>复评2</option>
+					<option>复评3</option>
+				</select>
+			</div>
+		</div>
+	</div>
+  </div>
+  
+  <div class="container" style="width:100%;margin:0px auto;">
+	<table class="table table-condensed">
+	  <thead>
+		  <tr>
+			<td style="vertical-align:middle;background-color:white;width:69%;">
+				<div style="font-size:18px;">
+					1.园舍产权 <img src="images/question.png"><a href="#">查看题目解释</a>
+				</div>
+				<hr>
+				<div>
+					    <label class="radio-inline">
+							<input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> A.园舍独立，产权清晰，规划科学，布局合理，民办园自有房产需要有效的房产证，租用园舍的，需要有效期3年及以上的租赁合同及月舞房产证或土地证。
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> B.园舍独立，产权清晰，规划科学，布局合理，民办园自有房产需要有效的房产证，租用园舍的，需要有效期3年及以上的租赁合同及月舞房产证或土地证。
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> C.园舍独立，产权清晰，规划科学，布局合理，民办园自有房产需要有效的房产证，租用园舍的，需要有效期3年及以上的租赁合同及月舞房产证或土地证。
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="optionsRadiosinline" id="optionsRadios4"  value="option2"> D.园舍独立，产权清晰，规划科学，布局合理，民办园自有房产需要有效的房产证，租用园舍的，需要有效期3年及以上的租赁合同及月舞房产证或土地证。
+						</label>
+				</div>
+			</td>
+			<td style="vertical-align:middle;width:1%;">
+			</td>
+			<td style="vertical-align:middle;background-color:white;width:30%;">
+				<table class="table table-condensed" style="border-top:0px solid white;">
+					<thead>
+					<tr><td><img src="images/image.png"></td><td><img src="images/image.png"></td><td><img src="images/image.png"></td><td><img src="images/image.png"></td><td><img src="images/image.png"></td><td><img src="images/image.png"></td></tr>
+					<tr><td><img src="images/add.png"></td><td><img src="images/add.png"></td><td><img src="images/add.png"></td><td><img src="images/add.png"></td><td><img src="images/add.png"></td><td><img src="images/add.png"></td></tr>
+					<tr>
+					</tr>
+					</thead>
+				</table>
+				<div>
+					<textarea class="form-control" rows="3" placeholder="请输入文字内容"></textarea>
+				</div>
+			</td>
+		  </tr>
+	  </thead>
+    </table>
+	<div style="text-align:center;width:100%">
+		<img src="images/pageup.png" style="margin-right:100px;"></img>
+		<img src="images/pagedown.png"></img>
+	</div>
+  </div>
+  <script>
+	
+	
+	
+  </script>
+</body>
+</html>

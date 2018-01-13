@@ -74,9 +74,10 @@
     
     DownloadManagerViewController* downloadManagerVC = [[DownloadManagerViewController alloc] init];
     [self.currentVC.navigationController pushViewController:downloadManagerVC animated:NO];*/
-    LoginViewController* loginVC = (LoginViewController*)self.currentVC;
-    [loginVC loginByUsername:title andPassword:msg];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        LoginViewController* loginVC = (LoginViewController*)self.currentVC;
+        [loginVC loginByUsername:title andPassword:msg];
+    });
 }
 
 

@@ -110,9 +110,10 @@
         NSLog(@"异常信息：%@", exceptionValue);
     };
     
-    if (_levelTable!=nil && _levelTable.length>0) { //向页面发送评估指标数据
+    //向页面发送评估指标数据
+    /*if (_levelTable!=nil && _levelTable.length>0) {
         [model ocCallJS:@"func2" withString:_levelTable];
-    }
+    }*/
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {

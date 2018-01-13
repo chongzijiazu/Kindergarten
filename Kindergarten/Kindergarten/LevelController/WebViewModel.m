@@ -20,7 +20,10 @@
     UploadViewController *uploadVC = [[UploadViewController alloc]init];
     uploadVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;//关键
     //UIModalPresentationOverFullScreen全屏效果
-    [self.currentVC presentViewController:uploadVC animated:YES completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.currentVC presentViewController:uploadVC animated:YES completion:nil];
+    });
+    
 }
 
 - (void)jsCallOC {

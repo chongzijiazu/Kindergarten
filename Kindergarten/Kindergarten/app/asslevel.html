@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Kindergarten</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <script src="jquery/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <style>
+	#table > thead > tr > th,
+	#table > thead > tr > td {
+	  padding-top: 8px;
+	  padding-bottom: 8px;
+	  padding-right: 8px;
+	  padding-left:8px;
+	  line-height: 1.42857143;
+	  vertical-align: middle;
+	  border-top: 1px solid #ddd;
+	  text-align:center; 
+	  margin:auto;
+	}
+	
+	#table > tbody > tr > th,
+	#table > tfoot > tr > th,
+	#table > tbody > tr > td,
+	#table > tfoot > tr > td {
+	  padding-top: 8px;
+	  padding-bottom: 8px;
+	  padding-right: 8px;
+	  padding-left:8px;
+	  line-height: 1.42857143;
+	  vertical-align: middle;
+	  border-top: 1px solid #ddd;
+	  text-align:left; 
+	  margin:auto;
+	}
+	.nav>li>a:focus, .nav>li>a:hover {
+		text-decoration: none;
+		background-color: #68cbd0;
+	}
+	.nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
+		border-color: #337ab7;
+		background-color: #68cbd0;
+	}
+  </style>
+</head>
+<body style="background-color:#f5f5f5">
+	<header class="main-header" style="background-color:#68cbd0;margin-bottom:5px;">
+		<table style="width:100%">
+			<tr>
+				<td style="width:25%">
+					<!-- left -->
+					<img src="images/logo.png" class="logo" style="margin-left:20px;">
+					  <!-- mini logo for sidebar mini 50x50 pixels -->
+					  <span class="logo-mini"><b>求真</b></span>
+					  <span class="logo-mini"><b>务实</b></span>
+					  <span class="logo-mini"><b>弘道</b></span>
+					  <span class="logo-mini"><b>创新</b></span>
+					</img>
+				</td>
+				<td style="text-align:center;width:50%">
+					<!-- middle-->
+					<span class="logo" style="font-size:25px;"><b>幼儿园办园行为督导评估系统</b></span>
+				</td>
+				<td style="width:25%;text-align:right;">
+					<!-- right-->
+					<!--<span class="logo" style="margin-right:20px;">
+						<img src="images/modify.png"></img>
+					</span>
+					<span class="logo" style="margin-right:20px;">
+						<img src="images/help.png"></img>
+					</span>-->
+					<span>
+					<ul class="nav navbar-nav" style="text-align:right;">
+					<li>
+						<div class="logo" style="margin-right:20px;">
+							<img src="images/modify.png"></img>
+						</div>
+					</li>
+					<li>
+						<div class="logo" >
+							<img src="images/help.png"></img>
+						</div>
+					</li>
+					 <li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="display:inline;">
+						  <!-- The user image in the navbar-->
+						  <img src="images/person.png" class="logo">
+						  <!-- hidden-xs hides the username on small devices so only the image appears. -->
+						  <span class="hidden-xs"><b>谁的青春不疯狂</b></span>
+						</a>
+						<ul class="dropdown-menu" style="width:250px;">
+						  <!-- Menu Body -->
+						  <li>
+							<div class="row">
+							  <div class="col-xs-4" style="text-align:right">
+								姓名：
+							  </div>
+							  <div class="col-xs-4" style="text-align:left">
+								张三丰
+							  </div>
+							</div>
+							<li class="divider"></li>
+							<div class="row">
+							  <div class="col-xs-4" style="text-align:right">
+								手机号：
+							  </div>
+							  <div class="col-xs-4" style="text-align:left">
+								15816253443
+							  </div>
+							</div>
+							<li class="divider"></li>
+							<div class="row">
+							  <div class="col-xs-4" style="text-align:right">
+								EMail：
+							  </div>
+							  <div class="col-xs-4" style="text-align:left">
+								du.xiaohan@qq.com
+							  </div>
+							</div>
+							<!-- /.row -->
+						  </li>
+						  <!-- Menu Footer-->
+						  <li class="user-footer">
+							<div class="pull-left" style="padding-left:50px;">
+							  <a href="#" class="btn btn-default btn-flat">修改</a>
+							</div>
+							<div onclick="CallEachModel.jsCallOC()" class="pull-right" style="padding-right:50px;">
+							  <a href="#" class="btn btn-default btn-flat">退出</a>
+							</div>
+						  </li>
+						</ul>
+					  </li>
+					</ul>
+					</span>
+					<!--<img src="images/person.png" class="logo">
+						<span class="logo-mini"><b>谁的青春不疯狂</b></span>
+					</img>-->
+				</td>
+			</tr>
+		</table>
+  </header>
+  <div class="container" style="width:100%;margin:0px auto;">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<table class="table table-condensed">
+				<thead>
+				  <tr>
+					 <td style="width:68px;vertical-align:middle">
+						<img src="images/school.png"></img>
+					</td>
+					<td style="vertical-align:middle">
+						<div style="font-size:18px;color:#FF9F4B;">
+							名称：
+						</div>
+						<div style="font-size:18px;background-color:#FFE4CC;padding:5px;border:1px solid #FF9F4B;border-radius:10px;">中国国防装备部郑州军分区附属第一幼儿园</div>
+					</td>
+					<td style="width:68px;vertical-align:middle"><img src="images/time.png"></img> </td>
+					<td style="vertical-align:middle;">
+						<div style="font-size:18px;color:#73C8F7;">
+							开始时间：
+						</div>
+						<div style="font-size:18px;background-color:#E2F7FF;padding:5px;border:1px solid #73C8F7;border-radius:10px;">2017年12月09日 09:00</div></td>
+					 <td style="width:68px;vertical-align:middle">
+						<img src="images/timeend.png"></img>
+					</td>
+					<td style="vertical-align:middle;">
+						<div style="font-size:18px;color:#F87172;">
+							结束时间：
+						</div>
+						<div style="font-size:18px;background-color:#FEEEEC;padding:5px;border:1px solid #F87172;border-radius:10px;">2018年02月09日 09:00</div>
+					</td>
+					 <td onclick="CallEachModel.jsCallOCForUpload()" style="width:60px;vertical-align:middle">
+						<img src="images/upload.png"></img>
+						<span>上传数据</span>
+					</td>
+					<td style="width:60px;vertical-align:middle">
+						<img src="images/submit.png"></img>
+						<span>提交数据</span>
+					</td>
+					<!--<td style="width:60px;">
+						<img src="images/submit.png"></img>
+						<span>确认开始</span>
+					</td>-->
+				  </tr>
+				</thead>
+			  </table>
+		</div>
+	</div>
+  </div>
+  <div class="container" style="width:100%;margin:0px auto;">
+	<div class="jumbotron" style="background-color:white;">
+	  <table class="table table-bordered" id="tableid">
+        <thead>
+          <tr>
+            <th style="width:20%;background-color:#E2F3A8;">一级指标</th>
+            <th style="width:25%;background-color:#E2F3A8;">二级指标</th>
+            <th style="width:50%;background-color:#E2F3A8;">三级指标</th>
+			<th style="width:5%;background-color:#E2F3A8;">完成</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="background-color:#EBF7C2;padding-left:5%;">A1环境支持C1园舍</td>
+            <td style="background-color:#FDFFF5;padding-left:8%;">B1园舍与场地C1</td>
+            <td style="background-color:#FEF0FA;padding-left:20%;">C1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华</td>
+			<td style="background-color:#FEFBFD;text-align:center;"><img src="images/finish.png"></img></td>
+          </tr>
+          <tr>
+			<td style="background-color:#EBF7C2;padding-left:5%;">A1环境支持C1园舍</td>
+			<td style="background-color:#FDFFF5;padding-left:8%;">B1园舍与场地C1</td>
+            <td style="background-color:#FEF0FA;padding-left:20%;"><a href="http://www.baidu.com" target="_blank">C2户外场地</td>
+			<td style="background-color:#FEFBFD;text-align:center;"><img src="images/finish.png"></img></td>
+		  </tr>
+          <tr>
+			<td style="background-color:#EBF7C2;padding-left:5%;">A1环境支持C1园舍</td>
+            <td style="background-color:#FDFFF5;padding-left:8%;">B1园舍与场地</td>
+            <td style="background-color:#FEF0FA;padding-left:20%;">C3区角设置</td>
+			<td style="background-color:#FEFBFD;text-align:center;"><img src="images/finish.png"></img></td>
+          </tr>
+        </tbody>
+      </table>
+	</div>
+  </div>
+  <script>
+	function mergin(tableid,column){
+		var tr = document.getElementById(tableid);
+		for(var i=1; i<tr.rows.length; i++){
+			var f = i-1;
+			var up = tr.rows[f].cells[column];
+			var down = tr.rows[i].cells[column];
+			if(up.innerHTML == down.innerHTML) {
+				var rs = 1;
+				while(down && up.innerHTML == down.innerHTML){
+					down.style.display="none";
+					rs++;
+					i++;
+					if(i<tr.rows.length)
+						down = tr.rows[i].cells[column];
+					else
+						down = undefined;
+				}
+				up.rowSpan = rs;
+			}
+		}
+	}
+	//mergin("tableid","0");
+	//mergin("tableid","1");
+	
+	
+  </script>
+</body>
+</html>

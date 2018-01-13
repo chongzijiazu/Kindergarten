@@ -93,7 +93,7 @@
 {
     //添加用户名、密码验证（待完善）
     
-    NSLog(@"login");
+    /*NSLog(@"login");
     NSData* usernameData = [username dataUsingEncoding:NSUTF8StringEncoding];
     username = [usernameData base64EncodedStringWithOptions:1];
     password = [Encryption md5:password];
@@ -101,7 +101,7 @@
     
     __weak typeof (self) weakSelf = self;
     
-    [HttpRequestModel httpRequest:[HTTPInterface login] withParamters:dict isPost:YES success:^(id  _Nullable responseObject)
+    [HttpRequestModel httpRequest:[HTTPInterface login] withParamters:dict isPost:NO success:^(id  _Nullable responseObject)
      {
          if ([responseObject isKindOfClass:[NSDictionary class]])
          {
@@ -162,18 +162,19 @@
              
              
              
-         }
+         /*}
          
      } failure:^(NSError * _Nonnull error) {
          
-         [self showAlertView:@"登录失败"];
-     }];
+         //[self showAlertView:@"登录失败"];
+     }];*/
     
-    /*//模拟登录（应放倒登录成功操作）
+    //模拟登录（应放倒登录成功操作）
     [userDefault setObject:@"111111" forKey:@"ticketid"];
     
     DownloadManagerViewController* downloadManagerVC = [[DownloadManagerViewController alloc] init];
-    [self.navigationController pushViewController:downloadManagerVC animated:NO];*/
+    [self.navigationController pushViewController:downloadManagerVC animated:NO];
+    
 }
 
 

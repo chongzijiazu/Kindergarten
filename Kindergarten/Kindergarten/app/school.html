@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Kindergarten</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <script src="jquery/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <style>
+	.modal-header {
+		padding: 15px;
+		border-bottom: 1px solid #68cbd0;
+	}
+	.ftable td:nth-child(odd){background-color:#e8ecef}
+	.stable tr:nth-of-type(1){background-color:#e8ecef}
+	.stable tr:nth-of-type(2){background-color:#e8ecef}
+	.stable tr:nth-of-type(3){background-color:white}
+  </style>
+</head>
+<body style="background-color:#f5f5f5">
+	<div class="modal-dialog" style="width:1100px">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" style="text-align:center;color:#68cbd0">幼儿园信息</h4>
+              </div>
+              <div class="modal-body">
+               <table class="table table-bordered ftable">
+               		<tr>
+               			<td><label>学校（机构）名称</label></td>
+               			<td><input type="text" name="name" value="${school.name}" /></td>
+               			<td><label>学校（机构）标识码</label></td>
+               			<td><input type="text" name="idcode" value="${school.idcode}" /></td>
+               		</tr>
+               		<tr>
+               			<td>学校（机构）地址名称</td>
+               			<td><input type="text" name="address" value="${school.address}" /></td>
+               			<td>学校（机构）地址代码</td>
+               			<td><input type="text" name="addresscode" value="${school.addresscode}" /></td>
+               		</tr>
+               		<tr>
+               			<td>学校（机构）驻地城乡类型名称</td>
+               			<td>
+               				<select name="seatkind" onchange="changeCode(this,'seatcode')" >
+               					<option value="">请选择</option>
+               					<option value="主城区" <c:if test="${school.seatkind == '主城区'}">selected="selected"</c:if>>主城区</option>
+               					<option value="城乡结合区" <c:if test="${school.seatkind == '城乡结合区'}">selected="selected"</c:if>>城乡结合区</option>
+               					<option value="镇中心区" <c:if test="${school.seatkind == '镇中心区'}">selected="selected"</c:if>>镇中心区</option>
+               					<option value="镇乡结合区" <c:if test="${school.seatkind == '镇乡结合区'}">selected="selected"</c:if>>镇乡结合区</option>
+               					<option value="特殊区域" <c:if test="${school.seatkind == '特殊区域'}">selected="selected"</c:if>>特殊区域</option>
+               					<option value="乡中心区" <c:if test="${school.seatkind == '乡中心区'}">selected="selected"</c:if>>乡中心区</option>
+               					<option value="村庄" <c:if test="${school.seatkind == '村庄'}">selected="selected"</c:if>>村庄</option>
+               				</select>
+               			</td>
+               			<td>学校（机构）驻地城乡类型代码</td>
+               			<td><input type="text" name="seatcode" value="${school.seatcode}" /></td>
+               		</tr>
+               		<tr>
+               			<td>学校（机构）办学类型名称</td>
+               			<td>
+               				<select name="holdkind" onchange="changeCode(this,'hodecode')" >
+               					<option value="">请选择</option>
+               					<option value="幼儿园" <c:if test="${school.holdkind == '幼儿园'}">selected="selected"</c:if>>幼儿园</option>
+               					<option value="独立设置的少数民族幼儿园" <c:if test="${school.holdkind == '独立设置的少数民族幼儿园'}">selected="selected"</c:if>>独立设置的少数民族幼儿园</option>
+               					<option value="附设幼儿班" <c:if test="${school.holdkind == '附设幼儿班'}">selected="selected"</c:if>>附设幼儿班</option>
+               				</select>
+               			</td>
+               			<td>学校（机构）办学类型代码</td>
+               			<td><input type="text" name="hodecode" value="${school.hodecode}" /></td>
+               		</tr>
+               		<tr>
+               			<td>学校（机构）举办者名称</td>
+               			<td>
+               				<select name="creatorname" onchange="changeCode(this,'creatorcode')" >
+               					<option value="">请选择</option>
+               					<option value="中央" <c:if test="${school.creatorname == '中央'}">selected="selected"</c:if>>中央</option>
+               					<option value="省级教育部门" <c:if test="${school.creatorname == '省级教育部门'}">selected="selected"</c:if>>省级教育部门</option>
+               					<option value="省级其他部门" <c:if test="${school.creatorname == '省级其他部门'}">selected="selected"</c:if>>省级其他部门</option>
+               					<option value="地级教育部门" <c:if test="${school.creatorname == '地级教育部门'}">selected="selected"</c:if>>地级教育部门</option>
+               					<option value="地级其他部门" <c:if test="${school.creatorname == '地级其他部门'}">selected="selected"</c:if>>地级其他部门</option>
+               					<option value="县级教育部门" <c:if test="${school.creatorname == '县级教育部门'}">selected="selected"</c:if>>县级教育部门</option>
+               					<option value="县级其他部门" <c:if test="${school.creatorname == '县级其他部门'}">selected="selected"</c:if>>县级其他部门</option>
+               					<option value="地方企业" <c:if test="${school.creatorname == '地方企业'}">selected="selected"</c:if>>地方企业</option>
+               					<option value="事业单位" <c:if test="${school.creatorname == '事业单位'}">selected="selected"</c:if>>事业单位</option>
+               					<option value="部队" <c:if test="${school.creatorname == '部队'}">selected="selected"</c:if>>部队</option>
+               					<option value="集体" <c:if test="${school.creatorname == '集体'}">selected="selected"</c:if>>集体</option>
+               					<option value="民办" <c:if test="${school.creatorname == '民办'}">selected="selected"</c:if>>民办</option>
+               				</select>
+               			</td>
+               			<td>学校（机构）举办者代码</td>
+               			<td><input type="text" name="creatorcode" value="${school.creatorcode}" /></td>
+               		</tr>
+               		<tr>
+               			<td>计划内预防接种率(%)</td>
+               			<td><input type="text" name="info64" value="${schoolDetail.info64}" />%</td>
+               			<td>传染病发病率(%)</td>
+               			<td><input type="text" name="info65" value="${schoolDetail.info65}" />%</td>
+               		</tr>
+               		<tr>
+               			<td>幼儿出勤率(%)</td>
+               			<td><input type="text" name="info66" value="${schoolDetail.info66}"/>%</td>
+               			<td>专任教师年保留率(%)</td>
+               			<td><input type="text" name="info67" value="${schoolDetail.info67}"/>%</td>
+               		</tr>
+               </table>
+               <table class="table table-bordered ftable" style="width:50%">
+               		<tr>
+               			<td>是否普惠性民办幼儿园</td>
+               			<td>否</td>
+               		</tr>
+               		<tr>
+               			<td>是否乡镇中心幼儿园</td>
+               			<td>否</td>
+               		</tr>
+               		<tr>
+               			<td>是否寄宿制幼儿园</td>
+               			<td>否</td>
+               		</tr>
+               </table>
+              <!--  <table>
+               		<tr>
+               			<td> -->
+			   <div class=".container">
+				<div class="row">
+				  <div class="col-md-6">
+					<table class="table table-bordered ftable">
+				               	<tr>
+				               		<td>安全保卫人员数</td>
+				               		<td><input type="text" name="info13" value="${schoolDetail.info13}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>学前教育专业毕业的专任教师数</td>
+				               		<td><input type="text" name="info30" value="${schoolDetail.info30}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>取得教师资格证的专任教师数</td>
+				               		<td><input type="text" name="info48" value="${schoolDetail.info48}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>工资不低于当地最低工资标准的教职工数</td>
+				               		<td><input type="text" name="info50" value="${schoolDetail.info50}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>兼职卫生保健人员数</td>
+				               		<td><input type="text" name="info56" value="${schoolDetail.info56}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>专职炊事员数</td>
+				               		<td><input type="text" name="info58" value="${schoolDetail.info58}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>兼职安保人员数</td>
+				               		<td><input type="text" name="info60" value="${schoolDetail.info60}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>教师用计算机台数</td>
+				               		<td><input type="text" name="info62" value="${schoolDetail.info62}"/></td>
+				               	</tr>
+			               </table>
+				  </div>
+				  <div class="col-md-6">
+					<table class="table table-bordered ftable">
+				               	<tr>
+				               		<td>图书（册）</td>
+				               		<td><input type="text" name="info46" value="${schoolDetail.info46}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>学前教育专业毕业的保育员数</td>
+				               		<td><input type="text" name="info31" value="${schoolDetail.info31}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>与幼儿园签订聘用合同或劳动合同的教职工数</td>
+				               		<td><input type="text" name="info49" value="${schoolDetail.info49}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>受过幼儿保育职业培训的保育员数</td>
+				               		<td><input type="text" name="info55" value="${schoolDetail.info55}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>供餐数量（几餐）</td>
+				               		<td><input type="text" name="info57" value="${schoolDetail.info57}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>兼职炊事员数</td>
+				               		<td><input type="text" name="info59" value="${schoolDetail.info59}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>多功能活动室面积</td>
+				               		<td><input type="text" name="info61" value="${schoolDetail.info61}"/></td>
+				               	</tr>
+				               	<tr>
+				               		<td>教师专业用书数量</td>
+				               		<td><input type="text" name="info63" value="${schoolDetail.info63}"/></td>
+				               	</tr>
+			               </table>
+				  </div>
+				</div>
+			   </div>
+               			<!-- </td>
+               			<td> -->
+               				
+               		<!-- 	</td>
+               		</tr>
+               </table> -->
+               <!-- <table>
+               		<tr>
+               			<td> -->
+						<div class=".container">
+							<div class="row">
+							  <div class="col-xs-6">
+								<table class="table table-bordered stable" id="tableid">
+			               		<tr>
+			               			<td colspan="5" align="center"><label class="tishi" name="bansum">班数</label></td>
+			               		</tr>
+			               		<tr>
+			               			<td>托班</td>
+			               			<td>小班</td>
+			               			<td>中班</td>
+			               			<td>大班</td>
+			               			<td>合计</td>
+			               		</tr>
+			               		<tr>
+			               			<td>33</td>
+			               			<td>11</td>
+			               			<td>9</td>
+			               			<td>33</td>
+			               			<td>99</td>
+			               		</tr>
+			               	 </table>
+							  </div>
+							   <div class="col-xs-6">
+								<table class="table table-bordered stable">
+			               		<tr>
+			               			<td colspan="5" align="center"><label class="tishi" name="jianzhumianjisum">在园(班)人数</label></td>
+			               		</tr>
+			               		<tr>
+			               			<td>托班</td>
+			               			<td>小班</td>
+			               			<td>中班</td>
+			               			<td>大班</td>
+			               			<td>合计</td>
+			               		</tr>
+			               		<tr>
+			               			<td>99</td>
+			               			<td>3</td>
+			               			<td>332</td>
+			               			<td>11</td>
+			               			<td>33</td>
+			               		</tr>
+			               	</table>
+							  </div>
+							</div>
+						</div>
+               				
+							 
+               			<!--</td>
+               			<td> -->
+               				
+               			<!-- </td>
+               		</tr>
+               </table> -->
+              <!--  <table>
+               		<tr>
+               			<td> -->
+						
+						<div class="container" style="width:100%;margin:0px auto;">
+							<table class="table table-condensed">
+							  <thead>
+								  <tr>
+									<td style="vertical-align:middle;background-color:white;width:50%;">
+									
+									<table class="table table-bordered stable">
+										<tr>
+											<td colspan="6" align="center"><label class="tishi" name="zhigongsum">职工人数</label></td>
+										</tr>
+										<tr>
+											<td>园长</td>
+											<td>专任教师</td>
+											<td>保健医</td>
+											<td>保育员</td>
+											<td>其他</td>
+											<td>合计</td>
+										</tr>
+										<tr>
+											<td>21</td>
+											<td>2</td>
+											<td>0</td>
+											<td>9</td>
+											<td>2</td>
+											<td>99</td>
+										</tr>
+								   </table>
+										
+									</td>
+									<td style="vertical-align:middle;background-color:white;width:50%;">
+										<table class="table table-bordered stable">
+			               		<tr>
+			               			<td colspan="6" align="center"><label class="tishi" name="zhigongsum">专任教师学历</label></td>
+			               		</tr>
+			               		<tr>
+			               			<td>研究生</td>
+			               			<td>本科</td>
+			               			<td>专科</td>
+			               			<td>高中</td>
+			               			<td>高中以下</td>
+			               		</tr>
+			               		<tr>
+			               			<td>111</td>
+			               			<td>2</td>
+			               			<td>3</td>
+			               			<td>5</td>
+			               			<td>98</td>
+			               		</tr>
+			               	</table>
+									</td>
+							      </tr>
+							  </thead>
+							</table>
+						</div>
+			
+						
+               				
+               				<!-- </td>
+               			<td> -->
+               				
+               			<!-- </td>
+               		</tr>
+               </table> -->
+                <!-- <table> -->
+				<div class=".container">
+					<div class="row">
+					  <div class="col-md-6">
+						<table class="table table-bordered stable">
+	               		<tr>
+	               			<td colspan="5" align="center"><label class="tishi" name="jianzhumianjisum">保育员学历</label></td>
+	               		</tr>
+	               		<tr>
+	               			<td>本科及以上</td>
+	               			<td>专科</td>
+	               			<td>高中</td>
+	               			<td>高中以下</td>
+	               		</tr>
+	               		<tr>
+	               			<td>22</td>
+	               			<td>99</td>
+	               			<td>88</td>
+	               			<td>8</td>
+	               		</tr>
+	               	</table>
+					  </div>
+					  <div class="col-md-6">
+						<table class="table table-bordered stable">
+	               		<tr>
+	               			<td colspan="3" align="center"><label class="tishi" name="zhandimianjisum">占地面积</label></td>
+	               		</tr>
+	               		<tr>
+	               			<td>绿化用地面积</td>
+	               			<td>运动场地面积</td>
+	               			<td>合计</td>
+	               		</tr>
+	               		<tr>
+	               			<td>100</td>
+	               			<td>99</td>
+	               			<td>11</td>
+	               		</tr>
+	               	</table>
+					  </div>
+					</div>
+				</div>
+				
+				
+				
+	               	
+	               	
+              <!--  </table> -->
+               <table class="table table-bordered stable">
+               		<tr>
+               			<td colspan="6" align="center"><label class="tishi" name="jianzhumianjisum">校舍建筑面积</label></td>
+               		</tr>
+               		<tr>
+               			<td>租借面积</td>
+               			<td>危房面积</td>
+               			<td>活动室面积</td>
+               			<td>睡眠面积</td>
+               			<td>保健室面积</td>
+               			<td>合计</td>
+               		</tr>
+               		<tr>
+               			<td>22</td>
+               			<td>211</td>
+               			<td>33</td>
+               			<td>99</td>
+               			<td>99</td>
+               			<td>9</td>
+               		</tr>
+               </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-rigth" data-dismiss="modal" id="cancel">取消</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+</body>
+</html>
