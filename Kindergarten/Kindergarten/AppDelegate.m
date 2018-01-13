@@ -8,9 +8,9 @@
 
 #import "AppDelegate.h"
 #import "KGMainNavigationViewController.h"
-#import "LoginViewController.h"
-#import "LevelViewController.h"
 #import "RootViewController.h"
+#import "JFKGNavigationViewController.h"
+#import "JFKGRootViewController.h"
 
 @interface AppDelegate ()
 
@@ -24,9 +24,12 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    KGMainNavigationViewController* mainController=nil;
+    /*KGMainNavigationViewController* mainController=nil;
     RootViewController* rootVC = [[RootViewController alloc] init];
-    mainController = [[KGMainNavigationViewController alloc] initWithRootViewController:rootVC];
+    mainController = [[KGMainNavigationViewController alloc] initWithRootViewController:rootVC];*/
+    JFKGRootViewController* rootVC = [[JFKGRootViewController alloc] init];
+    JFKGNavigationViewController* mainController= [[JFKGNavigationViewController alloc] initWithRootViewController:rootVC];
+    
     self.window.rootViewController=mainController;
     
     [self.window makeKeyAndVisible];

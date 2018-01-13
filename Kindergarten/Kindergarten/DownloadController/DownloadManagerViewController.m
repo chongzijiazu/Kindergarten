@@ -9,6 +9,7 @@
 #import "DownloadManagerViewController.h"
 #import "AFNetworking.h"
 #import "LevelViewController.h"
+#import "JFKGLoginContrller.h"
 
 @interface DownloadManagerViewController ()
 
@@ -24,8 +25,12 @@
 //测试用
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    LevelViewController* levelVC = [[LevelViewController alloc] init];
-    [self.navigationController pushViewController:levelVC animated:NO];
+    //LevelViewController* levelVC = [[LevelViewController alloc] init];
+    //[self.navigationController pushViewController:levelVC animated:NO];
+    if (self.delegate!=nil) {
+        [self.delegate sendIsSuccess:YES];
+    }
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -98,6 +103,10 @@
         if(self.currentDownloadCount == 4)//下载完成
         {
             //进行下一步操作
+            if (self.delegate!=nil) {
+                [self.delegate sendIsSuccess:YES];
+            }
+            [self dismissViewControllerAnimated:NO completion:nil];
         }
         else
         {
@@ -165,8 +174,7 @@
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         //下载失败，取消下载后，将清空个人登录信息数据(ticketid,院所信息等（待完善）)
         [userDefault setObject:@"" forKey:@"ticketid"];
-        
-        [self.navigationController popViewControllerAnimated:NO];
+        [self dismissViewControllerAnimated:NO completion:nil];
     }]];
     
     [self presentViewController:alertController animated:YES completion:nil];

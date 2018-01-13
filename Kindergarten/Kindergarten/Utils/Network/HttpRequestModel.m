@@ -29,7 +29,9 @@ static HttpRequestModel *requestModel = nil;
     [self printRequestUrlString:urlString withParamter:dic];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    //manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/html",@"text/plain", nil];
     
     __block MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].windows lastObject] animated:YES];
     
@@ -142,7 +144,9 @@ static HttpRequestModel *requestModel = nil;
     [self printRequestUrlString:urlString withParamter:dic];
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    //manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/html",@"text/plain", nil];
     
     //3.判断网络状况
     AFNetworkReachabilityManager *netManager = [AFNetworkReachabilityManager sharedManager];
@@ -185,6 +189,7 @@ static HttpRequestModel *requestModel = nil;
          {
              if (failure != nil)
              {
+                 //NSLog(@"%@",error);
                  failure(error);
              }
              
@@ -213,6 +218,7 @@ static HttpRequestModel *requestModel = nil;
          }
              failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error)
          {
+             //NSLog(@"%@",error);
              if (failure != nil)
              {
                  failure(error);

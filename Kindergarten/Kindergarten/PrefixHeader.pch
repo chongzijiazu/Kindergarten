@@ -17,8 +17,9 @@
 #import "MBProgressHUD+MJ.h"
 #import "HttpRequestModel.h"
 #import "HTTPInterface.h"
+#import "GlobalUtil.h"
 
-#define baseUrlString @"http://192.168.1.104:8070/kindergarten/evalution/app/"
+#define baseUrlString @"http://192.168.1.104:8070/kindergarten/evaluation/app/"
 
 
 #define userDefault [NSUserDefaults standardUserDefaults]

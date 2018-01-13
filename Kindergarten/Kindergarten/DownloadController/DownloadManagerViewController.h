@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DownloadManagerDelegate<NSObject>
+
+-(void)sendIsSuccess:(BOOL)isSuccess;
+
+@end
+
 @interface DownloadManagerViewController : UIViewController
 {
     UIProgressView* _downloadProgress; //下载进度
@@ -19,5 +25,7 @@
 @property(nonatomic,retain)UILabel* lbl_downloadState;
 @property(nonatomic,assign)int currentDownloadCount;
 @property(nonatomic,retain)NSMutableArray* downloadArray;
+
+@property(nonatomic,weak)id<DownloadManagerDelegate> delegate;
 
 @end

@@ -13,6 +13,9 @@
 		E60461392005B6DC00135F7C /* Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = E60461382005B6DC00135F7C /* Encryption.m */; };
 		E60461412005EEE800135F7C /* level.xml in Resources */ = {isa = PBXBuildFile; fileRef = E60461402005EEE800135F7C /* level.xml */; };
 		E60461492005F86C00135F7C /* LevelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60461482005F86C00135F7C /* LevelViewController.m */; };
+		E60FD1EC2009E8390080A07E /* JFKGLoginContrller.m in Sources */ = {isa = PBXBuildFile; fileRef = E60FD1EB2009E8390080A07E /* JFKGLoginContrller.m */; };
+		E60FD1EF2009EB620080A07E /* JFKGLevelController.m in Sources */ = {isa = PBXBuildFile; fileRef = E60FD1EE2009EB620080A07E /* JFKGLevelController.m */; };
+		E60FD1F2200A0AE70080A07E /* GlobalUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E60FD1F1200A0AE70080A07E /* GlobalUtil.m */; };
 		E618DBBF2008D3EF007CD354 /* View in Resources */ = {isa = PBXBuildFile; fileRef = E618DBBE2008D3EF007CD354 /* View */; };
 		E618DBC12008D4BF007CD354 /* app in Resources */ = {isa = PBXBuildFile; fileRef = E618DBC02008D4BF007CD354 /* app */; };
 		E618DBC42008E304007CD354 /* LoginWebViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E618DBC32008E304007CD354 /* LoginWebViewModel.m */; };
@@ -34,6 +37,9 @@
 		E6EF8E392004ABAC00A96B04 /* HttpRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EF8E382004ABAC00A96B04 /* HttpRequestModel.m */; };
 		E6EF8E422004B92E00A96B04 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6EF8E3F2004B92E00A96B04 /* MBProgressHUD.bundle */; };
 		E6EF8E432004B92E00A96B04 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EF8E412004B92E00A96B04 /* MBProgressHUD+MJ.m */; };
+		E6FA5AE22009D34200B7B30B /* JFKGNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FA5AE12009D34200B7B30B /* JFKGNavigationViewController.m */; };
+		E6FA5AE52009D36A00B7B30B /* JFKGRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FA5AE42009D36A00B7B30B /* JFKGRootViewController.m */; };
+		E6FA5AE72009DA9000B7B30B /* WKWebView.html in Resources */ = {isa = PBXBuildFile; fileRef = E6FA5AE62009DA9000B7B30B /* WKWebView.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +55,12 @@
 		E60461402005EEE800135F7C /* level.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level.xml; sourceTree = "<group>"; };
 		E60461472005F86C00135F7C /* LevelViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelViewController.h; sourceTree = "<group>"; };
 		E60461482005F86C00135F7C /* LevelViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LevelViewController.m; sourceTree = "<group>"; };
+		E60FD1EA2009E8390080A07E /* JFKGLoginContrller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGLoginContrller.h; sourceTree = "<group>"; };
+		E60FD1EB2009E8390080A07E /* JFKGLoginContrller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGLoginContrller.m; sourceTree = "<group>"; };
+		E60FD1ED2009EB620080A07E /* JFKGLevelController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGLevelController.h; sourceTree = "<group>"; };
+		E60FD1EE2009EB620080A07E /* JFKGLevelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGLevelController.m; sourceTree = "<group>"; };
+		E60FD1F0200A0AE70080A07E /* GlobalUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlobalUtil.h; sourceTree = "<group>"; };
+		E60FD1F1200A0AE70080A07E /* GlobalUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlobalUtil.m; sourceTree = "<group>"; };
 		E618DBBE2008D3EF007CD354 /* View */ = {isa = PBXFileReference; lastKnownFileType = folder; path = View; sourceTree = "<group>"; };
 		E618DBC02008D4BF007CD354 /* app */ = {isa = PBXFileReference; lastKnownFileType = folder; path = app; sourceTree = "<group>"; };
 		E618DBC22008E304007CD354 /* LoginWebViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginWebViewModel.h; sourceTree = "<group>"; };
@@ -85,6 +97,11 @@
 		E6EF8E3F2004B92E00A96B04 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		E6EF8E402004B92E00A96B04 /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
 		E6EF8E412004B92E00A96B04 /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
+		E6FA5AE02009D34200B7B30B /* JFKGNavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGNavigationViewController.h; sourceTree = "<group>"; };
+		E6FA5AE12009D34200B7B30B /* JFKGNavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGNavigationViewController.m; sourceTree = "<group>"; };
+		E6FA5AE32009D36A00B7B30B /* JFKGRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGRootViewController.h; sourceTree = "<group>"; };
+		E6FA5AE42009D36A00B7B30B /* JFKGRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGRootViewController.m; sourceTree = "<group>"; };
+		E6FA5AE62009DA9000B7B30B /* WKWebView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = WKWebView.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +178,7 @@
 		E604613F2005EEDB00135F7C /* testdata */ = {
 			isa = PBXGroup;
 			children = (
+				E6FA5AE62009DA9000B7B30B /* WKWebView.html */,
 				E60461402005EEE800135F7C /* level.xml */,
 				E638B9F12007644D00685670 /* CallEach.html */,
 				E638B9F320076D6F00685670 /* CallCameraJS.js */,
@@ -242,6 +260,7 @@
 		E67AB1D920044FF500AD83C9 /* Kindergarten */ = {
 			isa = PBXGroup;
 			children = (
+				E6FA5ADF2009D23400B7B30B /* Controllers */,
 				E618DBC02008D4BF007CD354 /* app */,
 				E618DBBE2008D3EF007CD354 /* View */,
 				E61AAB6C2008BB6700424DCE /* UploadController */,
@@ -268,6 +287,8 @@
 				E60461352005B2A900135F7C /* ZipUtil */,
 				E60461312005AE4F00135F7C /* Network */,
 				E6EF8E3B2004B8A800A96B04 /* MBProgressHUD */,
+				E60FD1F0200A0AE70080A07E /* GlobalUtil.h */,
+				E60FD1F1200A0AE70080A07E /* GlobalUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -280,6 +301,21 @@
 				E6EF8E412004B92E00A96B04 /* MBProgressHUD+MJ.m */,
 			);
 			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		E6FA5ADF2009D23400B7B30B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E6FA5AE02009D34200B7B30B /* JFKGNavigationViewController.h */,
+				E6FA5AE12009D34200B7B30B /* JFKGNavigationViewController.m */,
+				E6FA5AE32009D36A00B7B30B /* JFKGRootViewController.h */,
+				E6FA5AE42009D36A00B7B30B /* JFKGRootViewController.m */,
+				E60FD1EA2009E8390080A07E /* JFKGLoginContrller.h */,
+				E60FD1EB2009E8390080A07E /* JFKGLoginContrller.m */,
+				E60FD1ED2009EB620080A07E /* JFKGLevelController.h */,
+				E60FD1EE2009EB620080A07E /* JFKGLevelController.m */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,6 +387,7 @@
 				E638B9F22007644D00685670 /* CallEach.html in Resources */,
 				E67AB1E420044FF500AD83C9 /* Assets.xcassets in Resources */,
 				E6EF8E422004B92E00A96B04 /* MBProgressHUD.bundle in Resources */,
+				E6FA5AE72009DA9000B7B30B /* WKWebView.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,20 +446,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6FA5AE52009D36A00B7B30B /* JFKGRootViewController.m in Sources */,
 				E61AAB612008514700424DCE /* LevelNode.m in Sources */,
 				E6EF8E432004B92E00A96B04 /* MBProgressHUD+MJ.m in Sources */,
+				E60FD1EC2009E8390080A07E /* JFKGLoginContrller.m in Sources */,
 				E60461492005F86C00135F7C /* LevelViewController.m in Sources */,
 				E618DBC42008E304007CD354 /* LoginWebViewModel.m in Sources */,
 				E60461392005B6DC00135F7C /* Encryption.m in Sources */,
 				E653F18A200629D200AAC54A /* DownloadManagerViewController.m in Sources */,
+				E60FD1F2200A0AE70080A07E /* GlobalUtil.m in Sources */,
 				E61AAB6F2008BB8000424DCE /* UploadViewController.m in Sources */,
 				E67AB1EA20044FF500AD83C9 /* main.m in Sources */,
 				E6EF8E392004ABAC00A96B04 /* HttpRequestModel.m in Sources */,
 				E60461342005AE9200135F7C /* HTTPInterface.m in Sources */,
 				E638B9EE20075BA800685670 /* WebViewModel.m in Sources */,
 				E6EF8E332004861100A96B04 /* ZipUtil.m in Sources */,
+				E6FA5AE22009D34200B7B30B /* JFKGNavigationViewController.m in Sources */,
 				E60461302005A20B00135F7C /* LoginViewController.m in Sources */,
 				E61AAB642008522B00424DCE /* LevelTableCreator.m in Sources */,
+				E60FD1EF2009EB620080A07E /* JFKGLevelController.m in Sources */,
 				E61AAB682008958400424DCE /* KGMainNavigationViewController.m in Sources */,
 				E67AB1DC20044FF500AD83C9 /* AppDelegate.m in Sources */,
 				E61AAB6B2008AB3300424DCE /* RootViewController.m in Sources */,
