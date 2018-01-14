@@ -43,6 +43,9 @@
 		E6FD1B01200B3CA700E83675 /* JFKGEvaluateController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FD1B00200B3CA700E83675 /* JFKGEvaluateController.m */; };
 		E6FD1B04200B62CC00E83675 /* JFKGCommonController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FD1B03200B62CC00E83675 /* JFKGCommonController.m */; };
 		E6FD1B08200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FD1B07200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.m */; };
+		E6FD1B0A200B8B3100E83675 /* paper.xml in Resources */ = {isa = PBXBuildFile; fileRef = E6FD1B09200B8B3100E83675 /* paper.xml */; };
+		E6FD1B0E200B8C7A00E83675 /* EnOption.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FD1B0D200B8C7A00E83675 /* EnOption.m */; };
+		E6FD1B11200B8C8C00E83675 /* EnQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FD1B10200B8C8C00E83675 /* EnQuestion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +114,11 @@
 		E6FD1B03200B62CC00E83675 /* JFKGCommonController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGCommonController.m; sourceTree = "<group>"; };
 		E6FD1B06200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKFWeakScriptMessageDelegate.h; sourceTree = "<group>"; };
 		E6FD1B07200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKFWeakScriptMessageDelegate.m; sourceTree = "<group>"; };
+		E6FD1B09200B8B3100E83675 /* paper.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = paper.xml; sourceTree = "<group>"; };
+		E6FD1B0C200B8C7A00E83675 /* EnOption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnOption.h; sourceTree = "<group>"; };
+		E6FD1B0D200B8C7A00E83675 /* EnOption.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnOption.m; sourceTree = "<group>"; };
+		E6FD1B0F200B8C8C00E83675 /* EnQuestion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnQuestion.h; sourceTree = "<group>"; };
+		E6FD1B10200B8C8C00E83675 /* EnQuestion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnQuestion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +196,7 @@
 		E604613F2005EEDB00135F7C /* testdata */ = {
 			isa = PBXGroup;
 			children = (
+				E6FD1B09200B8B3100E83675 /* paper.xml */,
 				E6FA5AE62009DA9000B7B30B /* WKWebView.html */,
 				E60461402005EEE800135F7C /* level.xml */,
 				E638B9F12007644D00685670 /* CallEach.html */,
@@ -270,6 +279,7 @@
 		E67AB1D920044FF500AD83C9 /* Kindergarten */ = {
 			isa = PBXGroup;
 			children = (
+				E6FD1B0B200B8B9900E83675 /* Models */,
 				E6FA5ADF2009D23400B7B30B /* Controllers */,
 				E618DBC02008D4BF007CD354 /* app */,
 				E618DBBE2008D3EF007CD354 /* View */,
@@ -342,6 +352,17 @@
 			path = Kindergarten/Utils/KFWKWebView;
 			sourceTree = SOURCE_ROOT;
 		};
+		E6FD1B0B200B8B9900E83675 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E6FD1B0C200B8C7A00E83675 /* EnOption.h */,
+				E6FD1B0D200B8C7A00E83675 /* EnOption.m */,
+				E6FD1B0F200B8C8C00E83675 /* EnQuestion.h */,
+				E6FD1B10200B8C8C00E83675 /* EnQuestion.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -409,6 +430,7 @@
 				E67AB1E720044FF500AD83C9 /* LaunchScreen.storyboard in Resources */,
 				E618DBC12008D4BF007CD354 /* app in Resources */,
 				E638B9F22007644D00685670 /* CallEach.html in Resources */,
+				E6FD1B0A200B8B3100E83675 /* paper.xml in Resources */,
 				E67AB1E420044FF500AD83C9 /* Assets.xcassets in Resources */,
 				E6EF8E422004B92E00A96B04 /* MBProgressHUD.bundle in Resources */,
 				E6FA5AE72009DA9000B7B30B /* WKWebView.html in Resources */,
@@ -481,6 +503,8 @@
 				E6FD1B04200B62CC00E83675 /* JFKGCommonController.m in Sources */,
 				E653F18A200629D200AAC54A /* DownloadManagerViewController.m in Sources */,
 				E6FD1B08200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.m in Sources */,
+				E6FD1B11200B8C8C00E83675 /* EnQuestion.m in Sources */,
+				E6FD1B0E200B8C7A00E83675 /* EnOption.m in Sources */,
 				E60FD1F2200A0AE70080A07E /* GlobalUtil.m in Sources */,
 				E61AAB6F2008BB8000424DCE /* UploadViewController.m in Sources */,
 				E67AB1EA20044FF500AD83C9 /* main.m in Sources */,
