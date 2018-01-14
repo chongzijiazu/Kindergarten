@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WkWebViewCallEach</title>
+    <style type="text/css">
+      * {
+        font-size: 40px;
+      }
+    </style>
+  </head>
+  
+  <body>
+      
+
+    
+    
+    <div style="margin-top: 100px">
+      <div><input type="button" value="callJSAlert" onclick="func1()"></div>
+      <div><input type="button" value="CallJSConfirm" onclick="func2()"></div>
+      <div><input type="button" value="CallJSPrompt " onclick="func3()"></div><br/>
+      
+      <div>baidu: <a href="https://www.baidu.com/">JumpToBaidu</a></div>
+
+    </div>
+
+
+    <div id="123">
+        <span id="changeThisContent" style="color: red; font-size: 50px;"> willchangeThisHTML</span>
+    </div>
+    
+    
+    <script type="text/javascript">
+      function func1() {
+        alert('js call alert in js');
+        window.webkit.messageHandlers.AppModel.postMessage({body: 'js call alert in js'});
+      }
+    
+    function func2() {
+      if (confirm('[title] confirm', '[msg] js call confirm in js')) {
+        document.getElementById('changeThisContent"').innerHTML = 'true';
+        
+      } else {
+        document.getElementById('changeThisContent"').innerHTML = 'false';
+      }
+      
+      window.webkit.messageHandlers.AppModel.postMessage({body: '[body]js call confirm in js'});
+    }
+    
+    function func3() {
+      var response = prompt('[title] input', '[msg] js call prompt in js');
+      document.getElementById('changeThisContent').innerHTML = response;
+      
+      window.webkit.messageHandlers.AppModel.postMessage({body: response});
+    }
+      </script>
+    
+    
+  </body>
+</html>
+
+
+
+
+
