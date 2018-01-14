@@ -10,4 +10,5 @@
 
 @interface GlobalUtil : NSObject
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
++(void)deleteExistDownloadFile;
 @end

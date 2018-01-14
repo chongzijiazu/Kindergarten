@@ -36,7 +36,7 @@
             {
                 firstLevelNode = [self getFirstLevelByThirdLevel:thirdLevelNode fromLevelNodes:nodes];
                 secondLevelNode = [self getSecondLevelByThirdLevel:thirdLevelNode fromLevelNodes:nodes];
-                NSString* strTmp = [NSString stringWithFormat:@"{'fid':'%@','fname':'%@','sid':%@','sname':'%@','tid':%@','tname':'%@'},",firstLevelNode.levelId,firstLevelNode.name,secondLevelNode.levelId,secondLevelNode.name,thirdLevelNode.levelId,thirdLevelNode.name];
+                NSString* strTmp = [NSString stringWithFormat:@"{\"fid\":\"%@\",\"fname\":\"%@\",\"sid\":\"%@\",\"sname\":\"%@\",\"tid\":\"%@\",\"tname\":\"%@\"},",firstLevelNode.levelId,firstLevelNode.name,secondLevelNode.levelId,secondLevelNode.name,thirdLevelNode.levelId,thirdLevelNode.name];
                 _levelTable = [_levelTable stringByAppendingString:strTmp];
             }
         }
@@ -47,7 +47,7 @@
         _levelTable=@"";
     }
 
-    NSLog(@"%@",_levelTable);
+    //NSLog(@"%@",_levelTable);
     return _levelTable;
 }
 

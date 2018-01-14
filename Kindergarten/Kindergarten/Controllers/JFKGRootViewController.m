@@ -9,11 +9,15 @@
 #import "JFKGRootViewController.h"
 #import <WebKit/WebKit.h>
 #import "JFKGLoginContrller.h"
+#import "JFKGLevelController.h"
+#import "JFKGCommonController.h"
 
 @interface JFKGRootViewController ()<WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate>
 @property (nonatomic, strong) WKWebView *webView;
 
 @property (nonatomic, strong) JFKGLoginContrller *loginController;
+@property (nonatomic, strong) JFKGLevelController *levelController;
+@property (nonatomic, strong) JFKGCommonController *commonController;
 
 @end
 
@@ -34,12 +38,22 @@
     self.loginController = [[JFKGLoginContrller alloc]init];
     self.loginController.webView = self.webView;
     self.loginController.currentVC=self;
+    
+    //评估体系控制类
+    self.levelController = [[JFKGLevelController alloc]init];
+    self.levelController.webView = self.webView;
+    self.levelController.currentVC=self;
+    
+    //通用工具类
+    self.commonController = [[JFKGCommonController alloc]init];
+    self.commonController.webView = self.webView;
+    self.commonController.currentVC=self;
 }
 
 //加载初始页面
 -(void)loadStartView
 {
-    if (TICKETID!=nil && TICKETID.length!=0) //以登录用户直接进入，评估指标页面
+    if (TICKETID!=nil && TICKETID.length!=0 && ISDOWNLOADSUCCESS!=nil && [ISDOWNLOADSUCCESS isEqualToString:@"1"]) //以登录用户(并且下载资源成功)直接进入，评估指标页面
     {
         [self loadLocalHtmlByFilename:@"asslevel.html"];
     }
@@ -118,35 +132,41 @@
     {
         // 打印所传过来的参数，只支持NSNumber, NSString, NSDate, NSArray,
         // NSDictionary, and NSNull类型
-        NSLog(@"🍎didReceiveScriptMessage：%@", (NSString*)message.body);
+        NSLog(@"didReceiveScriptMessage：%@", (NSString*)message.body);
         NSString* htmlname= [[self.webView.URL path] lastPathComponent];
         if ([htmlname isEqualToString:@"login.html"])
         {
-            
-            [self.loginController loginByUsername:@"yuanz" andPassword:@"111"];
+            NSDictionary* dicParams = message.body;
+            NSLog(@"%@",[dicParams objectForKey:@"username"]);
+            [self.loginController loginByUsername:[dicParams objectForKey:@"username"] andPassword:[dicParams objectForKey:@"password"]];
         }
         else if ([htmlname isEqualToString:@"asslevel.html"])
         {
-            NSLog(@"%@",[message.body class]);
-            //NSString* msg = message.body;
-            if ([@"logout" isEqualToString:@"logout"])
+            NSDictionary* dicMsg = message.body;
+            NSString* operation = [dicMsg objectForKey:@"operation"];
+            if ([operation isEqualToString:@"logout"])
             {
-                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"登出后将清空评估数据，请确保评估数据已上传" preferredStyle:UIAlertControllerStyleAlert];
-                [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    NSLog(@"点击取消");
-                }]];
-                [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    
-                    //清空ticketid
-                    [userDefault setObject:@"" forKey:@"ticketid"];
-                    
-                    //清理本地数据（文件及数据库）
-                    
-                    //回到登录页面
-                    [self loadLocalHtmlByFilename:@"login.html"];
-                    
-                }]];
-                [self presentViewController:alertController animated:YES completion:nil];
+                [self.commonController logout];
+            }
+            else if([operation isEqualToString:@"showQuestion"])
+            {
+                NSLog(@"%@",[dicMsg objectForKey:@"param"]);
+                [self loadLocalHtmlByFilename:@"evaluate.html"];
+            }
+            else if([operation isEqualToString:@"uploadData"])
+            {
+                NSLog(@"%@",[dicMsg objectForKey:@"param"]);
+                [self.levelController uploadData];
+            }
+            
+        }
+        else if ([htmlname isEqualToString:@"evaluate.html"])
+        {
+            NSDictionary* dicMsg = message.body;
+            NSString* operation = [dicMsg objectForKey:@"operation"];
+            if ([operation isEqualToString:@"logout"])
+            {
+                [self.commonController logout];
             }
         }
     }
@@ -193,6 +213,11 @@
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
     NSLog(@"%s", __FUNCTION__);
+    NSString* htmlname= [[self.webView.URL path] lastPathComponent];
+    if ([htmlname isEqualToString:@"asslevel.html"])
+    {
+        [self.levelController sendLevelTableToView];
+    }
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {

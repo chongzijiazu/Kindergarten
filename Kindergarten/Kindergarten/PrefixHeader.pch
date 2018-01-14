@@ -25,3 +25,4 @@
 #define userDefault [NSUserDefaults standardUserDefaults]
 
 #define TICKETID ([NSString stringWithFormat:@"%@",[userDefault objectForKey:@"ticketid"]])
+#define ISDOWNLOADSUCCESS ([NSString stringWithFormat:@"%@",[userDefault objectForKey:@"isDownloadSuccess"]])

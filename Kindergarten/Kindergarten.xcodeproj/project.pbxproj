@@ -40,6 +40,8 @@
 		E6FA5AE22009D34200B7B30B /* JFKGNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FA5AE12009D34200B7B30B /* JFKGNavigationViewController.m */; };
 		E6FA5AE52009D36A00B7B30B /* JFKGRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FA5AE42009D36A00B7B30B /* JFKGRootViewController.m */; };
 		E6FA5AE72009DA9000B7B30B /* WKWebView.html in Resources */ = {isa = PBXBuildFile; fileRef = E6FA5AE62009DA9000B7B30B /* WKWebView.html */; };
+		E6FD1B01200B3CA700E83675 /* JFKGEvaluateController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FD1B00200B3CA700E83675 /* JFKGEvaluateController.m */; };
+		E6FD1B04200B62CC00E83675 /* JFKGCommonController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FD1B03200B62CC00E83675 /* JFKGCommonController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +104,10 @@
 		E6FA5AE32009D36A00B7B30B /* JFKGRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGRootViewController.h; sourceTree = "<group>"; };
 		E6FA5AE42009D36A00B7B30B /* JFKGRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGRootViewController.m; sourceTree = "<group>"; };
 		E6FA5AE62009DA9000B7B30B /* WKWebView.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = WKWebView.html; sourceTree = "<group>"; };
+		E6FD1AFF200B3CA700E83675 /* JFKGEvaluateController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGEvaluateController.h; sourceTree = "<group>"; };
+		E6FD1B00200B3CA700E83675 /* JFKGEvaluateController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGEvaluateController.m; sourceTree = "<group>"; };
+		E6FD1B02200B62CC00E83675 /* JFKGCommonController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGCommonController.h; sourceTree = "<group>"; };
+		E6FD1B03200B62CC00E83675 /* JFKGCommonController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGCommonController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -314,6 +320,10 @@
 				E60FD1EB2009E8390080A07E /* JFKGLoginContrller.m */,
 				E60FD1ED2009EB620080A07E /* JFKGLevelController.h */,
 				E60FD1EE2009EB620080A07E /* JFKGLevelController.m */,
+				E6FD1AFF200B3CA700E83675 /* JFKGEvaluateController.h */,
+				E6FD1B00200B3CA700E83675 /* JFKGEvaluateController.m */,
+				E6FD1B02200B62CC00E83675 /* JFKGCommonController.h */,
+				E6FD1B03200B62CC00E83675 /* JFKGCommonController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -446,6 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6FD1B01200B3CA700E83675 /* JFKGEvaluateController.m in Sources */,
 				E6FA5AE52009D36A00B7B30B /* JFKGRootViewController.m in Sources */,
 				E61AAB612008514700424DCE /* LevelNode.m in Sources */,
 				E6EF8E432004B92E00A96B04 /* MBProgressHUD+MJ.m in Sources */,
@@ -453,6 +464,7 @@
 				E60461492005F86C00135F7C /* LevelViewController.m in Sources */,
 				E618DBC42008E304007CD354 /* LoginWebViewModel.m in Sources */,
 				E60461392005B6DC00135F7C /* Encryption.m in Sources */,
+				E6FD1B04200B62CC00E83675 /* JFKGCommonController.m in Sources */,
 				E653F18A200629D200AAC54A /* DownloadManagerViewController.m in Sources */,
 				E60FD1F2200A0AE70080A07E /* GlobalUtil.m in Sources */,
 				E61AAB6F2008BB8000424DCE /* UploadViewController.m in Sources */,

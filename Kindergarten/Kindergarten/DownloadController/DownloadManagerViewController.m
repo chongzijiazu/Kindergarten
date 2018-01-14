@@ -35,7 +35,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    //[self downloadLevelcontent:[HTTPInterface downloadlevelcontent]];
+    //[self deleteExistDownloadFile];//清理下载目录
     //[self downloadEvalutionData]; //下载评估资源
     self.downloadProgress.progress=0.5;//测试用
 }
@@ -115,9 +115,29 @@
     }
 }
 
+-(void)deleteExistDownloadFile
+{
+    self.currentDownloadCount = 1;//重置当前下载个数
+    //Document路径
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+    NSString* downloadPath = [documentPath stringByAppendingPathComponent:@"DownloadFiles"];
+    if([[NSFileManager defaultManager] fileExistsAtPath:downloadPath])
+     {
+         [[NSFileManager defaultManager] removeItemAtPath:downloadPath error:nil];//删除原来
+         //重新创建目录
+         [[NSFileManager defaultManager] createDirectoryAtPath:downloadPath withIntermediateDirectories:YES attributes:nil error:nil];
+     }
+    else
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:downloadPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
+}
+
+
 -(void)downloadDataFrom:(NSString*)fromUrl toFilename:(NSString*)toFilename
 {
-    
+    NSString* downloadFilesDirect = [@"DownloadFiles" stringByAppendingPathComponent:toFilename];//将文件下载到沙盒Document/DownloadFiles下面
     //下载
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.timeoutIntervalForRequest = 30; //设置请求超时时间
@@ -135,7 +155,7 @@
         
     }  destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-        return [documentsDirectoryURL URLByAppendingPathComponent:toFilename];
+        return [documentsDirectoryURL URLByAppendingPathComponent:downloadFilesDirect];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         if (error)
         {
@@ -146,7 +166,7 @@
         else
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.lbl_downloadState.text =  [NSString  stringWithFormat:@"%@%d%@",@"正在下载评估资源(", self.currentDownloadCount++,@"/4)"];
+                self.lbl_downloadState.text =  [NSString  stringWithFormat:@"%@%d%@",@"正在下载评估资源(", ++self.currentDownloadCount,@"/4)"];
             });
             [self.downloadArray removeObject:toFilename]; //移除下载完成的文件
             [self downloadEvalutionData]; //下载下一个文件
@@ -164,7 +184,8 @@
     alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        //清空已下载数据（待完善）
+        //清空已下载数据
+        [self deleteExistDownloadFile];
         //从新下载数据
         [self downloadEvalutionData];
         

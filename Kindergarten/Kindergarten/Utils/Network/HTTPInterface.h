@@ -13,6 +13,9 @@
 //登录
 +(NSString*)login;
 
+//登出
++(NSString*)logout;
+
 //下载评估指标
 +(NSString*)downloadlevelcontent;
 
