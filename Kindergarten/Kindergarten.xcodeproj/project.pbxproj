@@ -42,6 +42,7 @@
 		E6FA5AE72009DA9000B7B30B /* WKWebView.html in Resources */ = {isa = PBXBuildFile; fileRef = E6FA5AE62009DA9000B7B30B /* WKWebView.html */; };
 		E6FD1B01200B3CA700E83675 /* JFKGEvaluateController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FD1B00200B3CA700E83675 /* JFKGEvaluateController.m */; };
 		E6FD1B04200B62CC00E83675 /* JFKGCommonController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FD1B03200B62CC00E83675 /* JFKGCommonController.m */; };
+		E6FD1B08200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FD1B07200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,8 @@
 		E6FD1B00200B3CA700E83675 /* JFKGEvaluateController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGEvaluateController.m; sourceTree = "<group>"; };
 		E6FD1B02200B62CC00E83675 /* JFKGCommonController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGCommonController.h; sourceTree = "<group>"; };
 		E6FD1B03200B62CC00E83675 /* JFKGCommonController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGCommonController.m; sourceTree = "<group>"; };
+		E6FD1B06200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKFWeakScriptMessageDelegate.h; sourceTree = "<group>"; };
+		E6FD1B07200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKFWeakScriptMessageDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +158,7 @@
 		E60461312005AE4F00135F7C /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				E6FD1B05200B6F2600E83675 /* KFWKWebView */,
 				E6EF8E372004ABAC00A96B04 /* HttpRequestModel.h */,
 				E6EF8E382004ABAC00A96B04 /* HttpRequestModel.m */,
 				E60461322005AE9200135F7C /* HTTPInterface.h */,
@@ -328,6 +332,16 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		E6FD1B05200B6F2600E83675 /* KFWKWebView */ = {
+			isa = PBXGroup;
+			children = (
+				E6FD1B06200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.h */,
+				E6FD1B07200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.m */,
+			);
+			name = KFWKWebView;
+			path = Kindergarten/Utils/KFWKWebView;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -466,6 +480,7 @@
 				E60461392005B6DC00135F7C /* Encryption.m in Sources */,
 				E6FD1B04200B62CC00E83675 /* JFKGCommonController.m in Sources */,
 				E653F18A200629D200AAC54A /* DownloadManagerViewController.m in Sources */,
+				E6FD1B08200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.m in Sources */,
 				E60FD1F2200A0AE70080A07E /* GlobalUtil.m in Sources */,
 				E61AAB6F2008BB8000424DCE /* UploadViewController.m in Sources */,
 				E67AB1EA20044FF500AD83C9 /* main.m in Sources */,

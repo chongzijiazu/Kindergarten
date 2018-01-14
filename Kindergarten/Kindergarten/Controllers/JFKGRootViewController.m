@@ -11,6 +11,7 @@
 #import "JFKGLoginContrller.h"
 #import "JFKGLevelController.h"
 #import "JFKGCommonController.h"
+#import "JFKFWeakScriptMessageDelegate.h"
 
 @interface JFKGRootViewController ()<WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate>
 @property (nonatomic, strong) WKWebView *webView;
@@ -96,7 +97,9 @@
     config.userContentController = [[WKUserContentController alloc] init];
     
     // 我们可以在WKScriptMessageHandler代理中接收到
-    [config.userContentController addScriptMessageHandler:self name:@"AppModel"];
+    //[config.userContentController addScriptMessageHandler:self name:@"AppModel"];
+    //使用JFKFWeakScriptMessageDelegate解决执行脚本内存无法释放问题
+    [config.userContentController addScriptMessageHandler:[[JFKFWeakScriptMessageDelegate alloc] initWithDelegate:self] name:@"AppModel"];
     
     // 添加一个JS到HTML中，这样就可以直接在JS中调用我们添加的JS方法
     /*WKUserScript *script = [[WKUserScript alloc]initWithSource:@"function showAlert() { alert('在载入webview时通过Swift注入的JS方法');"
@@ -114,13 +117,13 @@
     self.webView.UIDelegate = self;
 }
 
-- (void)goback {
+-(void)goback {
     if ([self.webView canGoBack]) {
         [self.webView goBack];
     }
 }
 
-- (void)gofarward {
+-(void)gofarward {
     if ([self.webView canGoForward]) {
         [self.webView goForward];
     }
@@ -167,6 +170,10 @@
             if ([operation isEqualToString:@"logout"])
             {
                 [self.commonController logout];
+            }
+            else if([operation isEqualToString:@"goback"])
+            {
+                [self goback];
             }
         }
     }
