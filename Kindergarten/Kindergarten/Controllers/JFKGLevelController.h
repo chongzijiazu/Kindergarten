@@ -10,12 +10,18 @@
 #import <WebKit/WebKit.h>
 
 @interface JFKGLevelController : NSObject
-
+{
+    NSArray* _sortedThirdLevelArray;//生序排序的三级指标id数组
+}
+@property(nonatomic,strong)NSArray* sortedThirdLevelArray;
 @property (nonatomic, weak) WKWebView *webView;
 @property (nonatomic, weak) UIViewController *currentVC;
 
+-(void)makeAssLevelFile;
 -(NSString*)readLevelData;
 -(void)sendLevelTableToView;
 -(void)uploadData;
+-(NSString*)getPreThirdLevelIdByCurrentThirdLevelId:(NSString*)currentThirdLevelId;
+-(NSString*)getNextThirdLevelIdByCurrentThirdLevelId:(NSString*)currentThirdLevelId;
 
 @end

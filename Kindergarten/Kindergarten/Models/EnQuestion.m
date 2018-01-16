@@ -25,9 +25,10 @@
 @synthesize appendprove;
 @synthesize calculated;
 @synthesize deleted;
+@synthesize questionnum;
 @synthesize optionArray=_optionArray;
 
--(id)initWithPKID:(NSString *)mpkId andLevel:(NSString *)mlevel andSeqLevel:(NSString*)mseqlevel andFormula:(NSString*)mformula andContentTip:(NSString*)mcontenttip andContent:(NSString*)mcontent andDescription:(NSString*)mdescription andSeq:(int)mSeq andType:(int)mType andWeight:(float)mweight andVeto:(int)mveto andAppendProve:(int)mappendprove andCalculated:(int)mcalculated andDeleted:(int)mdeleted
+-(id)initWithPKID:(NSString *)mpkId andLevel:(NSString *)mlevel andSeqLevel:(NSString*)mseqlevel andFormula:(NSString*)mformula andContentTip:(NSString*)mcontenttip andContent:(NSString*)mcontent andDescription:(NSString*)mdescription andSeq:(int)mSeq andType:(int)mType andWeight:(float)mweight andVeto:(int)mveto andAppendProve:(int)mappendprove andCalculated:(int)mcalculated andDeleted:(int)mdeleted andQuestionNum:(int)mquestionnum
 {
     if(self=[super init]){ //super代表父类
         self.pkId = mpkId;
@@ -44,15 +45,16 @@
         self.appendprove = mappendprove;
         self.calculated = mcalculated;
         self.deleted = mdeleted;
+        self.questionnum=mquestionnum;
         self.optionArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 
-+(id)questionWithPKID:(NSString *)mpkId andLevel:(NSString *)mlevel andSeqLevel:(NSString*)mseqlevel andFormula:(NSString*)mformula andContentTip:(NSString*)mcontenttip andContent:(NSString*)mcontent andDescription:(NSString*)mdescription andSeq:(int)mSeq andType:(int)mType andWeight:(float)mweight andVeto:(int)mveto andAppendProve:(int)mappendprove andCalculated:(int)mcalculated andDeleted:(int)mdeleted
++(id)questionWithPKID:(NSString *)mpkId andLevel:(NSString *)mlevel andSeqLevel:(NSString*)mseqlevel andFormula:(NSString*)mformula andContentTip:(NSString*)mcontenttip andContent:(NSString*)mcontent andDescription:(NSString*)mdescription andSeq:(int)mSeq andType:(int)mType andWeight:(float)mweight andVeto:(int)mveto andAppendProve:(int)mappendprove andCalculated:(int)mcalculated andDeleted:(int)mdeleted andQuestionNum:(int)mquestionnum
 {
-    EnQuestion* question = [[EnQuestion alloc] initWithPKID:mpkId andLevel:mlevel andSeqLevel:mseqlevel andFormula:mformula andContentTip:mcontenttip andContent:mcontent andDescription:mdescription andSeq:mSeq andType:mType andWeight:mweight andVeto:mveto andAppendProve:mappendprove andCalculated:mcalculated andDeleted:mdeleted];
+    EnQuestion* question = [[EnQuestion alloc] initWithPKID:mpkId andLevel:mlevel andSeqLevel:mseqlevel andFormula:mformula andContentTip:mcontenttip andContent:mcontent andDescription:mdescription andSeq:mSeq andType:mType andWeight:mweight andVeto:mveto andAppendProve:mappendprove andCalculated:mcalculated andDeleted:mdeleted andQuestionNum:mquestionnum];
     return question;
 }
 
@@ -77,7 +79,7 @@
         option = (EnOption*)self.optionArray[i];
         optionHtml=[optionHtml stringByAppendingString:[option description]];
     }
-    NSString* questionHtml = [NSString stringWithFormat:@"<div style=\"font-size: 18px;\">%d.%@<img src=\"images/question.png\" /><a href=\"#\">查看题目解释</a></div><hr/><div>%@</div>",self.seq,self.content,optionHtml];
+    NSString* questionHtml = [NSString stringWithFormat:@"<div style=\"font-size: 18px;\">%d.%@<img src=\"images/question.png\" /><a href=\"#\">查看题目解释</a></div><hr/><div>%@</div>",self.questionnum,self.content,optionHtml];
     return questionHtml;
 }
 

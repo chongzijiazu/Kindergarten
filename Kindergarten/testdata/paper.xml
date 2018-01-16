@@ -8,9 +8,10 @@
     <type>1</type>
     <weight>0.5</weight>
     <veto>1</veto>
-    <appendprove>1</appendprove >
-    <calculated>1</calculated >
-    <fkFormula>{teachertotal}</fkFormula >
+    <appendprove>1</appendprove>
+    <calculated>1</calculated>
+    <fkFormula>{teachertotal}</fkFormula>
+    <questionnum>1</questionnum>
     <deleted>0</deleted>
     <contenttip>蓝色提示字,教师数量：${公式1}(base64文本)</contenttip>
     <content>题干内容001001001(base64文本)</content>
@@ -34,9 +35,10 @@
     <type>1</type>
     <weight>0.5</weight>
     <veto>1</veto>
-    <appendprove>1</appendprove >
-    <calculated>1</calculated >
-    <fkFormula>{teachertotal}</fkFormula >
+    <appendprove>1</appendprove>
+    <calculated>1</calculated>
+    <fkFormula>{teachertotal}</fkFormula>
+    <questionnum>2</questionnum>
     <deleted>0</deleted>
     <contenttip>蓝色提示字,教师数量：${公式1}(base64文本)</contenttip>
     <content>题干内容001001001(base64文本)</content>
@@ -60,9 +62,10 @@
     <type>1</type>
     <weight>0.5</weight>
     <veto>1</veto>
-    <appendprove>1</appendprove >
+    <appendprove>1</appendprove>
     <calculated>1</calculated >
-    <fkFormula>{teachertotal}</fkFormula >
+    <fkFormula>{teachertotal}</fkFormula>
+    <questionnum>3</questionnum>
     <deleted>0</deleted>
     <contenttip>蓝色提示字,教师数量：${公式1}(base64文本)</contenttip>
     <content>题干内容001001002(base64文本)</content>
@@ -86,9 +89,10 @@
     <type>1</type>
     <weight>0.5</weight>
     <veto>1</veto>
-    <appendprove>1</appendprove >
-    <calculated>1</calculated >
-    <fkFormula>{teachertotal}</fkFormula >
+    <appendprove>1</appendprove>
+    <calculated>1</calculated>
+    <fkFormula>{teachertotal}</fkFormula>
+    <questionnum>4</questionnum>
     <deleted>0</deleted>
     <contenttip>蓝色提示字,教师数量：${公式1}(base64文本)</contenttip>
     <content>题干内容001001002(base64文本)</content>

@@ -63,7 +63,8 @@
     
     //读取评估指标数据
     NSString* levelXMLPath = [[NSBundle mainBundle] pathForResource:@"level" ofType:@"xml"];
-    _levelTable = [LevelTableCreator CreateTreeFromLevelXML:levelXMLPath];
+    LevelTableCreator* levelTabelC = [[LevelTableCreator alloc]init];
+    _levelTable = [levelTabelC CreateTreeFromLevelXML:levelXMLPath];
     if (_levelTable==nil || [_levelTable isEqualToString:@""]) {
         //读取指标数据失败
         return false;

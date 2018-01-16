@@ -9,6 +9,8 @@
 #import "DownloadManagerViewController.h"
 #import "AFNetworking.h"
 #import "JFKGLoginContrller.h"
+#import "JFKGLevelController.h"
+#import "JFKGEvaluateController.h"
 
 @interface DownloadManagerViewController ()
 
@@ -26,6 +28,8 @@
 {
     //LevelViewController* levelVC = [[LevelViewController alloc] init];
     //[self.navigationController pushViewController:levelVC animated:NO];
+    [self processDownloadData];//处理下载完的数据
+    //下载及加载数据完成，向页面发送成功消息
     if (self.delegate!=nil) {
         [self.delegate sendIsSuccess:YES];
     }
@@ -101,6 +105,8 @@
     {
         if(self.currentDownloadCount == 4)//下载完成
         {
+            [self processDownloadData];//处理下载完的数据
+            //下载及加载数据完成，向页面发送成功消息
             if (self.delegate!=nil) {
                 [self.delegate sendIsSuccess:YES];
             }
@@ -111,6 +117,22 @@
             //正常情况下，不会出现此逻辑，在下载出错后会做处理
         }
     }
+}
+
+//处理下载好的数据
+-(void)processDownloadData
+{
+    self.lbl_downloadState.text = @"数据加载中...";
+    //处理以评估数据，解压保存答案信息，解压保存证据信息
+    
+    //处理试卷数据，包括试卷包的解压和生成按三级指标分类的html
+    JFKGEvaluateController* evaluateC = [[JFKGEvaluateController alloc] init];
+    [evaluateC makeLevelHTMLByPaper];//生成按三级指标分类的html文件（调试，尚无解压过程）
+    
+    //处理评估指标体系，解压评估指标压缩包，生成评估指标所需的html格式文件
+    JFKGLevelController* levelC = [[JFKGLevelController alloc] init];
+    [levelC makeAssLevelFile];//生成html格式文件（调试，没添加解压过程）
+    
 }
 
 -(void)deleteExistDownloadFile
@@ -210,39 +232,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-/*//下载评估指标数据
--(void)downloadLevelcontent:(NSString*)downloadUrl
-{
-    AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:downloadUrl]];
-    
-    NSURLSessionDownloadTask* download = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
-        //下载进度
-        //NSLog(@"%f",1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.downloadProgress.progress =1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount;
-        });
-        
-        
-    } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        //保存的文件路径
-        NSString *fullPath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"level.zip"];
-        return [NSURL fileURLWithPath:fullPath];
-    } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-        NSLog(@"%@",filePath);
-        
-        if (error==nil) {
-            self.downloadProgress.progress = 1;
-        }
-        else
-        {
-            NSLog(@"下载失败：%@",error);
-        }
-        
-    }];
-    //执行Task
-    [download resume];
-}*/
 
 @end

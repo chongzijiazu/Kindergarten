@@ -186,8 +186,36 @@
             }
             else if([operation isEqualToString:@"pageDown"])
             {
-                self.evaluateController.currentLevelQuestionID =@"001001002";
-                [self.evaluateController sendLevelQuestionToView];
+                NSString* nextThirdLevelId = [self.levelController getNextThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
+                if (nextThirdLevelId!=nil && nextThirdLevelId.length==9)
+                {
+                    self.evaluateController.currentLevelQuestionID =nextThirdLevelId;
+                    [self.evaluateController sendLevelQuestionToView];
+                }
+                else
+                {
+                    NSString* funMessage = @"alert('当前页，已是最后一页');";
+                    [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                        NSLog(@"response: %@ error: %@", response, error);
+                    }];
+                }
+                
+            }
+            else if([operation isEqualToString:@"pageUp"])
+            {
+                NSString* preThirdLevelId = [self.levelController getPreThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
+                if (preThirdLevelId!=nil && preThirdLevelId.length==9)
+                {
+                    self.evaluateController.currentLevelQuestionID =preThirdLevelId;
+                    [self.evaluateController sendLevelQuestionToView];
+                }
+                else
+                {
+                    NSString* funMessage = @"alert('当前页，已是第一页');";
+                    [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                        NSLog(@"response: %@ error: %@", response, error);
+                    }];
+                }
             }
         }
     }
@@ -238,11 +266,6 @@
     if ([htmlname isEqualToString:@"asslevel.html"])
     {
         [self.levelController sendLevelTableToView];//向页面发送评估指标数据
-        //如果试题文件不存在，则生成试题文件
-        if(![[NSFileManager defaultManager] fileExistsAtPath:self.evaluateController.levelHTMLPath])
-        {
-            [self.evaluateController makeLevelHTMLByPaper];//生成按三级指标分类的试题
-        }
     }
     else if([htmlname isEqualToString:@"evaluate.html"])
     {

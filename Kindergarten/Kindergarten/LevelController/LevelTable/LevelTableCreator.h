@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface LevelTableCreator : NSObject
-+(NSString*)CreateTreeFromLevelXML:(NSString*) filepath;
+
+-(NSString*)CreateTreeFromLevelXML:(NSString*) filepath;
+-(NSArray*)getSortedLevelArrayFromLevelXmlFile:(NSString*)filepath;
 @end

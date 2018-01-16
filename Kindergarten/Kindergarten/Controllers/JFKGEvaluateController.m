@@ -95,7 +95,7 @@
         if (questions!=nil && questions.count>0) {
             EnQuestion* question;
             for (int i=0; i<questions.count; i++) {
-                question = [EnQuestion questionWithPKID:questions[i][@"pkId"] andLevel:questions[i][@"fkLevel"] andSeqLevel:questions[i][@"seqLevel"] andFormula:questions[i][@"fkFormula"] andContentTip:questions[i][@"contenttip"] andContent:questions[i][@"content"] andDescription:questions[i][@"description"] andSeq:[questions[i][@"seq"] intValue] andType:[questions[i][@"type"] intValue] andWeight:[questions[i][@"weight"] floatValue] andVeto:[questions[i][@"veto"] intValue] andAppendProve:[questions[i][@"appendprove"] intValue] andCalculated:[questions[i][@"calculated"] intValue] andDeleted:[questions[i][@"deleted"] intValue]];
+                question = [EnQuestion questionWithPKID:questions[i][@"pkId"] andLevel:questions[i][@"fkLevel"] andSeqLevel:questions[i][@"seqLevel"] andFormula:questions[i][@"fkFormula"] andContentTip:questions[i][@"contenttip"] andContent:questions[i][@"content"] andDescription:questions[i][@"description"] andSeq:[questions[i][@"seq"] intValue] andType:[questions[i][@"type"] intValue] andWeight:[questions[i][@"weight"] floatValue] andVeto:[questions[i][@"veto"] intValue] andAppendProve:[questions[i][@"appendprove"] intValue] andCalculated:[questions[i][@"calculated"] intValue] andDeleted:[questions[i][@"deleted"] intValue] andQuestionNum:[questions[i][@"questionnum"] intValue]];
                 NSArray* options = questions[i][@"options"][@"option"];
                 EnOption* option;
                 for (int j=0; j<options.count; j++) {
@@ -128,6 +128,12 @@
     XMLDictionaryParser* parser = [[XMLDictionaryParser alloc] init];
     NSDictionary* dicPaper = [parser dictionaryWithFile:filepath];
     return dicPaper;
+}
+
+//下一页
+-(void)pageDownByCurrentThirdLevelId:(NSString*)currentLevelId
+{
+    
 }
 
 -(NSString *)levelHTMLPath {

@@ -16,12 +16,14 @@
 
 @implementation LevelTableCreator
 
-+(NSString*)CreateTreeFromLevelXML:(NSString*) filepath
+
+-(NSString*)CreateTreeFromLevelXML:(NSString*) filepath
 {
     NSString* _levelTable;
     _levelTable= [[NSString alloc] init];
     
     NSArray* levelArray = [self getSortedLevelArrayFromLevelXmlFile:filepath];
+    
     NSMutableArray* nodes = [self getLevelNodesFromLevelArray:levelArray];
     
     if (nodes!=nil && nodes.count>0)
@@ -51,7 +53,7 @@
     return _levelTable;
 }
 
-+(NSMutableArray*)getLevelNodesFromLevelArray:(NSArray*) levelArray
+-(NSMutableArray*)getLevelNodesFromLevelArray:(NSArray*) levelArray
 {
     if (levelArray!=nil && levelArray.count>0) {
         NSMutableArray* nodes = [[NSMutableArray alloc] init];
@@ -71,7 +73,7 @@
     
 }
 
-+(NSArray*)getSortedLevelArrayFromLevelXmlFile:(NSString*)filepath
+-(NSArray*)getSortedLevelArrayFromLevelXmlFile:(NSString*)filepath
 {
     XMLDictionaryParser* parser = [[XMLDictionaryParser alloc] init];
     NSDictionary* dicLevel = [parser dictionaryWithFile:filepath];
@@ -79,11 +81,12 @@
     NSMutableArray* levelArr = dicLevel[@"level"];
     NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"pkId" ascending:YES]];
     [levelArr sortUsingDescriptors:sortDescriptors];
+    //NSLog(@"%@",levelArr);
     
     return levelArr;
 }
 
-+(LevelNode*)getFirstLevelByThirdLevel:(LevelNode*)thirdLevelNode fromLevelNodes:(NSMutableArray*)levelNodes
+-(LevelNode*)getFirstLevelByThirdLevel:(LevelNode*)thirdLevelNode fromLevelNodes:(NSMutableArray*)levelNodes
 {
     LevelNode* tmpNode = nil;
     if (thirdLevelNode!=nil && thirdLevelNode.levelId.length==9) {
@@ -98,7 +101,7 @@
     return tmpNode;
 }
 
-+(LevelNode*)getSecondLevelByThirdLevel:(LevelNode*)thirdLevelNode fromLevelNodes:(NSMutableArray*)levelNodes
+-(LevelNode*)getSecondLevelByThirdLevel:(LevelNode*)thirdLevelNode fromLevelNodes:(NSMutableArray*)levelNodes
 {
     LevelNode* tmpNode = nil;
     if (thirdLevelNode!=nil && thirdLevelNode.levelId.length==9) {
