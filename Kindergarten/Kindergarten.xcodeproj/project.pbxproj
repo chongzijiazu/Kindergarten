@@ -39,6 +39,8 @@
 		E6EF8E392004ABAC00A96B04 /* HttpRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EF8E382004ABAC00A96B04 /* HttpRequestModel.m */; };
 		E6EF8E422004B92E00A96B04 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E6EF8E3F2004B92E00A96B04 /* MBProgressHUD.bundle */; };
 		E6EF8E432004B92E00A96B04 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EF8E412004B92E00A96B04 /* MBProgressHUD+MJ.m */; };
+		E6F47E1A200DC87900CE111B /* EnAproveItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E6F47E19200DC87900CE111B /* EnAproveItem.m */; };
+		E6F47E1D200DEA6B00CE111B /* JFKGAproveController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6F47E1C200DEA6B00CE111B /* JFKGAproveController.m */; };
 		E6FA5AE22009D34200B7B30B /* JFKGNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FA5AE12009D34200B7B30B /* JFKGNavigationViewController.m */; };
 		E6FA5AE52009D36A00B7B30B /* JFKGRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FA5AE42009D36A00B7B30B /* JFKGRootViewController.m */; };
 		E6FA5AE72009DA9000B7B30B /* WKWebView.html in Resources */ = {isa = PBXBuildFile; fileRef = E6FA5AE62009DA9000B7B30B /* WKWebView.html */; };
@@ -109,6 +111,10 @@
 		E6EF8E3F2004B92E00A96B04 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		E6EF8E402004B92E00A96B04 /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
 		E6EF8E412004B92E00A96B04 /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
+		E6F47E18200DC87900CE111B /* EnAproveItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnAproveItem.h; sourceTree = "<group>"; };
+		E6F47E19200DC87900CE111B /* EnAproveItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnAproveItem.m; sourceTree = "<group>"; };
+		E6F47E1B200DEA6B00CE111B /* JFKGAproveController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGAproveController.h; sourceTree = "<group>"; };
+		E6F47E1C200DEA6B00CE111B /* JFKGAproveController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGAproveController.m; sourceTree = "<group>"; };
 		E6FA5AE02009D34200B7B30B /* JFKGNavigationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGNavigationViewController.h; sourceTree = "<group>"; };
 		E6FA5AE12009D34200B7B30B /* JFKGNavigationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGNavigationViewController.m; sourceTree = "<group>"; };
 		E6FA5AE32009D36A00B7B30B /* JFKGRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGRootViewController.h; sourceTree = "<group>"; };
@@ -347,6 +353,8 @@
 				E6FD1B00200B3CA700E83675 /* JFKGEvaluateController.m */,
 				E6FD1B02200B62CC00E83675 /* JFKGCommonController.h */,
 				E6FD1B03200B62CC00E83675 /* JFKGCommonController.m */,
+				E6F47E1B200DEA6B00CE111B /* JFKGAproveController.h */,
+				E6F47E1C200DEA6B00CE111B /* JFKGAproveController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -374,6 +382,8 @@
 				E6FED6D0200C4EA200359990 /* EnPaper.m */,
 				E652B390200CAC2400495147 /* EnAprove.h */,
 				E652B391200CAC2400495147 /* EnAprove.m */,
+				E6F47E18200DC87900CE111B /* EnAproveItem.h */,
+				E6F47E19200DC87900CE111B /* EnAproveItem.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -511,8 +521,10 @@
 				E6FA5AE52009D36A00B7B30B /* JFKGRootViewController.m in Sources */,
 				E61AAB612008514700424DCE /* LevelNode.m in Sources */,
 				E6FED6D1200C4EA200359990 /* EnPaper.m in Sources */,
+				E6F47E1D200DEA6B00CE111B /* JFKGAproveController.m in Sources */,
 				E6EF8E432004B92E00A96B04 /* MBProgressHUD+MJ.m in Sources */,
 				E60FD1EC2009E8390080A07E /* JFKGLoginContrller.m in Sources */,
+				E6F47E1A200DC87900CE111B /* EnAproveItem.m in Sources */,
 				E60461492005F86C00135F7C /* LevelViewController.m in Sources */,
 				E618DBC42008E304007CD354 /* LoginWebViewModel.m in Sources */,
 				E60461392005B6DC00135F7C /* Encryption.m in Sources */,

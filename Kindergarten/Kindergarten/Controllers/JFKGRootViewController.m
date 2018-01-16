@@ -13,6 +13,7 @@
 #import "JFKGCommonController.h"
 #import "JFKFWeakScriptMessageDelegate.h"
 #import "JFKGEvaluateController.h"
+#import "JFKGAproveController.h"
 
 
 @interface JFKGRootViewController ()<WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate>
@@ -22,7 +23,7 @@
 @property (nonatomic, strong) JFKGLevelController *levelController;
 @property (nonatomic, strong) JFKGEvaluateController* evaluateController;
 @property (nonatomic, strong) JFKGCommonController *commonController;
-
+@property (nonatomic, strong) JFKGAproveController *aproveController;
 
 @end
 
@@ -58,6 +59,11 @@
     self.commonController = [[JFKGCommonController alloc]init];
     self.commonController.webView = self.webView;
     self.commonController.currentVC=self;
+    
+    //获取证据类
+    self.aproveController = [[JFKGAproveController alloc]init];
+    self.aproveController.webView = self.webView;
+    self.aproveController.currentVC=self;
 }
 
 //加载初始页面
@@ -216,6 +222,12 @@
                         NSLog(@"response: %@ error: %@", response, error);
                     }];
                 }
+            }
+            else if([operation isEqualToString:@"addaprove"])
+            {
+                [self.aproveController getAprove];//获取证据
+                //[self.navigationController pushViewController:self.aproveController animated:NO];
+                
             }
         }
     }

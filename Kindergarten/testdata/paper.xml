@@ -35,7 +35,7 @@
     <type>1</type>
     <weight>0.5</weight>
     <veto>1</veto>
-    <appendprove>1</appendprove>
+    <appendprove>0</appendprove>
     <calculated>1</calculated>
     <fkFormula>{teachertotal}</fkFormula>
     <questionnum>2</questionnum>
