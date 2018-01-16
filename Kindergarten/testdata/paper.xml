@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paper>
+  <question>
+    <pkId>abcdefghigklmn001</pkId>
+    <fkLevel> 001001001</fkLevel>
+    <seq>1</seq>
+    <seqLevel>001-001001-001001001-1</seqLevel>
+    <type>1</type>
+    <weight>0.5</weight>
+    <veto>1</veto>
+    <appendprove>1</appendprove >
+    <calculated>1</calculated >
+    <fkFormula>{teachertotal}</fkFormula >
+    <deleted>0</deleted>
+    <contenttip>蓝色提示字,教师数量：${公式1}(base64文本)</contenttip>
+    <content>题干内容001001001(base64文本)</content>
+    <description>题目解释内容{pic1.jpg}有图片示例(base64文本)</description>
+    <options>
+      <option  optionvalue="A" weight="0.25" fkQuestion="eeeeeeee1" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+      </option>
+      <option  optionvalue="B" weight="0.25" fkQuestion="eeeeeeee2" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+      </option>
+      <option  optionvalue="C" weight="0.25" fkQuestion="eeeeeeee3" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+      </option>
+      <option  optionvalue="D" weight="0.25" fkQuestion="eeeeeeee4" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+      </option>
+    </options>
+  </question >
+  <question>
+    <pkId>abcdefghigklmn002</pkId>
+    <fkLevel> 001001001</fkLevel>
+    <seq>2</seq>
+    <seqLevel>001-001001-001001001-2</seqLevel>
+    <type>1</type>
+    <weight>0.5</weight>
+    <veto>1</veto>
+    <appendprove>1</appendprove >
+    <calculated>1</calculated >
+    <fkFormula>{teachertotal}</fkFormula >
+    <deleted>0</deleted>
+    <contenttip>蓝色提示字,教师数量：${公式1}(base64文本)</contenttip>
+    <content>题干内容001001001(base64文本)</content>
+    <description>题目解释内容{pic1.jpg}有图片示例(base64文本)</description>
+    <options>
+        <option  optionvalue="A" weight="0.25" fkQuestion="ffffffff1" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+        </option>
+        <option  optionvalue="B" weight="0.25" fkQuestion="ffffffff2" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+        </option>
+        <option  optionvalue="C" weight="0.25" fkQuestion="ffffffff3" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+        </option>
+        <option  optionvalue="D" weight="0.25" fkQuestion="ffffffff4" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+        </option>
+    </options>
+  </question >
+  <question>
+    <pkId>abcdefghigklmn003</pkId>
+    <fkLevel> 001001002</fkLevel>
+    <seq>1</seq>
+    <seqLevel>001-001001-001001001-1</seqLevel>
+    <type>1</type>
+    <weight>0.5</weight>
+    <veto>1</veto>
+    <appendprove>1</appendprove >
+    <calculated>1</calculated >
+    <fkFormula>{teachertotal}</fkFormula >
+    <deleted>0</deleted>
+    <contenttip>蓝色提示字,教师数量：${公式1}(base64文本)</contenttip>
+    <content>题干内容001001002(base64文本)</content>
+    <description>题目解释内容{pic1.jpg}有图片示例(base64文本)</description>
+    <options>
+        <option  optionvalue="A" weight="0.25" fkQuestion="aaaaaaaa1" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+        </option>
+        <option  optionvalue="B" weight="0.25" fkQuestion="aaaaaaaa2" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+        </option>
+        <option  optionvalue="C" weight="0.25" fkQuestion="aaaaaaaa3" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+        </option>
+        <option  optionvalue="D" weight="0.25" fkQuestion="aaaaaaaa4" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+        </option>
+    </options>
+  </question >
+  <question>
+    <pkId>abcdefghigklmn004</pkId>
+    <fkLevel> 001001002</fkLevel>
+    <seq>2</seq>
+    <seqLevel>001-001001-001001001-2</seqLevel>
+    <type>1</type>
+    <weight>0.5</weight>
+    <veto>1</veto>
+    <appendprove>1</appendprove >
+    <calculated>1</calculated >
+    <fkFormula>{teachertotal}</fkFormula >
+    <deleted>0</deleted>
+    <contenttip>蓝色提示字,教师数量：${公式1}(base64文本)</contenttip>
+    <content>题干内容001001002(base64文本)</content>
+    <description>题目解释内容{pic1.jpg}有图片示例(base64文本)</description>
+    <options>
+        <option  optionvalue="A" weight="0.25" fkQuestion="bbbbbbbb1" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+        </option>
+        <option  optionvalue="B" weight="0.25" fkQuestion="bbbbbbbb2" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+        </option>
+        <option  optionvalue="C" weight="0.25" fkQuestion="bbbbbbbb3" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+        </option>
+        <option  optionvalue="D" weight="0.25" fkQuestion="bbbbbbbb4" pkId="abcdefghigklmn001" content="选项A内容(base64文本)">
+        </option>
+    </options>
+  </question >
+</paper>
+
