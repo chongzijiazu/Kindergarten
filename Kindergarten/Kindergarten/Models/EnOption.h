@@ -10,13 +10,20 @@
 
 @interface EnOption : NSObject
 {
-    NSString* _optionvalue;
-    NSString* _normal;
+    NSString* _content;
+    NSString* _fkQuestion;
+    NSString* _optionValue;
+    NSString* _pkId;
     float weight;
 }
 
-@property(nonatomic,copy)NSString* optionvalue;
-@property(nonatomic,copy)NSString* normal;
+@property(nonatomic,copy)NSString* content;
+@property(nonatomic,copy)NSString* fkQuestion;
+@property(nonatomic,copy)NSString* optionValue;
+@property(nonatomic,copy)NSString* pkId;
 @property(nonatomic,assign)float weight;
 
+-(id)initWithContent:(NSString*)mContent andOptionValue:(NSString*)mOptionValue andWeight:(int)mweight andpkId:(NSString*)mpkId andfkQuestion:(NSString*)mfkQuestion;
+
++(id)OptionWithContent:(NSString*)mContent andOptionValue:(NSString*)mOptionValue andWeight:(int)mweight andpkId:(NSString*)mpkId andfkQuestion:(NSString*)mfkQuestion;
 @end

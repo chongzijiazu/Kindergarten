@@ -58,7 +58,7 @@
         LevelNode* node = nil;
         for (int i=0; i<levelArray.count; i++) {
             node = [[LevelNode alloc] init];
-            node.levelId = (NSString*)levelArray[i][@"pk_id"];
+            node.levelId = (NSString*)levelArray[i][@"pkId"];
             node.name= (NSString*)levelArray[i][@"name"];
             [nodes addObject:node];
         }
@@ -76,8 +76,8 @@
     XMLDictionaryParser* parser = [[XMLDictionaryParser alloc] init];
     NSDictionary* dicLevel = [parser dictionaryWithFile:filepath];
     
-    NSMutableArray* levelArr = dicLevel[@"row"];
-    NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"price" ascending:YES]];
+    NSMutableArray* levelArr = dicLevel[@"level"];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"pkId" ascending:YES]];
     [levelArr sortUsingDescriptors:sortDescriptors];
     
     return levelArr;

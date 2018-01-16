@@ -1,345 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tbl_ass_level>
-<row>
-  <pk_id>001</pk_id>
+<levels>
+<level>
+  <pkId>001</pkId>
   <name>A1办园条件</name>
   <weight>0.2</weight>
   <seq>1</seq>
-  <create_time>2017-12-12 10:00:00</create_time>
-  <delete_time>2017-12-13 10:00:00</delete_time>
-  <deleted>0</deleted>
-</row>
-  <row>
-    <pk_id>002</pk_id>
+</level>
+  <level>
+    <pkId>002</pkId>
     <name>A2安全卫生</name>
     <weight>0.2</weight>
     <seq>2</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001001</pk_id>
+  </level>
+  <level>
+    <pkId>001001</pkId>
     <name>B1办园资质</name>
     <weight>0.1</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001002</pk_id>
+  </level>
+  <level>
+    <pkId>001002</pkId>
     <name>B2规模与班额</name>
     <weight>0.1</weight>
     <seq>2</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001003</pk_id>
+  </level>
+  <level>
+    <pkId>001003</pkId>
     <name>B3园舍与场地</name>
     <weight>0.1</weight>
     <seq>3</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001004</pk_id>
+  </level>
+  <level>
+    <pkId>001004</pkId>
     <name>B4设施设备</name>
     <weight>0.1</weight>
     <seq>4</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001005</pk_id>
+  </level>
+  <level>
+    <pkId>001005</pkId>
     <name>B5材料与图书</name>
     <weight>0.1</weight>
     <seq>5</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001006</pk_id>
+  </level>
+  <level>
+    <pkId>001006</pkId>
     <name>B6办园经费</name>
     <weight>0.5</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001001001</pk_id>
+  </level>
+  <level>
+    <pkId>001001001</pkId>
     <name>C1办园许可</name>
     <weight>0.05</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001001002</pk_id>
+  </level>
+  <level>
+    <pkId>001001002</pkId>
     <name>C2相关证照</name>
     <weight>0.05</weight>
     <seq>2</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001002001</pk_id>
+  </level>
+  <level>
+    <pkId>001002001</pkId>
     <name>C1办园规模</name>
     <weight>0.05</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001002002</pk_id>
+  </level>
+  <level>
+    <pkId>001002002</pkId>
     <name>C2班额</name>
     <weight>0.05</weight>
     <seq>2</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001003001</pk_id>
+  </level>
+  <level>
+    <pkId>001003001</pkId>
     <name>C1园舍建筑</name>
     <weight>0.03</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001003002</pk_id>
+  </level>
+  <level>
+    <pkId>001003002</pkId>
     <name>C2户外场地</name>
     <weight>0.03</weight>
     <seq>2</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001003003</pk_id>
+  </level>
+  <level>
+    <pkId>001003003</pkId>
     <name>C3区角设置</name>
     <weight>0.03</weight>
     <seq>3</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001004001</pk_id>
+  </level>
+  <level>
+    <pkId>001004001</pkId>
     <name>C1教育活动设施设备</name>
     <weight>0.025</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001004002</pk_id>
+  </level>
+  <level>
+    <pkId>001004002</pkId>
     <name>C2生活设施设备</name>
     <weight>0.025</weight>
     <seq>2</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001004003</pk_id>
+  </level>
+  <level>
+    <pkId>001004003</pkId>
     <name>C3安保消防设施</name>
     <weight>0.025</weight>
     <seq>3</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001004004</pk_id>
+  </level>
+  <level>
+    <pkId>001004004</pkId>
     <name>C4卫生设施设备</name>
     <weight>0.025</weight>
     <seq>4</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001005001</pk_id>
+  </level>
+  <level>
+    <pkId>001005001</pkId>
     <name>C1室内玩具材料</name>
     <weight>0.03</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001005002</pk_id>
+  </level>
+  <level>
+    <pkId>001005002</pkId>
     <name>C2户外玩具和活动器械</name>
     <weight>0.03</weight>
     <seq>2</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001005003</pk_id>
+  </level>
+  <level>
+    <pkId>001005003</pkId>
     <name>C3图书</name>
     <weight>0.03</weight>
     <seq>3</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>001006001</pk_id>
+  </level>
+  <level>
+    <pkId>001006001</pkId>
     <name>C1经费投入</name>
     <weight>0.5</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002001</pk_id>
+  </level>
+  <level>
+    <pkId>002001</pkId>
     <name>B1制度建设</name>
     <weight>0.1</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002002</pk_id>
+  </level>
+  <level>
+    <pkId>002002</pkId>
     <name>B2饮食健康</name>
     <weight>0.1</weight>
     <seq>2</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002003</pk_id>
+  </level>
+  <level>
+    <pkId>002003</pkId>
     <name>B3健康检查</name>
     <weight>0.1</weight>
     <seq>3</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002004</pk_id>
+  </level>
+  <level>
+    <pkId>002004</pkId>
     <name>B4卫生消毒与疾病防控</name>
     <weight>0.1</weight>
     <seq>4</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002005</pk_id>
+  </level>
+  <level>
+    <pkId>002005</pkId>
     <name>B5安全管理</name>
     <weight>0.6</weight>
     <seq>5</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002001001</pk_id>
+  </level>
+  <level>
+    <pkId>002001001</pkId>
     <name>C1安全制度</name>
     <weight>0.05</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002001002</pk_id>
+  </level>
+  <level>
+    <pkId>002001002</pkId>
     <name>C2卫生保健制度</name>
     <weight>0.05</weight>
     <seq>2</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002002001</pk_id>
+  </level>
+  <level>
+    <pkId>002002001</pkId>
     <name>C1卫生饮水</name>
     <weight>0.05</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002002002</pk_id>
+  </level>
+  <level>
+    <pkId>002002002</pkId>
     <name>C2膳食营养</name>
     <weight>0.05</weight>
     <seq>2</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002003001</pk_id>
+  </level>
+  <level>
+    <pkId>002003001</pkId>
     <name>C1幼儿健康检查</name>
     <weight>0.05</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002003002</pk_id>
+  </level>
+  <level>
+    <pkId>002003002</pkId>
     <name>C2教职工健康检查</name>
     <weight>0.05</weight>
     <seq>2</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002004001</pk_id>
+  </level>
+  <level>
+    <pkId>002004001</pkId>
     <name>C1卫生消毒</name>
     <weight>0.05</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002004002</pk_id>
+  </level>
+  <level>
+    <pkId>002004002</pkId>
     <name>C2疾病防控</name>
     <weight>0.05</weight>
     <seq>2</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002005001</pk_id>
+  </level>
+  <level>
+    <pkId>002005001</pkId>
     <name>C1安全教育</name>
     <weight>0.3</weight>
     <seq>1</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-  <row>
-    <pk_id>002005002</pk_id>
+  </level>
+  <level>
+    <pkId>002005002</pkId>
     <name>C2校车安全</name>
     <weight>0.3</weight>
     <seq>2</seq>
-    <create_time>2017-12-12 10:00:00</create_time>
-    <delete_time>2017-12-13 10:00:00</delete_time>
-    <deleted>0</deleted>
-  </row>
-</tbl_ass_level>
+  </level>
+</levels>

@@ -8,7 +8,6 @@
 
 #import "DownloadManagerViewController.h"
 #import "AFNetworking.h"
-#import "LevelViewController.h"
 #import "JFKGLoginContrller.h"
 
 @interface DownloadManagerViewController ()
@@ -102,7 +101,6 @@
     {
         if(self.currentDownloadCount == 4)//下载完成
         {
-            //进行下一步操作
             if (self.delegate!=nil) {
                 [self.delegate sendIsSuccess:YES];
             }
@@ -124,14 +122,11 @@
     if([[NSFileManager defaultManager] fileExistsAtPath:downloadPath])
      {
          [[NSFileManager defaultManager] removeItemAtPath:downloadPath error:nil];//删除原来
-         //重新创建目录
-         [[NSFileManager defaultManager] createDirectoryAtPath:downloadPath withIntermediateDirectories:YES attributes:nil error:nil];
+         
      }
-    else
-    {
-        [[NSFileManager defaultManager] createDirectoryAtPath:downloadPath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
     
+    //重新创建目录
+    [[NSFileManager defaultManager] createDirectoryAtPath:downloadPath withIntermediateDirectories:YES attributes:nil error:nil];
 }
 
 

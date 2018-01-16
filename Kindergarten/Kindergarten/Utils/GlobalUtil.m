@@ -48,4 +48,26 @@
     
 }
 
+//清理按三级指标分类的html文件
++(void)deleteLevelHtmlFile
+{
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+    NSString* asslevelPath = [documentPath stringByAppendingPathComponent:@"assLevel"];
+    if([[NSFileManager defaultManager] fileExistsAtPath:asslevelPath])
+    {
+        [[NSFileManager defaultManager] removeItemAtPath:asslevelPath error:nil];//删除原来
+    }
+}
+
+//清理
++(void)deleteAssLevelFile
+{
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+    NSString* levelhtml = [documentPath stringByAppendingPathComponent:@"levelhtml"];
+    if([[NSFileManager defaultManager] fileExistsAtPath:levelhtml])
+    {
+        [[NSFileManager defaultManager] removeItemAtPath:levelhtml error:nil];//删除原来
+    }
+}
+
 @end

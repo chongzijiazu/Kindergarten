@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <script src="jquery/jquery.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
-  <script src="js/jf_kindergarten_evaluate.js"></script>
+   <script src="js/jf_kindergarten_evaluate.js"></script>
   <style>
 	#table > thead > tr > th,
 	#table > thead > tr > td {
@@ -50,7 +50,7 @@
   </style>
 </head>
 <body style="background-color:#f5f5f5">
-	<header class="main-header" style="background-color:#68cbd0;margin-bottom:5px;">
+	<div class="main-header" style="background-color:#68cbd0;margin-bottom:5px;">
 		<table style="width:100%">
 			<tr>
 				<td style="width:25%">
@@ -84,7 +84,7 @@
 					</li>
 					<li>
 						<div class="logo" >
-							<img src="images/help.png"></img>
+							<img src="images/help.png" data-toggle="modal" data-target="#myModal"></img>
 						</div>
 					</li>
 					 <li class="dropdown">
@@ -127,11 +127,11 @@
 						  </li>
 						  <!-- Menu Footer-->
 						  <li class="user-footer">
-							<div class="pull-left" style="padding-left:50px;">
+							<!-- <div class="pull-left" style="padding-left:50px;">
 							  <a href="#" class="btn btn-default btn-flat">修改</a>
-							</div>
-                            <div onclick="logout()" class="pull-right" style="padding-right:50px;">
-							  <a href="#" class="btn btn-default btn-flat">退出</a>
+							</div> -->
+                            <div onclick="logout();" class="pull-right" style="padding-right:50px;">
+							  <a href="#" class="btn btn-default btn-flat">注销</a>
 							</div>
 						  </li>
 						</ul>
@@ -144,7 +144,7 @@
 				</td>
 			</tr>
 		</table>
-  </header>
+  </div>
   <div class="container" style="width:100%;margin:0px auto;">
 	<div class="panel panel-default">
 		<div class="panel-body">
@@ -166,8 +166,8 @@
 							指标：
 						</div>
 						<div style="font-size:18px;background-color:#E2F7FF;padding:5px;border:1px solid #73C8F7;border-radius:10px;">A1环境支持/B1园舍与场地/C1园舍C1园舍建筑C1园舍建筑C1园舍建筑建筑</div></td>
-                    <td onclick="goback();" style="width:60px;vertical-align:middle">
-						<img src="images/back.png"></img>
+					<td style="width:60px;vertical-align:middle">
+						<a herf="#" onclick="goback();"><img src="images/back.png"></img></a>
 					</td>
 					<!--<td style="width:60px;">
 						<img src="images/submit.png"></img>
@@ -198,7 +198,7 @@
 	</div>
   </div>
   
-  <div class="container" style="width:100%;margin:0px auto;">
+  <div class="container" style="width:100%;margin:0px auto;" id="levelQuestion">
 	<table class="table table-condensed">
 	  <thead>
 		  <tr>
@@ -240,15 +240,354 @@
 		  </tr>
 	  </thead>
     </table>
-	<div style="text-align:center;width:100%">
-		<img src="images/pageup.png" style="margin-right:100px;"></img>
-		<img src="images/pagedown.png"></img>
+  </div>
+  <div class="container" style="width:100%;margin-bottom:20px;" id="levelQuestion">
+  	<div style="text-align:center;width:100%">
+		<a href="#" onclick="pageUp()"><img src="images/pageup.png" style="margin-right:100px;"></img></a>
+		<a href="#" onclick="pageDown()"><img src="images/pagedown.png"></img></a>
 	</div>
   </div>
+  
+  <!-- 模态框（Modal） -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" style="text-align:center;color:#68cbd0">幼儿园信息</h4>
+      </div>
+      <div class="modal-body">
+       <table class="table table-bordered ftable">
+       		<tr>
+       			<td><label>学校（机构）名称</label></td>
+       			<td id="name"></td>
+       			<td><label>学校（机构）标识码</label></td>
+       			<td id="idcode"></td>
+       		</tr>
+       		<tr>
+       			<td>学校（机构）地址名称</td>
+       			<td id="address"></td>
+       			<td>学校（机构）地址代码</td>
+       			<td id="addresscode"></td>
+       		</tr>
+       		<tr>
+       			<td>学校（机构）驻地城乡类型名称</td>
+       			<td>
+       				
+       			</td>
+       			<td>学校（机构）驻地城乡类型代码</td>
+       			<td id="seatcode"></td>
+       		</tr>
+       		<tr>
+       			<td>学校（机构）办学类型名称</td>
+       			<td id="holdkind">
+       				
+       			</td>
+       			<td>学校（机构）办学类型代码</td>
+       			<td id="hodecode"></td>
+       		</tr>
+       		<tr>
+       			<td>学校（机构）举办者名称</td>
+       			<td id="creatorname">
+       				
+       			</td>
+       			<td>学校（机构）举办者代码</td>
+       			<td id="creatorcode"></td>
+       		</tr>
+       		<tr>
+       			<td>计划内预防接种率(%)</td>
+       			<td id="info64"></td>
+       			<td>传染病发病率(%)</td>
+       			<td id="info65"></td>
+       		</tr>
+       		<tr>
+       			<td>幼儿出勤率(%)</td>
+       			<td id="info66">%</td>
+       			<td>专任教师年保留率(%)</td>
+       			<td id="info67"></td>
+       		</tr>
+       </table>
+       <table class="table table-bordered ftable" style="width:50%">
+       		<tr>
+       			<td>是否普惠性民办幼儿园</td>
+       			<td id="isprivate"></td>
+       		</tr>
+       		<tr>
+       			<td>是否乡镇中心幼儿园</td>
+       			<td id="iscenter"></td>
+       		</tr>
+       		<tr>
+       			<td>是否寄宿制幼儿园</td>
+       			<td id="info47"></td>
+       		</tr>
+       </table>
+	   <div class=".container">
+		<div class="row">
+		  <div class="col-md-6">
+			<table class="table table-bordered ftable">
+               	<tr>
+               		<td>安全保卫人员数</td>
+               		<td id="info13"></td>
+               	</tr>
+               	<tr>
+               		<td>学前教育专业毕业的专任教师数</td>
+               		<td id="info30"></td>
+               	</tr>
+               	<tr>
+               		<td>取得教师资格证的专任教师数</td>
+               		<td id="info48"></td>
+               	</tr>
+               	<tr>
+               		<td>工资不低于当地最低工资标准的教职工数</td>
+               		<td id="info50"></td>
+               	</tr>
+               	<tr>
+               		<td>兼职卫生保健人员数</td>
+               		<td id="info56"></td>
+               	</tr>
+               	<tr>
+               		<td>专职炊事员数</td>
+               		<td id="info58"></td>
+               	</tr>
+               	<tr>
+               		<td>兼职安保人员数</td>
+               		<td id="info60"></td>
+               	</tr>
+               	<tr>
+               		<td>教师用计算机台数</td>
+               		<td id="info62"></td>
+               	</tr>
+           </table>
+		  </div>
+		  <div class="col-md-6">
+			<table class="table table-bordered ftable">
+               	<tr>
+               		<td>图书（册）</td>
+               		<td id="info46"></td>
+               	</tr>
+               	<tr>
+               		<td>学前教育专业毕业的保育员数</td>
+               		<td id="info31"></td>
+               	</tr>
+               	<tr>
+               		<td>与幼儿园签订聘用合同或劳动合同的教职工数</td>
+               		<td id="info49"></td>
+               	</tr>
+               	<tr>
+               		<td>受过幼儿保育职业培训的保育员数</td>
+               		<td id="info55"></td>
+               	</tr>
+               	<tr>
+               		<td>供餐数量（几餐）</td>
+               		<td id="info57"></td>
+               	</tr>
+               	<tr>
+               		<td>兼职炊事员数</td>
+               		<td id="info59"></td>
+               	</tr>
+               	<tr>
+               		<td>多功能活动室面积</td>
+               		<td id="info61"></td>
+               	</tr>
+               	<tr>
+               		<td>教师专业用书数量</td>
+               		<td id="info63"></td>
+               	</tr>
+           </table>
+		  </div>
+		</div>
+	   </div>
+		<div class=".container">
+			<div class="row">
+			  <div class="col-xs-6">
+				<table class="table table-bordered stable" id="tableid">
+           		<tr>
+           			<td colspan="5" align="center"><label class="tishi" name="bansum">班数</label></td>
+           		</tr>
+           		<tr>
+           			<td>托班</td>
+           			<td>小班</td>
+           			<td>中班</td>
+           			<td>大班</td>
+           			<td>合计</td>
+           		</tr>
+           		<tr>
+           			<td id="info15"></td>
+           			<td id="info16"></td>
+           			<td id="info17"></td>
+           			<td id="info18"></td>
+           			<td id="bansum"></td>
+           		</tr>
+           	 </table>
+			  </div>
+			   <div class="col-xs-6">
+				<table class="table table-bordered stable">
+           		<tr>
+           			<td colspan="5" align="center"><label class="tishi" name="jianzhumianjisum">在园(班)人数</label></td>
+           		</tr>
+           		<tr>
+           			<td>托班</td>
+           			<td>小班</td>
+           			<td>中班</td>
+           			<td>大班</td>
+           			<td>合计</td>
+           		</tr>
+           		<tr>
+           			<td id="info20"></td>
+           			<td id="info21"></td>
+           			<td id="info22"></td>
+           			<td id="info23"></td>
+           			<td id="rensum"></td>
+           		</tr>
+           	</table>
+			  </div>
+			</div>
+		</div>
+       			
+		<div class="container" style="width:100%;margin:0px auto;">
+			<table class="table table-condensed">
+			  <thead>
+				  <tr>
+					<td style="vertical-align:middle;background-color:white;width:50%;">
+					
+					<table class="table table-bordered stable">
+						<tr>
+							<td colspan="6" align="center"><label class="tishi" name="zhigongsum">职工人数</label></td>
+						</tr>
+						<tr>
+							<td>园长</td>
+							<td>专任教师</td>
+							<td>保健医</td>
+							<td>保育员</td>
+							<td>其他</td>
+							<td>合计</td>
+						</tr>
+						<tr>
+							<td id="info25"></td>
+							<td id="info26"></td>
+							<td id="info27"></td>
+							<td id="info28"></td>
+							<td id="info29"></td>
+							<td id="zhigongsum"></td>
+						</tr>
+				   </table>
+						
+					</td>
+					<td style="vertical-align:middle;background-color:white;width:50%;">
+						<table class="table table-bordered stable">
+           		<tr>
+           			<td colspan="6" align="center"><label class="tishi" name="zhigongsum">专任教师学历</label></td>
+           		</tr>
+           		<tr>
+           			<td>研究生</td>
+           			<td>本科</td>
+           			<td>专科</td>
+           			<td>高中</td>
+           			<td>高中以下</td>
+           		</tr>
+           		<tr>
+           			<td id="info32"></td>
+           			<td id="info33"></td>
+           			<td id="info34"></td>
+           			<td id="info35"></td>
+           			<td id="info36"></td>
+           		</tr>
+           	</table>
+					</td>
+			      </tr>
+			  </thead>
+			</table>
+		</div>
+		<div class=".container">
+			<div class="row">
+			  <div class="col-md-6">
+				<table class="table table-bordered stable">
+           		<tr>
+           			<td colspan="5" align="center"><label class="tishi" name="jianzhumianjisum">保育员学历</label></td>
+           		</tr>
+           		<tr>
+           			<td>本科及以上</td>
+           			<td>专科</td>
+           			<td>高中</td>
+           			<td>高中以下</td>
+           		</tr>
+           		<tr>
+           			<td id="info51"></td>
+           			<td id="info52"></td>
+           			<td id="info53"></td>
+           			<td id="info54"></td>
+           		</tr>
+           	</table>
+			  </div>
+			  <div class="col-md-6">
+				<table class="table table-bordered stable">
+           		<tr>
+           			<td colspan="3" align="center"><label class="tishi" name="zhandimianjisum">占地面积</label></td>
+           		</tr>
+           		<tr>
+           			<td>绿化用地面积</td>
+           			<td>运动场地面积</td>
+           			<td>合计</td>
+           		</tr>
+           		<tr>
+           			<td id="info44"></td>
+           			<td id="info45"></td>
+           			<td id="zhandimianjisum"></td>
+           		</tr>
+           	</table>
+			  </div>
+			</div>
+		</div>
+      <!--  </table> -->
+       <table class="table table-bordered stable">
+       		<tr>
+       			<td colspan="6" align="center"><label class="tishi" name="jianzhumianjisum">校舍建筑面积</label></td>
+       		</tr>
+       		<tr>
+       			<td>租借面积</td>
+       			<td>危房面积</td>
+       			<td>活动室面积</td>
+       			<td>睡眠面积</td>
+       			<td>保健室面积</td>
+       			<td>合计</td>
+       		</tr>
+       		<tr>
+       			<td id="info38"></td>
+       			<td id="info39"></td>
+       			<td id="info40"></td>
+       			<td id="info41"></td>
+       			<td id="info42"></td>
+       			<td id="info37"></td>
+       		</tr>
+       </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-rigth" data-dismiss="modal" id="cancel">取消</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+  
+  
   <script>
-	
-	
-	
+  	function backPage(){
+  		jsInterface.closeEvaPage();
+  	}
+  
+	function initLevelQuestion(){
+		var questionHtml = jsInterface.initQuestion('001');
+		$("#levelQuestion").html(questionHtml);
+	}
+	initLevelQuestion();
+	function pageDown(){
+		var t = jsInterface.initQuestion('001');
+		$("#levelQuestion").html(t);
+	}
+	function pageUp(){
+		var t = jsInterface.initQuestion('001');
+		$("#levelQuestion").html(t);
+	}
   </script>
 </body>
 </html>

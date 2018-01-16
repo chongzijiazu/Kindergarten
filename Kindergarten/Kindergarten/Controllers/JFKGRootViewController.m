@@ -12,13 +12,17 @@
 #import "JFKGLevelController.h"
 #import "JFKGCommonController.h"
 #import "JFKFWeakScriptMessageDelegate.h"
+#import "JFKGEvaluateController.h"
+
 
 @interface JFKGRootViewController ()<WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate>
 @property (nonatomic, strong) WKWebView *webView;
 
 @property (nonatomic, strong) JFKGLoginContrller *loginController;
 @property (nonatomic, strong) JFKGLevelController *levelController;
+@property (nonatomic, strong) JFKGEvaluateController* evaluateController;
 @property (nonatomic, strong) JFKGCommonController *commonController;
+
 
 @end
 
@@ -44,6 +48,11 @@
     self.levelController = [[JFKGLevelController alloc]init];
     self.levelController.webView = self.webView;
     self.levelController.currentVC=self;
+    
+    //评估答题控制类
+    self.evaluateController = [[JFKGEvaluateController alloc]init];
+    self.evaluateController.webView = self.webView;
+    self.evaluateController.currentVC=self;
     
     //通用工具类
     self.commonController = [[JFKGCommonController alloc]init];
@@ -153,15 +162,15 @@
             }
             else if([operation isEqualToString:@"showQuestion"])
             {
-                NSLog(@"%@",[dicMsg objectForKey:@"param"]);
+                //NSLog(@"%@",[dicMsg objectForKey:@"param"]);
+                self.evaluateController.currentLevelQuestionID =[dicMsg objectForKey:@"param"];//将三级指标id传递给答题页面
                 [self loadLocalHtmlByFilename:@"evaluate.html"];
             }
             else if([operation isEqualToString:@"uploadData"])
             {
-                NSLog(@"%@",[dicMsg objectForKey:@"param"]);
+                //NSLog(@"%@",[dicMsg objectForKey:@"param"]);
                 [self.levelController uploadData];
             }
-            
         }
         else if ([htmlname isEqualToString:@"evaluate.html"])
         {
@@ -174,6 +183,11 @@
             else if([operation isEqualToString:@"goback"])
             {
                 [self goback];
+            }
+            else if([operation isEqualToString:@"pageDown"])
+            {
+                self.evaluateController.currentLevelQuestionID =@"001001002";
+                [self.evaluateController sendLevelQuestionToView];
             }
         }
     }
@@ -223,7 +237,16 @@
     NSString* htmlname= [[self.webView.URL path] lastPathComponent];
     if ([htmlname isEqualToString:@"asslevel.html"])
     {
-        [self.levelController sendLevelTableToView];
+        [self.levelController sendLevelTableToView];//向页面发送评估指标数据
+        //如果试题文件不存在，则生成试题文件
+        if(![[NSFileManager defaultManager] fileExistsAtPath:self.evaluateController.levelHTMLPath])
+        {
+            [self.evaluateController makeLevelHTMLByPaper];//生成按三级指标分类的试题
+        }
+    }
+    else if([htmlname isEqualToString:@"evaluate.html"])
+    {
+        [self.evaluateController sendLevelQuestionToView];
     }
 }
 

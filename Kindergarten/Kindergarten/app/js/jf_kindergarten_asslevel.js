@@ -10,7 +10,7 @@ function logout()
 
 function showQuestion(thirdLevelid)
 {
-    alert(thirdLevelid);
+    //alert(thirdLevelid);
     var dicmsg ={
         "operation":"showQuestion",
         "param":thirdLevelid
