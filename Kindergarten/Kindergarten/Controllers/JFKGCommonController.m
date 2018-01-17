@@ -26,9 +26,10 @@
         [userDefault setObject:@"" forKey:@"isDownloadSuccess"];
         
         //清理本地数据（文件及数据库）
-        [GlobalUtil deleteExistDownloadFile]; //删除下载的文件
-        [GlobalUtil deleteAssLevelFile]; //删除评估指标文件
-        [GlobalUtil deleteLevelHtmlFile]; //删除试题html文件
+        //[GlobalUtil deleteExistDownloadFile]; //删除下载的文件
+        //[GlobalUtil deleteAssLevelFile]; //删除评估指标文件
+        //[GlobalUtil deleteLevelHtmlFile]; //删除试题html文件
+        [GlobalUtil deleteAllDocumentsFile];//
         
         
         //回到登录页面

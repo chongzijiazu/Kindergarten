@@ -26,4 +26,10 @@
 -(id)initWithContent:(NSString*)mContent andOptionValue:(NSString*)mOptionValue andWeight:(int)mweight andpkId:(NSString*)mpkId andfkQuestion:(NSString*)mfkQuestion;
 
 +(id)OptionWithContent:(NSString*)mContent andOptionValue:(NSString*)mOptionValue andWeight:(int)mweight andpkId:(NSString*)mpkId andfkQuestion:(NSString*)mfkQuestion;
+
+-(instancetype)initWithDict:(NSDictionary *)dict;
+//将本身插入数据库
+-(BOOL)insertSelfToDB;
+//数据库中所有对象
++(NSArray *)allOptionFromDB;
 @end

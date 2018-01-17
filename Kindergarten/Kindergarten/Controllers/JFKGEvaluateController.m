@@ -49,13 +49,20 @@
 //每个三级指标下的试题生成一个三级指标html
 //生成的html以三级指标id(levelid)命名，例如(001001001.txt)
 //生成的html文件存放在沙盒的/document/levelhtml/，文件夹中
--(void)makeLevelHTMLByPaper
+//将试题及选项存放到数据库中
+-(BOOL)makeLevelHTMLByPaper
 {
     EnPaper* paper = [self getPaperFromXMLPaper];
     [self deleteExistHTMLFile];//清理已存在的html文件
     
+    if(![self SavePaperToDB:paper])//将试卷保存到数据库
+    {
+        return false;
+    }
+    
     //NSLog(@"%@",[levelQues description]);
-    if (paper!=nil && paper.levelquestionArray.count>0) {
+    if (paper!=nil && paper.levelquestionArray.count>0)
+    {
         EnLevelQuestion* levelQues;
         NSString* levelHtmlPath;
         NSString* htmlContent;
@@ -66,6 +73,12 @@
             [[NSFileManager defaultManager] createFileAtPath:levelHtmlPath contents:[htmlContent dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
         }
     }
+    else
+    {
+        return false;
+    }
+    
+    return true;
 }
 
 
@@ -130,10 +143,38 @@
     return dicPaper;
 }
 
-//下一页
--(void)pageDownByCurrentThirdLevelId:(NSString*)currentLevelId
+//将试卷保存到数据库中（包括题和选项）
+-(BOOL)SavePaperToDB:(EnPaper*)paper
 {
+    if (paper!=nil && paper.levelquestionArray.count>0)
+    {
+        EnLevelQuestion* levelQues;
+        EnQuestion* tmpQues;
+        EnOption* tmpOpt;
+        for (int i=0; i<paper.levelquestionArray.count; i++) {
+            levelQues = (EnLevelQuestion*)paper.levelquestionArray[i];
+            for (int j=0; j<levelQues.questionArray.count; j++) {
+                tmpQues = (EnQuestion*)levelQues.questionArray[j];
+                if(![tmpQues insertSelfToDB])
+                {
+                    return false;
+                }
+                for (int k=0; k<tmpQues.optionArray.count; k++) {
+                    tmpOpt = (EnOption*)tmpQues.optionArray[k];
+                    if(![tmpOpt insertSelfToDB])
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        return false;
+    }
     
+    return true;
 }
 
 -(NSString *)levelHTMLPath {

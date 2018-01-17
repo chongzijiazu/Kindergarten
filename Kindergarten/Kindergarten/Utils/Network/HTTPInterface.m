@@ -19,7 +19,14 @@
 //登出
 +(NSString*)logout
 {
-    return [baseUrlString stringByAppendingString:@"loginout.do"];
+    //return [baseUrlString stringByAppendingString:@"loginout.do"];
+    return [NSString stringWithFormat:@"%@%@%@",baseUrlString,@"loginout.do?ticketid=",TICKETID];
+}
+
+//获取评估信息
++(NSString*)processinfo
+{
+     return [NSString stringWithFormat:@"%@%@%@",baseUrlString,@"getprocessinfo.do?ticketid=",TICKETID ];
 }
 
 //下载指标数据

@@ -11,6 +11,8 @@
 #import "JFKGLoginContrller.h"
 #import "JFKGLevelController.h"
 #import "JFKGEvaluateController.h"
+#import "JFKGProcessInfoController.h"
+#import "SQLiteManager.h"
 
 @interface DownloadManagerViewController ()
 
@@ -26,19 +28,24 @@
 //测试用
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    //LevelViewController* levelVC = [[LevelViewController alloc] init];
-    //[self.navigationController pushViewController:levelVC animated:NO];
-    [self processDownloadData];//处理下载完的数据
-    //下载及加载数据完成，向页面发送成功消息
-    if (self.delegate!=nil) {
-        [self.delegate sendIsSuccess:YES];
+    [GlobalUtil deleteAllDocumentsFile];//下载前清空数据（进入下载就代表重开始）
+    if([self processDownloadData])//处理下载完的数据
+    {
+        //下载及加载数据完成，向页面发送成功消息
+        if (self.delegate!=nil) {
+            [self.delegate sendIsSuccess:YES];
+        }
+        [self dismissViewControllerAnimated:NO completion:nil];
     }
-    [self dismissViewControllerAnimated:NO completion:nil];
+    else
+    {
+        [self showAlertView:@"加载数据失败,是否从新下载评估数据"];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    //[self deleteExistDownloadFile];//清理下载目录
+    //[GlobalUtil deleteAllDocumentsFile];//下载前清空数据（进入下载就代表重开始）
     //[self downloadEvalutionData]; //下载评估资源
     self.downloadProgress.progress=0.5;//测试用
 }
@@ -105,12 +112,18 @@
     {
         if(self.currentDownloadCount == 4)//下载完成
         {
-            [self processDownloadData];//处理下载完的数据
-            //下载及加载数据完成，向页面发送成功消息
-            if (self.delegate!=nil) {
-                [self.delegate sendIsSuccess:YES];
+            if([self processDownloadData])//处理下载完的数据
+            {
+                //下载及加载数据完成，向页面发送成功消息
+                if (self.delegate!=nil) {
+                    [self.delegate sendIsSuccess:YES];
+                }
+                [self dismissViewControllerAnimated:NO completion:nil];
             }
-            [self dismissViewControllerAnimated:NO completion:nil];
+            else
+            {
+                [self showAlertView:@"加载数据失败,是否从新下载评估数据"];
+            }
         }
         else
         {
@@ -120,19 +133,39 @@
 }
 
 //处理下载好的数据
--(void)processDownloadData
+-(BOOL)processDownloadData
 {
     self.lbl_downloadState.text = @"数据加载中...";
+    //在处理数据的时候创建（打开）数据库
+    if ([[SQLiteManager shareInstance] openDB]) {
+        NSLog(@"打开/创建数据库成功!");
+    }else{
+        NSLog(@"数据库开启失败!");
+    }
     //处理以评估数据，解压保存答案信息，解压保存证据信息
     
     //处理试卷数据，包括试卷包的解压和生成按三级指标分类的html
     JFKGEvaluateController* evaluateC = [[JFKGEvaluateController alloc] init];
-    [evaluateC makeLevelHTMLByPaper];//生成按三级指标分类的html文件（调试，尚无解压过程）
+    //生成按三级指标分类的html文件（调试，尚无解压过程）
+    if(![evaluateC makeLevelHTMLByPaper])
+    {
+        return false;
+    }
     
     //处理评估指标体系，解压评估指标压缩包，生成评估指标所需的html格式文件
     JFKGLevelController* levelC = [[JFKGLevelController alloc] init];
-    [levelC makeAssLevelFile];//生成html格式文件（调试，没添加解压过程）
+    //生成html格式文件（调试，没添加解压过程）
+    if (![levelC makeAssLevelFile]) {
+        return false;
+    }
     
+    //通过网络接口，获取评估过程信息（试题答案）
+    JFKGProcessInfoController* processC = [[JFKGProcessInfoController alloc]init];
+    if (![processC getProcessInfo]) {
+        return false;
+    }
+    
+    return true;
 }
 
 -(void)deleteExistDownloadFile
@@ -201,8 +234,8 @@
     alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-        //清空已下载数据
-        [self deleteExistDownloadFile];
+        //清空数据
+        [GlobalUtil deleteAllDocumentsFile];
         //从新下载数据
         [self downloadEvalutionData];
         
@@ -212,6 +245,8 @@
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         //下载失败，取消下载后，将清空个人登录信息数据(ticketid,院所信息等（待完善）)
         [userDefault setObject:@"" forKey:@"ticketid"];
+        //清空数据
+        [GlobalUtil deleteAllDocumentsFile];
         [self dismissViewControllerAnimated:NO completion:nil];
     }]];
     

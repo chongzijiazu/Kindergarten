@@ -70,4 +70,15 @@
     }
 }
 
+//清理所有数据
++(BOOL)deleteAllDocumentsFile
+{
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+    if([[NSFileManager defaultManager] fileExistsAtPath:documentPath])
+    {
+        return [[NSFileManager defaultManager] removeItemAtPath:documentPath error:nil];
+    }
+    return true;
+}
+
 @end

@@ -19,6 +19,6 @@
 @property (nonatomic, weak) WKWebView *webView;
 @property (nonatomic, weak) UIViewController *currentVC;
 
--(void)makeLevelHTMLByPaper;
+-(BOOL)makeLevelHTMLByPaper;
 -(void)sendLevelQuestionToView;
 @end

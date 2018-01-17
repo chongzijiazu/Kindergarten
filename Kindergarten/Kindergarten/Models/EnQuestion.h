@@ -16,7 +16,7 @@
     NSString* _fkFormula;//计算公式名称
     NSString* _contenttip;//蓝色提示字
     NSString* _content;//题干内容
-    NSString* _description;//题目解释信息
+    NSString* _desc;//题目解释信息
     int seq;//题目在三级指标下的序号
     int type;//题目类型
     float weight;//试题权重
@@ -34,7 +34,7 @@
 @property(nonatomic,copy)NSString* fkFormula;
 @property(nonatomic,copy)NSString* contenttip;
 @property(nonatomic,copy)NSString* content;
-@property(nonatomic,copy)NSString* description;
+@property(nonatomic,copy)NSString* desc;
 @property(nonatomic,assign)int seq;
 @property(nonatomic,assign)int type;
 @property(nonatomic,assign)float weight;
@@ -49,5 +49,11 @@
 
 
 +(id)questionWithPKID:(NSString *)mpkId andLevel:(NSString *)mlevel andSeqLevel:(NSString*)mseqlevel andFormula:(NSString*)mformula andContentTip:(NSString*)mcontenttip andContent:(NSString*)mcontent andDescription:(NSString*)mdescription andSeq:(int)mSeq andType:(int)mType andWeight:(float)mweight andVeto:(int)mveto andAppendProve:(int)mappendprove andCalculated:(int)mcalculated andDeleted:(int)mdeleted andQuestionNum:(int)mquestionnum;
+
+-(instancetype)initWithDict:(NSDictionary *)dict;
+//将本身插入数据库
+-(BOOL)insertSelfToDB;
+//数据库中所有对象
++(NSArray *)allQuestionFromDB;
 
 @end

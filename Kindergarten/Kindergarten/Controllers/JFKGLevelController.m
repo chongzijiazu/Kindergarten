@@ -24,7 +24,7 @@
 @synthesize sortedThirdLevelArray=_sortedThirdLevelArray;
 
 //生成指标体系table格式文件，并保存
--(void)makeAssLevelFile
+-(BOOL)makeAssLevelFile
 {
     NSString* levelTable=@"";
     NSString* assLevelSavePath = [self.assLevelPath stringByAppendingPathComponent:@"assLevel.txt"];
@@ -39,6 +39,7 @@
     [[NSFileManager defaultManager] createDirectoryAtPath:self.assLevelPath withIntermediateDirectories:YES attributes:nil error:nil];
     [[NSFileManager defaultManager] createFileAtPath:assLevelSavePath contents:[levelTable dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
     
+    return true;
 }
 
 //读取页面所需数据

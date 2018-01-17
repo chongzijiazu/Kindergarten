@@ -7,6 +7,7 @@
 //
 
 #import "EnOption.h"
+#import "SQLiteManager.h"
 
 @implementation EnOption
 
@@ -34,10 +35,36 @@
     return option;
 }
 
+-(instancetype)initWithDict:(NSDictionary *)dict{
+    if (self = [super init]) {
+        [self setValuesForKeysWithDictionary:dict];
+    }
+    return self;
+}
+-(BOOL)insertSelfToDB{
+    //插入对象的SQL语句
+    NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO 'tbl_ass_question_option' (pkId,optionValue,content,fkQuestion,weight) VALUES ('%@','%@','%@','%@','%f');",self.pkId,self.optionValue,self.content,self.fkQuestion,self.weight];
+    return [[SQLiteManager shareInstance] execSQL:insertSQL];
+}
++(NSArray *)allOptionFromDB{
+    //查询表中所有数据的SQL语句
+    NSString *SQL = @"SELECT pkId,optionValue,content,fkQuestion,weight FROM 'tbl_ass_question_option'";
+    //取出数据库用户表中所有数据
+    NSArray *allOptioDictArr = [[SQLiteManager shareInstance] querySQL:SQL];
+    NSLog(@"%@",allOptioDictArr);
+    //将字典数组转化为模型数组
+    NSMutableArray *modelArrM = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in allOptioDictArr) {
+        [modelArrM addObject:[[EnOption alloc] initWithDict:dict]];
+    }
+    return modelArrM;
+}
+
+
 /*
  选项html示例：
 <label class="radio-inline">
-<input type="radio" name="optionsRadiosinline" id="optionsRadios4" value="option2"/>
+<input type="radio" name="A" id="optionsRadios4" value="option2"/>
 A.园舍独立，产权清晰，规划科学，布局合理，民办园自有房产需要有效的房产证，租用园舍的，需要有效期3年及以上的租赁合同及月舞房产证或土地证。
 </label>
  */

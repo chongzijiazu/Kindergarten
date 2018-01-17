@@ -17,7 +17,7 @@
 @property (nonatomic, weak) WKWebView *webView;
 @property (nonatomic, weak) UIViewController *currentVC;
 
--(void)makeAssLevelFile;
+-(BOOL)makeAssLevelFile;
 -(NSString*)readLevelData;
 -(void)sendLevelTableToView;
 -(void)uploadData;

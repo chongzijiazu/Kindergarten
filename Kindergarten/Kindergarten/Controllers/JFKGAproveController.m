@@ -51,6 +51,7 @@
             weakSelf.picker = [[UIImagePickerController alloc]init];
             weakSelf.picker.delegate = weakSelf;
             weakSelf.picker.allowsEditing = YES;//是否可以对原图进行编辑
+            weakSelf.picker.modalPresentationStyle = UIModalPresentationCurrentContext;
                                           
             //设置图片选择器的数据来源为 手机相册
             weakSelf.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;

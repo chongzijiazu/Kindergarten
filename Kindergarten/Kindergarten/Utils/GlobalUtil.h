@@ -13,4 +13,5 @@
 +(void)deleteExistDownloadFile;
 +(void)deleteAssLevelFile;
 +(void)deleteLevelHtmlFile;
++(BOOL)deleteAllDocumentsFile;
 @end

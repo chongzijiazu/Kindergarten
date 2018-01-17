@@ -12,26 +12,24 @@
 @implementation EnAprove
 
 @synthesize pkId=_pkId;
-@synthesize thirdLevelId=_thirdLevelId;
-@synthesize questionnum;
+@synthesize seqLevel=_seqLevel;
 @synthesize aproveItemNum;
 @synthesize aproveItemArray=_aproveItemArray;
 
--(id)initWithPkId:(NSString*)mpkId andThirdLevelId:(NSString*)mThirdLevelId andQuestionNum:(int)mQuestionNum andAproveItemNum:(int)mAproveItemNum
+-(id)initWithPkId:(NSString*)mpkId andSeqLevel:(NSString*)mseqlevel andAproveItemNum:(int)mAproveItemNum
 {
     if (self=[super init]) {
         self.aproveItemNum=mAproveItemNum;
         self.pkId = mpkId;
-        self.thirdLevelId=mThirdLevelId;
-        self.questionnum=mQuestionNum;
+        self.seqLevel=mseqlevel;
         self.aproveItemArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
-+(id)aproveWithPkId:(NSString*)mpkId andThirdLevelId:(NSString*)mThirdLevelId andQuestionNum:(int)mQuestionNum andAproveItemNum:(int)mAproveItemNum
++(id)aproveWithPkId:(NSString*)mpkId andSeqLevel:(NSString*)mseqlevel andAproveItemNum:(int)mAproveItemNum
 {
-    EnAprove* ap = [[EnAprove alloc] initWithPkId:mpkId andThirdLevelId:mThirdLevelId andQuestionNum:mQuestionNum andAproveItemNum:mAproveItemNum];
+    EnAprove* ap = [[EnAprove alloc] initWithPkId:mpkId andSeqLevel:mseqlevel andAproveItemNum:mAproveItemNum];
     return ap;
 }
 

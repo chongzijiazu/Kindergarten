@@ -16,6 +16,9 @@
 //登出
 +(NSString*)logout;
 
+//获取评估信息
++(NSString*)processinfo;
+
 //下载评估指标
 +(NSString*)downloadlevelcontent;
 

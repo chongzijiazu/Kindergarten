@@ -18,12 +18,16 @@
 		E61AAB612008514700424DCE /* LevelNode.m in Sources */ = {isa = PBXBuildFile; fileRef = E61AAB602008514700424DCE /* LevelNode.m */; };
 		E61AAB642008522B00424DCE /* LevelTableCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = E61AAB632008522B00424DCE /* LevelTableCreator.m */; };
 		E61AAB6F2008BB8000424DCE /* UploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E61AAB6E2008BB8000424DCE /* UploadViewController.m */; };
-		E638B9F020075BF800685670 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E638B9EF20075BF800685670 /* JavaScriptCore.framework */; };
 		E638B9F22007644D00685670 /* CallEach.html in Resources */ = {isa = PBXBuildFile; fileRef = E638B9F12007644D00685670 /* CallEach.html */; };
 		E638B9F420076D6F00685670 /* CallCameraJS.js in Resources */ = {isa = PBXBuildFile; fileRef = E638B9F320076D6F00685670 /* CallCameraJS.js */; };
 		E652B38F200C94AA00495147 /* paper.xml in Resources */ = {isa = PBXBuildFile; fileRef = E652B38E200C94AA00495147 /* paper.xml */; };
 		E652B392200CAC2400495147 /* EnAprove.m in Sources */ = {isa = PBXBuildFile; fileRef = E652B391200CAC2400495147 /* EnAprove.m */; };
 		E653F18A200629D200AAC54A /* DownloadManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E653F189200629D200AAC54A /* DownloadManagerViewController.m */; };
+		E668E33E200EF2F70023FFBC /* JFKGProcessInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E668E33D200EF2F70023FFBC /* JFKGProcessInfoController.m */; };
+		E668E342200EF77B0023FFBC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E668E341200EF77B0023FFBC /* libsqlite3.tbd */; };
+		E668E345200EF9DA0023FFBC /* SQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E668E344200EF9DA0023FFBC /* SQLiteManager.m */; };
+		E668E348200F01440023FFBC /* EnProcessInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E668E347200F01440023FFBC /* EnProcessInfo.m */; };
+		E668E34C200F14170023FFBC /* processinfo.txt in Resources */ = {isa = PBXBuildFile; fileRef = E668E34B200F14170023FFBC /* processinfo.txt */; };
 		E67AB1DC20044FF500AD83C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E67AB1DB20044FF500AD83C9 /* AppDelegate.m */; };
 		E67AB1E420044FF500AD83C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E67AB1E320044FF500AD83C9 /* Assets.xcassets */; };
 		E67AB1E720044FF500AD83C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E67AB1E520044FF500AD83C9 /* LaunchScreen.storyboard */; };
@@ -76,6 +80,14 @@
 		E652B391200CAC2400495147 /* EnAprove.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnAprove.m; sourceTree = "<group>"; };
 		E653F188200629D200AAC54A /* DownloadManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadManagerViewController.h; sourceTree = "<group>"; };
 		E653F189200629D200AAC54A /* DownloadManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadManagerViewController.m; sourceTree = "<group>"; };
+		E668E33C200EF2F70023FFBC /* JFKGProcessInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGProcessInfoController.h; sourceTree = "<group>"; };
+		E668E33D200EF2F70023FFBC /* JFKGProcessInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGProcessInfoController.m; sourceTree = "<group>"; };
+		E668E341200EF77B0023FFBC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		E668E343200EF9DA0023FFBC /* SQLiteManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLiteManager.h; sourceTree = "<group>"; };
+		E668E344200EF9DA0023FFBC /* SQLiteManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLiteManager.m; sourceTree = "<group>"; };
+		E668E346200F01440023FFBC /* EnProcessInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnProcessInfo.h; sourceTree = "<group>"; };
+		E668E347200F01440023FFBC /* EnProcessInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnProcessInfo.m; sourceTree = "<group>"; };
+		E668E34B200F14170023FFBC /* processinfo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = processinfo.txt; sourceTree = "<group>"; };
 		E67AB1D720044FF500AD83C9 /* Kindergarten.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kindergarten.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E67AB1DA20044FF500AD83C9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E67AB1DB20044FF500AD83C9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -121,7 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E638B9F020075BF800685670 /* JavaScriptCore.framework in Frameworks */,
+				E668E342200EF77B0023FFBC /* libsqlite3.tbd in Frameworks */,
 				6B8652AC7634D6474AA09999 /* libPods-Kindergarten.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,6 +144,7 @@
 		152381A33AA407891AE0C2D2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E668E341200EF77B0023FFBC /* libsqlite3.tbd */,
 				E638B9EF20075BF800685670 /* JavaScriptCore.framework */,
 				A153AD5C68F05D5D4DF0B3E0 /* libPods-Kindergarten.a */,
 			);
@@ -180,6 +193,7 @@
 		E604613F2005EEDB00135F7C /* testdata */ = {
 			isa = PBXGroup;
 			children = (
+				E668E34B200F14170023FFBC /* processinfo.txt */,
 				E652B38E200C94AA00495147 /* paper.xml */,
 				E6FA5AE62009DA9000B7B30B /* WKWebView.html */,
 				E60461402005EEE800135F7C /* level.xml */,
@@ -216,6 +230,15 @@
 				E653F189200629D200AAC54A /* DownloadManagerViewController.m */,
 			);
 			path = DownloadController;
+			sourceTree = "<group>";
+		};
+		E668E33F200EF6C10023FFBC /* Sqlite */ = {
+			isa = PBXGroup;
+			children = (
+				E668E343200EF9DA0023FFBC /* SQLiteManager.h */,
+				E668E344200EF9DA0023FFBC /* SQLiteManager.m */,
+			);
+			path = Sqlite;
 			sourceTree = "<group>";
 		};
 		E67AB1CE20044FF500AD83C9 = {
@@ -260,6 +283,7 @@
 		E6EF8E302004836800A96B04 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E668E33F200EF6C10023FFBC /* Sqlite */,
 				E60461362005B69B00135F7C /* MD5 */,
 				E60461352005B2A900135F7C /* ZipUtil */,
 				E60461312005AE4F00135F7C /* Network */,
@@ -298,6 +322,8 @@
 				E6FD1B03200B62CC00E83675 /* JFKGCommonController.m */,
 				E6F47E1B200DEA6B00CE111B /* JFKGAproveController.h */,
 				E6F47E1C200DEA6B00CE111B /* JFKGAproveController.m */,
+				E668E33C200EF2F70023FFBC /* JFKGProcessInfoController.h */,
+				E668E33D200EF2F70023FFBC /* JFKGProcessInfoController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -327,6 +353,8 @@
 				E652B391200CAC2400495147 /* EnAprove.m */,
 				E6F47E18200DC87900CE111B /* EnAproveItem.h */,
 				E6F47E19200DC87900CE111B /* EnAproveItem.m */,
+				E668E346200F01440023FFBC /* EnProcessInfo.h */,
+				E668E347200F01440023FFBC /* EnProcessInfo.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -398,6 +426,7 @@
 				E618DBC12008D4BF007CD354 /* app in Resources */,
 				E638B9F22007644D00685670 /* CallEach.html in Resources */,
 				E652B38F200C94AA00495147 /* paper.xml in Resources */,
+				E668E34C200F14170023FFBC /* processinfo.txt in Resources */,
 				E67AB1E420044FF500AD83C9 /* Assets.xcassets in Resources */,
 				E6EF8E422004B92E00A96B04 /* MBProgressHUD.bundle in Resources */,
 				E6FA5AE72009DA9000B7B30B /* WKWebView.html in Resources */,
@@ -461,6 +490,7 @@
 			files = (
 				E6FD1B01200B3CA700E83675 /* JFKGEvaluateController.m in Sources */,
 				E6FA5AE52009D36A00B7B30B /* JFKGRootViewController.m in Sources */,
+				E668E348200F01440023FFBC /* EnProcessInfo.m in Sources */,
 				E61AAB612008514700424DCE /* LevelNode.m in Sources */,
 				E6FED6D1200C4EA200359990 /* EnPaper.m in Sources */,
 				E6F47E1D200DEA6B00CE111B /* JFKGAproveController.m in Sources */,
@@ -471,12 +501,14 @@
 				E6FD1B04200B62CC00E83675 /* JFKGCommonController.m in Sources */,
 				E653F18A200629D200AAC54A /* DownloadManagerViewController.m in Sources */,
 				E6FD1B08200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.m in Sources */,
+				E668E33E200EF2F70023FFBC /* JFKGProcessInfoController.m in Sources */,
 				E6FD1B11200B8C8C00E83675 /* EnQuestion.m in Sources */,
 				E6FD1B0E200B8C7A00E83675 /* EnOption.m in Sources */,
 				E60FD1F2200A0AE70080A07E /* GlobalUtil.m in Sources */,
 				E61AAB6F2008BB8000424DCE /* UploadViewController.m in Sources */,
 				E67AB1EA20044FF500AD83C9 /* main.m in Sources */,
 				E6EF8E392004ABAC00A96B04 /* HttpRequestModel.m in Sources */,
+				E668E345200EF9DA0023FFBC /* SQLiteManager.m in Sources */,
 				E60461342005AE9200135F7C /* HTTPInterface.m in Sources */,
 				E6EF8E332004861100A96B04 /* ZipUtil.m in Sources */,
 				E6FA5AE22009D34200B7B30B /* JFKGNavigationViewController.m in Sources */,
