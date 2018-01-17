@@ -94,11 +94,28 @@ static SQLiteManager *instance;
         for (int i = 0; i < columnCount; i++) {
             // 取出i位置列的字段名,作为字典的键key
             const char *cKey = sqlite3_column_name(stmt, i);
-            NSString *key = [NSString stringWithUTF8String:cKey];
+            NSString *key;
+            if (cKey==NULL)
+            {
+                key=@"";
+            }
+            else
+            {
+                key = [NSString stringWithUTF8String:cKey];
+            }
+            
             
             //取出i位置存储的值,作为字典的值value
             const char *cValue = (const char *)sqlite3_column_text(stmt, i);
-            NSString *value = [NSString stringWithUTF8String:cValue];
+            NSString *value;
+            if (cValue==NULL)
+            {
+                value=@"";
+            }
+            else
+            {
+                value = [NSString stringWithUTF8String:cValue];
+            }
             
             //将此行数据 中此字段中key和value包装成 字典
             [dict setObject:value forKey:key];

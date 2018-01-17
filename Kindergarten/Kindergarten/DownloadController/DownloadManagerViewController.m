@@ -136,7 +136,7 @@
 -(BOOL)processDownloadData
 {
     self.lbl_downloadState.text = @"数据加载中...";
-    //在处理数据的时候创建（打开）数据库
+    //在处理数据的时候创建（打开）数据库(已在程序启动时做过此操作，但由于退出到登录界面时会删除数据库，所以在下载时重复做此操作，以保证数据库正常打开)
     if ([[SQLiteManager shareInstance] openDB]) {
         NSLog(@"打开/创建数据库成功!");
     }else{

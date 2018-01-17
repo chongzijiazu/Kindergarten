@@ -24,6 +24,21 @@ function showLevelQuestion(args)
     $("#levelQuestion").html(args);
 }
 
+function showLevelAnswer(args)
+{
+    //alert(args);
+    var arrayData = eval("(" + args + ")");
+    for(var i = 0; i<arrayData.length;i++){
+        var QA = arrayData[i];
+        //alert(QA);
+        if(QA.optionid.length>0)
+        {
+            var op = document.getElementById(QA.optionid);
+            op.checked=true;
+        }
+    }
+}
+
 function pageDown()
 {
     //alert("hello");
@@ -53,3 +68,20 @@ function addaprove()
     };
     window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
 }
+
+function optionClicked(obj)
+{
+    var radio=obj;
+    if (radio.tag==1)
+    {
+        radio.checked=false;
+        radio.tag=0;
+    }
+    else
+    {
+        radio.checked=true;
+        radio.tag=1
+    }
+    //alert(obj.checked);
+}
+
