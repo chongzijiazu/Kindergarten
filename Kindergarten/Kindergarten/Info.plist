@@ -26,6 +26,10 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>是否允许此App访问您的摄像头</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>是否允许此App访问您的相册</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>

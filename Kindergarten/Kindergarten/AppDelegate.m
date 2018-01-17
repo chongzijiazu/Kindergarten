@@ -7,8 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "KGMainNavigationViewController.h"
-#import "RootViewController.h"
 #import "JFKGNavigationViewController.h"
 #import "JFKGRootViewController.h"
 

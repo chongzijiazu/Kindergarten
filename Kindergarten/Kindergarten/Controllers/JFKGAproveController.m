@@ -17,16 +17,6 @@
 
 @implementation JFKGAproveController
 
-//测试用
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    [self getAprove];
-}
-
--(void)viewDidLoad
-{
-    [super viewDidLoad];
-}
 
 //通过相册摄像头获取证据
 - (void)getAprove
@@ -43,7 +33,8 @@
             weakSelf.picker.delegate = weakSelf;//设置UIImagePickerController的代理，同时要遵循UIImagePickerControllerDelegate，UINavigationControllerDelegate协议
             weakSelf.picker.allowsEditing = YES;//设置拍照之后图片是否可编辑，如果设置成可编辑的话会在代理方法返回的字典里面多一些键值。PS：如果在调用相机的时候允许照片可编辑，那么用户能编辑的照片的位置并不包括边角。
             weakSelf.picker.sourceType = UIImagePickerControllerSourceTypeCamera;//UIImagePicker选择器的数据来源，UIImagePickerControllerSourceTypeCamera说明数据来源于摄像头
-            [weakSelf presentViewController:weakSelf.picker animated:YES completion:nil];
+            [weakSelf.currentVC presentViewController:weakSelf.picker animated:YES completion:nil];
+            
         }
         else
         {
@@ -63,7 +54,7 @@
                                           
             //设置图片选择器的数据来源为 手机相册
             weakSelf.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            [weakSelf presentViewController:weakSelf.picker animated:YES completion:nil];
+            [weakSelf.currentVC presentViewController:weakSelf.picker animated:YES completion:nil];
         }
         else
         {
@@ -74,8 +65,8 @@
     //取消
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
-    alertC.popoverPresentationController.sourceView = self.view;
-    alertC.popoverPresentationController.sourceRect = self.view.frame;
+    alertC.popoverPresentationController.sourceView = self.currentVC.view;
+    alertC.popoverPresentationController.sourceRect = self.currentVC.view.frame;
     [alertC addAction:cameraAction];
     [alertC addAction:photoAction];
     [alertC addAction:cancelAction];
@@ -97,7 +88,7 @@
     imagesize.width = 200;
     
     //对图片大小进行压缩
-    image = [self imageWithImage:image scaledToSize:imagesize];
+    //image = [self imageWithImage:image scaledToSize:imagesize];
     NSData *imageData = UIImageJPEGRepresentation(image,0.008);
     
     UIImage *compressionImage = [UIImage imageWithData:imageData];
