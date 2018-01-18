@@ -10,6 +10,20 @@
 
 @implementation GlobalUtil
 
+//证据文件路径
++(NSString*)getAprovePath
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"aprove"];
+    NSFileManager* fileM = [NSFileManager defaultManager];
+    if (![fileM fileExistsAtPath:documentsDirectory])
+    {
+        [fileM createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return documentsDirectory;
+}
+
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString
 {
     NSLog(@"%@",jsonString);

@@ -1,3 +1,5 @@
+
+//退出操作
 function logout()
 {
     //alert("hello");
@@ -8,6 +10,7 @@ function logout()
     window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
 }
 
+//返回操作
 function goback()
 {
     //alert("goback");
@@ -18,12 +21,14 @@ function goback()
     window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
 }
 
+//显示试题
 function showLevelQuestion(args)
 {
     //alert(args);
     $("#levelQuestion").html(args);
 }
 
+//显示试题答案
 function showLevelAnswer(args)
 {
     //alert(args);
@@ -39,6 +44,36 @@ function showLevelAnswer(args)
     }
 }
 
+//显示试题证据
+function showLevelAprove(arrayData)
+{
+    //alert(arrayData);
+    for(var i = 0; i<arrayData.length;i++){
+        var QA = arrayData[i];
+        if(QA.aproveid.length>0)
+        {
+            var aprove = document.getElementById(QA.aproveid);
+            aprove.innerHTML = QA.aproveitem;
+        }
+    }
+}
+
+//显示试题说明
+function showLevelMemo(arrayData)
+{
+    //alert(arrayData);
+    for(var i = 0; i<arrayData.length;i++){
+        var QA = arrayData[i];
+        if(QA.memoid.length>0)
+        {
+            //alert(QA.memoid);
+            var memo = document.getElementById(QA.memoid+"_memo");
+            memo.innerText = QA.memocontent;
+        }
+    }
+}
+
+//下一页操作
 function pageDown()
 {
     //alert("hello");
@@ -49,6 +84,7 @@ function pageDown()
     window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
 }
 
+//上一页操作
 function pageUp()
 {
     //alert("hello");
@@ -59,6 +95,7 @@ function pageUp()
     window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
 }
 
+//添加证据操作
 function addaprove()
 {
     //alert("hello");
@@ -69,6 +106,7 @@ function addaprove()
     window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
 }
 
+//选项单击取反
 function optionClicked(obj)
 {
     var radio=obj;
@@ -84,4 +122,6 @@ function optionClicked(obj)
     }
     //alert(obj.checked);
 }
+
+
 

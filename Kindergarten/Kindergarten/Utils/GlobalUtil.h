@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface GlobalUtil : NSObject
+
++(NSString*)getAprovePath;
+
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
 +(void)deleteExistDownloadFile;
 +(void)deleteAssLevelFile;

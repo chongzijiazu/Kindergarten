@@ -51,9 +51,57 @@
             
             //处理页面证据
             NSString* strQuesAprove=[self getQuestionAproveByThirdLevelId:self.currentLevelQuestionID];
-            NSLog(@"%@",strQuesAprove);
+            scriptStr = [NSString stringWithFormat:@"showLevelAprove(%@);",strQuesAprove];
+            //NSLog(@"%@",strQuesAprove);
+            [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
+            
+            //处理文本框信息
+            NSString* strMemo = [self getQuestionMemoByThirdLevelId:self.currentLevelQuestionID];
+            //NSLog(@"%@",strMemo);
+            scriptStr = [NSString stringWithFormat:@"showLevelMemo(%@);",strMemo];
+            [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
         }
     }
+}
+
+-(NSString*)getQuestionMemoByThirdLevelId:(NSString*)thirdLevelId
+{
+    if (thirdLevelId!=nil && thirdLevelId.length==9)
+    {
+        NSString* strSql=[NSString stringWithFormat:@"SELECT question.seqLevel seqlevel FROM tbl_ass_quesstion question WHERE question.fkLevel='%@';",thirdLevelId];
+        NSArray* QAArray = [[SQLiteManager shareInstance] querySQL:strSql];
+        //NSLog(@"%@",QAArray);
+        NSFileManager* fileM = [NSFileManager defaultManager];
+        NSMutableArray* memoArray = [[NSMutableArray alloc]init];
+        NSString* aprovePath = [GlobalUtil getAprovePath];
+        NSString* txtMemoPath = [[NSString alloc] init];
+        for (int i=0; i<QAArray.count; i++) {
+            NSMutableDictionary* memoDic = [[NSMutableDictionary alloc]init];
+            txtMemoPath = [aprovePath stringByAppendingPathComponent:QAArray[i][@"seqlevel"]];
+            txtMemoPath = [txtMemoPath stringByAppendingString:@".txt"];
+            if ([fileM fileExistsAtPath:txtMemoPath]) {
+                NSString* memoContent = [NSString stringWithContentsOfFile:txtMemoPath encoding:NSUTF8StringEncoding error:nil];
+                [memoDic setObject:QAArray[i][@"seqlevel"] forKey:@"memoid"];
+                [memoDic setObject:memoContent forKey:@"memocontent"];
+                [memoArray addObject:memoDic];
+                txtMemoPath=@"";
+            }
+        }
+        
+        
+        NSData *data = [NSJSONSerialization dataWithJSONObject:memoArray options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];
+        if (data == nil) {
+            return nil;
+        }
+        
+        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //return dicQuesAprove;
+    }
+    return nil;
 }
 
 //页面证据处理
@@ -70,10 +118,11 @@
         //NSLog(@"%@",QAArray);
         NSString* strAttachments;
         EnAproveItem* tmpAproveItem;
-        NSMutableDictionary* dicQuesAprove = [[NSMutableDictionary alloc]init];
+        NSMutableArray* dicQuesAproveArray = [[NSMutableArray alloc]init];
         NSString* strAproveItems=[[NSString alloc]init];
         for (int i=0; i<QAArray.count; i++)
         {
+            NSMutableDictionary* dicQuesAprove = [[NSMutableDictionary alloc]init];
             strAproveItems=@"";
             strAttachments = QAArray[i][@"attachments"];
             if (strAttachments.length>0)//该题已有证据
@@ -90,21 +139,28 @@
                     tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:aproveItemId andType:0];
                     strAproveItems= [strAproveItems stringByAppendingString:[tmpAproveItem description]];
                 }
+                [dicQuesAprove setObject:strAproveItems forKey:@"aproveitem"];
+                [dicQuesAprove setObject:[QAArray[i][@"questionid"] stringByAppendingString:@"_aprove"] forKey:@"aproveid"];
             }
             else//该题尚无证据
             {
                 NSString* aproveItemId = [self getAproveItemIdByAttachments:strAttachments andSeqLevel:QAArray[i][@"seqlevel"]];
                 tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:aproveItemId andType:0];
                 strAproveItems= [strAproveItems stringByAppendingString:[tmpAproveItem description]];
+                [dicQuesAprove setObject:strAproveItems forKey:@"aproveitem"];
+                [dicQuesAprove setObject:[QAArray[i][@"questionid"] stringByAppendingString:@"_aprove"] forKey:@"aproveid"];
             }
-            [dicQuesAprove setObject:strAproveItems forKey:QAArray[i][@"questionid"]];
+            
+            [dicQuesAproveArray addObject:dicQuesAprove];
         }
-        NSData *data = [NSJSONSerialization dataWithJSONObject:dicQuesAprove options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];
+        
+        NSData *data = [NSJSONSerialization dataWithJSONObject:dicQuesAproveArray options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];
         if (data == nil) {
             return nil;
         }
         
         return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //return dicQuesAprove;
     }
     return nil;
 }
