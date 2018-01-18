@@ -11,20 +11,22 @@
 @implementation EnAproveItem
 
 @synthesize aproveItemId=_aproveItemId;
+@synthesize fkQuestionid=_fkQuestionid;
 @synthesize type;
 
--(id)initWithAproveItemId:(NSString*)mAproveItemId andType:(int)mType
+-(id)initWithAproveItemId:(NSString*)mAproveItemId andType:(int)mType andFKQuestionid:(NSString*)mFkQuestionid
 {
     if (self=[super init]) {
         self.aproveItemId = mAproveItemId;
+        self.fkQuestionid = mFkQuestionid;
         self.type = mType;
     }
     return self;
 }
 
-+(id)aproveItemWithApproveItemId:(NSString*)mAproveItemId andType:(int)mType
++(id)aproveItemWithApproveItemId:(NSString*)mAproveItemId andType:(int)mType andFKQuestionid:(NSString*)mFkQuestionid
 {
-    EnAproveItem* item = [[EnAproveItem alloc] initWithAproveItemId:mAproveItemId andType:mType];
+    EnAproveItem* item = [[EnAproveItem alloc] initWithAproveItemId:mAproveItemId andType:mType andFKQuestionid:mFkQuestionid];
     return item;
 }
 
@@ -44,11 +46,11 @@
 {
     if (self.type==1)//已有证据项
     {
-        return [NSString stringWithFormat:@"<td id=\"%@\" type=\"1\" onclick=\"proveItemClick(this.id,this.type);\"><img src=\"images/image.png\"/></td>",self.aproveItemId];
+        return [NSString stringWithFormat:@"<td id=\"%@\" onclick=\"proveItemClick(this.id,'1','%@');\"><img src=\"images/image.png\"/></td>",self.aproveItemId,self.fkQuestionid];
     }
     else if(self.type==0)
     {
-        return [NSString stringWithFormat:@"<td id=\"%@\" type=\"0\" onclick=\"proveItemClick(this.id,this.type);\"><img src=\"images/add.png\"/></td>",self.aproveItemId];
+        return [NSString stringWithFormat:@"<td id=\"%@\" onclick=\"proveItemClick(this.id,'0','%@');\"><img src=\"images/add.png\"/></td>",self.aproveItemId,self.fkQuestionid];
     }
     else
     {

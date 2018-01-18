@@ -13,6 +13,7 @@ function logout()
 //返回操作
 function goback()
 {
+    saveQuestionAnswer();//返回操作时，保存答案
     //alert("goback");
     var dicmsg ={
         "operation":"goback",
@@ -76,6 +77,7 @@ function showLevelMemo(arrayData)
 //下一页操作
 function pageDown()
 {
+    saveQuestionAnswer();//下一页操作时，保存答案
     //alert("hello");
     var dicmsg ={
         "operation":"pageDown",
@@ -87,6 +89,7 @@ function pageDown()
 //上一页操作
 function pageUp()
 {
+    saveQuestionAnswer();//上一页操作时，保存答案
     //alert("hello");
     var dicmsg ={
         "operation":"pageUp",
@@ -109,11 +112,20 @@ function addaprove()
 //选项单击取反
 function optionClicked(obj)
 {
+    alert(obj.tag);
     var radio=obj;
     if (radio.tag==1)
     {
         radio.checked=false;
         radio.tag=0;
+        //取消选中将答案设置为空
+        var param={};
+        param[radio.name]="";
+        var dicmsg ={
+            "operation":"saveAnswer",
+            "param":param
+        };
+        window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
     }
     else
     {
@@ -121,6 +133,46 @@ function optionClicked(obj)
         radio.tag=1
     }
     //alert(obj.checked);
+}
+
+function proveItemClick(aproveitemid,aproveitemtype,questionid)
+{
+    //alert(questionid);
+    var param ={
+        "type":aproveitemtype,
+        "id":aproveitemid,
+        "questionid":questionid
+    };
+    var dicmsg ={
+        "operation":"clickaprove",
+        "param":param
+    };
+    window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
+}
+
+
+function showAlertMessage(msg)
+{
+    alert(msg);
+}
+
+//保存当前页面答案
+function saveQuestionAnswer()
+{
+    var checkedEles = $("input[type='radio']:checked");
+    if(checkedEles)
+    {
+        var param={};
+        for(var i=0;i<checkedEles.length;i++)
+        {
+            param[checkedEles[i].name]=checkedEles[i].value;
+        }
+        var dicmsg ={
+            "operation":"saveAnswer",
+            "param":param
+        };
+        window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
+    }
 }
 
 

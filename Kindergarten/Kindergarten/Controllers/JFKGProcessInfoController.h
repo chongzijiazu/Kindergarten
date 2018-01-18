@@ -14,4 +14,6 @@
 @property (nonatomic, weak) UIViewController *currentVC;
 
 -(BOOL)getProcessInfo;
++(BOOL)saveQuestionAnswerToDB:(NSDictionary*)dicQuesAns;
+
 @end

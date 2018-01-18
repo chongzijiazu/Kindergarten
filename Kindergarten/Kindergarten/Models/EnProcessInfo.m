@@ -49,4 +49,99 @@
     return modelArrM;
 }
 
+-(BOOL)deleteAttachmentPathByQuestionId:(NSString*)mquestionid andNeedDeletedAttachmentPath:(NSString*)attachmentPath
+{
+    NSString* newAttachmentPath=[[NSString alloc]init];
+    NSString* strQureySql = [NSString stringWithFormat:@"SELECT attachmentpath FROM tbl_ass_process WHERE fkQuestionid='%@';",mquestionid];
+    NSArray* attachpathArray = [[SQLiteManager shareInstance] querySQL:strQureySql];
+    if (attachpathArray!=nil)
+    {
+        if(attachpathArray.count==1)//有答题纪录
+        {
+            NSString* oldAttachPath = attachpathArray[0][@"attachmentpath"];
+            if (oldAttachPath.length>0) {
+                newAttachmentPath = [self getNewAttachmentPathByReplace:attachmentPath andOldAttachmentPath:oldAttachPath];
+            }
+            else
+            {
+                //nothing
+            }
+            
+            NSString* strUpdateSql = [NSString stringWithFormat:@"UPDATE tbl_ass_process SET attachmentpath='%@' WHERE fkQuestionid='%@';",newAttachmentPath,mquestionid];
+            return [[SQLiteManager shareInstance] execSQL:strUpdateSql];
+        }
+        else if(attachpathArray.count==0)//新作答，无答题纪录
+        {
+            //删除证据，必有纪录
+        }
+    }
+    
+    return false;
+}
+
+-(NSString*)getNewAttachmentPathByReplace:(NSString*)deleteedPath andOldAttachmentPath:(NSString*)oldAttamentPath
+{
+    NSString* newAttachmentPath = [[NSString alloc]init];
+    
+    NSArray* attachmentArr = [oldAttamentPath componentsSeparatedByString:@","];
+    
+    if (attachmentArr.count==1) //只有一个证据
+    {
+        return @"";
+    }
+    else
+    {
+        for (int i=0; i<attachmentArr.count; i++)
+        {
+            if (![attachmentArr[i] isEqualToString:deleteedPath])
+            {
+                newAttachmentPath = [newAttachmentPath stringByAppendingString:attachmentArr[i]];
+                newAttachmentPath = [newAttachmentPath stringByAppendingString:@","];
+            }
+        }
+    
+        return [newAttachmentPath substringToIndex:newAttachmentPath.length-1];
+    }
+}
+
+//将答案保存到数据库中，如果存在该纪录则更新，不存在则插入
++(BOOL)saveQuestionAnswer:(NSDictionary*)dicQuesAns
+{
+    if(dicQuesAns!=nil&&dicQuesAns.count>0)
+    {
+        for (NSString* key in dicQuesAns) {
+            if ([self isExist:key])//更新
+            {
+                NSString* strUpdateSql = [NSString stringWithFormat:@"UPDATE tbl_ass_process SET answer='%@' WHERE fkQuestionid='%@';",dicQuesAns[key],key];
+                if (![[SQLiteManager shareInstance] execSQL:strUpdateSql])
+                {
+                    return false;
+                };
+            }
+            else//插入
+            {
+                EnProcessInfo* process = [[EnProcessInfo alloc] initWithfkQuestionid:key andAttachmentPath:@"" andAnswer:dicQuesAns[key]];
+                if (![process insertSelfToDB]) {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+//判断试题是否存在纪录，根据questionid
++(BOOL)isExist:(NSString*)questionid
+{
+    NSString* strSql = [NSString stringWithFormat:@"SELECT count(1) isexist FROM tbl_ass_process WHERE fkQuestionid='%@';",questionid];
+    NSArray* retArr = [[SQLiteManager shareInstance] querySQL:strSql];
+    if (retArr!=nil&& [retArr[0][@"isexist"] isEqualToString:@"1"]) {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 @end

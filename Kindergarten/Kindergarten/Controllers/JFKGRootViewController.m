@@ -14,6 +14,8 @@
 #import "JFKFWeakScriptMessageDelegate.h"
 #import "JFKGEvaluateController.h"
 #import "JFKGAproveController.h"
+#import "JFKGAproveViewController.h"
+#import "JFKGProcessInfoController.h"
 
 
 @interface JFKGRootViewController ()<WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate>
@@ -28,6 +30,11 @@
 @end
 
 @implementation JFKGRootViewController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBar.hidden = YES;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -223,11 +230,32 @@
                     }];
                 }
             }
-            else if([operation isEqualToString:@"addaprove"])
+            else if([operation isEqualToString:@"clickaprove"])
             {
-                [self.aproveController getAprove];//获取证据
-                //[self.navigationController pushViewController:self.aproveController animated:NO];
-                
+                NSDictionary* dicParams = [dicMsg objectForKey:@"param"];
+                //NSLog(@"%@",[dicParams objectForKey:@"type"]);
+                NSString* aproveitemtype =[dicParams objectForKey:@"type"];
+                 NSString* questionid =[dicParams objectForKey:@"questionid"];
+                NSString* aproveitemid =[dicParams objectForKey:@"id"];
+                if ([aproveitemtype isEqualToString:@"0"]) //添加证据
+                {
+                    [self.aproveController getAproveByAproveItemId:aproveitemid andQuestionId:questionid];//获取证据
+                }
+                else if([aproveitemtype isEqualToString:@"1"])//已有证据
+                {
+                    JFKGAproveViewController* aproveVC = [[JFKGAproveViewController alloc] init];
+                    aproveVC.aproveItemId =aproveitemid;
+                    aproveVC.questionid = questionid;
+                    aproveVC.webView = self.webView;
+                    [self.navigationController pushViewController:aproveVC animated:NO                ];
+                }
+            }
+            else if([operation isEqualToString:@"saveAnswer"])
+            {
+                NSDictionary* dicParams = [dicMsg objectForKey:@"param"];
+                if (dicParams!=nil&&dicParams.count>0) {
+                    [JFKGProcessInfoController saveQuestionAnswerToDB:dicParams];
+                }
             }
         }
     }

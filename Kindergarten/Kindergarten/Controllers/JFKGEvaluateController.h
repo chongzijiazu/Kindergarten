@@ -21,4 +21,7 @@
 
 -(BOOL)makeLevelHTMLByPaper;
 -(void)sendLevelQuestionToView;
+
+-(NSString*)getQuestionMemoByThirdLevelId:(NSString*)thirdLevelId;
+-(NSString*)getQuestionAproveByThirdLevelId:(NSString*)thirdLevelId;
 @end

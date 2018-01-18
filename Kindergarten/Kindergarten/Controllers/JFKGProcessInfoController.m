@@ -51,4 +51,10 @@
     return true;
 }
 
+//保存答案
++(BOOL)saveQuestionAnswerToDB:(NSDictionary*)dicQuesAns
+{
+    return [EnProcessInfo saveQuestionAnswer:dicQuesAns];
+}
+
 @end

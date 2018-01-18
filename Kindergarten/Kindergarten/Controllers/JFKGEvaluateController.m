@@ -110,10 +110,9 @@
 //如果试题下无证据信息，则判断该题是否可添加证据，如果可添加证据，则生成一个可添加证据项
 -(NSString*)getQuestionAproveByThirdLevelId:(NSString*)thirdLevelId
 {
-    
     if (thirdLevelId!=nil && thirdLevelId.length==9)
     {
-        NSString* strSql=[NSString stringWithFormat:@"SELECT question.pkId questionid,question.seqLevel seqlevel,process.attachmentpath attachments FROM tbl_ass_quesstion question LEFT JOIN tbl_ass_process process ON question.pkId=process.fkQuestionid WHERE question.fkLevel='%@';",thirdLevelId];
+        NSString* strSql=[NSString stringWithFormat:@"SELECT question.pkId questionid,question.seqLevel seqlevel,process.attachmentpath attachments,question.appendprove appendprove FROM tbl_ass_quesstion question LEFT JOIN tbl_ass_process process ON question.pkId=process.fkQuestionid WHERE question.fkLevel='%@';",thirdLevelId];
         NSArray* QAArray = [[SQLiteManager shareInstance] querySQL:strSql];
         //NSLog(@"%@",QAArray);
         NSString* strAttachments;
@@ -130,13 +129,13 @@
                 NSArray *array = [strAttachments componentsSeparatedByString:@","];
                 for (int j=0; j<array.count; j++)
                 {
-                    tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:array[j] andType:1];
+                    tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:array[j] andType:1 andFKQuestionid:QAArray[i][@"questionid"]];
                     strAproveItems= [strAproveItems stringByAppendingString:[tmpAproveItem description]];
                 }
                 if (array.count<self.maxAproveNum)
                 {
                     NSString* aproveItemId = [self getAproveItemIdByAttachments:strAttachments andSeqLevel:QAArray[i][@"seqlevel"]];
-                    tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:aproveItemId andType:0];
+                    tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:aproveItemId andType:0 andFKQuestionid:QAArray[i][@"questionid"]];
                     strAproveItems= [strAproveItems stringByAppendingString:[tmpAproveItem description]];
                 }
                 [dicQuesAprove setObject:strAproveItems forKey:@"aproveitem"];
@@ -145,13 +144,15 @@
             else//该题尚无证据
             {
                 NSString* aproveItemId = [self getAproveItemIdByAttachments:strAttachments andSeqLevel:QAArray[i][@"seqlevel"]];
-                tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:aproveItemId andType:0];
+                tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:aproveItemId andType:0 andFKQuestionid:QAArray[i][@"questionid"]];
                 strAproveItems= [strAproveItems stringByAppendingString:[tmpAproveItem description]];
                 [dicQuesAprove setObject:strAproveItems forKey:@"aproveitem"];
                 [dicQuesAprove setObject:[QAArray[i][@"questionid"] stringByAppendingString:@"_aprove"] forKey:@"aproveid"];
             }
-            
-            [dicQuesAproveArray addObject:dicQuesAprove];
+            if (![QAArray[i][@"appendprove"] isEqualToString:@"0"])//不可追加证据
+            {
+                [dicQuesAproveArray addObject:dicQuesAprove];
+            }
         }
         
         NSData *data = [NSJSONSerialization dataWithJSONObject:dicQuesAproveArray options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];

@@ -14,6 +14,6 @@
 @property (nonatomic, weak) WKWebView *webView;
 @property (nonatomic, weak) UIViewController *currentVC;
 
--(void)getAprove;
+- (void)getAproveByAproveItemId:(NSString*)aproveitemid andQuestionId:(NSString*)mquestionid;
 
 @end

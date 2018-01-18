@@ -7,8 +7,15 @@
 //
 
 #import "JFKGAproveController.h"
+#import "SQLiteManager.h"
+#import "JFKGEvaluateController.h"
+#import "EnProcessInfo.h"
 
 @interface JFKGAproveController()
+{
+    NSString* _aproveItemName;
+    NSString* _questionid;
+}
 
 //@property (nonatomic,strong) UIImageView * camorrorImageview;
 @property (strong, nonatomic) UIImagePickerController *picker;
@@ -18,9 +25,12 @@
 @implementation JFKGAproveController
 
 
-//通过相册摄像头获取证据
-- (void)getAprove
+//通过相册摄像头获取证据(并用传过来的aproveitemid命名)
+- (void)getAproveByAproveItemId:(NSString*)aproveitemid andQuestionId:(NSString*)mquestionid
 {
+    _aproveItemName=aproveitemid;//将名字保存到变量中，save时用
+    _questionid=mquestionid;
+    
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"请选择图片来源" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     //从照相机拍照
@@ -103,7 +113,8 @@
         _camorrorImageview.image = compressionImage;
     }*/
     
-    [self saveImage:compressionImage withName:@"aprove.jpg"];
+    NSString* imageN = [_aproveItemName stringByAppendingString:@".jpg"];
+    [self saveImage:compressionImage withName:imageN];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -145,14 +156,75 @@
     }
     NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:imageName];
     
-    // 将图片写入文件
-    [imageData writeToFile:fullPath atomically:NO];
+    if ([self saveAproveItemToDB]) {
+        // 将图片写入文件
+        [imageData writeToFile:fullPath atomically:NO];
+        
+        //处理页面证据
+        NSString* thirdLevel = [self getThirdLevelFromSeqLevel:_aproveItemName];
+        JFKGEvaluateController* evaluateC = [[JFKGEvaluateController alloc]init];
+        NSString* strQuesAprove=[evaluateC getQuestionAproveByThirdLevelId:thirdLevel];
+        NSString* scriptStr = [NSString stringWithFormat:@"showLevelAprove(%@);",strQuesAprove];
+        //NSLog(@"%@",strQuesAprove);
+        [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            NSLog(@"response: %@ error: %@", response, error);
+        }];
+    }
+    else
+    {
+        NSString* scriptStr = [NSString stringWithFormat:@"showAlertMessage(%@);",@"添加证据失败"];
+        [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            NSLog(@"response: %@ error: %@", response, error);
+        }];
+    }
 }
 
 #pragma mark - 取消拍照/选择图片
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(BOOL)saveAproveItemToDB
+{
+    NSString* newAttachmentPath=[[NSString alloc]init];
+    NSString* strQureySql = [NSString stringWithFormat:@"SELECT attachmentpath FROM tbl_ass_process WHERE fkQuestionid='%@';",_questionid];
+    NSArray* attachpathArray = [[SQLiteManager shareInstance] querySQL:strQureySql];
+    if (attachpathArray!=nil)
+    {
+        if(attachpathArray.count==1)//有答题纪录
+        {
+            NSString* tmpAttachPath = attachpathArray[0][@"attachmentpath"];
+            if (tmpAttachPath.length>0) {
+                newAttachmentPath = [NSString stringWithFormat:@"%@%@%@",tmpAttachPath,@",",_aproveItemName];
+            }
+            else
+            {
+                newAttachmentPath=_aproveItemName;
+            }
+        
+            NSString* strUpdateSql = [NSString stringWithFormat:@"UPDATE tbl_ass_process SET attachmentpath='%@' WHERE fkQuestionid='%@';",newAttachmentPath,_questionid];
+            return [[SQLiteManager shareInstance] execSQL:strUpdateSql];
+        }
+        else if(attachpathArray.count==0)//新作答，无答题纪录
+        {
+            EnProcessInfo* process = [[EnProcessInfo alloc] initWithfkQuestionid:_questionid andAttachmentPath:_aproveItemName andAnswer:@""];
+            return [process insertSelfToDB];
+        }
+    }
+    
+    return false;
+}
+
+-(NSString*)getThirdLevelFromSeqLevel:(NSString*)seqlevel
+{
+    if (seqlevel!=nil && seqlevel.length>0) {
+        NSArray* levelArr = [seqlevel componentsSeparatedByString:@"-"];
+        if (levelArr[2]!=nil) {
+            return levelArr[2];
+        }
+    }
+    return nil;
 }
 
 @end

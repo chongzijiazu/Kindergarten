@@ -71,7 +71,7 @@ A.园舍独立，产权清晰，规划科学，布局合理，民办园自有房
 //按html格式描述选项
 -(NSString*)description
 {
-    NSString* optionHtml = [NSString stringWithFormat:@"<label class=\"radio-inline\"><input type=\"radio\" name=\"optionsRadiosinline\" id=\"%@\" value=\"option2\" onclick=\"optionClicked(this)\"/>%@.%@</label><br></br>",self.pkId,self.optionValue,self.content];
+    NSString* optionHtml = [NSString stringWithFormat:@"<label class=\"radio-inline\"><input type=\"radio\" name=\"%@\" id=\"%@\" value=\"%@\" onclick=\"optionClicked(this)\"/>%@.%@</label><br></br>",self.fkQuestion,self.pkId,self.optionValue,self.optionValue,self.content];
     return optionHtml;
 }
 

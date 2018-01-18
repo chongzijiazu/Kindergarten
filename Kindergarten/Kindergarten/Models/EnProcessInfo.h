@@ -25,4 +25,7 @@
 //数据库中所有对象
 +(NSArray *)allProcessInfoFromDB;
 
+-(BOOL)deleteAttachmentPathByQuestionId:(NSString*)mquestionid andNeedDeletedAttachmentPath:(NSString*)attachmentPath;
++(BOOL)saveQuestionAnswer:(NSDictionary*)dicQuesAns;
+
 @end
