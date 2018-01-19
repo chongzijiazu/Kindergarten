@@ -1,4 +1,4 @@
-function hello()
+function login()
 {
     //alert("hello");
     var edt_account=document.getElementById("edt_account");
@@ -7,12 +7,26 @@ function hello()
         "username":edt_account.value,
         "password":edt_password.value
     };
-
+    
+    var dicmsg ={
+        "operation":"login",
+        "param":params
+    };
     //将用户名、密码传递到OC代码中，调用接口进行登录
-    window.webkit.messageHandlers.AppModel.postMessage(params);
+    window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
 }
 
 function alertLoginResult(args)
 {
     alert(args);
+}
+
+function calculateFormula(dicFormula)
+{
+    //alert("hello");
+    var dicmsg ={
+        "operation":"calculateFomula",
+        "param":""
+    };
+    window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
 }

@@ -13,6 +13,7 @@
 #import "JFKGEvaluateController.h"
 #import "JFKGProcessInfoController.h"
 #import "SQLiteManager.h"
+#import "EnFormula.h"
 
 @interface DownloadManagerViewController ()
 
@@ -132,16 +133,27 @@
     }
 }
 
-//处理下载好的数据
+//处理下载好的数据(先处理基础数据，因为后续操作会用到基础数据)
 -(BOOL)processDownloadData
 {
     self.lbl_downloadState.text = @"数据加载中...";
-    //在处理数据的时候创建（打开）数据库(已在程序启动时做过此操作，但由于退出到登录界面时会删除数据库，所以在下载时重复做此操作，以保证数据库正常打开)
+    //在处理数据的时候创建（打开）数据库(已在程序启动时做过此操作，但由于退出到登录界面时会删除数据库，所以在系统启动时再做此操作，以保证数据库正常打开)
     if ([[SQLiteManager shareInstance] openDB]) {
         NSLog(@"打开/创建数据库成功!");
     }else{
         NSLog(@"数据库开启失败!");
     }
+    
+    //处理公式信息，解压公式压缩包，将公式信息倒入数据库中
+    if([EnFormula loadFormulaXMLToDB])
+    {
+        
+    }
+    else
+    {
+        return false;
+    }
+    
     //处理以评估数据，解压保存答案信息，解压保存证据信息
     
     //通过网络接口，获取评估过程信息（试题答案）
@@ -164,7 +176,6 @@
     if (![levelC makeAssLevelFile]) {
         return false;
     }
-    
    
     
     return true;

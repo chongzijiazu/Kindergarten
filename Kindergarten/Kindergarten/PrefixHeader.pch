@@ -18,6 +18,7 @@
 #import "HttpRequestModel.h"
 #import "HTTPInterface.h"
 #import "GlobalUtil.h"
+#import "Base64Util.h"
 
 #define baseUrlString @"http://192.168.1.104:8070/kindergarten/evaluation/app/"
 

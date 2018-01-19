@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 @protocol DownloadManagerDelegate<NSObject>
 
@@ -27,5 +28,7 @@
 @property(nonatomic,retain)NSMutableArray* downloadArray;
 
 @property(nonatomic,weak)id<DownloadManagerDelegate> delegate;
+
+@property (nonatomic, weak) WKWebView *webView;
 
 @end

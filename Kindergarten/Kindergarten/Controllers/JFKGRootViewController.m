@@ -16,6 +16,7 @@
 #import "JFKGAproveController.h"
 #import "JFKGAproveViewController.h"
 #import "JFKGProcessInfoController.h"
+#import "SQLiteManager.h"
 
 
 @interface JFKGRootViewController ()<WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate>
@@ -161,9 +162,21 @@
         NSString* htmlname= [[self.webView.URL path] lastPathComponent];
         if ([htmlname isEqualToString:@"login.html"])
         {
-            NSDictionary* dicParams = message.body;
-            NSLog(@"%@",[dicParams objectForKey:@"username"]);
-            [self.loginController loginByUsername:[dicParams objectForKey:@"username"] andPassword:[dicParams objectForKey:@"password"]];
+            //NSDictionary* dicParams = message.body;
+            NSDictionary* dicMsg = message.body;
+            NSString* operation = [dicMsg objectForKey:@"operation"];
+            if ([operation isEqualToString:@"login"])
+            {
+                NSDictionary* dicParams = [dicMsg objectForKey:@"param"];
+                //NSLog(@"%@",[dicParams objectForKey:@"username"]);
+                [self.loginController loginByUsername:[dicParams objectForKey:@"username"] andPassword:[dicParams objectForKey:@"password"]];
+            }
+            else if([operation isEqualToString:@"calculateFomula"])
+            {
+                NSLog(@"HELLO");
+            }
+            
+            
         }
         else if ([htmlname isEqualToString:@"asslevel.html"])
         {

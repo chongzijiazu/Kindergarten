@@ -9,6 +9,7 @@
 #import "JFKGLoginContrller.h"
 #import "Encryption.h"
 #import "JFKGRootViewController.h"
+#import "SQLiteManager.h"
 
 @implementation JFKGLoginContrller
 
@@ -38,7 +39,8 @@
          if (dicResponse[@"success"]!=nil && [dicResponse[@"success"] isEqualToString:@"1"]) {//登录成功
              //NSLog(@"%@",dicResponse);
              [userDefault setObject:dicResponse[@"ticketid"] forKey:@"ticketid"];
-              
+              //登录成功，则保存登录信息（将院所，系统参数先保存到本地文件中，加载数据的时候再做处理）
+     
               DownloadManagerViewController* downloadManagerVC = [[DownloadManagerViewController alloc] init];
               downloadManagerVC.delegate = self;
               [self.currentVC presentViewController:downloadManagerVC animated:YES completion:nil];
@@ -56,8 +58,10 @@
     
     //模拟登录，测试用
     [userDefault setObject:@"111111" forKey:@"ticketid"];
+    [self saveLoginInfoToDocument:@""];
     DownloadManagerViewController* downloadManagerVC = [[DownloadManagerViewController alloc] init];
     downloadManagerVC.delegate = self;
+    downloadManagerVC.webView = self.webView;
     [self.currentVC presentViewController:downloadManagerVC animated:YES completion:nil];
 }
 
@@ -70,6 +74,13 @@
         JFKGRootViewController* rooVC = (JFKGRootViewController*)self.currentVC;
         [rooVC loadLocalHtmlByFilename:@"asslevel.html"];
     }
+}
+
+//将登录信息保存到文件中
+-(BOOL)saveLoginInfoToDocument:(NSString*)strLogInfo
+{
+    NSString* filePath = [GlobalUtil getLoginInfoPath];
+    return [strLogInfo writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
 @end

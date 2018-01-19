@@ -8,6 +8,7 @@
 
 #import "JFKGCommonController.h"
 #import "JFKGRootViewController.h"
+#import "EnFormula.h"
 
 @implementation JFKGCommonController
 
@@ -55,6 +56,39 @@
      }failure:^(NSError * _Nonnull error) {
      
      }];*/
+}
+
+//处理答题过程中用到的公式信息
+-(BOOL)processFormulaInfo
+{
+    NSArray* formulaArr = [EnFormula allFormulaFromDB];
+    //NSLog(@"%@",formulaArr);
+    //EnSchool* school = [[EnSchool alloc] init];
+    //[EnFormula translateExpression:formulaArr bySchoolInfo:school];
+    NSArray* schoolArra = [EnSchool allSchoolFromDB];
+    if (schoolArra!=nil&&schoolArra.count>0) {
+        NSDictionary* dicSchool = (NSDictionary*)schoolArra[0];
+        NSMutableDictionary* dicNewSchool = [[NSMutableDictionary alloc] init];
+        NSString* newKey = [[NSString alloc]init];
+        for (NSString* key in dicSchool) {
+            newKey = [NSString stringWithFormat:@"{%@}",key];
+            [dicNewSchool setObject:dicSchool[key] forKey:newKey];
+        }
+        
+        NSDictionary* newFormulaDic = [EnFormula translateExpression:formulaArr bySchoolInfo:dicNewSchool];
+        
+        NSData *data = [NSJSONSerialization dataWithJSONObject:newFormulaDic options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];
+        if (data == nil) {
+            return false;
+        }
+        
+        NSString* scriptStr= [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //NSLog(@"%@",tmp);
+        
+    }
+    
+    
+    return true;
 }
 
 @end

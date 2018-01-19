@@ -17,4 +17,6 @@
 +(void)deleteAssLevelFile;
 +(void)deleteLevelHtmlFile;
 +(BOOL)deleteAllDocumentsFile;
++(NSString*)getLoginInfoPath;
++(NSString*)getFormulaXMLPathPath;
 @end

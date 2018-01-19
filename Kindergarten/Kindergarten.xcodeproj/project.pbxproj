@@ -47,6 +47,11 @@
 		E6FD1B08200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FD1B07200B6F5300E83675 /* JFKFWeakScriptMessageDelegate.m */; };
 		E6FD1B0E200B8C7A00E83675 /* EnOption.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FD1B0D200B8C7A00E83675 /* EnOption.m */; };
 		E6FD1B11200B8C8C00E83675 /* EnQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FD1B10200B8C8C00E83675 /* EnQuestion.m */; };
+		E6FEC85D2011C1B10052D561 /* EnFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FEC85C2011C1B10052D561 /* EnFormula.m */; };
+		E6FEC8602011C1C40052D561 /* EnParam.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FEC85F2011C1C40052D561 /* EnParam.m */; };
+		E6FEC8632011C1D60052D561 /* EnSchool.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FEC8622011C1D60052D561 /* EnSchool.m */; };
+		E6FEC8652011D6EF0052D561 /* formula.xml in Resources */ = {isa = PBXBuildFile; fileRef = E6FEC8642011D6EF0052D561 /* formula.xml */; };
+		E6FEC8692011E9E50052D561 /* Base64Util.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FEC8682011E9E50052D561 /* Base64Util.m */; };
 		E6FED6CE200C4C1500359990 /* EnLevelQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FED6CD200C4C1500359990 /* EnLevelQuestion.m */; };
 		E6FED6D1200C4EA200359990 /* EnPaper.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FED6D0200C4EA200359990 /* EnPaper.m */; };
 /* End PBXBuildFile section */
@@ -125,6 +130,15 @@
 		E6FD1B0D200B8C7A00E83675 /* EnOption.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnOption.m; sourceTree = "<group>"; };
 		E6FD1B0F200B8C8C00E83675 /* EnQuestion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnQuestion.h; sourceTree = "<group>"; };
 		E6FD1B10200B8C8C00E83675 /* EnQuestion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnQuestion.m; sourceTree = "<group>"; };
+		E6FEC85B2011C1B10052D561 /* EnFormula.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnFormula.h; sourceTree = "<group>"; };
+		E6FEC85C2011C1B10052D561 /* EnFormula.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnFormula.m; sourceTree = "<group>"; };
+		E6FEC85E2011C1C40052D561 /* EnParam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnParam.h; sourceTree = "<group>"; };
+		E6FEC85F2011C1C40052D561 /* EnParam.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnParam.m; sourceTree = "<group>"; };
+		E6FEC8612011C1D60052D561 /* EnSchool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnSchool.h; sourceTree = "<group>"; };
+		E6FEC8622011C1D60052D561 /* EnSchool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnSchool.m; sourceTree = "<group>"; };
+		E6FEC8642011D6EF0052D561 /* formula.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = formula.xml; sourceTree = "<group>"; };
+		E6FEC8672011E9E50052D561 /* Base64Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Base64Util.h; sourceTree = "<group>"; };
+		E6FEC8682011E9E50052D561 /* Base64Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Base64Util.m; sourceTree = "<group>"; };
 		E6FED6CC200C4C1500359990 /* EnLevelQuestion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnLevelQuestion.h; sourceTree = "<group>"; };
 		E6FED6CD200C4C1500359990 /* EnLevelQuestion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnLevelQuestion.m; sourceTree = "<group>"; };
 		E6FED6CF200C4EA200359990 /* EnPaper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnPaper.h; sourceTree = "<group>"; };
@@ -202,6 +216,7 @@
 				E60461402005EEE800135F7C /* level.xml */,
 				E638B9F12007644D00685670 /* CallEach.html */,
 				E638B9F320076D6F00685670 /* CallCameraJS.js */,
+				E6FEC8642011D6EF0052D561 /* formula.xml */,
 			);
 			path = testdata;
 			sourceTree = "<group>";
@@ -286,6 +301,7 @@
 		E6EF8E302004836800A96B04 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E6FEC8662011E9D30052D561 /* Base64 */,
 				E668E33F200EF6C10023FFBC /* Sqlite */,
 				E60461362005B69B00135F7C /* MD5 */,
 				E60461352005B2A900135F7C /* ZipUtil */,
@@ -360,8 +376,23 @@
 				E6F47E19200DC87900CE111B /* EnAproveItem.m */,
 				E668E346200F01440023FFBC /* EnProcessInfo.h */,
 				E668E347200F01440023FFBC /* EnProcessInfo.m */,
+				E6FEC85B2011C1B10052D561 /* EnFormula.h */,
+				E6FEC85C2011C1B10052D561 /* EnFormula.m */,
+				E6FEC85E2011C1C40052D561 /* EnParam.h */,
+				E6FEC85F2011C1C40052D561 /* EnParam.m */,
+				E6FEC8612011C1D60052D561 /* EnSchool.h */,
+				E6FEC8622011C1D60052D561 /* EnSchool.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E6FEC8662011E9D30052D561 /* Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				E6FEC8672011E9E50052D561 /* Base64Util.h */,
+				E6FEC8682011E9E50052D561 /* Base64Util.m */,
+			);
+			path = Base64;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,6 +463,7 @@
 				E638B9F22007644D00685670 /* CallEach.html in Resources */,
 				E652B38F200C94AA00495147 /* paper.xml in Resources */,
 				E668E34C200F14170023FFBC /* processinfo.txt in Resources */,
+				E6FEC8652011D6EF0052D561 /* formula.xml in Resources */,
 				E67AB1E420044FF500AD83C9 /* Assets.xcassets in Resources */,
 				E6EF8E422004B92E00A96B04 /* MBProgressHUD.bundle in Resources */,
 				E6FA5AE72009DA9000B7B30B /* WKWebView.html in Resources */,
@@ -493,13 +525,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6FEC8632011C1D60052D561 /* EnSchool.m in Sources */,
 				E6FD1B01200B3CA700E83675 /* JFKGEvaluateController.m in Sources */,
 				E6FA5AE52009D36A00B7B30B /* JFKGRootViewController.m in Sources */,
 				E668E348200F01440023FFBC /* EnProcessInfo.m in Sources */,
 				E61AAB612008514700424DCE /* LevelNode.m in Sources */,
+				E6FEC85D2011C1B10052D561 /* EnFormula.m in Sources */,
 				E6FED6D1200C4EA200359990 /* EnPaper.m in Sources */,
 				E6F47E1D200DEA6B00CE111B /* JFKGAproveController.m in Sources */,
 				E6EF8E432004B92E00A96B04 /* MBProgressHUD+MJ.m in Sources */,
+				E6FEC8602011C1C40052D561 /* EnParam.m in Sources */,
+				E6FEC8692011E9E50052D561 /* Base64Util.m in Sources */,
 				E60FD1EC2009E8390080A07E /* JFKGLoginContrller.m in Sources */,
 				E6F47E1A200DC87900CE111B /* EnAproveItem.m in Sources */,
 				E60461392005B6DC00135F7C /* Encryption.m in Sources */,

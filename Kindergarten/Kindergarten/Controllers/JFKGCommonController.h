@@ -14,5 +14,6 @@
 @property (nonatomic, weak) UIViewController *currentVC;
 
 -(void)logout;
+-(BOOL)processFormulaInfo;
 
 @end

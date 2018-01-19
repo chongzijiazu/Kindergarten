@@ -10,7 +10,7 @@
 
 @implementation GlobalUtil
 
-//证据文件路径
+//证据文件夹路径
 +(NSString*)getAprovePath
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -21,6 +21,32 @@
     {
         [fileM createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:nil];
     }
+    return documentsDirectory;
+}
+
+//公式文件路径路径
++(NSString*)getFormulaXMLPathPath
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"DownloadFiles"];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"formula.xml"];
+
+    return documentsDirectory;
+}
+
+//登录成功信息文件路径（院所、系统配置等）
++(NSString*)getLoginInfoPath
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"LoginInfo"];
+    NSFileManager* fileM = [NSFileManager defaultManager];
+    if (![fileM fileExistsAtPath:documentsDirectory])
+    {
+        [fileM createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"loginfo.txt"];
     return documentsDirectory;
 }
 

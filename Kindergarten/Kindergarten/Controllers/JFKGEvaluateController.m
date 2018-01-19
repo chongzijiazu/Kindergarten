@@ -64,6 +64,8 @@
             [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
                 NSLog(@"response: %@ error: %@", response, error);
             }];
+            
+            
         }
     }
 }
