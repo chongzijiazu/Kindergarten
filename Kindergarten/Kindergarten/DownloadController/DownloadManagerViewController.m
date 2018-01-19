@@ -144,6 +144,12 @@
     }
     //处理以评估数据，解压保存答案信息，解压保存证据信息
     
+    //通过网络接口，获取评估过程信息（试题答案）
+    JFKGProcessInfoController* processC = [[JFKGProcessInfoController alloc]init];
+    if (![processC getProcessInfo]) {
+        return false;
+    }
+    
     //处理试卷数据，包括试卷包的解压和生成按三级指标分类的html
     JFKGEvaluateController* evaluateC = [[JFKGEvaluateController alloc] init];
     //生成按三级指标分类的html文件（调试，尚无解压过程）
@@ -159,11 +165,7 @@
         return false;
     }
     
-    //通过网络接口，获取评估过程信息（试题答案）
-    JFKGProcessInfoController* processC = [[JFKGProcessInfoController alloc]init];
-    if (![processC getProcessInfo]) {
-        return false;
-    }
+   
     
     return true;
 }

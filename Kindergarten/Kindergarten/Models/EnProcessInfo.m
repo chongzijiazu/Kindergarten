@@ -144,4 +144,27 @@
     }
 }
 
+//判断试题是否已完成（有无答案），根据questionid
++(BOOL)isFinished:(NSString*)questionid
+{
+    NSString* strSql = [NSString stringWithFormat:@"SELECT answer isfinished FROM tbl_ass_process WHERE fkQuestionid='%@';",questionid];
+    NSArray* retArr = [[SQLiteManager shareInstance] querySQL:strSql];
+    if (retArr!=nil && retArr.count>0)
+    {
+        NSString* strFinish =(NSString*)retArr[0][@"isfinished"];
+        if(strFinish!=nil && strFinish.length>0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
+
 @end

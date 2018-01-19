@@ -42,6 +42,8 @@ function showLevelAnswer(args)
             var op = document.getElementById(QA.optionid);
             op.checked=true;
             op.tag=1;
+            //将有答案的的试题标记为已完成
+            showFinished(op);
         }
     }
 }
@@ -117,6 +119,7 @@ function optionClicked(obj)
     var radio=obj;
     if (radio.tag==1)
     {
+        hideFinished(radio);
         radio.checked=false;
         radio.tag=0;
         //取消选中将答案设置为空
@@ -130,10 +133,27 @@ function optionClicked(obj)
     }
     else
     {
+        showFinished(radio);
         radio.checked=true;
         radio.tag=1
     }
     //alert(obj.checked);
+}
+
+function hideFinished(obj)
+{
+    var radio = obj;
+    var fid = "quesFinish_"+radio.name;
+    var font = document.getElementById(fid);
+    font.style.display = "none";
+}
+
+function showFinished(obj)
+{
+    var radio = obj;
+    var fid = "quesFinish_"+radio.name;
+    var font = document.getElementById(fid);
+    font.style.display = "inline";
 }
 
 function proveItemClick(aproveitemid,aproveitemtype,questionid)
@@ -190,6 +210,16 @@ function saveQuestionAnswer()
         };
         window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
     }
+}
+
+//查看试题描述信息
+function showQuesDesc(pkId)
+{
+    var idArr= pkId.split("_");
+    pkId=idArr[0];
+    var tContent = $("#"+pkId+"_desc").attr("sdesc");
+    $("#tipModalBody").html(tContent);
+    $('#tipModal').modal({show:true,backdrop:false,keyboard:false});
 }
 
 

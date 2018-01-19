@@ -44,6 +44,6 @@ function showLevelTable(data){
     }
     $("#asslevelid").html(dataHtml);
     
-    mergin("tableid","0");
-    mergin("tableid","1");
+    mergin("levelTableId","0");
+    mergin("levelTableId","1");
 }

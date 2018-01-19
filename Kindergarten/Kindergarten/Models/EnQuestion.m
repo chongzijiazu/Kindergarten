@@ -9,6 +9,7 @@
 #import "EnQuestion.h"
 #import "EnOption.h"
 #import "SQLiteManager.h"
+#import "EnProcessInfo.h"
 
 @implementation EnQuestion
 
@@ -117,11 +118,20 @@
         optionHtml=[optionHtml stringByAppendingString:[option description]];
     }
     
+    //是否关键指标
     NSString* strVeto=@"";
     if (self.veto==0) {
         strVeto=@"none";
     }
-    NSString* questionHtml = [NSString stringWithFormat:@"<div style=\"font-size: 18px;\">%d.%@<span style=\"color: red; font-weight: bold;display:%@\">（关键指标）</span><img src=\"images/question.png\" /><a href=\"#\">查看题目解释</a></div><hr/><div id=\"%@\">%@</div><div class=\"questips\"><img src=\"images/result.png\" /><span>%@</span></div>",self.seq,self.content,strVeto,self.pkId,optionHtml,self.contenttip];
+    /*//是否完成
+    NSString* strFinish=@"";
+    BOOL isFinished = [EnProcessInfo isFinished:self.pkId];
+    if(!isFinished)
+    {
+        strFinish=@"none";
+    }*/
+    
+    NSString* questionHtml = [NSString stringWithFormat:@"<div style=\"font-size: 18px;\">%d.%@<span style=\"color: red; font-weight: bold;display:%@\">（关键指标）</span><img src=\"images/question.png\" /><a id=\"%@_desclink\" onclick=\"showQuesDesc(this.id)\" href=\"#\"><span>查看题目解释<span><span sdesc=\"%@\" id=\"%@_desc\" /></a> <font style=\"display:none; font-size: 18px; border: 2px solid orange; padding: 4px;border-radius: 4px; font-weight: bold;\" color=\"orange\" id=\"quesFinish_%@\">已完成</font></div><hr/><div id=\"%@\">%@</div><div class=\"questips\"><img src=\"images/result.png\" /><span>%@</span></div>",self.seq,self.content,strVeto,self.pkId,self.desc,self.pkId,self.pkId,self.pkId,optionHtml,self.contenttip];
     return questionHtml;
 }
 

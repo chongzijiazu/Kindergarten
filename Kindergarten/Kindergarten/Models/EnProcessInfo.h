@@ -28,4 +28,6 @@
 -(BOOL)deleteAttachmentPathByQuestionId:(NSString*)mquestionid andNeedDeletedAttachmentPath:(NSString*)attachmentPath;
 +(BOOL)saveQuestionAnswer:(NSDictionary*)dicQuesAns;
 
++(BOOL)isFinished:(NSString*)questionid;
+
 @end

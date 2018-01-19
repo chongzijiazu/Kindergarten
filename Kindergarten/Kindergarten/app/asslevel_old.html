@@ -7,8 +7,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="css/loading.css"/>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <script src="jquery/jquery.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <script src="js/jf_kindergarten_asslevel.js"></script>
@@ -87,12 +86,12 @@
 					<span>
 					<ul class="nav navbar-nav" style="text-align:right;">
 					<li>
-						<div class="logo" style="margin-right:20px;" data-toggle="modal" data-target="#myModal">
-							<img src="images/modify.png"></img>
+						<div class="logo" style="margin-right:20px;">
+							<img src="images/modify.png"  data-toggle="modal" data-target="#myModal"></img>
 						</div>
 					</li>
 					<li>
-						<div class="logo" onclick="openHelp();">
+						<div class="logo" >
 							<img src="images/help.png"></img>
 						</div>
 					</li>
@@ -101,7 +100,7 @@
 						  <!-- The user image in the navbar-->
 						  <img src="images/person.png" class="logo">
 						  <!-- hidden-xs hides the username on small devices so only the image appears. -->
-						  <span class="hidden-xs"><b></b></span>
+						  <span class="hidden-xs"><b>谁的青春不疯狂</b></span>
 						</a>
 						<ul class="dropdown-menu" style="width:250px;">
 						  <!-- Menu Body -->
@@ -111,7 +110,7 @@
 								姓名：
 							  </div>
 							  <div class="col-xs-4" style="text-align:left">
-								
+								张三丰
 							  </div>
 							</div>
 							<li class="divider"></li>
@@ -120,7 +119,7 @@
 								手机号：
 							  </div>
 							  <div class="col-xs-4" style="text-align:left">
-								
+								15816253443
 							  </div>
 							</div>
 							<li class="divider"></li>
@@ -129,18 +128,19 @@
 								EMail：
 							  </div>
 							  <div class="col-xs-4" style="text-align:left">
-								
+								du.xiaohan@qq.com
 							  </div>
 							</div>
 							<!-- /.row -->
 						  </li>
 						  <!-- Menu Footer-->
 						  <li class="user-footer">
-							<!-- <div class="pull-left" style="padding-left:50px;">
+							<div class="pull-left" style="padding-left:50px;">
 							  <a href="#" class="btn btn-default btn-flat">修改</a>
-							</div> -->
-                            <div onclick="logout();" class="pull-right" style="padding-right:50px;">
-							  <a href="#" class="btn btn-default btn-flat">注销</a>
+							</div>
+                            <div onclick="logout();"
+                                class="pull-right" style="padding-right:50px;">
+							  <a href="#" class="btn btn-default btn-flat">退出</a>
 							</div>
 						  </li>
 						</ul>
@@ -167,14 +167,14 @@
 						<div style="font-size:18px;color:#FF9F4B;">
 							名称：
 						</div>
-						<div style="font-size:18px;background-color:#FFE4CC;padding:5px;border:1px solid #FF9F4B;border-radius:10px;" id="school_name"> </div>
+						<div style="font-size:18px;background-color:#FFE4CC;padding:5px;border:1px solid #FF9F4B;border-radius:10px;" id="school_name">中国国防装备部郑州军分区附属第一幼儿园</div>
 					</td>
 					<td style="width:68px;vertical-align:middle"><img src="images/time.png"></img> </td>
 					<td style="vertical-align:middle;">
 						<div style="font-size:18px;color:#73C8F7;">
 							开始时间：
 						</div>
-						<div style="font-size:18px;background-color:#E2F7FF;padding:5px;border:1px solid #73C8F7;border-radius:10px;" id="eva_starttime"></div></td>
+						<div style="font-size:18px;background-color:#E2F7FF;padding:5px;border:1px solid #73C8F7;border-radius:10px;" id="eva_starttime">2017年12月09日 09:00</div></td>
 					 <td style="width:68px;vertical-align:middle">
 						<img src="images/timeend.png"></img>
 					</td>
@@ -182,12 +182,20 @@
 						<div style="font-size:18px;color:#F87172;">
 							结束时间：
 						</div>
-						<div style="font-size:18px;background-color:#FEEEEC;padding:5px;border:1px solid #F87172;border-radius:10px;" id="eva_endtime"></div>
+						<div style="font-size:18px;background-color:#FEEEEC;padding:5px;border:1px solid #F87172;border-radius:10px;" id="eva_endtime">2018年02月09日 09:00</div>
 					</td>
-					 <td style="width:60px;vertical-align:middle" onclick="uploadData();">
+                    <td onclick="uploadData();" style="width:60px;vertical-align:middle">
 						<img src="images/upload.png"></img>
 						<span>上传数据</span>
 					</td>
+					<td style="width:60px;vertical-align:middle">
+						<img src="images/submit.png"></img>
+						<span>提交数据</span>
+					</td>
+					<!--<td style="width:60px;">
+						<img src="images/submit.png"></img>
+						<span>确认开始</span>
+					</td>-->
 				  </tr>
 				</thead>
 			  </table>
@@ -196,7 +204,7 @@
   </div>
   <div class="container" style="width:100%;margin:0px auto;">
 	<div class="jumbotron" style="background-color:white;">
-	  <table class="table table-bordered" id="levelTableId">
+	  <table class="table table-bordered" id="tableid">
         <thead>
           <tr>
             <th style="width:20%;background-color:#E2F3A8;text-align:center;">一级指标</th>
@@ -206,7 +214,7 @@
           </tr>
         </thead>
         <tbody id="asslevelid">
-          <!-- <tr>
+          <tr>
             <td style="background-color:#EBF7C2;padding-left:5%;">A1环境支持C1园舍</td>
             <td style="background-color:#FDFFF5;padding-left:8%;">B1园舍与场地C1</td>
             <td style="background-color:#FEF0FA;padding-left:20%;">C1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华</td>
@@ -223,7 +231,7 @@
             <td style="background-color:#FDFFF5;padding-left:8%;">B1园舍与场地</td>
             <td style="background-color:#FEF0FA;padding-left:20%;">C3区角设置</td>
 			<td style="background-color:#FEFBFD;text-align:center;"><img src="images/finish.png"></img></td>
-          </tr> -->
+          </tr>
         </tbody>
       </table>
 	</div>
@@ -553,19 +561,8 @@
   </div>
   <!-- /.modal-dialog -->
   
-  
-  <!-- 模态框（Modal） -->
-<!--<div class="modal fade" id="myLoadingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" backdrop="static" data-keyboard="false">
-	<div class="spinner">
-		  <div class="bounce1"></div>
-		  <div class="bounce2"></div>
-		  <div class="bounce3"></div>
-		</div>
-</div>-->
-  
   <script>
-	function mergin(tableid,column)
-    {
+	function mergin(tableid,column){
 		var tr = document.getElementById(tableid);
 		for(var i=1; i<tr.rows.length; i++){
 			var f = i-1;
@@ -586,38 +583,38 @@
 			}
 		}
 	}
-	
-    function updateStatus(finishLevel,finishedNum){
-        var content = '<img src="images/finish.png"></img>';
-        var totalnum = $("#"+finishLevel+"_status").attr("totalnum");
-        if(parseInt(totalnum) == parseInt(finishedNum)){
-            $("td[sid='"+finishLevel+"']").html(content);
-        }
-    }
-  
-  function initPage(){
-      //loadPageData();
-  }
-  function loadPageData(pageData){
-      if(pageData){
-          var headData = pageData.headerInfo;
-          if(headData){
-              var kindergarteninfo = headData.kindergarteninfo;
-              kindergarteninfo = eval("(" + kindergarteninfo + ")");
-              for (var key in kindergarteninfo){
-                  $("#"+key).html(kindergarteninfo[key]);
-              }
-              $("#school_name").html(kindergarteninfo.name);
-              if(headData.evaluateTimeInfo){
-                  $("#eva_starttime").html(headData.evaluateTimeInfo.beginTime);
-                  $("#eva_endtime").html(headData.evaluateTimeInfo.endTime);
-              }
-          }
-          var assLevelData = pageData.rowData;
-      }
-  }
-  initPage();
-  
+	//fillData();
+	//mergin("tableid","0");
+	//mergin("tableid","1");
+	function fillData(data){
+		data = '[{"fid":"001","fname":"A1办园条件","sid":"001001","sname":"B1办园资质","tid":"001001001","tname":"C1办园许可"}]';
+		var arrayData = eval("(" + data + ")"); 
+		var dataHtml = "";
+		for(var i = 0; i<arrayData.length;i++){
+			var level = arrayData[i];
+			var row = '<tr> <td id="'+level.fid+'" style="background-color:#EBF7C2;padding-left:5%;">'+level.fname+'</td> ';
+			row += '<td '+level.sid+' style="background-color:#FDFFF5;padding-left:8%;">'+level.sname+'</td>';
+			row += '<td '+level.tid+' style="background-color:#FEF0FA;padding-left:20%;">'+level.tname+'</td>';
+			row += '<td style="background-color:#FEFBFD;text-align:center;"><img src="images/finish.png"></img></td>';
+			row += '</tr>';
+			dataHtml += row;
+		}
+		$("#asslevelid").html(dataHtml);
+		
+	}
+	function initView(){
+		var pageJson = jsInterface.getAssLevelPageData();
+		var pageData = eval("(" + pageJson + ")");
+		var kindergarteninfo = pageData.kindergarteninfo;
+		for (var key in kindergarteninfo){
+			$("#"+key).html(kindergarteninfo[key]);
+		}
+		$("#school_name").html(kindergarteninfo.name);
+		$("#eva_starttime").html(pageData.evaluateTimeInfo.beginTime);
+		$("#eva_endtime").html(pageData.evaluateTimeInfo.endTime);
+		
+	}
+	initView();
   </script>
 </body>
 </html>
