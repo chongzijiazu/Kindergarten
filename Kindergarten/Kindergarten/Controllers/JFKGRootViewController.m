@@ -257,6 +257,13 @@
                     [JFKGProcessInfoController saveQuestionAnswerToDB:dicParams];
                 }
             }
+            else if([operation isEqualToString:@"saveMemo"])
+            {
+                NSDictionary* dicParams = [dicMsg objectForKey:@"param"];
+                if (dicParams!=nil&&dicParams.count>0) {
+                    [JFKGProcessInfoController saveMemoToDocument:dicParams];
+                }
+            }
         }
     }
     

@@ -57,4 +57,36 @@
     return [EnProcessInfo saveQuestionAnswer:dicQuesAns];
 }
 
+//保存提示信息
++(BOOL)saveMemoToDocument:(NSDictionary*)dicMemo
+{
+    NSString* aprovePath = [GlobalUtil getAprovePath];
+    if (dicMemo!=nil && dicMemo.count>0) {
+        for (NSString* key in dicMemo)
+        {
+            NSString* memoContent = dicMemo[key];
+            NSArray *array = [key componentsSeparatedByString:@"_"];
+            NSString* memoPath = [aprovePath stringByAppendingPathComponent:array[0]];
+            memoPath = [memoPath stringByAppendingString:@".txt"];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:memoPath]) {
+                if (memoContent.length>0) {
+                    [memoContent writeToFile:memoPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+                }
+                else
+                {
+                    [[NSFileManager defaultManager] removeItemAtPath:memoPath error:nil];
+                }
+            }
+            else
+            {
+                if (memoContent.length>0) {
+                    [memoContent writeToFile:memoPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+                }
+            }
+            
+        }
+    }
+    return true;
+}
+
 @end

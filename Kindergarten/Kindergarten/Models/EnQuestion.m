@@ -91,12 +91,20 @@
  试题模板示例：
 <div style="font-size: 18px;">
 1.园舍产权
+ <span style="color: red; font-weight: bold;display:none">（关键指标）</span>
 <img src="images/question.png" />
 <a href="#">查看题目解释</a>
+ <font style="display: 1; font-size: 18px; border: 2px solid orange; padding: 4px;border-radius: 4px; font-weight: bold;" color="orange" id="quesFinish_0d0ecc66c2964929a132bd7337d39d88">
+    已完成
+ </font>
 </div>
 <hr/>
 <div id="pkId">
     选项
+</div>
+<div class="questips">
+    <img src="images/result.png" />
+    <span>根据您填写的院所信息，在园人数：485.00</span>
 </div>
  */
 //html格式描述试题
@@ -108,7 +116,12 @@
         option = (EnOption*)self.optionArray[i];
         optionHtml=[optionHtml stringByAppendingString:[option description]];
     }
-    NSString* questionHtml = [NSString stringWithFormat:@"<div style=\"font-size: 18px;\">%d.%@<img src=\"images/question.png\" /><a href=\"#\">查看题目解释</a></div><hr/><div id=\"%@\">%@</div>",self.seq,self.pkId,self.content,optionHtml];
+    
+    NSString* strVeto=@"";
+    if (self.veto==0) {
+        strVeto=@"none";
+    }
+    NSString* questionHtml = [NSString stringWithFormat:@"<div style=\"font-size: 18px;\">%d.%@<span style=\"color: red; font-weight: bold;display:%@\">（关键指标）</span><img src=\"images/question.png\" /><a href=\"#\">查看题目解释</a></div><hr/><div id=\"%@\">%@</div><div class=\"questips\"><img src=\"images/result.png\" /><span>%@</span></div>",self.seq,self.content,strVeto,self.pkId,optionHtml,self.contenttip];
     return questionHtml;
 }
 

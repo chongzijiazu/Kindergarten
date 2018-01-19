@@ -7,7 +7,7 @@
     <seqLevel>001-001001-001001001-1</seqLevel>
     <type>1</type>
     <weight>0.5</weight>
-    <veto>1</veto>
+    <veto>0</veto>
     <appendprove>1</appendprove>
     <calculated>1</calculated>
     <fkFormula>{teachertotal}</fkFormula>

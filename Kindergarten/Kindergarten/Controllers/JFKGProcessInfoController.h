@@ -15,5 +15,6 @@
 
 -(BOOL)getProcessInfo;
 +(BOOL)saveQuestionAnswerToDB:(NSDictionary*)dicQuesAns;
++(BOOL)saveMemoToDocument:(NSDictionary*)dicMemo;
 
 @end

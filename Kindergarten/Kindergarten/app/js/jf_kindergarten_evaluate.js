@@ -41,6 +41,7 @@ function showLevelAnswer(args)
         {
             var op = document.getElementById(QA.optionid);
             op.checked=true;
+            op.tag=1;
         }
     }
 }
@@ -112,7 +113,7 @@ function addaprove()
 //选项单击取反
 function optionClicked(obj)
 {
-    alert(obj.tag);
+    //alert(obj.tag);
     var radio=obj;
     if (radio.tag==1)
     {
@@ -170,6 +171,22 @@ function saveQuestionAnswer()
         var dicmsg ={
             "operation":"saveAnswer",
             "param":param
+        };
+        window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
+    }
+    
+    //保存答案的时候，同时保存说明信息
+    var memoEles = $("textarea");
+    if(memoEles)
+    {
+        var txtparam={};
+        for(var i=0;i<memoEles.length;i++)
+        {
+            txtparam[memoEles[i].id]=memoEles[i].value;
+        }
+        var dicmsg ={
+            "operation":"saveMemo",
+            "param":txtparam
         };
         window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
     }
