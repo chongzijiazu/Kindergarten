@@ -65,6 +65,7 @@
     downloadManagerVC.delegate = self;
     downloadManagerVC.webView = self.webView;
     [self.currentVC presentViewController:downloadManagerVC animated:YES completion:nil];
+    
 }
 
 //判断下载是否成功

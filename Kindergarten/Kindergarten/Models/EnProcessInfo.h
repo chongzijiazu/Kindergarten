@@ -29,5 +29,6 @@
 +(BOOL)saveQuestionAnswer:(NSDictionary*)dicQuesAns;
 
 +(BOOL)isFinished:(NSString*)questionid;
++(NSString*)toJsonProcessInfo;
 
 @end

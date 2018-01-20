@@ -60,4 +60,10 @@
     //return [NSString stringWithFormat:@"%@%@%@",baseUrlString,@"downloadattachmentcontent.do?ticketid=",TICKETID ];
 }
 
+//上传评估数据
++(NSString*)uploadevaluatedata;
+{
+    return [NSString stringWithFormat:@"%@%@%@",baseUrlString,@"uploadevaluatedata?ticketid=",TICKETID ];
+}
+
 @end

@@ -13,7 +13,7 @@
     UIProgressView* _uploadProgress; //上传进度
     UILabel* _lbl_uploadState;//上传状态
 }
-
+@property (nonatomic, weak) UIViewController *currentVC;
 @property(nonatomic,retain)UIProgressView* uploadProgress;
 @property(nonatomic,retain)UILabel* lbl_uploadState;
 

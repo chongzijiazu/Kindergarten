@@ -45,6 +45,7 @@
     [self initControllers];//初始化控制类
 }
 
+
 //初始化控制类
 -(void)initControllers
 {
@@ -171,9 +172,13 @@
                 //NSLog(@"%@",[dicParams objectForKey:@"username"]);
                 [self.loginController loginByUsername:[dicParams objectForKey:@"username"] andPassword:[dicParams objectForKey:@"password"]];
             }
-            else if([operation isEqualToString:@"calculateFomula"])
+            else if([operation isEqualToString:@"logonline"])
             {
-                NSLog(@"HELLO");
+                //NSLog(@"HELLO");
+                NSString* strUrl=@"https://baidu.com";
+                NSURL* url = [NSURL URLWithString:strUrl];
+                NSURLRequest* request = [NSURLRequest requestWithURL:url];
+                [self.webView loadRequest:request];
             }
             
             

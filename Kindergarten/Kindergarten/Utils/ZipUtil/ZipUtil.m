@@ -26,18 +26,16 @@
     return isSuccess;
 }
 
-//根据文件夹路径，压缩文件夹（默认压缩文件保存到沙盒的Document文件夹下）
-+(BOOL)ZipArchiveWithFolder:(NSString *)directoryPath
+//根据文件夹路径，压缩文件夹
++(BOOL)ZipArchiveWithFolder:(NSString *)sourcePath toPath:(NSString*)destPath
 {
-    //Document路径
-    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
     //根据文件夹路径获取文件夹的名称，作为压缩文件的文件名
-    NSString* zipFileName = [directoryPath lastPathComponent];
+    NSString* zipFileName = [sourcePath lastPathComponent];
     zipFileName = [zipFileName stringByAppendingPathExtension:@"zip"];
     //压缩包保存路径
-    NSString* zipSavePath = [documentPath stringByAppendingPathComponent:zipFileName];
+    NSString* zipSavePath = [destPath stringByAppendingPathComponent:zipFileName];
     //创建不带密码zip压缩包
-    BOOL isSuccess = [SSZipArchive createZipFileAtPath:zipSavePath withContentsOfDirectory:[documentPath stringByAppendingPathComponent:directoryPath]];
+    BOOL isSuccess = [SSZipArchive createZipFileAtPath:zipSavePath withContentsOfDirectory:sourcePath];
     //创建带密码zip压缩包
     //BOOL isSuccess = [SSZipArchive createZipFileAtPath:path withContentsOfDirectory:folderPath withPassword:@"SSZipArchive.zip"];
     return isSuccess;

@@ -31,4 +31,7 @@
 //下载证据数据
 +(NSString*)downloadattachmentcontent;
 
+//上传评估数据
++(NSString*)uploadevaluatedata;
+
 @end

@@ -21,12 +21,12 @@ function alertLoginResult(args)
     alert(args);
 }
 
-function calculateFormula(dicFormula)
+function online_login()
 {
-    //alert("hello");
     var dicmsg ={
-        "operation":"calculateFomula",
+        "operation":"logonline",
         "param":""
     };
+    //将用户名、密码传递到OC代码中，调用接口进行登录
     window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
 }

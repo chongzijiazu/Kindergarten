@@ -143,6 +143,7 @@
 {
     //上传评估数据
     UploadViewController *uploadVC = [[UploadViewController alloc]init];
+    uploadVC.currentVC = self.currentVC;
     uploadVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;//关键
     //UIModalPresentationOverFullScreen全屏效果
     uploadVC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.625f];

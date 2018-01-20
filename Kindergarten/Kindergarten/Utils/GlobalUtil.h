@@ -19,4 +19,5 @@
 +(BOOL)deleteAllDocumentsFile;
 +(NSString*)getLoginInfoPath;
 +(NSString*)getFormulaXMLPathPath;
++(NSString*)getUploadPath;
 @end

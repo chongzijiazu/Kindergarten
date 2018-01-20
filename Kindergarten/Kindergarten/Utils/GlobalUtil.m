@@ -121,4 +121,18 @@
     return true;
 }
 
+//证据文件夹路径
++(NSString*)getUploadPath
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"Upload"];
+    NSFileManager* fileM = [NSFileManager defaultManager];
+    if (![fileM fileExistsAtPath:documentsDirectory])
+    {
+        [fileM createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return documentsDirectory;
+}
+
 @end

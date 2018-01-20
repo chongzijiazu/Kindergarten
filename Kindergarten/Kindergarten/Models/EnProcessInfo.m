@@ -37,7 +37,7 @@
 }
 +(NSArray *)allProcessInfoFromDB{
     //查询表中所有数据的SQL语句
-    NSString *SQL = @"SELECT fkQuestion,attachmentpath,answer FROM 'tbl_ass_process'";
+    NSString *SQL = @"SELECT fkQuestionid,attachmentpath,answer FROM 'tbl_ass_process'";
     //取出数据库用户表中所有数据
     NSArray *allProcessDictArr = [[SQLiteManager shareInstance] querySQL:SQL];
     NSLog(@"%@",allProcessDictArr);
@@ -165,6 +165,25 @@
     {
         return false;
     }
+}
+
+//将答案文件转化成json数据
++(NSString*)toJsonProcessInfo
+{
+    //查询表中所有数据的SQL语句
+    NSString *SQL = @"SELECT fkQuestionid,attachmentpath,answer FROM 'tbl_ass_process' WHERE LENGTH(answer)>0";
+    //取出数据库用户表中所有有答案的数据
+    NSArray *allProcessDictArr = [[SQLiteManager shareInstance] querySQL:SQL];
+    if(allProcessDictArr!=nil && allProcessDictArr.count>0)
+    {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:allProcessDictArr options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];
+        if (data == nil) {
+            return nil;
+        }
+        
+        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+    return nil;
 }
 
 @end
