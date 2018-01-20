@@ -222,5 +222,78 @@ function showQuesDesc(pkId)
     $('#tipModal').modal({show:true,backdrop:false,keyboard:false});
 }
 
+function loadBaseInfo(pageData,thirdlevelname){
+    //alert(thirdlevelname);
+    if(pageData){
+        var headData = pageData;
+        if(headData){
+            var kindergarteninfo = headData.kindergarteninfo;
+            //kindergarteninfo = eval("(" + kindergarteninfo + ")");
+            for (var key in kindergarteninfo){
+                $("#"+key).html(kindergarteninfo[key]);
+            }
+            calculateBaseInfo();
+            $("#school_name").html(kindergarteninfo.name);
+            $("#thirdlevelname").html(thirdlevelname);
+            if(headData.evaluateTimeInfo){
+                $("#eva_starttime").html(headData.evaluateTimeInfo.beginTime);
+                $("#eva_endtime").html(headData.evaluateTimeInfo.endTime);
+            }
+        }
+    }
+}
+
+function calculateBaseInfo(){
+    var infosum1 = 0;
+    if(!isNaN(parseInt($("#info15").html()))){
+        infosum1 += parseInt($("#info15").html());
+    }
+    if(!isNaN(parseInt($("#info16").html()))){
+        infosum1 += parseInt($("#info16").html());
+    }if(!isNaN(parseInt($("#info17").html()))){
+        infosum1 += parseInt($("#info17").html());
+    }if(!isNaN(parseInt($("#info18").html()))){
+        infosum1 += parseInt($("#info18").html());
+    }
+    $("#infosum1").html(infosum1);
+    
+    var infosum2 = 0;
+    if(!isNaN(parseInt($("#info20").html()))){
+        infosum2 += parseInt($("#info20").html());
+    }
+    if(!isNaN(parseInt($("#info21").html()))){
+        infosum2 += parseInt($("#info21").html());
+    }if(!isNaN(parseInt($("#info22").html()))){
+        infosum2 += parseInt($("#info22").html());
+    }if(!isNaN(parseInt($("#info23").html()))){
+        infosum2 += parseInt($("#info23").html());
+    }
+    $("#infosum2").html(infosum2);
+    
+    var infosum3 = 0;
+    if(!isNaN(parseInt($("#info25").html()))){
+        infosum3 += parseInt($("#info25").html());
+    }
+    if(!isNaN(parseInt($("#info26").html()))){
+        infosum3 += parseInt($("#info26").html());
+    }if(!isNaN(parseInt($("#info27").html()))){
+        infosum3 += parseInt($("#info27").html());
+    }if(!isNaN(parseInt($("#info28").html()))){
+        infosum3 += parseInt($("#info28").html());
+    }
+    if(!isNaN(parseInt($("#info29").html()))){
+        infosum3 += parseInt($("#info29").html());
+    }
+    $("#infosum3").html(infosum3);
+    
+    var infosum4 = 0;
+    if(!isNaN(parseFloat($("#info44").html()))){
+        infosum4 += parseFloat($("#info44").html());
+    }
+    if(!isNaN(parseFloat($("#info45").html()))){
+        infosum4 += parseFloat($("#info45").html());
+    }
+    $("#infosum4").html(infosum4);
+}
 
 

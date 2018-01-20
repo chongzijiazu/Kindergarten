@@ -189,7 +189,9 @@
             else if([operation isEqualToString:@"showQuestion"])
             {
                 //NSLog(@"%@",[dicMsg objectForKey:@"param"]);
-                self.evaluateController.currentLevelQuestionID =[dicMsg objectForKey:@"param"];//将三级指标id传递给答题页面
+                NSDictionary* dicParam =[dicMsg objectForKey:@"param"];
+                self.evaluateController.currentLevelQuestionID =[dicParam objectForKey:@"thirdlevelid"];//三级指标id传给页面
+            self.evaluateController.currentLevelQuestionName=[dicParam objectForKey:@"thirdlevelname"];
                 [self loadLocalHtmlByFilename:@"evaluate.html"];
             }
             else if([operation isEqualToString:@"uploadData"])

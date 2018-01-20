@@ -94,6 +94,13 @@
         NSLog(@"response: %@ error: %@", response, error);
     }];
     
+    //向页面发送基本信息（院所信息，评估开始结束时间）
+    strResult = [JFKGCommonController getBaseInfo];
+    scriptStr = [NSString stringWithFormat:@"loadPageData(%@);",strResult];
+    
+    [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+        NSLog(@"response: %@ error: %@", response, error);
+    }];
     
     //如果尚未计算，则计算公式表中的公式
     if(![ISFORMULACALCULATED isEqualToString:@"1"])

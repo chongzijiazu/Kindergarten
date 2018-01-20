@@ -256,9 +256,7 @@
        		</tr>
        		<tr>
        			<td>学校（机构）驻地城乡类型名称</td>
-       			<td>
-       				
-       			</td>
+       			<td id="seatkind"></td>
        			<td>学校（机构）驻地城乡类型代码</td>
        			<td id="seatcode"></td>
        		</tr>
@@ -268,7 +266,7 @@
        				
        			</td>
        			<td>学校（机构）办学类型代码</td>
-       			<td id="hodecode"></td>
+       			<td id="holdcode"></td>
        		</tr>
        		<tr>
        			<td>学校（机构）举办者名称</td>
@@ -400,7 +398,7 @@
            			<td id="info16"></td>
            			<td id="info17"></td>
            			<td id="info18"></td>
-           			<td id="bansum"></td>
+           			<td id="infosum1"></td>
            		</tr>
            	 </table>
 			  </div>
@@ -421,7 +419,7 @@
            			<td id="info21"></td>
            			<td id="info22"></td>
            			<td id="info23"></td>
-           			<td id="rensum"></td>
+           			<td id="infosum2"></td>
            		</tr>
            	</table>
 			  </div>
@@ -452,7 +450,7 @@
 							<td id="info27"></td>
 							<td id="info28"></td>
 							<td id="info29"></td>
-							<td id="zhigongsum"></td>
+							<td id="infosum3"></td>
 						</tr>
 				   </table>
 						
@@ -516,7 +514,7 @@
            		<tr>
            			<td id="info44"></td>
            			<td id="info45"></td>
-           			<td id="zhandimianjisum"></td>
+           			<td id="infosum4"></td>
            		</tr>
            	</table>
 			  </div>
@@ -564,60 +562,8 @@
 </div>-->
   
   <script>
-	function mergin(tableid,column)
-    {
-		var tr = document.getElementById(tableid);
-		for(var i=1; i<tr.rows.length; i++){
-			var f = i-1;
-			var up = tr.rows[f].cells[column];
-			var down = tr.rows[i].cells[column];
-			if(up.innerHTML == down.innerHTML) {
-				var rs = 1;
-				while(down && up.innerHTML == down.innerHTML){
-					down.style.display="none";
-					rs++;
-					i++;
-					if(i<tr.rows.length)
-						down = tr.rows[i].cells[column];
-					else
-						down = undefined;
-				}
-				up.rowSpan = rs;
-			}
-		}
-	}
 	
-    function updateStatus(finishLevel,finishedNum){
-        var content = '<img src="images/finish.png"></img>';
-        var totalnum = $("#"+finishLevel+"_status").attr("totalnum");
-        if(parseInt(totalnum) == parseInt(finishedNum)){
-            $("td[sid='"+finishLevel+"']").html(content);
-        }
-    }
-  
-  function initPage(){
-      //loadPageData();
-  }
-  function loadPageData(pageData){
-      if(pageData){
-          var headData = pageData.headerInfo;
-          if(headData){
-              var kindergarteninfo = headData.kindergarteninfo;
-              kindergarteninfo = eval("(" + kindergarteninfo + ")");
-              for (var key in kindergarteninfo){
-                  $("#"+key).html(kindergarteninfo[key]);
-              }
-              $("#school_name").html(kindergarteninfo.name);
-              if(headData.evaluateTimeInfo){
-                  $("#eva_starttime").html(headData.evaluateTimeInfo.beginTime);
-                  $("#eva_endtime").html(headData.evaluateTimeInfo.endTime);
-              }
-          }
-          var assLevelData = pageData.rowData;
-      }
-  }
-  initPage();
-  
+
   </script>
 </body>
 </html>

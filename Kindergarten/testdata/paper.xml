@@ -13,17 +13,17 @@
     <fkFormula>{teachertotal}</fkFormula>
     <questionnum>1</questionnum>
     <deleted>0</deleted>
-    <contenttip>蓝色提示字,教师数量：${expression1}(base64文本)</contenttip>
-    <content>题干内容001001001(base64文本)</content>
-    <description>题目解释内容{pic1.jpg}有图片示例(base64文本)</description>
+    <contenttip>6JOd6Imy5o+Q56S65a2XLOaVmeW4iOaVsOmHj++8miR75YWs5byPMX0oYmFzZTY05paH5pysKQ==</contenttip>
+    <content>6aKY5bmy5YaF5a65MDAxMDAxMDAxKGJhc2U2NOaWh+acrCk=</content>
+    <description>6aKY55uu6Kej6YeK5YaF5a65e3BpYzEuanBnfeacieWbvueJh+ekuuS+iyhiYXNlNjTmlofmnKwp</description>
     <options>
-      <option  optionvalue="A" weight="0.25" pkId="eeeeeeee1" fkQuestion="abcdefghigklmn001" content="选项A内容(base64文本)">
+      <option  optionvalue="A" weight="0.25" pkId="eeeeeeee1" fkQuestion="abcdefghigklmn001" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
       </option>
-      <option  optionvalue="B" weight="0.25" pkId="eeeeeeee2" fkQuestion="abcdefghigklmn001" content="选项A内容(base64文本)">
+      <option  optionvalue="B" weight="0.25" pkId="eeeeeeee2" fkQuestion="abcdefghigklmn001" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
       </option>
-      <option  optionvalue="C" weight="0.25" pkId="eeeeeeee3" fkQuestion="abcdefghigklmn001" content="选项A内容(base64文本)">
+      <option  optionvalue="C" weight="0.25" pkId="eeeeeeee3" fkQuestion="abcdefghigklmn001" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
       </option>
-      <option  optionvalue="D" weight="0.25" pkId="eeeeeeee4" fkQuestion="abcdefghigklmn001" content="选项A内容(base64文本)">
+      <option  optionvalue="D" weight="0.25" pkId="eeeeeeee4" fkQuestion="abcdefghigklmn001" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
       </option>
     </options>
   </question >
@@ -40,17 +40,17 @@
     <fkFormula>abcdefghijklmn002</fkFormula>
     <questionnum>2</questionnum>
     <deleted>0</deleted>
-    <contenttip>蓝色提示字,教师数量：${公式1}(base64文本)</contenttip>
-    <content>题干内容001001001(base64文本)</content>
-    <description>题目解释内容{pic1.jpg}有图片示例(base64文本)</description>
+    <contenttip>6JOd6Imy5o+Q56S65a2XLOaVmeW4iOaVsOmHj++8miR75YWs5byPMX0oYmFzZTY05paH5pysKQ==</contenttip>
+    <content>6aKY5bmy5YaF5a65MDAxMDAxMDAxKGJhc2U2NOaWh+acrCk=</content>
+    <description>6aKY55uu6Kej6YeK5YaF5a65e3BpYzEuanBnfeacieWbvueJh+ekuuS+iyhiYXNlNjTmlofmnKwp</description>
     <options>
-        <option  optionvalue="A" weight="0.25" pkId="ffffffff1" fkQuestion="abcdefghigklmn002" content="选项A内容(base64文本)">
+        <option  optionvalue="A" weight="0.25" pkId="ffffffff1" fkQuestion="abcdefghigklmn002" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
         </option>
-        <option  optionvalue="B" weight="0.25" pkId="ffffffff2" fkQuestion="abcdefghigklmn002" content="选项A内容(base64文本)">
+        <option  optionvalue="B" weight="0.25" pkId="ffffffff2" fkQuestion="abcdefghigklmn002" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
         </option>
-        <option  optionvalue="C" weight="0.25" pkId="ffffffff3" fkQuestion="abcdefghigklmn002" content="选项A内容(base64文本)">
+        <option  optionvalue="C" weight="0.25" pkId="ffffffff3" fkQuestion="abcdefghigklmn002" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
         </option>
-        <option  optionvalue="D" weight="0.25" pkId="ffffffff4" fkQuestion="abcdefghigklmn002" content="选项A内容(base64文本)">
+        <option  optionvalue="D" weight="0.25" pkId="ffffffff4" fkQuestion="abcdefghigklmn002" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
         </option>
     </options>
   </question >
@@ -67,17 +67,17 @@
     <fkFormula>{teachertotal}</fkFormula>
     <questionnum>3</questionnum>
     <deleted>0</deleted>
-    <contenttip>蓝色提示字,教师数量：${公式1}(base64文本)</contenttip>
-    <content>题干内容001001002(base64文本)</content>
-    <description>题目解释内容{pic1.jpg}有图片示例(base64文本)</description>
+    <contenttip>6JOd6Imy5o+Q56S65a2XLOaVmeW4iOaVsOmHj++8miR75YWs5byPMX0oYmFzZTY05paH5pysKQ==</contenttip>
+    <content>6aKY5bmy5YaF5a65MDAxMDAxMDAxKGJhc2U2NOaWh+acrCk=</content>
+    <description>6aKY55uu6Kej6YeK5YaF5a65e3BpYzEuanBnfeacieWbvueJh+ekuuS+iyhiYXNlNjTmlofmnKwp</description>
     <options>
-        <option  optionvalue="A" weight="0.25" pkId="aaaaaaaa1" fkQuestion="abcdefghigklmn003" content="选项A内容(base64文本)">
+        <option  optionvalue="A" weight="0.25" pkId="aaaaaaaa1" fkQuestion="abcdefghigklmn003" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
         </option>
-        <option  optionvalue="B" weight="0.25" pkId="aaaaaaaa2" fkQuestion="abcdefghigklmn003" content="选项A内容(base64文本)">
+        <option  optionvalue="B" weight="0.25" pkId="aaaaaaaa2" fkQuestion="abcdefghigklmn003" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
         </option>
-        <option  optionvalue="C" weight="0.25" pkId="aaaaaaaa3" fkQuestion="abcdefghigklmn003" content="选项A内容(base64文本)">
+        <option  optionvalue="C" weight="0.25" pkId="aaaaaaaa3" fkQuestion="abcdefghigklmn003" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
         </option>
-        <option  optionvalue="D" weight="0.25" pkId="aaaaaaaa4" fkQuestion="abcdefghigklmn003" content="选项A内容(base64文本)">
+        <option  optionvalue="D" weight="0.25" pkId="aaaaaaaa4" fkQuestion="abcdefghigklmn003" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
         </option>
     </options>
   </question >
@@ -94,17 +94,17 @@
     <fkFormula>{teachertotal}</fkFormula>
     <questionnum>4</questionnum>
     <deleted>0</deleted>
-    <contenttip>蓝色提示字,教师数量：${公式1}(base64文本)</contenttip>
-    <content>题干内容001001002(base64文本)</content>
-    <description>题目解释内容{pic1.jpg}有图片示例(base64文本)</description>
+    <contenttip>6JOd6Imy5o+Q56S65a2XLOaVmeW4iOaVsOmHj++8miR75YWs5byPMX0oYmFzZTY05paH5pysKQ==</contenttip>
+    <content>6aKY5bmy5YaF5a65MDAxMDAxMDAxKGJhc2U2NOaWh+acrCk=</content>
+    <description>6aKY55uu6Kej6YeK5YaF5a65e3BpYzEuanBnfeacieWbvueJh+ekuuS+iyhiYXNlNjTmlofmnKwp</description>
     <options>
-        <option  optionvalue="A" weight="0.25" pkId="bbbbbbbb1" fkQuestion="abcdefghigklmn004" content="选项A内容(base64文本)">
+        <option  optionvalue="A" weight="0.25" pkId="bbbbbbbb1" fkQuestion="abcdefghigklmn004" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
         </option>
-        <option  optionvalue="B" weight="0.25" pkId="bbbbbbbb2" fkQuestion="abcdefghigklmn004" content="选项A内容(base64文本)">
+        <option  optionvalue="B" weight="0.25" pkId="bbbbbbbb2" fkQuestion="abcdefghigklmn004" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
         </option>
-        <option  optionvalue="C" weight="0.25" pkId="bbbbbbbb3" fkQuestion="abcdefghigklmn004" content="选项A内容(base64文本)">
+        <option  optionvalue="C" weight="0.25" pkId="bbbbbbbb3" fkQuestion="abcdefghigklmn004" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
         </option>
-        <option  optionvalue="D" weight="0.25" pkId="bbbbbbbb4" fkQuestion="abcdefghigklmn004" content="选项A内容(base64文本)">
+        <option  optionvalue="D" weight="0.25" pkId="bbbbbbbb4" fkQuestion="abcdefghigklmn004" content="6YCJ6aG5QeWGheWuuShiYXNlNjTmlofmnKwp">
         </option>
     </options>
   </question >

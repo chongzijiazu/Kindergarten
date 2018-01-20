@@ -185,14 +185,14 @@
 						<div style="font-size:18px;color:#FF9F4B;">
 							名称：
 						</div>
-						<div style="font-size:18px;background-color:#FFE4CC;padding:5px;border:1px solid #FF9F4B;border-radius:10px;"></div>
+						<div style="font-size:18px;background-color:#FFE4CC;padding:5px;border:1px solid #FF9F4B;border-radius:10px;"id="school_name"></div>
 					</td>
 					<td style="width:68px;vertical-align:middle"><img src="images/asslevel.png"></img> </td>
 					<td style="vertical-align:middle;">
 						<div style="font-size:18px;color:#73C8F7;">
 							指标：
 						</div>
-						<div style="font-size:18px;background-color:#E2F7FF;padding:5px;border:1px solid #73C8F7;border-radius:10px;"></div></td>
+						<div style="font-size:18px;background-color:#E2F7FF;padding:5px;border:1px solid #73C8F7;border-radius:10px;" id="thirdlevelname"></div></td>
 					<td style="width:60px;vertical-align:middle">
 						<a herf="#" onclick="goback();"><img src="images/back.png"></img></a>
 					</td>
@@ -258,9 +258,7 @@
        		</tr>
        		<tr>
        			<td>学校（机构）驻地城乡类型名称</td>
-       			<td>
-       				
-       			</td>
+       			<td id="seatkind"></td>
        			<td>学校（机构）驻地城乡类型代码</td>
        			<td id="seatcode"></td>
        		</tr>
@@ -270,7 +268,7 @@
        				
        			</td>
        			<td>学校（机构）办学类型代码</td>
-       			<td id="hodecode"></td>
+       			<td id="holdcode"></td>
        		</tr>
        		<tr>
        			<td>学校（机构）举办者名称</td>
@@ -402,7 +400,7 @@
            			<td id="info16"></td>
            			<td id="info17"></td>
            			<td id="info18"></td>
-           			<td id="bansum"></td>
+           			<td id="infosum1"></td>
            		</tr>
            	 </table>
 			  </div>
@@ -423,7 +421,7 @@
            			<td id="info21"></td>
            			<td id="info22"></td>
            			<td id="info23"></td>
-           			<td id="rensum"></td>
+           			<td id="infosum2"></td>
            		</tr>
            	</table>
 			  </div>
@@ -454,7 +452,7 @@
 							<td id="info27"></td>
 							<td id="info28"></td>
 							<td id="info29"></td>
-							<td id="zhigongsum"></td>
+							<td id="infosum3"></td>
 						</tr>
 				   </table>
 						
@@ -518,7 +516,7 @@
            		<tr>
            			<td id="info44"></td>
            			<td id="info45"></td>
-           			<td id="zhandimianjisum"></td>
+           			<td id="infosum4"></td>
            		</tr>
            	</table>
 			  </div>
@@ -598,38 +596,8 @@
   
   
   <script>
-	function initPage(){
-		loadBaseInfo();
-	}
-	function loadBaseInfo(){
-		if(pageData){
-			var headData = pageData.headerInfo;
-			if(headData){
-				var kindergarteninfo = headData.kindergarteninfo;
-				kindergarteninfo = eval("(" + kindergarteninfo + ")");
-				for (var key in kindergarteninfo){
-					$("#"+key).html(kindergarteninfo[key]);
-				}
-				$("#school_name").html(kindergarteninfo.name);
-				if(headData.evaluateTimeInfo){
-					$("#eva_starttime").html(headData.evaluateTimeInfo.beginTime);
-					$("#eva_endtime").html(headData.evaluateTimeInfo.endTime);
-				}
-			}
-		}
-	}
-	//值转换
-  	function colorRGB2Hex(color) {
-	    var rgb = color.split(',');
-	    var r = parseInt(rgb[0].split('(')[1]);
-	    var g = parseInt(rgb[1]);
-	    var b = parseInt(rgb[2].split(')')[0]);
-	 
-	    var hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-	    return hex;
-	 }
+
 	
-	initPage();
   </script>
 </body>
 </html>

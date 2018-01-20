@@ -15,6 +15,7 @@
 #import "EnPaper.h"
 #import "SQLiteManager.h"
 #import "EnAproveItem.h"
+#import "JFKGCommonController.h"
 
 @interface JFKGEvaluateController()
 {
@@ -65,7 +66,13 @@
                 NSLog(@"response: %@ error: %@", response, error);
             }];
             
-            //处理计算题表达式信息
+            //向页面发送基本信息（院所信息，评估开始结束时间）
+            NSString* strResult = [JFKGCommonController getBaseInfo];
+            scriptStr = [NSString stringWithFormat:@"loadBaseInfo(%@,'%@');",strResult,_currentLevelQuestionName];
+            
+            [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
             
         }
     }

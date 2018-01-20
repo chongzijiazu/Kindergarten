@@ -16,5 +16,6 @@
 -(void)logout;
 -(BOOL)processFormulaInfo;
 +(BOOL)saveFormulaValue:(NSDictionary*)dicFormula;
++(NSString*)getBaseInfo;
 
 @end
