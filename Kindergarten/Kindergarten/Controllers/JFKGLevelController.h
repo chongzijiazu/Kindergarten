@@ -23,5 +23,6 @@
 -(void)uploadData;
 -(NSString*)getPreThirdLevelIdByCurrentThirdLevelId:(NSString*)currentThirdLevelId;
 -(NSString*)getNextThirdLevelIdByCurrentThirdLevelId:(NSString*)currentThirdLevelId;
+-(BOOL)saveFormulaValue:(NSDictionary*)dicFormula;
 
 @end

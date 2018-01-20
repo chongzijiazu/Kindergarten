@@ -28,12 +28,26 @@
     return allSchoolDictArr;
 }
 
-//是否包含公式中的元素
--(NSString*)replaceFormulaElement:(NSString*)fromulaElement
++(NSDictionary*)loadSchoolInfoToDBFromFile
 {
-    //NSLog(@"%@",self.info15)
-    return @"";
+    NSString* loginfoPath = [GlobalUtil getLoginInfoPath];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:loginfoPath]) {
+        return false;
+    }
+    else
+    {
+        NSString* strLoginfo = [NSString stringWithContentsOfFile:loginfoPath encoding:NSUTF8StringEncoding error:nil];
+        NSDictionary* dicLoginfo = [GlobalUtil dictionaryWithJsonString:strLoginfo];
+        //NSLog(@"%@",[dicLoginfo objectForKey:@"idcode"]);
+        if (dicLoginfo!=nil && dicLoginfo.count>0) {
+            return dicLoginfo;
+        }
+        else
+        {
+            return nil;
+        }
+    }
+    return nil;
 }
-
 
 @end

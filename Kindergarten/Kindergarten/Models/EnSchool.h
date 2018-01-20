@@ -83,7 +83,7 @@
 @property(nonatomic,assign)float info69;
 @property(nonatomic,assign)float info70;
 
--(NSString*)replaceFormulaElement:(NSString*)fromulaElement;
 +(NSArray *)allSchoolFromDB;
++(NSDictionary*)loadSchoolInfoToDBFromFile;
 
 @end

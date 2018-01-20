@@ -14,6 +14,7 @@
     NSString* _fkQuestion;
     NSString* _optionValue;
     NSString* _pkId;
+    int disabled;
     float weight;
 }
 
@@ -22,6 +23,7 @@
 @property(nonatomic,copy)NSString* optionValue;
 @property(nonatomic,copy)NSString* pkId;
 @property(nonatomic,assign)float weight;
+@property(nonatomic,assign)int disabled;
 
 -(id)initWithContent:(NSString*)mContent andOptionValue:(NSString*)mOptionValue andWeight:(int)mweight andpkId:(NSString*)mpkId andfkQuestion:(NSString*)mfkQuestion;
 

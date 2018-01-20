@@ -24,6 +24,14 @@
     NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO 'tbl_formula' (pkId,name,expression,value) VALUES ('%@','%@','%@','%@');",self.pkId,self.name,self.expression,self.value];
     return [[SQLiteManager shareInstance] execSQL:insertSQL];
 }
+
+-(BOOL)updateValueToDB
+{
+    //更新对象的SQL语句
+    NSString *updateSQL = [NSString stringWithFormat:@"UPDATE  'tbl_formula' SET value='%@' WHERE pkId='%@';",self.value,self.pkId];
+    return [[SQLiteManager shareInstance] execSQL:updateSQL];
+}
+
 +(NSArray *)allFormulaFromDB{
     //查询表中所有数据的SQL语句
     NSString *SQL = @"SELECT pkId,name,expression,value FROM 'tbl_formula'";
@@ -38,7 +46,7 @@
     return modelArrM;
 }
 
-//计算表达式结果，根据表达式
+//计算表达式结果，根据表达式,院校信息
 +(NSDictionary*)translateExpression:(NSArray*)formulaArra bySchoolInfo:(NSDictionary*)dicSchool
 {
     EnFormula* f;
@@ -68,7 +76,7 @@
                     end = (int)result.range.location+(int)result.range.length;
                 }
                 newStr = [newStr stringByAppendingString:[f.expression substringWithRange:NSMakeRange(end, f.expression.length-end)]];
-                f.expression = newStr;
+                f.expression = [Base64Util Encode:newStr];
             }
         }
     }
@@ -104,6 +112,58 @@
     }
     
     return true;
+}
+
+//翻译字符串中的表达式，根据表达式的值
++(NSString*)translateDesc:(NSString*)strDesc
+{
+    NSDictionary* dicFormula = [self getDicFormulaForExpress];
+    NSString *pattern = @"\\{([^\\{\\}]+)\\}";//创建正则表达式，匹配表达式中的变量
+    NSRegularExpression *regular = [[NSRegularExpression alloc] initWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
+    //利用规则测试字符串获取匹配结果
+    NSArray *results = [regular matchesInString:strDesc options:0 range:NSMakeRange(0, strDesc.length)];
+    //NSLog(@"%@",results);
+    NSString* newStr = [[NSString alloc] init];
+    int end=0;
+    for (NSTextCheckingResult *result in results)
+    {
+        newStr = [newStr stringByAppendingString:[strDesc substringWithRange:NSMakeRange(end, result.range.location-end)]];
+        if ([dicFormula.allKeys containsObject:[strDesc substringWithRange:result.range]])
+        {
+            newStr = [newStr stringByAppendingString:dicFormula[[strDesc substringWithRange:result.range]]];
+        }
+        else
+        {
+            newStr = [newStr stringByAppendingString:[strDesc substringWithRange:result.range]];
+        }
+        end = (int)result.range.location+(int)result.range.length;
+    }
+    return newStr = [newStr stringByAppendingString:[strDesc substringWithRange:NSMakeRange(end, strDesc.length-end)]];
+}
+
++(NSDictionary*)getDicFormulaForExpress
+{
+    NSArray* formulaArr = [self allFormulaFromDB];
+    EnFormula* formula;
+    NSMutableDictionary* dicRet = [[NSMutableDictionary alloc]init];
+    for (int i=0; i<formulaArr.count; i++) {
+        formula = (EnFormula*)formulaArr[i];
+        [dicRet setObject:formula.value forKey:formula.name];
+    }
+    return dicRet;
+}
+
++(NSString*)getValueByPKID:(NSString*)mPKID
+{
+    NSArray* formulaArr = [self allFormulaFromDB];
+    EnFormula* formula;
+    for (int i=0; i<formulaArr.count; i++) {
+        formula = (EnFormula*)formulaArr[i];
+        if ([formula.pkId isEqualToString:mPKID]) {
+            return formula.value;
+        }
+    }
+    return nil;
 }
 
 @end

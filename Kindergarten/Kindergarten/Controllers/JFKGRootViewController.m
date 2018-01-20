@@ -197,6 +197,16 @@
                 //NSLog(@"%@",[dicMsg objectForKey:@"param"]);
                 [self.levelController uploadData];
             }
+            else if([operation isEqualToString:@"calculateFormula"])
+            {
+                NSDictionary* dicParam = [dicMsg objectForKey:@"param"];
+                //NSLog(@"%@",dicParam);
+                if([self.levelController saveFormulaValue:dicParam])
+                {
+                    //将公式计算标志改为，已计算（避免重复计算）
+                    [userDefault setObject:@"1" forKey:@"isFormulaCalculated"];
+                }
+            }
         }
         else if ([htmlname isEqualToString:@"evaluate.html"])
         {

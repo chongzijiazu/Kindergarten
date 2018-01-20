@@ -9,11 +9,11 @@
     <weight>0.5</weight>
     <veto>0</veto>
     <appendprove>1</appendprove>
-    <calculated>1</calculated>
+    <calculated>0</calculated>
     <fkFormula>{teachertotal}</fkFormula>
     <questionnum>1</questionnum>
     <deleted>0</deleted>
-    <contenttip>蓝色提示字,教师数量：${公式1}(base64文本)</contenttip>
+    <contenttip>蓝色提示字,教师数量：${expression1}(base64文本)</contenttip>
     <content>题干内容001001001(base64文本)</content>
     <description>题目解释内容{pic1.jpg}有图片示例(base64文本)</description>
     <options>
@@ -37,7 +37,7 @@
     <veto>1</veto>
     <appendprove>0</appendprove>
     <calculated>1</calculated>
-    <fkFormula>{teachertotal}</fkFormula>
+    <fkFormula>abcdefghijklmn002</fkFormula>
     <questionnum>2</questionnum>
     <deleted>0</deleted>
     <contenttip>蓝色提示字,教师数量：${公式1}(base64文本)</contenttip>
@@ -63,7 +63,7 @@
     <weight>0.5</weight>
     <veto>1</veto>
     <appendprove>1</appendprove>
-    <calculated>1</calculated >
+    <calculated>0</calculated >
     <fkFormula>{teachertotal}</fkFormula>
     <questionnum>3</questionnum>
     <deleted>0</deleted>
@@ -90,7 +90,7 @@
     <weight>0.5</weight>
     <veto>1</veto>
     <appendprove>1</appendprove>
-    <calculated>1</calculated>
+    <calculated>0</calculated>
     <fkFormula>{teachertotal}</fkFormula>
     <questionnum>4</questionnum>
     <deleted>0</deleted>

@@ -27,3 +27,4 @@
 
 #define TICKETID ([NSString stringWithFormat:@"%@",[userDefault objectForKey:@"ticketid"]])
 #define ISDOWNLOADSUCCESS ([NSString stringWithFormat:@"%@",[userDefault objectForKey:@"isDownloadSuccess"]])
+#define ISFORMULACALCULATED ([NSString stringWithFormat:@"%@",[userDefault objectForKey:@"isFormulaCalculated"]])

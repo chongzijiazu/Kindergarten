@@ -18,5 +18,9 @@
 +(BOOL)loadFormulaXMLToDB;
 +(NSArray *)allFormulaFromDB;
 +(NSDictionary*)translateExpression:(NSArray*)formulaArra bySchoolInfo:(NSDictionary*)dicSchool;
+-(BOOL)insertSelfToDB;
+-(BOOL)updateValueToDB;
++(NSString*)translateDesc:(NSString*)strDesc;
++(NSString*)getValueByPKID:(NSString*)mPKID;
 
 @end

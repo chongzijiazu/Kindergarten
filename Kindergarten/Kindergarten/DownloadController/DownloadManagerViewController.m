@@ -14,6 +14,7 @@
 #import "JFKGProcessInfoController.h"
 #import "SQLiteManager.h"
 #import "EnFormula.h"
+#import "EnSchool.h"
 
 @interface DownloadManagerViewController ()
 
@@ -29,7 +30,7 @@
 //测试用
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [GlobalUtil deleteAllDocumentsFile];//下载前清空数据（进入下载就代表重开始）
+    [self deleteExistDownloadFile];//下载前清空数据清空下载数据
     if([self processDownloadData])//处理下载完的数据
     {
         //下载及加载数据完成，向页面发送成功消息
@@ -46,7 +47,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    //[GlobalUtil deleteAllDocumentsFile];//下载前清空数据（进入下载就代表重开始）
+    //[self deleteExistDownloadFile];//下载前清空数据清空下载数据
     //[self downloadEvalutionData]; //下载评估资源
     self.downloadProgress.progress=0.5;//测试用
 }
@@ -163,12 +164,12 @@
     }
     
     //处理试卷数据，包括试卷包的解压和生成按三级指标分类的html
-    JFKGEvaluateController* evaluateC = [[JFKGEvaluateController alloc] init];
+    /*JFKGEvaluateController* evaluateC = [[JFKGEvaluateController alloc] init];
     //生成按三级指标分类的html文件（调试，尚无解压过程）
     if(![evaluateC makeLevelHTMLByPaper])
     {
         return false;
-    }
+    }*/
     
     //处理评估指标体系，解压评估指标压缩包，生成评估指标所需的html格式文件
     JFKGLevelController* levelC = [[JFKGLevelController alloc] init];

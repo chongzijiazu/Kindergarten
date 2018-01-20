@@ -16,6 +16,7 @@
 @synthesize pkId=_pkId;
 @synthesize fkQuestion=_fkQuestion;
 @synthesize weight;
+@synthesize disabled;
 
 -(id)initWithContent:(NSString*)mContent andOptionValue:(NSString*)mOptionValue andWeight:(int)mweight andpkId:(NSString*)mpkId andfkQuestion:(NSString*)mfkQuestion
 {
@@ -71,7 +72,15 @@ A.园舍独立，产权清晰，规划科学，布局合理，民办园自有房
 //按html格式描述选项
 -(NSString*)description
 {
-    NSString* optionHtml = [NSString stringWithFormat:@"<label class=\"radio-inline\"><input type=\"radio\" name=\"%@\" id=\"%@\" value=\"%@\" onclick=\"optionClicked(this)\"/>%@.%@</label><br></br>",self.fkQuestion,self.pkId,self.optionValue,self.optionValue,self.content];
+    NSString* optionHtml;
+    if (self.disabled==1) {
+        optionHtml = [NSString stringWithFormat:@"<label class=\"radio-inline\"><input disabled readonly=\"true\" type=\"radio\" name=\"%@\" id=\"%@\" value=\"%@\" onclick=\"optionClicked(this)\"/>%@.%@</label><br></br>",self.fkQuestion,self.pkId,self.optionValue,self.optionValue,self.content];
+    }
+    else
+    {
+        optionHtml = [NSString stringWithFormat:@"<label class=\"radio-inline\"><input type=\"radio\" name=\"%@\" id=\"%@\" value=\"%@\" onclick=\"optionClicked(this)\"/>%@.%@</label><br></br>",self.fkQuestion,self.pkId,self.optionValue,self.optionValue,self.content];
+    }
+    
     return optionHtml;
 }
 

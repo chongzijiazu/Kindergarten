@@ -52,7 +52,7 @@
 
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString
 {
-    NSLog(@"%@",jsonString);
+    //NSLog(@"%@",jsonString);
     if (jsonString == nil) {
         return nil;
     }

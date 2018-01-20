@@ -65,6 +65,7 @@
                 NSLog(@"response: %@ error: %@", response, error);
             }];
             
+            //处理计算题表达式信息
             
         }
     }
@@ -217,6 +218,10 @@
 -(NSString*)readLevelQuestionByLevelId:(NSString*)levelid
 {
     NSString* levelQPath = [self.levelHTMLPath stringByAppendingPathComponent:[levelid stringByAppendingString:@".txt"]];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:levelQPath])
+    {
+        [self makeLevelHTMLByPaper];
+    }
     NSData* qData = [[NSFileManager defaultManager] contentsAtPath:levelQPath];
     return [[NSString alloc] initWithData:qData encoding:NSUTF8StringEncoding];
 }

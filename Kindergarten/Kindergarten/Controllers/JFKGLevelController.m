@@ -10,6 +10,8 @@
 #import "JFKGRootViewController.h"
 #import "LevelTableCreator.h"
 #import "UploadViewController.h"
+#import "JFKGCommonController.h"
+#import "SQLiteManager.h"
 
 @interface JFKGLevelController()
 {
@@ -83,6 +85,51 @@
             NSLog(@"response: %@ error: %@", response, error);
         }];
     }
+    
+    //计算三级指标完成状态，并刷新
+    NSString* strResult = [self getFinishState];
+    NSString* scriptStr = [NSString stringWithFormat:@"refreshFinished(%@);",strResult];
+    
+    [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+        NSLog(@"response: %@ error: %@", response, error);
+    }];
+    
+    
+    //如果尚未计算，则计算公式表中的公式
+    if(![ISFORMULACALCULATED isEqualToString:@"1"])
+    {
+        [self calculateFormula];
+    }
+}
+
+//计算按三级指标的完成状态
+-(NSString*)getFinishState
+{
+    NSString* strSql=@"SELECT question.fkLevel thirdlevelid, COUNT(question.fkLevel)-SUM(length(answer)) result FROM tbl_ass_quesstion question LEFT JOIN tbl_ass_process process ON question.pkId=process.fkQuestionid GROUP BY question.fkLevel";
+    NSArray* resultArray = [[SQLiteManager shareInstance] querySQL:strSql];
+    if (resultArray!=nil && resultArray.count>0) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:resultArray options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];
+        if (data == nil) {
+            return nil;
+        }
+        
+        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+    return nil;
+}
+
+//计算表达式的值
+-(void)calculateFormula
+{
+    JFKGCommonController* commonC = [[JFKGCommonController alloc]init];
+    commonC.webView=self.webView;
+    [commonC processFormulaInfo];
+}
+
+//保存表达式的计算结果
+-(BOOL)saveFormulaValue:(NSDictionary*)dicFormula
+{
+    return [JFKGCommonController saveFormulaValue:dicFormula];
 }
 
 -(void)uploadData

@@ -10,6 +10,7 @@
 #import "EnOption.h"
 #import "SQLiteManager.h"
 #import "EnProcessInfo.h"
+#import "EnFormula.h"
 
 @implementation EnQuestion
 
@@ -113,10 +114,28 @@
 {
     NSString* optionHtml=@"";
     EnOption* option;
-    for (int i=0; i<self.optionArray.count; i++) {
-        option = (EnOption*)self.optionArray[i];
-        optionHtml=[optionHtml stringByAppendingString:[option description]];
+    if (self.calculated) {
+        NSString* ans = [EnFormula getValueByPKID:self.fkFormula];
+        if (ans!=nil&&([@"ABCD" containsString:ans])) {
+            NSDictionary *dic1 = [NSDictionary dictionaryWithObject:ans forKey:self.pkId];
+            [EnProcessInfo saveQuestionAnswer:dic1];
+        }
+        
+        
+        for (int i=0; i<self.optionArray.count; i++) {
+            option = (EnOption*)self.optionArray[i];
+            option.disabled=1;
+            optionHtml=[optionHtml stringByAppendingString:[option description]];
+        }
     }
+    else
+    {
+        for (int i=0; i<self.optionArray.count; i++) {
+            option = (EnOption*)self.optionArray[i];
+            optionHtml=[optionHtml stringByAppendingString:[option description]];
+        }
+    }
+    
     
     //是否关键指标
     NSString* strVeto=@"";
@@ -124,14 +143,15 @@
         strVeto=@"none";
     }
     /*//是否完成
-    NSString* strFinish=@"";
-    BOOL isFinished = [EnProcessInfo isFinished:self.pkId];
-    if(!isFinished)
-    {
-        strFinish=@"none";
-    }*/
+     NSString* strFinish=@"";
+     BOOL isFinished = [EnProcessInfo isFinished:self.pkId];
+     if(!isFinished)
+     {
+     strFinish=@"none";
+     }*/
+    NSString* strTip = [EnFormula translateDesc:self.contenttip];
     
-    NSString* questionHtml = [NSString stringWithFormat:@"<div style=\"font-size: 18px;\">%d.%@<span style=\"color: red; font-weight: bold;display:%@\">（关键指标）</span><img src=\"images/question.png\" /><a id=\"%@_desclink\" onclick=\"showQuesDesc(this.id)\" href=\"#\"><span>查看题目解释<span><span sdesc=\"%@\" id=\"%@_desc\" /></a> <font style=\"display:none; font-size: 18px; border: 2px solid orange; padding: 4px;border-radius: 4px; font-weight: bold;\" color=\"orange\" id=\"quesFinish_%@\">已完成</font></div><hr/><div id=\"%@\">%@</div><div class=\"questips\"><img src=\"images/result.png\" /><span>%@</span></div>",self.seq,self.content,strVeto,self.pkId,self.desc,self.pkId,self.pkId,self.pkId,optionHtml,self.contenttip];
+    NSString* questionHtml = [NSString stringWithFormat:@"<div style=\"font-size: 18px;\">%d.%@<span style=\"color: red; font-weight: bold;display:%@\">（关键指标）</span><img src=\"images/question.png\" /><a id=\"%@_desclink\" onclick=\"showQuesDesc(this.id)\" href=\"#\"><span>查看题目解释<span><span sdesc=\"%@\" id=\"%@_desc\" /></a> <font style=\"display:none; font-size: 18px; border: 2px solid orange; padding: 4px;border-radius: 4px; font-weight: bold;\" color=\"orange\" id=\"quesFinish_%@\">已完成</font></div><hr/><div id=\"%@\">%@</div><div class=\"questips\"><img src=\"images/result.png\" /><span>%@</span></div>",self.seq,self.content,strVeto,self.pkId,self.desc,self.pkId,self.pkId,self.pkId,optionHtml,strTip];
     return questionHtml;
 }
 

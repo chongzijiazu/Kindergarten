@@ -58,7 +58,9 @@
     
     //模拟登录，测试用
     [userDefault setObject:@"111111" forKey:@"ticketid"];
-    [self saveLoginInfoToDocument:@""];
+    NSString* loginfoPath = [[NSBundle mainBundle] pathForResource:@"schoolinfo" ofType:@".txt"];
+    NSString* strLoginfo = [NSString stringWithContentsOfFile:loginfoPath encoding:NSUTF8StringEncoding error:nil];
+    [self saveLoginInfoToDocument:strLoginfo];
     DownloadManagerViewController* downloadManagerVC = [[DownloadManagerViewController alloc] init];
     downloadManagerVC.delegate = self;
     downloadManagerVC.webView = self.webView;
