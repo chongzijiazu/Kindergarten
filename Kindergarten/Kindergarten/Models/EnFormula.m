@@ -94,6 +94,7 @@
 
 +(BOOL)loadFormulaXMLToDB
 {
+    
     //NSString* xmlPath = [GlobalUtil getFormulaXMLPathPath];
     NSString* xmlPath = [[NSBundle mainBundle] pathForResource:@"formula" ofType:@"xml"];
     XMLDictionaryParser* parser = [[XMLDictionaryParser alloc] init];

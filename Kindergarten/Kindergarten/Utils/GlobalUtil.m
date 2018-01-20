@@ -121,7 +121,7 @@
     return true;
 }
 
-//证据文件夹路径
+//上传文件夹路径
 +(NSString*)getUploadPath
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
