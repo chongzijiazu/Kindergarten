@@ -125,7 +125,7 @@
         for (int i=0; i<QAArray.count; i++)
         {
             NSMutableDictionary* dicQuesAprove = [[NSMutableDictionary alloc]init];
-            strAproveItems=@"";
+            strAproveItems=@"<tr>";
             strAttachments = QAArray[i][@"attachments"];
             if (strAttachments.length>0)//该题已有证据
             {
@@ -134,12 +134,19 @@
                 {
                     tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:array[j] andType:1 andFKQuestionid:QAArray[i][@"questionid"]];
                     strAproveItems= [strAproveItems stringByAppendingString:[tmpAproveItem description]];
+                    if ((j+1)%4==0) {
+                        strAproveItems = [strAproveItems stringByAppendingString:@"</tr><tr>"];
+                    }
+                    if ((j+1)==array.count && array.count>=self.maxAproveNum) {//最后一个元素
+                        strAproveItems = [strAproveItems substringToIndex:strAproveItems.length-4];
+                    }
                 }
                 if (array.count<self.maxAproveNum)
                 {
                     NSString* aproveItemId = [self getAproveItemIdByAttachments:strAttachments andSeqLevel:QAArray[i][@"seqlevel"]];
                     tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:aproveItemId andType:0 andFKQuestionid:QAArray[i][@"questionid"]];
                     strAproveItems= [strAproveItems stringByAppendingString:[tmpAproveItem description]];
+                    strAproveItems = [strAproveItems stringByAppendingString:@"</tr>"];
                 }
                 [dicQuesAprove setObject:strAproveItems forKey:@"aproveitem"];
                 [dicQuesAprove setObject:[QAArray[i][@"questionid"] stringByAppendingString:@"_aprove"] forKey:@"aproveid"];
