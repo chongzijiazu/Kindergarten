@@ -15,7 +15,7 @@
 
 -(void)loginByUsername:(NSString*)username andPassword:(NSString*)password
 {
-    /*//添加用户名、密码验证（待完善）
+    //添加用户名、密码验证（待完善）
     if (username==nil || password==nil || username.length==0 || password.length==0) {
         //提示用户名密码不能为空
         [self.webView evaluateJavaScript:@"alertLoginResult('用户名密码不能为空');" completionHandler:^(id _Nullable response, NSError * _Nullable error) {
@@ -40,6 +40,8 @@
              //NSLog(@"%@",dicResponse);
              [userDefault setObject:dicResponse[@"ticketid"] forKey:@"ticketid"];
               //登录成功，则保存登录信息（将院所，系统参数先保存到本地文件中，加载数据的时候再做处理）
+             NSString* strLoginfo = [GlobalUtil jsonStringWithObject:dicResponse];
+             [self saveLoginInfoToDocument:strLoginfo];
      
               DownloadManagerViewController* downloadManagerVC = [[DownloadManagerViewController alloc] init];
               downloadManagerVC.delegate = self;
@@ -54,9 +56,9 @@
          }
      }failure:^(NSError * _Nonnull error) {
          
-     }];*/
+     }];
     
-    //模拟登录，测试用
+    /*//模拟登录，测试用
     [userDefault setObject:@"111111" forKey:@"ticketid"];
     NSString* loginfoPath = [[NSBundle mainBundle] pathForResource:@"schoolinfo" ofType:@".txt"];
     NSString* strLoginfo = [NSString stringWithContentsOfFile:loginfoPath encoding:NSUTF8StringEncoding error:nil];
@@ -64,7 +66,7 @@
     DownloadManagerViewController* downloadManagerVC = [[DownloadManagerViewController alloc] init];
     downloadManagerVC.delegate = self;
     downloadManagerVC.webView = self.webView;
-    [self.currentVC presentViewController:downloadManagerVC animated:YES completion:nil];
+    [self.currentVC presentViewController:downloadManagerVC animated:YES completion:nil];*/
     
 }
 
@@ -82,8 +84,15 @@
 //将登录信息保存到文件中
 -(BOOL)saveLoginInfoToDocument:(NSString*)strLogInfo
 {
-    NSString* filePath = [GlobalUtil getLoginInfoPath];
-    return [strLogInfo writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    if (strLogInfo!=nil && strLogInfo.length>0) {
+        NSString* filePath = [GlobalUtil getLoginInfoPath];
+        return [strLogInfo writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    }
+    else
+    {
+        return false;
+    }
+    return true;
 }
 
 @end

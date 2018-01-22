@@ -50,26 +50,6 @@
     return documentsDirectory;
 }
 
-+ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString
-{
-    //NSLog(@"%@",jsonString);
-    if (jsonString == nil) {
-        return nil;
-    }
-    
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *err;
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                        options:NSJSONReadingMutableContainers
-                                                          error:&err];
-    if(err)
-    {
-        NSLog(@"json解析失败：%@",err);
-        return nil;
-    }
-    return dic;
-}
-
 +(void)deleteExistDownloadFile
 {
     //Document路径
@@ -185,6 +165,36 @@
 {
     NSString* downloadfilePath = [self getDownloadFilesPath];
     return [downloadfilePath stringByAppendingPathComponent:@"paper.xml"];
+}
+
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString
+{
+    //NSLog(@"%@",jsonString);
+    if (jsonString == nil) {
+        return nil;
+    }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err)
+    {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
+
++ (NSString *)jsonStringWithObject:(id)obj
+{
+    NSData *data = [NSJSONSerialization dataWithJSONObject:obj options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];
+    if (data == nil) {
+        return nil;
+    }
+    
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
 @end

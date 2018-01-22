@@ -143,7 +143,7 @@
                 {
                     tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:array[j] andType:1 andFKQuestionid:QAArray[i][@"questionid"]];
                     strAproveItems= [strAproveItems stringByAppendingString:[tmpAproveItem description]];
-                    if ((j+1)%4==0) {
+                    if ((j+1)%3==0) {
                         strAproveItems = [strAproveItems stringByAppendingString:@"</tr><tr>"];
                     }
                     if ((j+1)==array.count && array.count>=self.maxAproveNum) {//最后一个元素

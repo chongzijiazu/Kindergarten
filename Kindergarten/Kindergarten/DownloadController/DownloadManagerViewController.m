@@ -31,7 +31,7 @@
 //测试用
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self deleteExistDownloadFile];//下载前清空数据清空下载数据
+    /*[self deleteExistDownloadFile];//下载前清空数据清空下载数据
     if([self processDownloadData])//处理下载完的数据
     {
         //下载及加载数据完成，向页面发送成功消息
@@ -43,21 +43,27 @@
     else
     {
         [self showAlertView:@"加载数据失败,是否从新下载评估数据"];
-    }
+    }*/
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    //[self deleteExistDownloadFile];//下载前清空数据清空下载数据
-    //[self downloadEvalutionData]; //下载评估资源
-    self.downloadProgress.progress=0.5;//测试用
+    [self startDownload];
+}
+
+//开始下载数据
+-(void)startDownload
+{
+    //初始化数据
+    self.currentDownloadCount = 1;//重置当前下载个数
+    self.downloadArray = [[NSMutableArray alloc] initWithObjects:@"level.zip",@"paper.zip",@"formula.zip",@"attachment.zip",@"help.zip", nil];
+    [self deleteExistDownloadFile];//下载前清空数据清空下载数据
+    [self downloadEvalutionData]; //下载评估资源
+    //self.downloadProgress.progress=0.5;//测试用
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //初始化数据
-    self.currentDownloadCount = 1;//重置当前下载个数
-    self.downloadArray = [[NSMutableArray alloc] initWithObjects:@"level.zip",@"paper.zip",@"formula.zip",@"attachment.zip",@"help.zip", nil];
     
     // Do any additional setup after loading the view.
     self.downloadProgress = [[UIProgressView alloc] init];
@@ -80,7 +86,7 @@
     
     self.lbl_downloadState = [[UILabel alloc] init];
     self.lbl_downloadState.frame = CGRectMake(self.view.frame.size.width/2-100, self.view.frame.size.height/2+20, 200, 20);
-    self.lbl_downloadState.text = @"正在下载评估资源（1/4)";
+    self.lbl_downloadState.text = @"正在下载评估资源（1/5)";
     [self.view addSubview:self.lbl_downloadState];
 }
 
@@ -154,17 +160,18 @@
     NSString* downloadfilesPath = [GlobalUtil getDownloadFilesPath];
     
     //处理公式信息，解压公式压缩包，将公式信息倒入数据库中
-    //NSString* formulazipPath = [downloadfilesPath stringByAppendingPathComponent:@"formula.zip"];
-    //if (![ZipUtil UZipArchive:formulazipPath  toPath:downloadfilesPath]) {
-    //return false;
-    //}
-    //else
-    //{
-    if(![EnFormula loadFormulaXMLToDB])
+    NSString* formulazipPath = [downloadfilesPath stringByAppendingPathComponent:@"formula.zip"];
+    if (![ZipUtil UZipArchive:formulazipPath  toPath:downloadfilesPath])
     {
         return false;
     }
-    //}
+    else
+    {
+        if(![EnFormula loadFormulaXMLToDB])
+        {
+            return false;
+        }
+    }
     
     //处理以评估数据，解压保存答案信息，解压保存证据信息
     //NSString* attachmentzipPath = [downloadfilesPath stringByAppendingPathComponent:@"attachment.zip"];
@@ -264,7 +271,7 @@
         else
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.lbl_downloadState.text =  [NSString  stringWithFormat:@"%@%d%@",@"正在下载评估资源(", ++self.currentDownloadCount,@"/4)"];
+                self.lbl_downloadState.text =  [NSString  stringWithFormat:@"%@%d%@",@"正在下载评估资源(", ++self.currentDownloadCount,@"/5)"];
             });
             [self.downloadArray removeObject:toFilename]; //移除下载完成的文件
             [self downloadEvalutionData]; //下载下一个文件
@@ -285,7 +292,7 @@
         //清空数据
         [GlobalUtil deleteAllDocumentsFile];
         //从新下载数据
-        [self downloadEvalutionData];
+        [self startDownload];
         
     }];
     [alertController addAction:OKAction];

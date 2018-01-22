@@ -119,7 +119,8 @@
 //从文件读取基本信息
 +(NSString*)getBaseInfo
 {
-    NSString* baseFilePath = [[NSBundle mainBundle] pathForResource:@"loginfo" ofType:@"txt"];
+    //NSString* baseFilePath = [[NSBundle mainBundle] pathForResource:@"loginfo" ofType:@"txt"];
+    NSString* baseFilePath =[GlobalUtil getLoginInfoPath];
     NSString* strBaseInfo = [NSString stringWithContentsOfFile:baseFilePath encoding:NSUTF8StringEncoding error:nil];
     
     return strBaseInfo;

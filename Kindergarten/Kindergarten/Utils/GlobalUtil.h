@@ -13,6 +13,7 @@
 +(NSString*)getAprovePath;
 
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
++ (NSString *)jsonStringWithObject:(id)obj;
 +(void)deleteExistDownloadFile;
 +(void)deleteAssLevelFile;
 +(void)deleteLevelHtmlFile;
