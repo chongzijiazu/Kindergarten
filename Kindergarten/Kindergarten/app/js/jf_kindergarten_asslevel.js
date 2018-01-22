@@ -63,10 +63,10 @@ function refreshFinished(thirdLevelidArray)
         {
             if(thirdLevelidArray[i].result!=0)
             {
-            var imgfinishid=thirdLevelidArray[i].thirdlevelid+"_finish";
-            var td = document.getElementById(imgfinishid);
-            //alert(td);
-            td.innerHTML = "";
+                var imgfinishid=thirdLevelidArray[i].thirdlevelid+"_finish";
+                var td = document.getElementById(imgfinishid);
+                //alert(td);
+                td.innerHTML = "";
             }
         }
         
@@ -294,3 +294,14 @@ function Base64() {
         return string;
     }
 }
+
+function openHelpFile()
+{
+    //alert("hello");
+    var dicmsg ={
+        "operation":"openHelpFile",
+        "param":""
+    };
+    window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
+}
+

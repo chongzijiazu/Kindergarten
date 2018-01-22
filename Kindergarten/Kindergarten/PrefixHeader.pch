@@ -22,6 +22,7 @@
 #import "ZipUtil.h"
 
 #define baseUrlString @"http://192.168.1.104:8070/kindergarten/evaluation/app/"
+#define OnlineUrlString @"http://www.sina.com"
 
 
 #define userDefault [NSUserDefaults standardUserDefaults]

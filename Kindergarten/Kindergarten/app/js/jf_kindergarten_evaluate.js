@@ -218,7 +218,9 @@ function showQuesDesc(pkId)
 {
     var idArr= pkId.split("_");
     pkId=idArr[0];
+    var base = new Base64();
     var tContent = $("#"+pkId+"_desc").attr("sdesc");
+    tContent=base.decode(tContent);
     $("#tipModalBody").html(tContent);
     $('#tipModal').modal({show:true,backdrop:false,keyboard:false});
 }
@@ -414,3 +416,14 @@ function Base64() {
         return string;
     }
 }
+
+function openHelpFile()
+{
+    //alert("hello");
+    var dicmsg ={
+        "operation":"openHelpFile",
+        "param":""
+    };
+    window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
+}
+

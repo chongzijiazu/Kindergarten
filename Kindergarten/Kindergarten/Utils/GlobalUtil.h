@@ -20,4 +20,9 @@
 +(NSString*)getLoginInfoPath;
 +(NSString*)getFormulaXMLPathPath;
 +(NSString*)getUploadPath;
++(NSString*)getHelpFilePath;
++(NSString*)getDownloadFilesPath;
++(NSString*)getPaperXMLPath;
++(NSString*)getHelpFileDirectPath;
 @end
+

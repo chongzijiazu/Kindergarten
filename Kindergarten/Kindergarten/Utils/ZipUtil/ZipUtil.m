@@ -42,18 +42,15 @@
 }
 
 //根据文件路径，解压文件(默认跟路径为沙盒的Document文件夹)
-+(BOOL)UZipArchive:(NSString *)zippedFilePath
++(BOOL)UZipArchive:(NSString *)zippedFilePath toPath:(NSString*)destPath
 {
-    //Document路径
-    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
-    //解压文件夹名自称
+    //解压文件夹名名称
     NSString* uZipName = [[zippedFilePath lastPathComponent] stringByDeletingPathExtension];
     //解压目标路径
-    NSString *destinationPath =[documentPath stringByAppendingPathComponent:uZipName];
-    //zip压缩包的路径
-    NSString *path = [documentPath stringByAppendingPathComponent:zippedFilePath];
+    NSString *destinationPath =[destPath stringByAppendingPathComponent:uZipName];
     //解压
-    BOOL isSuccess = [SSZipArchive unzipFileAtPath:path toDestination:destinationPath];
+    BOOL isSuccess = [SSZipArchive unzipFileAtPath:zippedFilePath toDestination:destinationPath];
     return isSuccess;
 }
 @end
+

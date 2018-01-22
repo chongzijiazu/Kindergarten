@@ -9,6 +9,8 @@
 #import "JFKGCommonController.h"
 #import "JFKGRootViewController.h"
 #import "EnFormula.h"
+#import "EnOption.h"
+#import "XMLDictionary.h"
 
 @implementation JFKGCommonController
 
@@ -121,6 +123,151 @@
     NSString* strBaseInfo = [NSString stringWithContentsOfFile:baseFilePath encoding:NSUTF8StringEncoding error:nil];
     
     return strBaseInfo;
+}
+
++(EnPaper*)getPaperFromXMLPaper
+{
+    EnPaper* tmpPaper=nil;
+    
+    NSDictionary* dicPaper = [self getDictionaryFromPaperXML];
+    //NSLog(@"%@",dicPaper);
+    if (dicPaper!=nil && dicPaper.count>0)
+    {
+        tmpPaper = [[EnPaper alloc] init];
+        NSArray* questions = dicPaper[@"question"];
+        if (questions!=nil && questions.count>0) {
+            EnQuestion* question;
+            for (int i=0; i<questions.count; i++) {
+                question = [EnQuestion questionWithPKID:questions[i][@"pkId"] andLevel:questions[i][@"fkLevel"] andSeqLevel:questions[i][@"seqLevel"] andFormula:questions[i][@"fkFormula"] andContentTip:questions[i][@"contenttip"] andContent:questions[i][@"content"] andDescription:questions[i][@"description"] andSeq:[questions[i][@"seq"] intValue] andType:[questions[i][@"type"] intValue] andWeight:[questions[i][@"weight"] floatValue] andVeto:[questions[i][@"veto"] intValue] andAppendProve:[questions[i][@"appendprove"] intValue] andCalculated:[questions[i][@"calculated"] intValue] andDeleted:[questions[i][@"deleted"] intValue] andQuestionNum:[questions[i][@"questionnum"] intValue]];
+                NSArray* options = questions[i][@"options"][@"option"];
+                EnOption* option;
+                for (int j=0; j<options.count; j++) {
+                    option = [EnOption OptionWithContent:options[j][@"_content"] andOptionValue:options[j][@"_optionvalue"] andWeight:[options[j][@"_weight"] floatValue] andpkId:options[j][@"_pkId"] andfkQuestion:options[j][@"_fkQuestion"]];
+                    [question.optionArray addObject:option];
+                }
+                
+                if (![tmpPaper isExistLevelQuestionByLevelID:questions[i][@"fkLevel"]])
+                {
+                    EnLevelQuestion* levelQuestion = [EnLevelQuestion LevelQuestionWithLevelID:questions[i][@"fkLevel"]];
+                    [tmpPaper.levelquestionArray addObject:levelQuestion];
+                }
+                EnLevelQuestion* tmpLevelQ = [tmpPaper getLevelQuestionByLevelID:questions[i][@"fkLevel"]];
+                [tmpLevelQ.questionArray addObject:question];
+            }
+        }
+    }
+    else
+    {
+        //解析试卷错误，需要考虑重新下载数据问题
+    }
+    
+    return tmpPaper;
+}
+
+//从paperXML读取数据
++(NSDictionary*)getDictionaryFromPaperXML
+{
+    //NSString* filepath = [GlobalUtil getPaperXMLPath];
+    NSString* filepath = [[NSBundle mainBundle] pathForResource:@"paper" ofType:@"xml"];
+    XMLDictionaryParser* parser = [[XMLDictionaryParser alloc] init];
+    NSDictionary* dicPaper = [parser dictionaryWithFile:filepath];
+    return dicPaper;
+}
+
+//将试卷保存到数据库中（包括题和选项）
++(BOOL)SavePaperToDB:(EnPaper*)paper
+{
+    if (paper!=nil && paper.levelquestionArray.count>0)
+    {
+        EnLevelQuestion* levelQues;
+        EnQuestion* tmpQues;
+        EnOption* tmpOpt;
+        for (int i=0; i<paper.levelquestionArray.count; i++) {
+            levelQues = (EnLevelQuestion*)paper.levelquestionArray[i];
+            for (int j=0; j<levelQues.questionArray.count; j++) {
+                tmpQues = (EnQuestion*)levelQues.questionArray[j];
+                if(![tmpQues insertSelfToDB])
+                {
+                    return false;
+                }
+                for (int k=0; k<tmpQues.optionArray.count; k++) {
+                    tmpOpt = (EnOption*)tmpQues.optionArray[k];
+                    if(![tmpOpt insertSelfToDB])
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        return false;
+    }
+    
+    return true;
+}
+
++(BOOL)SavePaperToDB
+{
+    EnPaper* paper = [self getPaperFromXMLPaper];
+    return [self SavePaperToDB:paper];
+}
+
+-(void)showHelpFile:(NSString*)helpfilepath
+{
+    if (helpfilepath!=nil&&helpfilepath.length>0) {
+        _docController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:helpfilepath]];
+        _docController.delegate = self;
+        CGRect rect = CGRectMake(self.currentVC.view.frame.size.width/2-100, 0, 200, 200);
+        [_docController presentOpenInMenuFromRect:rect inView:self.currentVC.view animated:YES];
+        //[_docController presentPreviewAnimated:NO];
+    }
+    {
+        [self showAlertView:@"无帮助文档"];
+    }
+}
+
+- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller
+{
+    
+    return self.currentVC;
+    
+}
+- (UIView *)documentInteractionControllerViewForPreview:(UIDocumentInteractionController *)controller
+{
+    
+    return self.currentVC.view;
+    
+}
+- (CGRect)documentInteractionControllerRectForPreview:(UIDocumentInteractionController *)controller
+{
+    return  self.currentVC.view.frame;
+}
+
+- (void)showAlertView:(NSString *)message
+{
+    NSString *title = @"提示";
+    UIAlertController *alertController;
+    alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        
+    }];
+    [alertController addAction:OKAction];
+    
+    [self.currentVC presentViewController:alertController animated:YES completion:nil];
+}
+
++(void)copyFileToAppDesc
+{
+    NSString* basePath = [[NSBundle mainBundle] bundlePath];
+    basePath = [basePath stringByAppendingString:@"/app/desc"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:basePath]) {
+        NSString* downloadpath = [GlobalUtil getDownloadFilesPath];
+        NSString* descPath =[downloadpath stringByAppendingPathComponent:@"desc"];
+        BOOL isgood = [[NSFileManager defaultManager] copyItemAtPath:descPath toPath:basePath error:NULL];
+    }
 }
 
 @end

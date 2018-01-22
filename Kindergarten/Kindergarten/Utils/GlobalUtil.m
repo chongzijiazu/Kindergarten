@@ -31,7 +31,7 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"DownloadFiles"];
     documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"formula.xml"];
-
+    
     return documentsDirectory;
 }
 
@@ -135,4 +135,57 @@
     return documentsDirectory;
 }
 
+//帮助文件路径
++(NSString*)getHelpFilePath
+{
+    NSFileManager* fileM = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"helpfile"];
+    if (![fileM fileExistsAtPath:documentsDirectory]) {
+        [fileM createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
+    NSArray* helpfileArra = [fileM contentsOfDirectoryAtPath: documentsDirectory error:nil];
+    if (helpfileArra!=nil && helpfileArra.count>0) {
+        NSString* tmp =  [documentsDirectory stringByAppendingPathComponent:helpfileArra[0]];
+        return tmp;
+    }
+    
+    return nil;
+}
+
+//帮助文件夹路径
++(NSString*)getHelpFileDirectPath
+{
+    NSFileManager* fileM = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"helpfile"];
+    if (![fileM fileExistsAtPath:documentsDirectory]) {
+        [fileM createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
+    return documentsDirectory;
+}
+
+//获取下载资源路径
++(NSString*)getDownloadFilesPath
+{
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+    NSString* downloadPath = [documentPath stringByAppendingPathComponent:@"DownloadFiles"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:downloadPath]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:downloadPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return downloadPath;
+}
+
+//获取解压后的paper.xml文件路径
++(NSString*)getPaperXMLPath
+{
+    NSString* downloadfilePath = [self getDownloadFilesPath];
+    return [downloadfilePath stringByAppendingPathComponent:@"paper.xml"];
+}
+
 @end
+

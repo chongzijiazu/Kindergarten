@@ -98,6 +98,7 @@
     NSURL *accessReadUrl = [NSURL fileURLWithPath:basePath];
     
     [self.webView loadFileURL:htmlUrl allowingReadAccessToURL:accessReadUrl];
+    
 }
 
 //初始化wkWebView
@@ -127,9 +128,9 @@
     
     // 添加一个JS到HTML中，这样就可以直接在JS中调用我们添加的JS方法
     /*WKUserScript *script = [[WKUserScript alloc]initWithSource:@"function showAlert() { alert('在载入webview时通过Swift注入的JS方法');"
-                                                 injectionTime:WKUserScriptInjectionTimeAtDocumentStart
-                                              forMainFrameOnly:YES];
-    [config.userContentController addUserScript:script];*/
+     injectionTime:WKUserScriptInjectionTimeAtDocumentStart
+     forMainFrameOnly:YES];
+     [config.userContentController addUserScript:script];*/
     
     
     self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds configuration:config];
@@ -175,8 +176,7 @@
             else if([operation isEqualToString:@"logonline"])
             {
                 //NSLog(@"HELLO");
-                NSString* strUrl=@"https://baidu.com";
-                NSURL* url = [NSURL URLWithString:strUrl];
+                NSURL* url = [NSURL URLWithString:OnlineUrlString];
                 NSURLRequest* request = [NSURLRequest requestWithURL:url];
                 [self.webView loadRequest:request];
             }
@@ -196,7 +196,7 @@
                 //NSLog(@"%@",[dicMsg objectForKey:@"param"]);
                 NSDictionary* dicParam =[dicMsg objectForKey:@"param"];
                 self.evaluateController.currentLevelQuestionID =[dicParam objectForKey:@"thirdlevelid"];//三级指标id传给页面
-            self.evaluateController.currentLevelQuestionName=[dicParam objectForKey:@"thirdlevelname"];
+                self.evaluateController.currentLevelQuestionName=[dicParam objectForKey:@"thirdlevelname"];
                 [self loadLocalHtmlByFilename:@"evaluate.html"];
             }
             else if([operation isEqualToString:@"uploadData"])
@@ -213,6 +213,11 @@
                     //将公式计算标志改为，已计算（避免重复计算）
                     [userDefault setObject:@"1" forKey:@"isFormulaCalculated"];
                 }
+            }
+            else if([operation isEqualToString:@"openHelpFile"])
+            {
+                NSString* hepfilePath = [GlobalUtil getHelpFilePath];
+                [self.commonController showHelpFile:hepfilePath];
             }
         }
         else if ([htmlname isEqualToString:@"evaluate.html"])
@@ -265,7 +270,7 @@
                 NSDictionary* dicParams = [dicMsg objectForKey:@"param"];
                 //NSLog(@"%@",[dicParams objectForKey:@"type"]);
                 NSString* aproveitemtype =[dicParams objectForKey:@"type"];
-                 NSString* questionid =[dicParams objectForKey:@"questionid"];
+                NSString* questionid =[dicParams objectForKey:@"questionid"];
                 NSString* aproveitemid =[dicParams objectForKey:@"id"];
                 if ([aproveitemtype isEqualToString:@"0"]) //添加证据
                 {
@@ -294,6 +299,11 @@
                     [JFKGProcessInfoController saveMemoToDocument:dicParams];
                 }
             }
+            else if([operation isEqualToString:@"openHelpFile"])
+            {
+                NSString* hepfilePath = [GlobalUtil getHelpFilePath];
+                [self.commonController showHelpFile:hepfilePath];
+            }
         }
     }
     
@@ -305,11 +315,10 @@
     if (navigationAction.navigationType == WKNavigationTypeLinkActivated
         && ![hostname containsString:@".baidu.com"]) {
         // 对于跨域，需要手动跳转
-        //[[UIApplication sharedApplication] openURL:navigationAction.request.URL];
+        [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
         
         // 不允许web内跳转
-        //decisionHandler(WKNavigationActionPolicyCancel);
-        decisionHandler(WKNavigationActionPolicyAllow);
+        decisionHandler(WKNavigationActionPolicyCancel);
     } else {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
@@ -355,13 +364,18 @@
     
 }
 
-- (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *__nullable credential))completionHandler {
-    NSLog(@"%s", __FUNCTION__);
-    completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
-}
+
 
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
     NSLog(@"%s", __FUNCTION__);
+}
+-(WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures
+{
+    NSLog(@"createWebViewWithConfiguration");
+    if (!navigationAction.targetFrame.isMainFrame) {
+        [webView loadRequest:navigationAction.request];
+    }
+    return nil;
 }
 
 #pragma mark - WKUIDelegate
@@ -420,13 +434,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
+

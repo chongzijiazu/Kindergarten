@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
+#import "EnPaper.h"
 
-@interface JFKGCommonController : NSObject
+@interface JFKGCommonController : NSObject<UIDocumentInteractionControllerDelegate>
+@property(nonatomic,retain)UIDocumentInteractionController *docController;
 @property (nonatomic, weak) WKWebView *webView;
 @property (nonatomic, weak) UIViewController *currentVC;
 
@@ -17,5 +19,9 @@
 -(BOOL)processFormulaInfo;
 +(BOOL)saveFormulaValue:(NSDictionary*)dicFormula;
 +(NSString*)getBaseInfo;
++(BOOL)SavePaperToDB;
++(EnPaper*)getPaperFromXMLPaper;
+-(void)showHelpFile:(NSString*)helpfilepath;
++(void)copyFileToAppDesc;
 
 @end

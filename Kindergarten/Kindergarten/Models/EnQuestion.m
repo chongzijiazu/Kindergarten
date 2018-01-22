@@ -88,26 +88,49 @@
     return modelArrM;
 }
 
+//翻译题目解释信息中的图片
+//<img src="desc/login.png">
+-(NSString*)translateDesc:(NSString*)strDesc
+{
+    NSString* imageHtml = @"<img src=\"desc/%@\">";
+    NSString *pattern = @"\\{([^\\{\\}]+)\\}";//创建正则表达式，匹配表达式中的变量
+    NSRegularExpression *regular = [[NSRegularExpression alloc] initWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
+    //利用规则测试字符串获取匹配结果
+    NSArray *results = [regular matchesInString:strDesc options:0 range:NSMakeRange(0, strDesc.length)];
+    //NSLog(@"%@",results);
+    NSString* newStr = [[NSString alloc] init];
+    int end=0;
+    for (NSTextCheckingResult *result in results)
+    {
+        newStr = [newStr stringByAppendingString:[strDesc substringWithRange:NSMakeRange(end, result.range.location-end)]];
+        NSString* strTmp = [NSString stringWithFormat:imageHtml,[strDesc substringWithRange:NSMakeRange(result.range.location+1, result.range.length-2)]];
+        newStr = [newStr stringByAppendingString:strTmp];
+        end = (int)result.range.location+(int)result.range.length;
+    }
+    newStr = [newStr stringByAppendingString:[strDesc substringWithRange:NSMakeRange(end, strDesc.length-end)]];
+    return [Base64Util Encode:newStr];
+}
+
 
 /*
  试题模板示例：
-<div style="font-size: 18px;">
-1.园舍产权
+ <div style="font-size: 18px;">
+ 1.园舍产权
  <span style="color: red; font-weight: bold;display:none">（关键指标）</span>
-<img src="images/question.png" />
-<a href="#">查看题目解释</a>
+ <img src="images/question.png" />
+ <a href="#">查看题目解释</a>
  <font style="display: 1; font-size: 18px; border: 2px solid orange; padding: 4px;border-radius: 4px; font-weight: bold;" color="orange" id="quesFinish_0d0ecc66c2964929a132bd7337d39d88">
-    已完成
+ 已完成
  </font>
-</div>
-<hr/>
-<div id="pkId">
-    选项
-</div>
-<div class="questips">
-    <img src="images/result.png" />
-    <span>根据您填写的院所信息，在园人数：485.00</span>
-</div>
+ </div>
+ <hr/>
+ <div id="pkId">
+ 选项
+ </div>
+ <div class="questips">
+ <img src="images/result.png" />
+ <span>根据您填写的院所信息，在园人数：485.00</span>
+ </div>
  */
 //html格式描述试题
 -(NSString*)description
@@ -151,9 +174,12 @@
      }*/
     NSString* strTip = [EnFormula translateDesc:[Base64Util Decode:self.contenttip]];
     self.content = [Base64Util Decode:self.content];
-    self.desc =[Base64Util Decode:self.desc];
+    //self.desc =[Base64Util Decode:self.desc];
+    self.desc=@"5L2g5aW9e2xvZ2luLnBuZ33miJHmmK/lm77niYcK";
+    self.desc = [self translateDesc:[Base64Util Decode:self.desc]];
     NSString* questionHtml = [NSString stringWithFormat:@"<div style=\"font-size: 18px;\">%d.%@<span style=\"color: red; font-weight: bold;display:%@\">（关键指标）</span><img src=\"images/question.png\" /><a id=\"%@_desclink\" onclick=\"showQuesDesc(this.id)\" href=\"#\"><span>查看题目解释<span><span sdesc=\"%@\" id=\"%@_desc\" /></a> <font style=\"display:none; font-size: 18px; border: 2px solid orange; padding: 4px;border-radius: 4px; font-weight: bold;\" color=\"orange\" id=\"quesFinish_%@\">已完成</font></div><hr/><div id=\"%@\">%@</div><div class=\"questips\"><img src=\"images/result.png\" /><span>%@</span></div>",self.seq,self.content,strVeto,self.pkId,self.desc,self.pkId,self.pkId,self.pkId,optionHtml,strTip];
     return questionHtml;
 }
 
 @end
+

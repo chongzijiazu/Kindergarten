@@ -15,6 +15,7 @@
 #import "SQLiteManager.h"
 #import "EnFormula.h"
 #import "EnSchool.h"
+#import "JFKGCommonController.h"
 
 @interface DownloadManagerViewController ()
 
@@ -56,7 +57,7 @@
     [super viewDidLoad];
     //初始化数据
     self.currentDownloadCount = 1;//重置当前下载个数
-    self.downloadArray = [[NSMutableArray alloc] initWithObjects:@"level.zip",@"paper.zip",@"formula.zip",@"processed.zip", nil];
+    self.downloadArray = [[NSMutableArray alloc] initWithObjects:@"level.zip",@"paper.zip",@"formula.zip",@"attachment.zip",@"help.zip", nil];
     
     // Do any additional setup after loading the view.
     self.downloadProgress = [[UIProgressView alloc] init];
@@ -104,15 +105,20 @@
             //下载公式数据
             [self downloadDataFrom:[HTTPInterface downloadformulacontent] toFilename:@"formula.zip"];
         }
-        else if([tempStr isEqualToString:@"processed.zip"])
+        else if([tempStr isEqualToString:@"attachment.zip"])
         {
             //下载证据数据
-            [self downloadDataFrom:[HTTPInterface downloadpapercontent] toFilename:@"processed.zip"];
+            [self downloadDataFrom:[HTTPInterface downloadattachmentcontent] toFilename:@"attachment.zip"];
+        }
+        else if([tempStr isEqualToString:@"help.zip"])
+        {
+            //下载帮助文档数据
+            [self downloadDataFrom:[HTTPInterface downloadhelpfile] toFilename:@"help.zip"];
         }
     }
     else
     {
-        if(self.currentDownloadCount == 4)//下载完成
+        if(self.currentDownloadCount == 5)//下载完成
         {
             if([self processDownloadData])//处理下载完的数据
             {
@@ -145,17 +151,27 @@
         NSLog(@"数据库开启失败!");
     }
     
+    NSString* downloadfilesPath = [GlobalUtil getDownloadFilesPath];
+    
     //处理公式信息，解压公式压缩包，将公式信息倒入数据库中
-    if([EnFormula loadFormulaXMLToDB])
-    {
-        
-    }
-    else
+    //NSString* formulazipPath = [downloadfilesPath stringByAppendingPathComponent:@"formula.zip"];
+    //if (![ZipUtil UZipArchive:formulazipPath  toPath:downloadfilesPath]) {
+    //return false;
+    //}
+    //else
+    //{
+    if(![EnFormula loadFormulaXMLToDB])
     {
         return false;
     }
+    //}
     
     //处理以评估数据，解压保存答案信息，解压保存证据信息
+    //NSString* attachmentzipPath = [downloadfilesPath stringByAppendingPathComponent:@"attachment.zip"];
+    //NSString* aprovePath = [GlobalUtil getAprovePath];
+    //if (![ZipUtil UZipArchive:attachmentzipPath  toPath:aprovePath]) {
+    //return false;
+    //}
     
     //通过网络接口，获取评估过程信息（试题答案）
     JFKGProcessInfoController* processC = [[JFKGProcessInfoController alloc]init];
@@ -163,21 +179,39 @@
         return false;
     }
     
-    //处理试卷数据，包括试卷包的解压和生成按三级指标分类的html
-    /*JFKGEvaluateController* evaluateC = [[JFKGEvaluateController alloc] init];
-    //生成按三级指标分类的html文件（调试，尚无解压过程）
-    if(![evaluateC makeLevelHTMLByPaper])
-    {
+    //处理试卷数据，包括试卷包的解压,保存到数据库中
+    //NSString* paperzipPath = [downloadfilesPath stringByAppendingPathComponent:@"paper.zip"];
+    //if (![ZipUtil UZipArchive:paperzipPath  toPath:downloadfilesPath]) {
+    //return false;
+    //}
+    //else
+    //{
+    if (![JFKGCommonController SavePaperToDB]) {
         return false;
-    }*/
+    }
+    //}
     
     //处理评估指标体系，解压评估指标压缩包，生成评估指标所需的html格式文件
+    //NSString* levelzipPath = [downloadfilesPath stringByAppendingPathComponent:@"level.zip"];
+    //if (![ZipUtil UZipArchive:levelzipPath  toPath:downloadfilesPath]) {
+    //return false;
+    //}
+    //else
+    //{
     JFKGLevelController* levelC = [[JFKGLevelController alloc] init];
     //生成html格式文件（调试，没添加解压过程）
     if (![levelC makeAssLevelFile]) {
         return false;
     }
-   
+    //}
+    
+    //处理帮助文件
+    //NSString* helpDirec = [GlobalUtil getHelpFileDirectPath];
+    //NSString* helpzipPath = [downloadfilesPath stringByAppendingPathComponent:@"help.zip"];
+    //if (![ZipUtil UZipArchive:helpzipPath  toPath:helpDirec]) {
+    //return false;
+    //}
+    
     
     return true;
 }
@@ -186,13 +220,13 @@
 {
     self.currentDownloadCount = 1;//重置当前下载个数
     //Document路径
-    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
-    NSString* downloadPath = [documentPath stringByAppendingPathComponent:@"DownloadFiles"];
+    
+    NSString* downloadPath = [GlobalUtil getDownloadFilesPath];
     if([[NSFileManager defaultManager] fileExistsAtPath:downloadPath])
-     {
-         [[NSFileManager defaultManager] removeItemAtPath:downloadPath error:nil];//删除原来
-         
-     }
+    {
+        [[NSFileManager defaultManager] removeItemAtPath:downloadPath error:nil];//删除原来
+        
+    }
     
     //重新创建目录
     [[NSFileManager defaultManager] createDirectoryAtPath:downloadPath withIntermediateDirectories:YES attributes:nil error:nil];
@@ -253,7 +287,7 @@
         //从新下载数据
         [self downloadEvalutionData];
         
-                                       }];
+    }];
     [alertController addAction:OKAction];
     
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -273,13 +307,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
+

@@ -26,7 +26,7 @@
 //获取评估信息
 +(NSString*)processinfo
 {
-     return [NSString stringWithFormat:@"%@%@%@",baseUrlString,@"getprocessinfo.do?ticketid=",TICKETID ];
+    return [NSString stringWithFormat:@"%@%@%@",baseUrlString,@"getprocessinfo.do?ticketid=",TICKETID ];
 }
 
 //下载指标数据
@@ -60,6 +60,13 @@
     //return [NSString stringWithFormat:@"%@%@%@",baseUrlString,@"downloadattachmentcontent.do?ticketid=",TICKETID ];
 }
 
+//下载帮助文档
++(NSString*)downloadhelpfile
+{
+    return @"http://10.3.1.29:8032/msgcat/2.zip";
+    //return [NSString stringWithFormat:@"%@%@%@",baseUrlString,@"downloadhelpfile.do?ticketid=",TICKETID ];
+}
+
 //上传评估数据
 +(NSString*)uploadevaluatedata;
 {
@@ -67,3 +74,4 @@
 }
 
 @end
+

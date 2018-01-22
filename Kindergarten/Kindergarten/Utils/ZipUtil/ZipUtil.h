@@ -18,6 +18,7 @@
 +(BOOL)ZipArchiveWithFolder:(NSString *)sourcePath toPath:(NSString*)destPath;
 
 //根据文件路径，解压文件
-+(BOOL)UZipArchive:(NSString*)zippedFilePath;
++(BOOL)UZipArchive:(NSString *)zippedFilePath toPath:(NSString*)destPath;
 
 @end
+

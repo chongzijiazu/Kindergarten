@@ -35,11 +35,19 @@
         NSString* levelQuestion = [self readLevelQuestionByLevelId:self.currentLevelQuestionID];
         if(levelQuestion!=nil && levelQuestion.length>0)
         {
-            //页面试题处理
-            NSString* scriptStr = [NSString stringWithFormat:@"showLevelQuestion('%@');",levelQuestion];
-        
+            //向页面发送基本信息（院所信息，评估开始结束时间）
+            NSString* strResult = [JFKGCommonController getBaseInfo];
+            NSString* scriptStr = [NSString stringWithFormat:@"loadBaseInfo(%@,'%@');",strResult,_currentLevelQuestionName];
+            
             [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-            NSLog(@"response: %@ error: %@", response, error);
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
+            
+            //页面试题处理
+            scriptStr = [NSString stringWithFormat:@"showLevelQuestion('%@');",levelQuestion];
+            
+            [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
             }];
             
             //页面答案处理
@@ -66,13 +74,7 @@
                 NSLog(@"response: %@ error: %@", response, error);
             }];
             
-            //向页面发送基本信息（院所信息，评估开始结束时间）
-            NSString* strResult = [JFKGCommonController getBaseInfo];
-            scriptStr = [NSString stringWithFormat:@"loadBaseInfo(%@,'%@');",strResult,_currentLevelQuestionName];
             
-            [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-                NSLog(@"response: %@ error: %@", response, error);
-            }];
             
         }
     }
@@ -231,6 +233,7 @@
 //根据三级指标读取试题
 -(NSString*)readLevelQuestionByLevelId:(NSString*)levelid
 {
+    [JFKGCommonController copyFileToAppDesc];//将卷子中解释信息的图片文件拷贝到baseurl目录中的desc文件夹
     NSString* levelQPath = [self.levelHTMLPath stringByAppendingPathComponent:[levelid stringByAppendingString:@".txt"]];
     if (![[NSFileManager defaultManager] fileExistsAtPath:levelQPath])
     {
@@ -247,13 +250,8 @@
 //将试题及选项存放到数据库中
 -(BOOL)makeLevelHTMLByPaper
 {
-    EnPaper* paper = [self getPaperFromXMLPaper];
+    EnPaper* paper = [JFKGCommonController getPaperFromXMLPaper];
     [self deleteExistHTMLFile];//清理已存在的html文件
-    
-    if(![self SavePaperToDB:paper])//将试卷保存到数据库
-    {
-        return false;
-    }
     
     //NSLog(@"%@",[levelQues description]);
     if (paper!=nil && paper.levelquestionArray.count>0)
@@ -290,88 +288,6 @@
     [[NSFileManager defaultManager] createDirectoryAtPath:self.levelHTMLPath withIntermediateDirectories:YES attributes:nil error:nil];
 }
 
--(EnPaper*)getPaperFromXMLPaper
-{
-    EnPaper* tmpPaper=nil;
-    
-    NSDictionary* dicPaper = [self getDictionaryFromPaperXML];
-    //NSLog(@"%@",dicPaper);
-    if (dicPaper!=nil && dicPaper.count>0)
-    {
-        tmpPaper = [[EnPaper alloc] init];
-        NSArray* questions = dicPaper[@"question"];
-        if (questions!=nil && questions.count>0) {
-            EnQuestion* question;
-            for (int i=0; i<questions.count; i++) {
-                question = [EnQuestion questionWithPKID:questions[i][@"pkId"] andLevel:questions[i][@"fkLevel"] andSeqLevel:questions[i][@"seqLevel"] andFormula:questions[i][@"fkFormula"] andContentTip:questions[i][@"contenttip"] andContent:questions[i][@"content"] andDescription:questions[i][@"description"] andSeq:[questions[i][@"seq"] intValue] andType:[questions[i][@"type"] intValue] andWeight:[questions[i][@"weight"] floatValue] andVeto:[questions[i][@"veto"] intValue] andAppendProve:[questions[i][@"appendprove"] intValue] andCalculated:[questions[i][@"calculated"] intValue] andDeleted:[questions[i][@"deleted"] intValue] andQuestionNum:[questions[i][@"questionnum"] intValue]];
-                NSArray* options = questions[i][@"options"][@"option"];
-                EnOption* option;
-                for (int j=0; j<options.count; j++) {
-                    option = [EnOption OptionWithContent:options[j][@"_content"] andOptionValue:options[j][@"_optionvalue"] andWeight:[options[j][@"_weight"] floatValue] andpkId:options[j][@"_pkId"] andfkQuestion:options[j][@"_fkQuestion"]];
-                    [question.optionArray addObject:option];
-                }
-                
-                if (![tmpPaper isExistLevelQuestionByLevelID:questions[i][@"fkLevel"]])
-                {
-                    EnLevelQuestion* levelQuestion = [EnLevelQuestion LevelQuestionWithLevelID:questions[i][@"fkLevel"]];
-                    [tmpPaper.levelquestionArray addObject:levelQuestion];
-                }
-                EnLevelQuestion* tmpLevelQ = [tmpPaper getLevelQuestionByLevelID:questions[i][@"fkLevel"]];
-                [tmpLevelQ.questionArray addObject:question];
-            }
-        }
-    }
-    else
-    {
-        //解析试卷错误，需要考虑重新下载数据问题
-    }
-    
-    return tmpPaper;
-}
-
-//从paperXML读取数据
--(NSDictionary*)getDictionaryFromPaperXML
-{
-    NSString* filepath = [[NSBundle mainBundle] pathForResource:@"paper" ofType:@"xml"];
-    XMLDictionaryParser* parser = [[XMLDictionaryParser alloc] init];
-    NSDictionary* dicPaper = [parser dictionaryWithFile:filepath];
-    return dicPaper;
-}
-
-//将试卷保存到数据库中（包括题和选项）
--(BOOL)SavePaperToDB:(EnPaper*)paper
-{
-    if (paper!=nil && paper.levelquestionArray.count>0)
-    {
-        EnLevelQuestion* levelQues;
-        EnQuestion* tmpQues;
-        EnOption* tmpOpt;
-        for (int i=0; i<paper.levelquestionArray.count; i++) {
-            levelQues = (EnLevelQuestion*)paper.levelquestionArray[i];
-            for (int j=0; j<levelQues.questionArray.count; j++) {
-                tmpQues = (EnQuestion*)levelQues.questionArray[j];
-                if(![tmpQues insertSelfToDB])
-                {
-                    return false;
-                }
-                for (int k=0; k<tmpQues.optionArray.count; k++) {
-                    tmpOpt = (EnOption*)tmpQues.optionArray[k];
-                    if(![tmpOpt insertSelfToDB])
-                    {
-                        return false;
-                    }
-                }
-            }
-        }
-    }
-    else
-    {
-        return false;
-    }
-    
-    return true;
-}
-
 -(NSString *)levelHTMLPath {
     if (_levelHTMLPath == nil) {
         //Document路径
@@ -392,3 +308,4 @@
 }
 
 @end
+
