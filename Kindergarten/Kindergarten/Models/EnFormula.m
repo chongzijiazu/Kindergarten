@@ -95,8 +95,8 @@
 +(BOOL)loadFormulaXMLToDB
 {
     
-    //NSString* xmlPath = [GlobalUtil getFormulaXMLPathPath];
-    NSString* xmlPath = [[NSBundle mainBundle] pathForResource:@"formula" ofType:@"xml"];
+    //NSString* xmlPath = [[NSBundle mainBundle] pathForResource:@"formula" ofType:@"xml"];
+    NSString* xmlPath = [GlobalUtil getFormulaXMLPathPath];
     XMLDictionaryParser* parser = [[XMLDictionaryParser alloc] init];
     NSDictionary* dicFormula = [parser dictionaryWithFile:xmlPath];
     
@@ -118,6 +118,10 @@
 //翻译字符串中的表达式，根据表达式的值
 +(NSString*)translateDesc:(NSString*)strDesc
 {
+    if (strDesc==nil || strDesc.length==0) {
+        return @"";
+    }
+    
     NSDictionary* dicFormula = [self getDicFormulaForExpress];
     NSString *pattern = @"\\{([^\\{\\}]+)\\}";//创建正则表达式，匹配表达式中的变量
     NSRegularExpression *regular = [[NSRegularExpression alloc] initWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];

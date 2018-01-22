@@ -61,13 +61,24 @@ function refreshFinished(thirdLevelidArray)
     {
         for(var i=0;i<thirdLevelidArray.length;i++)
         {
-            if(thirdLevelidArray[i].result!=0)
+            if(thirdLevelidArray[i].result.length>0)
+            {
+                if(thirdLevelidArray[i].result!=0)
+                {
+                    var imgfinishid=thirdLevelidArray[i].thirdlevelid+"_finish";
+                    var td = document.getElementById(imgfinishid);
+                    //alert(td);
+                    td.innerHTML = "";
+                }
+            }
+            else
             {
                 var imgfinishid=thirdLevelidArray[i].thirdlevelid+"_finish";
                 var td = document.getElementById(imgfinishid);
                 //alert(td);
                 td.innerHTML = "";
             }
+            
         }
         
     }
@@ -132,6 +143,11 @@ function loadPageData(pageData){
             }
             $("#school_name").html(kindergarteninfo.name);
             calculateBaseInfo();
+            var personInfo = headData.personInfo;
+            for (var pinfo in personInfo) {
+                //alert(pinfo);
+                $("#s" + pinfo).html(personInfo[pinfo]);
+            }
             if(headData.evaluateTimeInfo){
                 $("#eva_starttime").html(headData.evaluateTimeInfo.beginTime);
                 $("#eva_endtime").html(headData.evaluateTimeInfo.endTime);

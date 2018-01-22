@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6B8652AC7634D6474AA09999 /* libPods-Kindergarten.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A153AD5C68F05D5D4DF0B3E0 /* libPods-Kindergarten.a */; };
-		E6045BB82012DD5100F5EBE7 /* schoolinfo.txt in Resources */ = {isa = PBXBuildFile; fileRef = E6045BB72012DD5100F5EBE7 /* schoolinfo.txt */; };
 		E6045BBA2013255A00F5EBE7 /* loginfo.txt in Resources */ = {isa = PBXBuildFile; fileRef = E6045BB92013255A00F5EBE7 /* loginfo.txt */; };
 		E60461342005AE9200135F7C /* HTTPInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = E60461332005AE9200135F7C /* HTTPInterface.m */; };
 		E60461392005B6DC00135F7C /* Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = E60461382005B6DC00135F7C /* Encryption.m */; };
@@ -62,7 +61,6 @@
 		72B437DF44B03AFF65C17060 /* Pods-Kindergarten.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kindergarten.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kindergarten/Pods-Kindergarten.debug.xcconfig"; sourceTree = "<group>"; };
 		A153AD5C68F05D5D4DF0B3E0 /* libPods-Kindergarten.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kindergarten.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDFB3632EC523E0959FFBCB1 /* Pods-Kindergarten.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kindergarten.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kindergarten/Pods-Kindergarten.release.xcconfig"; sourceTree = "<group>"; };
-		E6045BB72012DD5100F5EBE7 /* schoolinfo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schoolinfo.txt; sourceTree = "<group>"; };
 		E6045BB92013255A00F5EBE7 /* loginfo.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = loginfo.txt; sourceTree = "<group>"; };
 		E60461322005AE9200135F7C /* HTTPInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPInterface.h; sourceTree = "<group>"; };
 		E60461332005AE9200135F7C /* HTTPInterface.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HTTPInterface.m; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				E6045BB92013255A00F5EBE7 /* loginfo.txt */,
-				E6045BB72012DD5100F5EBE7 /* schoolinfo.txt */,
 				E668E34B200F14170023FFBC /* processinfo.txt */,
 				E652B38E200C94AA00495147 /* paper.xml */,
 				E6FA5AE62009DA9000B7B30B /* WKWebView.html */,
@@ -462,7 +459,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6045BB82012DD5100F5EBE7 /* schoolinfo.txt in Resources */,
 				E638B9F420076D6F00685670 /* CallCameraJS.js in Resources */,
 				E60461412005EEE800135F7C /* level.xml in Resources */,
 				E67AB1E720044FF500AD83C9 /* LaunchScreen.storyboard in Resources */,

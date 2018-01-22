@@ -75,17 +75,19 @@
             [dicNewSchool setObject:dicSchool[key] forKey:newKey];
         }
         NSDictionary* newFormulaDic = [EnFormula translateExpression:formulaArr bySchoolInfo:dicNewSchool];
-        NSData *data = [NSJSONSerialization dataWithJSONObject:newFormulaDic options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];
-        if (data == nil) {
-            return false;
+        if (newFormulaDic!=nil && newFormulaDic.count>0) {
+            NSData *data = [NSJSONSerialization dataWithJSONObject:newFormulaDic options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];
+            if (data == nil) {
+                return false;
+            }
+            NSString* scriptStr= [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            //NSLog(@"%@",tmp);
+            scriptStr = [NSString stringWithFormat:@"calculateFormula(%@);",scriptStr];
+            
+            [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
         }
-        NSString* scriptStr= [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        //NSLog(@"%@",tmp);
-        scriptStr = [NSString stringWithFormat:@"calculateFormula(%@);",scriptStr];
-        
-        [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-            NSLog(@"response: %@ error: %@", response, error);
-        }];
     }
     else
     {
@@ -121,6 +123,7 @@
 {
     //NSString* baseFilePath = [[NSBundle mainBundle] pathForResource:@"loginfo" ofType:@"txt"];
     NSString* baseFilePath =[GlobalUtil getLoginInfoPath];
+   
     NSString* strBaseInfo = [NSString stringWithContentsOfFile:baseFilePath encoding:NSUTF8StringEncoding error:nil];
     
     return strBaseInfo;
@@ -139,7 +142,7 @@
         if (questions!=nil && questions.count>0) {
             EnQuestion* question;
             for (int i=0; i<questions.count; i++) {
-                question = [EnQuestion questionWithPKID:questions[i][@"pkId"] andLevel:questions[i][@"fkLevel"] andSeqLevel:questions[i][@"seqLevel"] andFormula:questions[i][@"fkFormula"] andContentTip:questions[i][@"contenttip"] andContent:questions[i][@"content"] andDescription:questions[i][@"description"] andSeq:[questions[i][@"seq"] intValue] andType:[questions[i][@"type"] intValue] andWeight:[questions[i][@"weight"] floatValue] andVeto:[questions[i][@"veto"] intValue] andAppendProve:[questions[i][@"appendprove"] intValue] andCalculated:[questions[i][@"calculated"] intValue] andDeleted:[questions[i][@"deleted"] intValue] andQuestionNum:[questions[i][@"questionnum"] intValue]];
+                question = [EnQuestion questionWithPKID:questions[i][@"pkId"] andLevel:questions[i][@"_fkLevel"] andSeqLevel:questions[i][@"seqLevel"] andFormula:questions[i][@"fkFormula"] andContentTip:questions[i][@"contenttip"] andContent:questions[i][@"content"] andDescription:questions[i][@"description"] andSeq:[questions[i][@"seq"] intValue] andType:[questions[i][@"type"] intValue] andWeight:[questions[i][@"weight"] floatValue] andVeto:[questions[i][@"veto"] intValue] andAppendProve:[questions[i][@"appendprove"] intValue] andCalculated:[questions[i][@"calculated"] intValue] andDeleted:[questions[i][@"deleted"] intValue] andQuestionNum:[questions[i][@"questionnum"] intValue]];
                 NSArray* options = questions[i][@"options"][@"option"];
                 EnOption* option;
                 for (int j=0; j<options.count; j++) {
@@ -147,12 +150,12 @@
                     [question.optionArray addObject:option];
                 }
                 
-                if (![tmpPaper isExistLevelQuestionByLevelID:questions[i][@"fkLevel"]])
+                if (![tmpPaper isExistLevelQuestionByLevelID:questions[i][@"_fkLevel"]])
                 {
-                    EnLevelQuestion* levelQuestion = [EnLevelQuestion LevelQuestionWithLevelID:questions[i][@"fkLevel"]];
+                    EnLevelQuestion* levelQuestion = [EnLevelQuestion LevelQuestionWithLevelID:questions[i][@"_fkLevel"]];
                     [tmpPaper.levelquestionArray addObject:levelQuestion];
                 }
-                EnLevelQuestion* tmpLevelQ = [tmpPaper getLevelQuestionByLevelID:questions[i][@"fkLevel"]];
+                EnLevelQuestion* tmpLevelQ = [tmpPaper getLevelQuestionByLevelID:questions[i][@"_fkLevel"]];
                 [tmpLevelQ.questionArray addObject:question];
             }
         }
@@ -168,8 +171,8 @@
 //从paperXML读取数据
 +(NSDictionary*)getDictionaryFromPaperXML
 {
-    //NSString* filepath = [GlobalUtil getPaperXMLPath];
-    NSString* filepath = [[NSBundle mainBundle] pathForResource:@"paper" ofType:@"xml"];
+    //NSString* filepath = [[NSBundle mainBundle] pathForResource:@"paper" ofType:@"xml"];
+    NSString* filepath = [GlobalUtil getPaperXMLPath];
     XMLDictionaryParser* parser = [[XMLDictionaryParser alloc] init];
     NSDictionary* dicPaper = [parser dictionaryWithFile:filepath];
     return dicPaper;

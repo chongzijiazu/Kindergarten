@@ -14,29 +14,38 @@
 //获取评估信息
 -(BOOL)getProcessInfo
 {
-    /*__block BOOL isgood = true;
+    NSString * strUrl =[HTTPInterface processinfo];
+    NSURL * url = [NSURL URLWithString:strUrl];
+    NSURLRequest *requst = [NSURLRequest requestWithURL:url];
+    /** 接收数据 */
+    NSError* err;
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:requst returningResponse:nil error:&err];
+    if (err!=nil) {
+        return false;
+    }
+    /** 解析数据 */
+    NSDictionary * rootDict;
+    //    int newVerson;
+    if (responseData)
+    {
+        rootDict = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableLeaves error:nil];
+    }
+    if([rootDict objectForKey:@"processinfo"])
+    {
+        NSArray* arrProc = [rootDict objectForKey:@"processinfo"];
+        return [self SaveProcessInfo:arrProc];
+    }
     
-    [HttpRequestModel httpRequest:[HTTPInterface processinfo] withParamters:nil isPost:NO success:^(id  _Nullable responseObject)
-     {
-         NSDictionary* dicResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-         NSLog(@"%@",dicResponse);
-         //将数据写入数据库
-     }failure:^(NSError *error) {
-         isgood=false;
-     }];
-    
-    return isgood;*/
-    
-    return [self SaveProcessInfo:@""];
+    return true;
 }
 
 //根据json串返回评估信息实体数组
--(BOOL)SaveProcessInfo:(NSString*)jsonProcess
+-(BOOL)SaveProcessInfo:(NSArray*)arrProc
 {
     //从本地文件获取模拟数据，测试用，实际从网络接口获取
-     NSString* processPath = [[NSBundle mainBundle] pathForResource:@"processinfo" ofType:@"txt"];
-    NSData* processData = [NSData dataWithContentsOfFile:processPath];
-    NSArray* arrProc = [NSJSONSerialization JSONObjectWithData:processData options:NSJSONReadingMutableContainers error:nil];
+     //NSString* processPath = [[NSBundle mainBundle] pathForResource:@"processinfo" ofType:@"txt"];
+    //NSData* processData = [NSData dataWithContentsOfFile:processPath];
+    //NSArray* arrProc = [NSJSONSerialization JSONObjectWithData:processData options:NSJSONReadingMutableContainers error:nil];
     
     //NSLog(@"%@",arrProc);
     if (arrProc!=nil && arrProc.count>0) {

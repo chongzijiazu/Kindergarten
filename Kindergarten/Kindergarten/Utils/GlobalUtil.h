@@ -25,5 +25,8 @@
 +(NSString*)getDownloadFilesPath;
 +(NSString*)getPaperXMLPath;
 +(NSString*)getHelpFileDirectPath;
++(NSString*)getDBPath;
++(NSString*)getLevelXMLPath;
++(long long) fileSizeAtPath:(NSString*)filePath;
 @end
 

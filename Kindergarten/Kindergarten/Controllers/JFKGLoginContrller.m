@@ -60,7 +60,7 @@
     
     /*//模拟登录，测试用
     [userDefault setObject:@"111111" forKey:@"ticketid"];
-    NSString* loginfoPath = [[NSBundle mainBundle] pathForResource:@"schoolinfo" ofType:@".txt"];
+    NSString* loginfoPath = [[NSBundle mainBundle] pathForResource:@"loginfo" ofType:@".txt"];
     NSString* strLoginfo = [NSString stringWithContentsOfFile:loginfoPath encoding:NSUTF8StringEncoding error:nil];
     [self saveLoginInfoToDocument:strLoginfo];
     DownloadManagerViewController* downloadManagerVC = [[DownloadManagerViewController alloc] init];
@@ -86,6 +86,10 @@
 {
     if (strLogInfo!=nil && strLogInfo.length>0) {
         NSString* filePath = [GlobalUtil getLoginInfoPath];
+        //如果存在则删除后再写入
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+        }
         return [strLogInfo writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
     }
     else

@@ -124,7 +124,7 @@
 {
     if (thirdLevelId!=nil && thirdLevelId.length==9)
     {
-        NSString* strSql=[NSString stringWithFormat:@"SELECT question.pkId questionid,question.seqLevel seqlevel,process.attachmentpath attachments,question.appendprove appendprove FROM tbl_ass_quesstion question LEFT JOIN tbl_ass_process process ON question.pkId=process.fkQuestionid WHERE question.fkLevel='%@';",thirdLevelId];
+        NSString* strSql=[NSString stringWithFormat:@"SELECT question.pkId questionid,question.seqLevel seqlevel,process.attachmentpath attachments,question.appendprove appendprove,question.fkLevel fklevel FROM tbl_ass_quesstion question LEFT JOIN tbl_ass_process process ON question.pkId=process.fkQuestionid WHERE question.fkLevel='%@';",thirdLevelId];
         NSArray* QAArray = [[SQLiteManager shareInstance] querySQL:strSql];
         //NSLog(@"%@",QAArray);
         NSString* strAttachments;
@@ -136,12 +136,12 @@
             NSMutableDictionary* dicQuesAprove = [[NSMutableDictionary alloc]init];
             strAproveItems=@"<tr>";
             strAttachments = QAArray[i][@"attachments"];
-            if (strAttachments.length>0)//该题已有证据
+            if (![strAttachments isEqualToString:@"(null)"] && strAttachments!=nil && strAttachments.length>0)//该题已有证据
             {
                 NSArray *array = [strAttachments componentsSeparatedByString:@","];
                 for (int j=0; j<array.count; j++)
                 {
-                    tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:array[j] andType:1 andFKQuestionid:QAArray[i][@"questionid"]];
+                    tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:array[j] andType:1 andFKQuestionid:QAArray[i][@"questionid"] andFKLevel:QAArray[i][@"fklevel"]];
                     strAproveItems= [strAproveItems stringByAppendingString:[tmpAproveItem description]];
                     if ((j+1)%3==0) {
                         strAproveItems = [strAproveItems stringByAppendingString:@"</tr><tr>"];
@@ -153,7 +153,7 @@
                 if (array.count<self.maxAproveNum)
                 {
                     NSString* aproveItemId = [self getAproveItemIdByAttachments:strAttachments andSeqLevel:QAArray[i][@"seqlevel"]];
-                    tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:aproveItemId andType:0 andFKQuestionid:QAArray[i][@"questionid"]];
+                    tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:aproveItemId andType:0 andFKQuestionid:QAArray[i][@"questionid"] andFKLevel:QAArray[i][@"fklevel"]];
                     strAproveItems= [strAproveItems stringByAppendingString:[tmpAproveItem description]];
                     strAproveItems = [strAproveItems stringByAppendingString:@"</tr>"];
                 }
@@ -163,7 +163,7 @@
             else//该题尚无证据
             {
                 NSString* aproveItemId = [self getAproveItemIdByAttachments:strAttachments andSeqLevel:QAArray[i][@"seqlevel"]];
-                tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:aproveItemId andType:0 andFKQuestionid:QAArray[i][@"questionid"]];
+                tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:aproveItemId andType:0 andFKQuestionid:QAArray[i][@"questionid"] andFKLevel:QAArray[i][@"fklevel"]];
                 strAproveItems= [strAproveItems stringByAppendingString:[tmpAproveItem description]];
                 [dicQuesAprove setObject:strAproveItems forKey:@"aproveitem"];
                 [dicQuesAprove setObject:[QAArray[i][@"questionid"] stringByAppendingString:@"_aprove"] forKey:@"aproveid"];
@@ -189,7 +189,7 @@
 //无附件时（即参数为空），取序号1
 -(NSString*)getAproveItemIdByAttachments:(NSString*)attachments andSeqLevel:(NSString*)seqlevel
 {
-    if(attachments!=nil && attachments.length>0)//有附件证据
+    if(![attachments isEqualToString:@"(null)"] && attachments!=nil && attachments.length>0)//有附件证据
     {
         NSMutableArray* tmpArray = [[NSMutableArray alloc]init];
         for (int i=0; i<self.maxAproveNum; i++)

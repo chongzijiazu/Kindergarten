@@ -15,6 +15,7 @@
 {
     NSString* _aproveItemName;
     NSString* _questionid;
+    NSString* _fklevel;
 }
 
 //@property (nonatomic,strong) UIImageView * camorrorImageview;
@@ -26,10 +27,11 @@
 
 
 //通过相册摄像头获取证据(并用传过来的aproveitemid命名)
-- (void)getAproveByAproveItemId:(NSString*)aproveitemid andQuestionId:(NSString*)mquestionid
+- (void)getAproveByAproveItemId:(NSString*)aproveitemid andQuestionId:(NSString*)mquestionid andFKLevel:(NSString*)fklevel
 {
     _aproveItemName=aproveitemid;//将名字保存到变量中，save时用
     _questionid=mquestionid;
+    _fklevel=fklevel;
     
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"请选择图片来源" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
@@ -161,9 +163,8 @@
         [imageData writeToFile:fullPath atomically:NO];
         
         //处理页面证据
-        NSString* thirdLevel = [self getThirdLevelFromSeqLevel:_aproveItemName];
         JFKGEvaluateController* evaluateC = [[JFKGEvaluateController alloc]init];
-        NSString* strQuesAprove=[evaluateC getQuestionAproveByThirdLevelId:thirdLevel];
+        NSString* strQuesAprove=[evaluateC getQuestionAproveByThirdLevelId:_fklevel];
         NSString* scriptStr = [NSString stringWithFormat:@"showLevelAprove(%@);",strQuesAprove];
         //NSLog(@"%@",strQuesAprove);
         [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
@@ -214,17 +215,6 @@
     }
     
     return false;
-}
-
--(NSString*)getThirdLevelFromSeqLevel:(NSString*)seqlevel
-{
-    if (seqlevel!=nil && seqlevel.length>0) {
-        NSArray* levelArr = [seqlevel componentsSeparatedByString:@"-"];
-        if (levelArr[2]!=nil) {
-            return levelArr[2];
-        }
-    }
-    return nil;
 }
 
 @end

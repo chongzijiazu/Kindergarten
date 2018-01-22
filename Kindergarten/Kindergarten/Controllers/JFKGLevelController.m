@@ -35,7 +35,8 @@
         [[NSFileManager defaultManager] removeItemAtPath:self.assLevelPath error:nil];
     }
  
-    NSString* levelXMLPath = [[NSBundle mainBundle] pathForResource:@"level" ofType:@"xml"];
+    //NSString* levelXMLPath = [[NSBundle mainBundle] pathForResource:@"level" ofType:@"xml"];
+    NSString* levelXMLPath = [GlobalUtil getLevelXMLPath];
     LevelTableCreator* levelTabelC =[[LevelTableCreator alloc]init];
     levelTable = [levelTabelC CreateTreeFromLevelXML:levelXMLPath];
     [[NSFileManager defaultManager] createDirectoryAtPath:self.assLevelPath withIntermediateDirectories:YES attributes:nil error:nil];
@@ -63,7 +64,8 @@
     }
     else
     {
-        NSString* levelXMLPath = [[NSBundle mainBundle] pathForResource:@"level" ofType:@"xml"];
+        //NSString* levelXMLPath = [[NSBundle mainBundle] pathForResource:@"level" ofType:@"xml"];
+        NSString* levelXMLPath = [GlobalUtil getLevelXMLPath];
         LevelTableCreator* levelTabelC = [[LevelTableCreator alloc] init];
         levelTable = [levelTabelC CreateTreeFromLevelXML:levelXMLPath];
         [[NSFileManager defaultManager] createDirectoryAtPath:self.assLevelPath withIntermediateDirectories:YES attributes:nil error:nil];
@@ -155,7 +157,8 @@
 -(NSArray*)getSortedThirdlevelArray
 {
     NSArray* stArray=nil;
-    NSString* levelXMLPath = [[NSBundle mainBundle] pathForResource:@"level" ofType:@"xml"];
+    //NSString* levelXMLPath = [[NSBundle mainBundle] pathForResource:@"level" ofType:@"xml"];
+    NSString* levelXMLPath = [GlobalUtil getLevelXMLPath];
     LevelTableCreator* levelTabelC = [[LevelTableCreator alloc] init];
     NSArray* levelArray = [levelTabelC getSortedLevelArrayFromLevelXmlFile:levelXMLPath];
     

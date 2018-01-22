@@ -31,7 +31,7 @@
 //测试用
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    /*[self deleteExistDownloadFile];//下载前清空数据清空下载数据
+    /*//[self deleteExistDownloadFile];//下载前清空数据清空下载数据
     if([self processDownloadData])//处理下载完的数据
     {
         //下载及加载数据完成，向页面发送成功消息
@@ -55,7 +55,7 @@
 -(void)startDownload
 {
     //初始化数据
-    self.currentDownloadCount = 1;//重置当前下载个数
+    self.currentDownloadCount = 0;//重置当前下载个数
     self.downloadArray = [[NSMutableArray alloc] initWithObjects:@"level.zip",@"paper.zip",@"formula.zip",@"attachment.zip",@"help.zip", nil];
     [self deleteExistDownloadFile];//下载前清空数据清空下载数据
     [self downloadEvalutionData]; //下载评估资源
@@ -171,14 +171,19 @@
         {
             return false;
         }
-    }
+     }
     
     //处理以评估数据，解压保存答案信息，解压保存证据信息
-    //NSString* attachmentzipPath = [downloadfilesPath stringByAppendingPathComponent:@"attachment.zip"];
-    //NSString* aprovePath = [GlobalUtil getAprovePath];
-    //if (![ZipUtil UZipArchive:attachmentzipPath  toPath:aprovePath]) {
-    //return false;
-    //}
+    NSString* attachmentzipPath = [downloadfilesPath stringByAppendingPathComponent:@"attachment.zip"];
+    NSString* aprovePath = [GlobalUtil getAprovePath];
+    long long filesize = [GlobalUtil fileSizeAtPath:attachmentzipPath];
+    if(filesize!=0)
+    {
+        if (![ZipUtil UZipArchive:attachmentzipPath  toPath:aprovePath])
+        {
+            return false;
+        }
+    }
     
     //通过网络接口，获取评估过程信息（试题答案）
     JFKGProcessInfoController* processC = [[JFKGProcessInfoController alloc]init];
@@ -187,38 +192,44 @@
     }
     
     //处理试卷数据，包括试卷包的解压,保存到数据库中
-    //NSString* paperzipPath = [downloadfilesPath stringByAppendingPathComponent:@"paper.zip"];
-    //if (![ZipUtil UZipArchive:paperzipPath  toPath:downloadfilesPath]) {
-    //return false;
-    //}
-    //else
-    //{
-    if (![JFKGCommonController SavePaperToDB]) {
+    NSString* paperzipPath = [downloadfilesPath stringByAppendingPathComponent:@"paper.zip"];
+    if (![ZipUtil UZipArchive:paperzipPath  toPath:downloadfilesPath])
+    {
         return false;
     }
-    //}
+    else
+    {
+        if (![JFKGCommonController SavePaperToDB])
+        {
+            return false;
+        }
+    }
     
     //处理评估指标体系，解压评估指标压缩包，生成评估指标所需的html格式文件
-    //NSString* levelzipPath = [downloadfilesPath stringByAppendingPathComponent:@"level.zip"];
-    //if (![ZipUtil UZipArchive:levelzipPath  toPath:downloadfilesPath]) {
-    //return false;
-    //}
-    //else
-    //{
+    NSString* levelzipPath = [downloadfilesPath stringByAppendingPathComponent:@"level.zip"];
+    if (![ZipUtil UZipArchive:levelzipPath  toPath:downloadfilesPath]) {
+    return false;
+    }
+    else
+    {
     JFKGLevelController* levelC = [[JFKGLevelController alloc] init];
     //生成html格式文件（调试，没添加解压过程）
     if (![levelC makeAssLevelFile]) {
         return false;
     }
-    //}
+    }
     
     //处理帮助文件
-    //NSString* helpDirec = [GlobalUtil getHelpFileDirectPath];
-    //NSString* helpzipPath = [downloadfilesPath stringByAppendingPathComponent:@"help.zip"];
-    //if (![ZipUtil UZipArchive:helpzipPath  toPath:helpDirec]) {
-    //return false;
-    //}
-    
+    NSString* helpDirec = [GlobalUtil getHelpFileDirectPath];
+    NSString* helpzipPath = [downloadfilesPath stringByAppendingPathComponent:@"help.zip"];
+    long long helpfilesize = [GlobalUtil fileSizeAtPath:attachmentzipPath];
+    if(helpfilesize!=0)
+    {
+        if (![ZipUtil UZipArchive:helpzipPath  toPath:helpDirec])
+        {
+            return false;
+        }
+    }
     
     return true;
 }
@@ -227,16 +238,21 @@
 {
     self.currentDownloadCount = 1;//重置当前下载个数
     //Document路径
-    
     NSString* downloadPath = [GlobalUtil getDownloadFilesPath];
     if([[NSFileManager defaultManager] fileExistsAtPath:downloadPath])
     {
         [[NSFileManager defaultManager] removeItemAtPath:downloadPath error:nil];//删除原来
         
     }
-    
     //重新创建目录
     [[NSFileManager defaultManager] createDirectoryAtPath:downloadPath withIntermediateDirectories:YES attributes:nil error:nil];
+    
+    //删除数据库文件
+    NSString* dbPath = [GlobalUtil getDBPath];
+    if([[NSFileManager defaultManager] fileExistsAtPath: dbPath])
+    {
+        [[NSFileManager defaultManager] removeItemAtPath:dbPath error:nil];
+    }
 }
 
 

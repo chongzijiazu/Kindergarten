@@ -13,20 +13,22 @@
 @synthesize aproveItemId=_aproveItemId;
 @synthesize fkQuestionid=_fkQuestionid;
 @synthesize type;
+@synthesize fklevel=_fklevel;
 
--(id)initWithAproveItemId:(NSString*)mAproveItemId andType:(int)mType andFKQuestionid:(NSString*)mFkQuestionid
+-(id)initWithAproveItemId:(NSString*)mAproveItemId andType:(int)mType andFKQuestionid:(NSString*)mFkQuestionid andFKLevel:(NSString*)mfklevel
 {
     if (self=[super init]) {
         self.aproveItemId = mAproveItemId;
         self.fkQuestionid = mFkQuestionid;
         self.type = mType;
+        self.fklevel=mfklevel;
     }
     return self;
 }
 
-+(id)aproveItemWithApproveItemId:(NSString*)mAproveItemId andType:(int)mType andFKQuestionid:(NSString*)mFkQuestionid
++(id)aproveItemWithApproveItemId:(NSString*)mAproveItemId andType:(int)mType andFKQuestionid:(NSString*)mFkQuestionid andFKLevel:(NSString*)mfklevel
 {
-    EnAproveItem* item = [[EnAproveItem alloc] initWithAproveItemId:mAproveItemId andType:mType andFKQuestionid:mFkQuestionid];
+    EnAproveItem* item = [[EnAproveItem alloc] initWithAproveItemId:mAproveItemId andType:mType andFKQuestionid:mFkQuestionid andFKLevel:mfklevel];
     return item;
 }
 
@@ -46,11 +48,11 @@
 {
     if (self.type==1)//已有证据项
     {
-        return [NSString stringWithFormat:@"<td id=\"%@\" onclick=\"proveItemClick(this.id,'1','%@');\"><img src=\"images/image.png\"/></td>",self.aproveItemId,self.fkQuestionid];
+        return [NSString stringWithFormat:@"<td id=\"%@\" onclick=\"proveItemClick(this.id,'1','%@','%@');\"><img src=\"images/image.png\"/></td>",self.aproveItemId,self.fkQuestionid,self.fklevel];
     }
     else if(self.type==0)
     {
-        return [NSString stringWithFormat:@"<td id=\"%@\" onclick=\"proveItemClick(this.id,'0','%@');\"><img src=\"images/add.png\"/></td>",self.aproveItemId,self.fkQuestionid];
+        return [NSString stringWithFormat:@"<td id=\"%@\" onclick=\"proveItemClick(this.id,'0','%@','%@');\"><img src=\"images/add.png\"/></td>",self.aproveItemId,self.fkQuestionid,self.fklevel];
     }
     else
     {

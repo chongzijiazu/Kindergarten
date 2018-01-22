@@ -10,6 +10,18 @@
 
 @implementation GlobalUtil
 
+//获取数据库文件路径
++(NSString*)getDBPath
+{
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    if(![[NSFileManager defaultManager] fileExistsAtPath:documentPath])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:documentPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    NSString *DBPath = [documentPath stringByAppendingPathComponent:@"KGDB.sqlite"];
+    return DBPath;
+}
+
 //证据文件夹路径
 +(NSString*)getAprovePath
 {
@@ -30,7 +42,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"DownloadFiles"];
-    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"formula.xml"];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"formula/formula.xml"];
     
     return documentsDirectory;
 }
@@ -164,7 +176,14 @@
 +(NSString*)getPaperXMLPath
 {
     NSString* downloadfilePath = [self getDownloadFilesPath];
-    return [downloadfilePath stringByAppendingPathComponent:@"paper.xml"];
+    return [downloadfilePath stringByAppendingPathComponent:@"paper/paper.xml"];
+}
+
+//获取解压后的level.xml文件路径
++(NSString*)getLevelXMLPath
+{
+    NSString* downloadfilePath = [self getDownloadFilesPath];
+    return [downloadfilePath stringByAppendingPathComponent:@"level/level.xml"];
 }
 
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString
@@ -195,6 +214,16 @@
     }
     
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
+
+//获取路径下的文件大小
++(long long) fileSizeAtPath:(NSString*)filePath
+{
+    NSFileManager* manager =[NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:filePath]){
+        return [[manager attributesOfItemAtPath:filePath error:nil]fileSize];
+    }
+    return 0;
 }
 
 @end

@@ -52,7 +52,7 @@ function showLevelAnswer(args)
 //显示试题证据
 function showLevelAprove(arrayData)
 {
-    //alert(arrayData);
+    alert(arrayData);
     for(var i = 0; i<arrayData.length;i++){
         var QA = arrayData[i];
         if(QA.aproveid.length>0)
@@ -157,13 +157,14 @@ function showFinished(obj)
     font.style.display = "inline";
 }
 
-function proveItemClick(aproveitemid,aproveitemtype,questionid)
+function proveItemClick(aproveitemid,aproveitemtype,questionid,fklevel)
 {
     //alert(questionid);
     var param ={
         "type":aproveitemtype,
         "id":aproveitemid,
-        "questionid":questionid
+        "questionid":questionid,
+        "fklevel":fklevel
     };
     var dicmsg ={
         "operation":"clickaprove",
@@ -236,6 +237,11 @@ function loadBaseInfo(pageData,thirdlevelname){
                 $("#"+key).html(kindergarteninfo[key]);
             }
             calculateBaseInfo();
+            
+            var personInfo = headData.personInfo;
+            for (var pinfo in personInfo) {
+                $("#s" + pinfo).html(personInfo[pinfo]);
+            }
             $("#school_name").html(kindergarteninfo.name);
             $("#thirdlevelname").html(thirdlevelname);
             if(headData.evaluateTimeInfo){

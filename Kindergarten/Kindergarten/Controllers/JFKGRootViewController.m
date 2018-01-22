@@ -271,10 +271,11 @@
                 //NSLog(@"%@",[dicParams objectForKey:@"type"]);
                 NSString* aproveitemtype =[dicParams objectForKey:@"type"];
                 NSString* questionid =[dicParams objectForKey:@"questionid"];
+                NSString* fklevel =[dicParams objectForKey:@"fklevel"];
                 NSString* aproveitemid =[dicParams objectForKey:@"id"];
                 if ([aproveitemtype isEqualToString:@"0"]) //添加证据
                 {
-                    [self.aproveController getAproveByAproveItemId:aproveitemid andQuestionId:questionid];//获取证据
+                    [self.aproveController getAproveByAproveItemId:aproveitemid andQuestionId:questionid andFKLevel:fklevel];//获取证据
                 }
                 else if([aproveitemtype isEqualToString:@"1"])//已有证据
                 {

@@ -40,7 +40,8 @@
         NSDictionary* dicLoginfo = [GlobalUtil dictionaryWithJsonString:strLoginfo];
         //NSLog(@"%@",[dicLoginfo objectForKey:@"idcode"]);
         if (dicLoginfo!=nil && dicLoginfo.count>0) {
-            return dicLoginfo;
+            NSDictionary* dicSchool = [dicLoginfo objectForKey:@"kindergarteninfo"];
+            return dicSchool;
         }
         else
         {

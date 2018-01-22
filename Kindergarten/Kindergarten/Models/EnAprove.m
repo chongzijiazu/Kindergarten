@@ -61,24 +61,5 @@
     return aproveHtml;
 }
 
-//创建证据项html串
--(NSString*)createAproveItem
-{
-    NSString* aproveItemsHtml= [[NSString alloc]init];
-    
-    EnAproveItem* item;
-    for (int j=0; j<self.aproveItemArray.count; j++)
-    {
-        item = (EnAproveItem*)self.aproveItemArray[j];
-        aproveItemsHtml = [aproveItemsHtml stringByAppendingString:[item description]];
-    }
-    //补足可添加证据项
-    for (int i=0; i<self.aproveItemNum-self.aproveItemArray.count; i++) {
-        
-    }
-    
-    return aproveItemsHtml;
-}
-
 
 @end
