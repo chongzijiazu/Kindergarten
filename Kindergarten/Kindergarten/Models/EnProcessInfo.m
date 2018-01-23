@@ -174,16 +174,48 @@
     NSString *SQL = @"SELECT fkQuestionid,attachmentpath,answer FROM 'tbl_ass_process' WHERE LENGTH(answer)>0";
     //取出数据库用户表中所有有答案的数据
     NSArray *allProcessDictArr = [[SQLiteManager shareInstance] querySQL:SQL];
-    if(allProcessDictArr!=nil && allProcessDictArr.count>0)
+    NSArray* outputArray = [self toOutputArray:allProcessDictArr];
+    if(outputArray!=nil && outputArray.count>0)
     {
-        NSData *data = [NSJSONSerialization dataWithJSONObject:allProcessDictArr options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];
+        NSData *data = [NSJSONSerialization dataWithJSONObject:outputArray options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];
         if (data == nil) {
             return nil;
         }
         
-        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString* strOutput =  [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        return strOutput;
     }
     return nil;
+}
+
++(NSArray*)toOutputArray:(NSArray*)realArray
+{
+    if (realArray!=nil && realArray.count>0) {
+        NSMutableArray* outputArray = [[NSMutableArray alloc] init];
+    
+        NSMutableArray* tmpAttachmentArray;
+        for (int i=0; i<realArray.count; i++) {
+            NSMutableDictionary* dicProcess = [[NSMutableDictionary alloc] init];
+            tmpAttachmentArray = [[NSMutableArray alloc] init];
+            NSString* strAttachment = realArray[i][@"attachmentpath"];
+            if (strAttachment!=nil && strAttachment.length>0) {
+                NSArray* attachments = [strAttachment componentsSeparatedByString:@","];
+                for (int j=0; j<attachments.count; j++) {
+                    NSString* newAttach = [attachments[j] stringByAppendingString:@".jpg"];
+                    [tmpAttachmentArray addObject:newAttach];
+                }
+            }
+            [dicProcess setObject:[GlobalUtil jsonStringWithObject:tmpAttachmentArray] forKey:@"attachmentpath"];
+            [dicProcess setObject:realArray[i][@"fkQuestionid"] forKey:@"fkQuestionid"];
+            [dicProcess setObject:realArray[i][@"answer"] forKey:@"answer"];
+            [outputArray addObject:dicProcess];
+        }
+        return outputArray;
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 @end

@@ -148,7 +148,7 @@
     // UIImage对象 -> NSData对象
     NSData *imageData = UIImagePNGRepresentation(currentImage);
     // 获取沙盒目录
-    NSString *aprovepath=[GlobalUtil getAprovePath];
+    NSString *aprovepath=[GlobalUtil getAproveItemPath];
     NSFileManager* fileM = [NSFileManager defaultManager];
     if (![fileM fileExistsAtPath:aprovepath])
     {

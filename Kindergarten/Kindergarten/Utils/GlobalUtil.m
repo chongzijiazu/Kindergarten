@@ -27,13 +27,26 @@
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"attachment"];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"aproves"];
     NSFileManager* fileM = [NSFileManager defaultManager];
     if (![fileM fileExistsAtPath:documentsDirectory])
     {
         [fileM createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:nil];
     }
     return documentsDirectory;
+}
+
+//证据文件项文件夹路径
++(NSString*)getAproveItemPath
+{
+    NSString* aprovesPath = [self getAprovePath];
+    NSString* aproveitemPath = [aprovesPath stringByAppendingPathComponent:@"proves"];
+    NSFileManager* fileM = [NSFileManager defaultManager];
+    if (![fileM fileExistsAtPath:aproveitemPath])
+    {
+        [fileM createDirectoryAtPath:aproveitemPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return aproveitemPath;
 }
 
 //公式文件路径路径
@@ -127,13 +140,26 @@
     return documentsDirectory;
 }
 
+//上传文件夹压缩路径
++(NSString*)getUploadZipPath
+{
+    NSString *documentsDirectory = [self getUploadPath];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"content"];
+    NSFileManager* fileM = [NSFileManager defaultManager];
+    if (![fileM fileExistsAtPath:documentsDirectory])
+    {
+        [fileM createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    return documentsDirectory;
+}
+
 //帮助文件路径
 +(NSString*)getHelpFilePath
 {
     NSFileManager* fileM = [NSFileManager defaultManager];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"helpfile"];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"help"];
     if (![fileM fileExistsAtPath:documentsDirectory]) {
         [fileM createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:nil];
     }
@@ -153,7 +179,7 @@
     NSFileManager* fileM = [NSFileManager defaultManager];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"helpfile"];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"help"];
     if (![fileM fileExistsAtPath:documentsDirectory]) {
         [fileM createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:nil];
     }

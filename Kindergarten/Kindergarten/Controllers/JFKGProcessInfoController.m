@@ -56,7 +56,7 @@
             proc = [[EnProcessInfo alloc] init];
             proc.fkQuestionid = dicTmp[@"fkQuestionid"];
             proc.answer=dicTmp[@"answer"];
-            proc.attachmentpath=dicTmp[@"attachmentpath"] ==nil?@"":dicTmp[@"attachmentpath"];
+            proc.attachmentpath=[self getNeedAttachmentpath:dicTmp[@"attachmentpath"]];
             
             if (![proc insertSelfToDB]) {
                 return false;
@@ -64,6 +64,32 @@
         }
     }
     return true;
+}
+
+//处理接受到的附件证据，剔除jpg(jpeg)以外的路径，并去掉jpg(jpeg）
+-(NSString*)getNeedAttachmentpath:(NSString*)strAttachArray
+{
+    NSData *jsonData = [strAttachArray dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSArray* attachArray = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if (attachArray!=nil && attachArray.count>0) {
+        NSString* strNewAttach = [[NSString alloc] init];
+        for (int i = 0;i<attachArray.count; i++) {
+            NSString * strOldAttach = attachArray[i];
+            if ([strOldAttach containsString:@"jpg"] || [strOldAttach containsString:@"jpeg"]) {
+                strOldAttach = [strOldAttach componentsSeparatedByString:@"."][0];
+                strOldAttach = [strOldAttach stringByAppendingString:@","];
+                strNewAttach = [strNewAttach stringByAppendingString:strOldAttach];
+            }
+        }
+        return [strNewAttach substringToIndex:strNewAttach.length-1];
+    }
+    else
+    {
+        return @"";
+    }
 }
 
 //保存答案
@@ -75,7 +101,7 @@
 //保存提示信息
 +(BOOL)saveMemoToDocument:(NSDictionary*)dicMemo
 {
-    NSString* aprovePath = [GlobalUtil getAprovePath];
+    NSString* aprovePath = [GlobalUtil getAproveItemPath];
     if (dicMemo!=nil && dicMemo.count>0) {
         for (NSString* key in dicMemo)
         {

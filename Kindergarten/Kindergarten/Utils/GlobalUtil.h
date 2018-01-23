@@ -28,5 +28,7 @@
 +(NSString*)getDBPath;
 +(NSString*)getLevelXMLPath;
 +(long long) fileSizeAtPath:(NSString*)filePath;
++(NSString*)getAproveItemPath;
++(NSString*)getUploadZipPath;
 @end
 

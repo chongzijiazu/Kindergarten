@@ -47,7 +47,7 @@
 -(void)showAprove
 {
     if (self.aproveItemId!=nil && self.aproveItemId.length>0) {
-        NSString *filePath = [GlobalUtil getAprovePath];
+        NSString *filePath = [GlobalUtil getAproveItemPath];
         filePath= [filePath stringByAppendingPathComponent:[self.aproveItemId stringByAppendingString:@".jpg"]];
         if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
         {
@@ -67,7 +67,7 @@
     EnProcessInfo* process = [[EnProcessInfo alloc] init];
     BOOL isgood = [process deleteAttachmentPathByQuestionId:self.questionid andNeedDeletedAttachmentPath:self.aproveItemId];
     if (isgood) {
-        NSString *filePath = [GlobalUtil getAprovePath];
+        NSString *filePath = [GlobalUtil getAproveItemPath];
         filePath= [filePath stringByAppendingPathComponent:[self.aproveItemId stringByAppendingString:@".jpg"]];
         if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
         {

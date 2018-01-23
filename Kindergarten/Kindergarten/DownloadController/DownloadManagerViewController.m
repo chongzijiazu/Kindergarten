@@ -56,7 +56,7 @@
 {
     //初始化数据
     self.currentDownloadCount = 0;//重置当前下载个数
-    self.downloadArray = [[NSMutableArray alloc] initWithObjects:@"level.zip",@"paper.zip",@"formula.zip",@"attachment.zip",@"help.zip", nil];
+    self.downloadArray = [[NSMutableArray alloc] initWithObjects:@"level.zip",@"paper.zip",@"formula.zip",@"proves.zip",@"help.zip", nil];
     [self deleteExistDownloadFile];//下载前清空数据清空下载数据
     [self downloadEvalutionData]; //下载评估资源
     //self.downloadProgress.progress=0.5;//测试用
@@ -111,10 +111,10 @@
             //下载公式数据
             [self downloadDataFrom:[HTTPInterface downloadformulacontent] toFilename:@"formula.zip"];
         }
-        else if([tempStr isEqualToString:@"attachment.zip"])
+        else if([tempStr isEqualToString:@"proves.zip"])
         {
             //下载证据数据
-            [self downloadDataFrom:[HTTPInterface downloadattachmentcontent] toFilename:@"attachment.zip"];
+            [self downloadDataFrom:[HTTPInterface downloadattachmentcontent] toFilename:@"proves.zip"];
         }
         else if([tempStr isEqualToString:@"help.zip"])
         {
@@ -174,18 +174,18 @@
      }
     
     //处理以评估数据，解压保存答案信息，解压保存证据信息
-    NSString* attachmentzipPath = [downloadfilesPath stringByAppendingPathComponent:@"attachment.zip"];
-    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString* attachmentzipPath = [downloadfilesPath stringByAppendingPathComponent:@"proves.zip"];
+    NSString *aprovesPath = [GlobalUtil getAprovePath];
     long long filesize = [GlobalUtil fileSizeAtPath:attachmentzipPath];
     if(filesize!=0)
     {
-        if (![ZipUtil UZipArchive:attachmentzipPath  toPath:documentPath])
+        if (![ZipUtil UZipArchive:attachmentzipPath  toPath:aprovesPath])
         {
             return false;
         }
         else//处理thumb文件名
         {
-            NSString* aprovepath = [GlobalUtil getAprovePath];
+            NSString* aprovepath = [GlobalUtil getAproveItemPath];
             NSFileManager* fileMgr = [NSFileManager defaultManager];
             NSArray* tempArray = [fileMgr contentsOfDirectoryAtPath:aprovepath error:nil];
             for (NSString* fileName in tempArray) {
@@ -232,12 +232,12 @@
     }
     
     //处理帮助文件
-    NSString* helpDirec = [GlobalUtil getHelpFileDirectPath];
+    NSString* documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     NSString* helpzipPath = [downloadfilesPath stringByAppendingPathComponent:@"help.zip"];
     long long helpfilesize = [GlobalUtil fileSizeAtPath:helpzipPath];
     if(helpfilesize!=0)
     {
-        if (![ZipUtil UZipArchive:helpzipPath  toPath:helpDirec])
+        if (![ZipUtil UZipArchive:helpzipPath  toPath:documentPath])
         {
             return false;
         }

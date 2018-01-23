@@ -177,6 +177,7 @@
      }*/
     NSString* strTip = [EnFormula translateDesc:[Base64Util Decode:self.contenttip]];
     self.content = [Base64Util Decode:self.content];
+    //self.content = [self.content stringByReplacingOccurrencesOfString:@"\n" withString:@"<br/>"];
     self.desc = [self translateDesc:[Base64Util Decode:self.desc]];
     NSString* questionHtml = [NSString stringWithFormat:@"<div style=\"font-size: 18px;\">%d.%@<span style=\"color: red; font-weight: bold;display:%@\">（关键指标）</span><img src=\"images/question.png\" /><a id=\"%@_desclink\" onclick=\"showQuesDesc(this.id)\" href=\"#\"><span>查看题目解释<span><span sdesc=\"%@\" id=\"%@_desc\" /></a> <font style=\"display:none; font-size: 18px; border: 2px solid orange; padding: 4px;border-radius: 4px; font-weight: bold;\" color=\"orange\" id=\"quesFinish_%@\">已完成</font></div><hr/><div id=\"%@\">%@</div><div class=\"questips\"><img src=\"images/result.png\" /><span>%@</span></div>",self.seq,self.content,strVeto,self.pkId,self.desc,self.pkId,self.pkId,self.pkId,optionHtml,strTip];
     return questionHtml;

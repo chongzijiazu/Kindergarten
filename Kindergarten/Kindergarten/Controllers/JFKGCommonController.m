@@ -224,8 +224,14 @@
         _docController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:helpfilepath]];
         _docController.delegate = self;
         CGRect rect = CGRectMake(self.currentVC.view.frame.size.width/2-100, 0, 200, 200);
-        [_docController presentOpenInMenuFromRect:rect inView:self.currentVC.view animated:YES];
-        //[_docController presentPreviewAnimated:NO];
+        
+        if ([[[helpfilepath pathExtension] lowercaseString] isEqualToString:@"pdf"]) {
+            [_docController presentPreviewAnimated:NO];
+        }
+        else
+        {
+            [_docController presentOpenInMenuFromRect:rect inView:self.currentVC.view animated:YES];
+        }
     }
     {
         [self showAlertView:@"无帮助文档"];

@@ -74,7 +74,7 @@
     BOOL isgood = [self zipUploadFile];
     if (isgood) {
         NSString* uploadPath = [GlobalUtil getUploadPath];
-        NSString* uploadFilepath = [uploadPath stringByAppendingPathComponent:@"attachment.zip"];
+        NSString* uploadFilepath = [uploadPath stringByAppendingPathComponent:@"content.zip"];
         if ([[NSFileManager defaultManager] fileExistsAtPath:uploadFilepath]) {
             //[self uploadDataFrom:uploadFilepath toUrl:[HTTPInterface uploadevaluatedata]];
             [self uploadFile:uploadFilepath toUrl:[HTTPInterface uploadevaluatedata]];
@@ -85,21 +85,21 @@
 -(BOOL)zipUploadFile
 {
     //生成答案文件
+    NSString* uploadZipPath = [GlobalUtil getUploadZipPath];
     NSString* strAnswer = [EnProcessInfo toJsonProcessInfo];
     if (strAnswer!=nil && strAnswer.length>0) {
         //NSLog(@"%@",strAnswer);
-        //将答案文件写到证据所在路径
-        NSString* aprovePath = [GlobalUtil getAprovePath];
-        NSString* answerFilepath = [aprovePath stringByAppendingPathComponent:@"answer.txt"];
+        //将答案文件写到上传所在路径
+        NSString* answerFilepath = [uploadZipPath stringByAppendingPathComponent:@"answer.txt"];
         if ([[NSFileManager defaultManager] fileExistsAtPath:answerFilepath]){
             [[NSFileManager defaultManager] removeItemAtPath:answerFilepath error:nil];//存在则先删除
         }
         BOOL isgood = [strAnswer writeToFile:answerFilepath atomically:YES encoding:NSUTF8StringEncoding error:nil];
         if (isgood) {
-            NSString* uploadPath = [GlobalUtil getUploadPath];
-            BOOL isok = [ZipUtil ZipArchiveWithFolder:aprovePath toPath:uploadPath];
+            NSString* proveitempath = [GlobalUtil getAproveItemPath];
+            BOOL isok = [ZipUtil ZipArchiveWithFolder:proveitempath toPath:uploadZipPath];
             if (isok) {
-                return true;
+                return [ZipUtil ZipArchiveWithFolder:uploadZipPath toPath:[GlobalUtil getUploadPath]];
             }
             else
             {
@@ -142,9 +142,15 @@
                                                                      options:NSJSONReadingMutableContainers
                                                                        error:nil];
          NSLog(@"上传成功.%@",dicResponse);
-         //上传成功则清理数据，退出到登录页面
-         [self showSucessAlertView:@"上传成功!"];
-          }
+         if ([dicResponse[@"success"] isEqualToString:@"1"]) {
+             //上传成功则清理数据，退出到登录页面
+             [self showSucessAlertView:@"上传成功!"];
+         }
+         else
+         {
+             [self showErrorAlertView:@"上传失败,是否从新上传评估数据"];
+         }
+        }
     failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
               NSLog(@"上传失败.%@",error);
         [self showErrorAlertView:@"上传失败,是否从新上传评估数据"];

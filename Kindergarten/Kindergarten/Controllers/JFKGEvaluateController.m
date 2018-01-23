@@ -89,7 +89,7 @@
         //NSLog(@"%@",QAArray);
         NSFileManager* fileM = [NSFileManager defaultManager];
         NSMutableArray* memoArray = [[NSMutableArray alloc]init];
-        NSString* aprovePath = [GlobalUtil getAprovePath];
+        NSString* aprovePath = [GlobalUtil getAproveItemPath];
         NSString* txtMemoPath = [[NSString alloc] init];
         for (int i=0; i<QAArray.count; i++) {
             NSMutableDictionary* memoDic = [[NSMutableDictionary alloc]init];
