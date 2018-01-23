@@ -282,6 +282,7 @@
                     JFKGAproveViewController* aproveVC = [[JFKGAproveViewController alloc] init];
                     aproveVC.aproveItemId =aproveitemid;
                     aproveVC.questionid = questionid;
+                    aproveVC.fklevel = fklevel;
                     aproveVC.webView = self.webView;
                     [self.navigationController pushViewController:aproveVC animated:NO                ];
                 }

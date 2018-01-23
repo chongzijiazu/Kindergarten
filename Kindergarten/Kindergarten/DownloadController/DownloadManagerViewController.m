@@ -175,13 +175,25 @@
     
     //处理以评估数据，解压保存答案信息，解压保存证据信息
     NSString* attachmentzipPath = [downloadfilesPath stringByAppendingPathComponent:@"attachment.zip"];
-    NSString* aprovePath = [GlobalUtil getAprovePath];
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     long long filesize = [GlobalUtil fileSizeAtPath:attachmentzipPath];
     if(filesize!=0)
     {
-        if (![ZipUtil UZipArchive:attachmentzipPath  toPath:aprovePath])
+        if (![ZipUtil UZipArchive:attachmentzipPath  toPath:documentPath])
         {
             return false;
+        }
+        else//处理thumb文件名
+        {
+            NSString* aprovepath = [GlobalUtil getAprovePath];
+            NSFileManager* fileMgr = [NSFileManager defaultManager];
+            NSArray* tempArray = [fileMgr contentsOfDirectoryAtPath:aprovepath error:nil];
+            for (NSString* fileName in tempArray) {
+                if ([fileName containsString:@"_thumb"]) {
+                    NSString* newFilename = [fileName stringByReplacingOccurrencesOfString:@"_thumb" withString:@""];
+                    [fileMgr moveItemAtPath:[aprovepath stringByAppendingPathComponent:fileName] toPath:[aprovepath stringByAppendingPathComponent:newFilename] error:nil];
+                }
+            }
         }
     }
     
@@ -222,7 +234,7 @@
     //处理帮助文件
     NSString* helpDirec = [GlobalUtil getHelpFileDirectPath];
     NSString* helpzipPath = [downloadfilesPath stringByAppendingPathComponent:@"help.zip"];
-    long long helpfilesize = [GlobalUtil fileSizeAtPath:attachmentzipPath];
+    long long helpfilesize = [GlobalUtil fileSizeAtPath:helpzipPath];
     if(helpfilesize!=0)
     {
         if (![ZipUtil UZipArchive:helpzipPath  toPath:helpDirec])

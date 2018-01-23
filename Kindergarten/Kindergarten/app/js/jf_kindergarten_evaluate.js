@@ -52,7 +52,7 @@ function showLevelAnswer(args)
 //显示试题证据
 function showLevelAprove(arrayData)
 {
-    alert(arrayData);
+    //alert(arrayData);
     for(var i = 0; i<arrayData.length;i++){
         var QA = arrayData[i];
         if(QA.aproveid.length>0)

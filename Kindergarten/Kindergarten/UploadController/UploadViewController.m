@@ -29,7 +29,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.uploadProgress.progress=0.5;
+    //self.uploadProgress.progress=0.5;
 }
 
 - (void)viewDidLoad {
@@ -60,7 +60,7 @@
     [self.view addSubview:self.uploadProgress];
     
     self.lbl_uploadState = [[UILabel alloc] init];
-    self.lbl_uploadState.frame = CGRectMake(self.view.frame.size.width/2-65, self.view.frame.size.height/2+20, 130, 20);
+    self.lbl_uploadState.frame = CGRectMake(self.view.frame.size.width/2-55, self.view.frame.size.height/2+20, 130, 20);
     self.lbl_uploadState.text = @"数据上传中...";
     [self.view addSubview:self.lbl_uploadState];
 }
@@ -74,9 +74,10 @@
     BOOL isgood = [self zipUploadFile];
     if (isgood) {
         NSString* uploadPath = [GlobalUtil getUploadPath];
-        NSString* uploadFilepath = [uploadPath stringByAppendingPathComponent:@"aprove.zip"];
+        NSString* uploadFilepath = [uploadPath stringByAppendingPathComponent:@"attachment.zip"];
         if ([[NSFileManager defaultManager] fileExistsAtPath:uploadFilepath]) {
-            [self uploadDataFrom:uploadFilepath toUrl:[HTTPInterface uploadevaluatedata]];
+            //[self uploadDataFrom:uploadFilepath toUrl:[HTTPInterface uploadevaluatedata]];
+            [self uploadFile:uploadFilepath toUrl:[HTTPInterface uploadevaluatedata]];
         }
     }
 }
@@ -117,34 +118,37 @@
     return true;
 }
 
--(void)uploadDataFrom:(NSString*)fromFilePath toUrl:(NSString*)toUrl
+//上传文件
+- (void)uploadFile:(NSString*)fromFilePath toUrl:(NSString*)toUrl
 {
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json",@"text/json",@"text/html",@"text/plain", nil];
     
-    NSURL *URL = [NSURL URLWithString:toUrl];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    
-    NSURL *filePath = [NSURL fileURLWithPath:fromFilePath];
-    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithRequest:request fromFile:filePath progress:^(NSProgress * _Nonnull uploadProg) {
-        //下载进度
-        //NSLog(@"%f",1.0 * downloadProgress.completedUnitCount / downloadProgress.totalUnitCount);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.uploadProgress.progress =1.0 * uploadProg.completedUnitCount / uploadProg.totalUnitCount;
-        });
+    NSDictionary *dict = @{@"ticketid":TICKETID};
+    [manager POST:toUrl parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData)
+    {
+        [formData appendPartWithFileURL:[NSURL fileURLWithPath:fromFilePath] name:@"file" error:nil];
         
-    }  completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-            [self showErrorAlertView:@"上传失败,是否从新上传评估数据"];
-        } else {
-            NSLog(@"Success: %@ %@", response, responseObject);
-            //上传成功则清理数据，退出到登录页面
-            [self showSucessAlertView:@"上传成功!"];
-        }
-    }];
-    //开始上传
-    [uploadTask resume];
+    }progress:^(NSProgress * _Nonnull uploadProgress) {
+             //NSLog(@"%f",1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.uploadProgress.progress =1.0 * uploadProgress.completedUnitCount / uploadProgress.totalUnitCount;
+        });
+         }
+     success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+         
+         NSDictionary* dicResponse = [NSJSONSerialization JSONObjectWithData:responseObject
+                                                                     options:NSJSONReadingMutableContainers
+                                                                       error:nil];
+         NSLog(@"上传成功.%@",dicResponse);
+         //上传成功则清理数据，退出到登录页面
+         [self showSucessAlertView:@"上传成功!"];
+          }
+    failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+              NSLog(@"上传失败.%@",error);
+        [self showErrorAlertView:@"上传失败,是否从新上传评估数据"];
+          }];
 }
 
 -(void)uploadSuccess

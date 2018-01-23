@@ -27,7 +27,7 @@
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"aprove"];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"attachment"];
     NSFileManager* fileM = [NSFileManager defaultManager];
     if (![fileM fileExistsAtPath:documentsDirectory])
     {

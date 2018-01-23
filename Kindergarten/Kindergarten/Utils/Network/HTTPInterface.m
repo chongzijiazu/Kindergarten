@@ -62,7 +62,7 @@
 //上传评估数据
 +(NSString*)uploadevaluatedata;
 {
-    return [NSString stringWithFormat:@"%@%@%@",baseUrlString,@"uploadevaluatedata?ticketid=",TICKETID ];
+    return [NSString stringWithFormat:@"%@%@",baseUrlString,@"uploadevaluatedata.do"];
 }
 
 @end

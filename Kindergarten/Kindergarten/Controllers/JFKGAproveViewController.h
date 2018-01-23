@@ -13,10 +13,12 @@
 {
     NSString* _aproveItemId;//seqlevel_题号_序号，命名的证据
     NSString* _questionid;
+    NSString* _fklevel;
     UIImageView* _aproveImageView;
 }
 @property(nonatomic,copy)NSString* aproveItemId;
 @property(nonatomic,copy)NSString* questionid;
+@property(nonatomic,copy)NSString* fklevel;
 @property(nonatomic,strong)UIImageView* aproveImageView;
 
 @property (nonatomic, weak) WKWebView *webView;

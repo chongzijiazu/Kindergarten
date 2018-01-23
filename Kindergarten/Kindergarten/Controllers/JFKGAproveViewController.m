@@ -18,6 +18,7 @@
 
 @synthesize aproveItemId=_aproveItemId;
 @synthesize questionid=_questionid;
+@synthesize fklevel=_fklevel;
 @synthesize aproveImageView = _aproveImageView;
 
 -(void)viewWillAppear:(BOOL)animated
@@ -73,9 +74,8 @@
             BOOL isDeleted = [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
             if (isDeleted) {
                 //处理页面证据
-                NSString* thirdLevel = [self getThirdLevelFromSeqLevel:self.aproveItemId];
                 JFKGEvaluateController* evaluateC = [[JFKGEvaluateController alloc]init];
-                NSString* strQuesAprove=[evaluateC getQuestionAproveByThirdLevelId:thirdLevel];
+                NSString* strQuesAprove=[evaluateC getQuestionAproveByThirdLevelId:self.fklevel];
                 NSString* scriptStr = [NSString stringWithFormat:@"showLevelAprove(%@);",strQuesAprove];
                 //NSLog(@"%@",strQuesAprove);
                 [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
@@ -85,17 +85,6 @@
             }
         }
     }
-}
-
--(NSString*)getThirdLevelFromSeqLevel:(NSString*)seqlevel
-{
-    if (seqlevel!=nil && seqlevel.length>0) {
-        NSArray* levelArr = [seqlevel componentsSeparatedByString:@"-"];
-        if (levelArr[2]!=nil) {
-            return levelArr[2];
-        }
-    }
-    return nil;
 }
 
 -(void)backMain:(id)sender{

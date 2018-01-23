@@ -22,7 +22,7 @@
 #import "ZipUtil.h"
 
 //#define baseUrlString @"http://10.3.1.147:8080/kindergarten/evaluation/app/"
-#define baseUrlString @"http://192.168.1.115:8070/kindergarten/evaluation/app/"
+#define baseUrlString @"http://192.168.1.114:8070/kindergarten/evaluation/app/"
 #define OnlineUrlString @"http://10.3.1.146:8080/kindergarten/evaluation/login.do"
 
 

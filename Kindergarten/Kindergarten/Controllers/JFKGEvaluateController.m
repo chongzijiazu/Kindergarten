@@ -134,10 +134,11 @@
         for (int i=0; i<QAArray.count; i++)
         {
             NSMutableDictionary* dicQuesAprove = [[NSMutableDictionary alloc]init];
-            strAproveItems=@"<tr>";
+            strAproveItems=@"";
             strAttachments = QAArray[i][@"attachments"];
             if (![strAttachments isEqualToString:@"(null)"] && strAttachments!=nil && strAttachments.length>0)//该题已有证据
             {
+                strAproveItems=@"<tr>";
                 NSArray *array = [strAttachments componentsSeparatedByString:@","];
                 for (int j=0; j<array.count; j++)
                 {

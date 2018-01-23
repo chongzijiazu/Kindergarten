@@ -50,8 +50,14 @@
     //NSLog(@"%@",arrProc);
     if (arrProc!=nil && arrProc.count>0) {
         EnProcessInfo* proc;
+        NSDictionary* dicTmp;
         for (int i=0; i<arrProc.count; i++) {
-            proc = [[EnProcessInfo alloc] initWithDict:arrProc[i]];
+            dicTmp=arrProc[i];
+            proc = [[EnProcessInfo alloc] init];
+            proc.fkQuestionid = dicTmp[@"fkQuestionid"];
+            proc.answer=dicTmp[@"answer"];
+            proc.attachmentpath=dicTmp[@"attachmentpath"] ==nil?@"":dicTmp[@"attachmentpath"];
+            
             if (![proc insertSelfToDB]) {
                 return false;
             }

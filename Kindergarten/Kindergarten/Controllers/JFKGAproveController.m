@@ -148,15 +148,13 @@
     // UIImage对象 -> NSData对象
     NSData *imageData = UIImagePNGRepresentation(currentImage);
     // 获取沙盒目录
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"aprove"];
+    NSString *aprovepath=[GlobalUtil getAprovePath];
     NSFileManager* fileM = [NSFileManager defaultManager];
-    if (![fileM fileExistsAtPath:documentsDirectory])
+    if (![fileM fileExistsAtPath:aprovepath])
     {
-        [fileM createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+        [fileM createDirectoryAtPath:aprovepath withIntermediateDirectories:YES attributes:nil error:nil];
     }
-    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:imageName];
+    NSString *fullPath = [aprovepath stringByAppendingPathComponent:imageName];
     
     if ([self saveAproveItemToDB]) {
         // 将图片写入文件
