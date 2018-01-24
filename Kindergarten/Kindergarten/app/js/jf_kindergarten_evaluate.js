@@ -246,6 +246,7 @@ function loadBaseInfo(pageData,thirdlevelname){
             $("#school_name").html(kindergarteninfo.name);
             $("#thirdlevelname").html(thirdlevelname);
             if(headData.evaluateTimeInfo){
+                //alert(headData.evaluateTimeInfo.beginTime);
                 $("#eva_starttime").html(headData.evaluateTimeInfo.beginTime);
                 $("#eva_endtime").html(headData.evaluateTimeInfo.endTime);
             }
@@ -314,11 +315,20 @@ function calculateBaseInfo(){
         }
     }
     
+    var isprivate = $("#isprivate").html();
+    if(isprivate != ""){
+        if(parseInt(isprivate) == 0 ){
+            $("#isprivate").html("否");
+        }else if(parseInt(isprivate) == 1){
+            $("#isprivate").html("是");
+        }
+    }
+    
     var iscenter = $("#iscenter").html();
     if(iscenter != ""){
         if(parseInt(iscenter) == 0 ){
             $("#iscenter").html("否");
-        }else if(parseInt(isprivate) == 1){
+        }else if(parseInt(iscenter) == 1){
             $("#iscenter").html("是");
         }
     }

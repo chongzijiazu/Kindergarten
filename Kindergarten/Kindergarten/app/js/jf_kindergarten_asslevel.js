@@ -131,7 +131,7 @@ function mergin(tableid,column)
 
 
 function loadPageData(pageData){
-    //alert(pageData.kindergarteninfo["address"]);
+    
     if(pageData){
         var headData = pageData;
         if(headData){
@@ -149,6 +149,7 @@ function loadPageData(pageData){
                 $("#s" + pinfo).html(personInfo[pinfo]);
             }
             if(headData.evaluateTimeInfo){
+                //alert(pageData.kindergarteninfo["address"]);
                 $("#eva_starttime").html(headData.evaluateTimeInfo.beginTime);
                 $("#eva_endtime").html(headData.evaluateTimeInfo.endTime);
             }
@@ -217,11 +218,20 @@ function calculateBaseInfo(){
         }
     }
     
+    var isprivate = $("#isprivate").html();
+    if(isprivate != ""){
+        if(parseInt(isprivate) == 0 ){
+            $("#isprivate").html("否");
+        }else if(parseInt(isprivate) == 1){
+            $("#isprivate").html("是");
+        }
+    }
+    
     var iscenter = $("#iscenter").html();
     if(iscenter != ""){
         if(parseInt(iscenter) == 0 ){
             $("#iscenter").html("否");
-        }else if(parseInt(isprivate) == 1){
+        }else if(parseInt(iscenter) == 1){
             $("#iscenter").html("是");
         }
     }
