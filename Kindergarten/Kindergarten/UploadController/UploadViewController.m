@@ -148,12 +148,21 @@
          }
          else
          {
-             [self showErrorAlertView:@"上传失败,是否从新上传评估数据"];
+             NSString* errmsg =dicResponse[@"message"];
+             if (errmsg!=nil && errmsg.length>0) {
+                 errmsg = [NSString stringWithFormat:@"上传失败,是否重新上传评估数据(%@)",errmsg];
+                 [self showErrorAlertView:errmsg];
+             }
+             else
+             {
+                 [self showErrorAlertView:@"上传失败,是否重新上传评估数据"];
+             }
          }
         }
     failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
               NSLog(@"上传失败.%@",error);
-        [self showErrorAlertView:@"上传失败,是否从新上传评估数据"];
+        NSString* strErr = [NSString stringWithFormat:@"%@",error];
+        [self showErrorAlertView:[NSString stringWithFormat:@"上传失败,是否重新上传评估数据(%@)",strErr]];
           }];
 }
 
