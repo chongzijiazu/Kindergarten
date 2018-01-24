@@ -301,7 +301,19 @@
 
 //从配置文件取值，暂时定义为12
 -(int)maxAproveNum {
-    if (_maxAproveNum == 0) {
+    NSString* strResult = [JFKGCommonController getBaseInfo];
+    NSDictionary* dicLoginfo = [GlobalUtil dictionaryWithJsonString:strResult];
+    if (dicLoginfo!=nil && dicLoginfo.count>0) {
+        NSDictionary* dicParam = dicLoginfo[@"paramInfo"];
+        if (dicParam!=nil && dicParam.count>0) {
+            NSString* attachment_max = dicParam[@"attachments.max"];
+            if (attachment_max!=nil && attachment_max.length>0) {
+                _maxAproveNum = [attachment_max intValue];
+            }
+        }
+    }
+    else
+    {
         _maxAproveNum=12;
     }
     

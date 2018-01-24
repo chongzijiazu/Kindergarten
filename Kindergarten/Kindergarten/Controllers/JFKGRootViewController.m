@@ -235,9 +235,12 @@
             else if([operation isEqualToString:@"pageDown"])
             {
                 NSString* nextThirdLevelId = [self.levelController getNextThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
+                
                 if (nextThirdLevelId!=nil && nextThirdLevelId.length==9)
                 {
+                    NSString* nextThirdLevelName = [self.levelController getThirdLevelNameByCurrentThirdLevelId:nextThirdLevelId];
                     self.evaluateController.currentLevelQuestionID =nextThirdLevelId;
+                    self.evaluateController.currentLevelQuestionName = nextThirdLevelName;
                     [self.evaluateController sendLevelQuestionToView];
                 }
                 else
@@ -252,9 +255,12 @@
             else if([operation isEqualToString:@"pageUp"])
             {
                 NSString* preThirdLevelId = [self.levelController getPreThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
+                
                 if (preThirdLevelId!=nil && preThirdLevelId.length==9)
                 {
+                    NSString* preThirdLevelName = [self.levelController getThirdLevelNameByCurrentThirdLevelId:preThirdLevelId];
                     self.evaluateController.currentLevelQuestionID =preThirdLevelId;
+                    self.evaluateController.currentLevelQuestionName = preThirdLevelName;
                     [self.evaluateController sendLevelQuestionToView];
                 }
                 else

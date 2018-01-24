@@ -126,6 +126,7 @@
     {
         if(self.currentDownloadCount == 5)//下载完成
         {
+            self.lbl_downloadState.text =  @"数据加载中...";
             if([self processDownloadData])//处理下载完的数据
             {
                 //下载及加载数据完成，向页面发送成功消息
@@ -149,7 +150,6 @@
 //处理下载好的数据(先处理基础数据，因为后续操作会用到基础数据)
 -(BOOL)processDownloadData
 {
-    self.lbl_downloadState.text = @"数据加载中...";
     //在处理数据的时候创建（打开）数据库(已在程序启动时做过此操作，但由于退出到登录界面时会删除数据库，所以在系统启动时再做此操作，以保证数据库正常打开)
     if ([[SQLiteManager shareInstance] openDB]) {
         NSLog(@"打开/创建数据库成功!");

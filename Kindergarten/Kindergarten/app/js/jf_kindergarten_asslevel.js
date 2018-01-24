@@ -207,6 +207,34 @@ function calculateBaseInfo(){
         infosum4 += parseFloat($("#info45").html());
     }
     $("#infosum4").html(infosum4);
+    
+    var isprivate = $("#isprivate").html();
+    if(isprivate != ""){
+        if(parseInt(isprivate) == 0 ){
+            $("#isprivate").html("否");
+        }else if(parseInt(isprivate) == 1){
+            $("#isprivate").html("是");
+        }
+    }
+    
+    var iscenter = $("#iscenter").html();
+    if(iscenter != ""){
+        if(parseInt(iscenter) == 0 ){
+            $("#iscenter").html("否");
+        }else if(parseInt(isprivate) == 1){
+            $("#iscenter").html("是");
+        }
+    }
+    
+    var info47 = $("#info47").html();
+    if(info47 != ""){
+        if(parseInt(info47) == 0 ){
+            $("#info47").html("否");
+        }else if(parseInt(info47) == 1){
+            $("#info47").html("是");
+        }
+    }
+    
 }
 
 function Base64() {

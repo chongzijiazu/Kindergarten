@@ -12,8 +12,10 @@
 @interface JFKGLevelController : NSObject
 {
     NSArray* _sortedThirdLevelArray;//生序排序的三级指标id数组
+    NSDictionary* _thirdLevelDic;//生序三级指标id,name字典
 }
 @property(nonatomic,strong)NSArray* sortedThirdLevelArray;
+@property(nonatomic,strong)NSDictionary* thirdLevelDic;
 @property (nonatomic, weak) WKWebView *webView;
 @property (nonatomic, weak) UIViewController *currentVC;
 
@@ -24,5 +26,6 @@
 -(NSString*)getPreThirdLevelIdByCurrentThirdLevelId:(NSString*)currentThirdLevelId;
 -(NSString*)getNextThirdLevelIdByCurrentThirdLevelId:(NSString*)currentThirdLevelId;
 -(BOOL)saveFormulaValue:(NSDictionary*)dicFormula;
+-(NSString*)getThirdLevelNameByCurrentThirdLevelId:(NSString*)currentThirdLevelId;
 
 @end

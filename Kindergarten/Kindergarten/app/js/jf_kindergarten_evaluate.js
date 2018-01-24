@@ -222,6 +222,7 @@ function showQuesDesc(pkId)
     var base = new Base64();
     var tContent = $("#"+pkId+"_desc").attr("sdesc");
     tContent=base.decode(tContent);
+    tContent = tContent.replace(/NEW_LINE/g, '<br/>');
     $("#tipModalBody").html(tContent);
     $('#tipModal').modal({show:true,backdrop:false,keyboard:false});
 }
@@ -303,6 +304,34 @@ function calculateBaseInfo(){
         infosum4 += parseFloat($("#info45").html());
     }
     $("#infosum4").html(infosum4);
+    
+    var isprivate = $("#isprivate").html();
+    if(isprivate != ""){
+        if(parseInt(isprivate) == 0 ){
+            $("#isprivate").html("否");
+        }else if(parseInt(isprivate) == 1){
+            $("#isprivate").html("是");
+        }
+    }
+    
+    var iscenter = $("#iscenter").html();
+    if(iscenter != ""){
+        if(parseInt(iscenter) == 0 ){
+            $("#iscenter").html("否");
+        }else if(parseInt(isprivate) == 1){
+            $("#iscenter").html("是");
+        }
+    }
+    
+    var info47 = $("#info47").html();
+    if(info47 != ""){
+        if(parseInt(info47) == 0 ){
+            $("#info47").html("否");
+        }else if(parseInt(info47) == 1){
+            $("#info47").html("是");
+        }
+    }
+    
 }
 
 function decodeViewBase64()

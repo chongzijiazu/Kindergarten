@@ -180,6 +180,33 @@
     return stArray;
 }
 
+
+-(NSDictionary*)getThirdlevelDict
+{
+    NSDictionary* stDict=nil;
+    //NSString* levelXMLPath = [[NSBundle mainBundle] pathForResource:@"level" ofType:@"xml"];
+    NSString* levelXMLPath = [GlobalUtil getLevelXMLPath];
+    LevelTableCreator* levelTabelC = [[LevelTableCreator alloc] init];
+    NSArray* levelArray = [levelTabelC getSortedLevelArrayFromLevelXmlFile:levelXMLPath];
+    
+    NSMutableDictionary* tmpDict;
+    if (levelArray!=nil && levelArray.count>0) {
+        tmpDict = [[NSMutableDictionary alloc] init];
+        NSString* strpkId=nil;
+        NSString* strname=nil;
+        for (int i=0; i<levelArray.count; i++) {
+            strpkId = (NSString*)levelArray[i][@"pkId"];
+            strname = (NSString*)levelArray[i][@"name"];
+            if (strpkId.length==9) {
+                [tmpDict setObject:strname forKey:strpkId];
+            }
+        }
+        stDict = (NSDictionary*)tmpDict;
+    }
+    
+    return stDict;
+}
+
 -(NSString*)getNextThirdLevelIdByCurrentThirdLevelId:(NSString*)currentThirdLevelId
 {
     NSString* nextid=nil;
@@ -220,6 +247,11 @@
     return preid;
 }
 
+-(NSString*)getThirdLevelNameByCurrentThirdLevelId:(NSString*)currentThirdLevelId
+{
+    return self.thirdLevelDic[currentThirdLevelId];
+}
+
 -(NSString *)assLevelPath {
     if (_assLevelPath == nil) {
         //Document路径
@@ -236,5 +268,13 @@
     }
     
     return _sortedThirdLevelArray;
+}
+
+-(NSDictionary*)thirdLevelDic {
+    if (_thirdLevelDic == nil) {
+        _thirdLevelDic = [self getThirdlevelDict];
+    }
+    
+    return _thirdLevelDic;
 }
 @end
