@@ -84,7 +84,13 @@
                 strNewAttach = [strNewAttach stringByAppendingString:strOldAttach];
             }
         }
-        return [strNewAttach substringToIndex:strNewAttach.length-1];
+        if (strNewAttach!=nil && strNewAttach.length>0) {
+            return [strNewAttach substringToIndex:strNewAttach.length-1];
+        }
+        else
+        {
+            return @"";
+        }
     }
     else
     {
