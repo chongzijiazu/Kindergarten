@@ -22,5 +22,6 @@
 -(BOOL)updateValueToDB;
 +(NSString*)translateDesc:(NSString*)strDesc;
 +(NSString*)getValueByPKID:(NSString*)mPKID;
++(NSString*)getValueByName:(NSString*)mName;
 
 @end

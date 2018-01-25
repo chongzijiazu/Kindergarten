@@ -94,8 +94,17 @@ function calculateFormula(dicFormula)
         for(var key in dicFormula)
         {
             var expression = base.decode(dicFormula[key]);
-            var value = eval(expression);
-            params[key]=value;
+            //alert(expression);
+            try
+            {
+                var value = eval(expression);
+                //alert(value);
+                params[key]=value;
+            }
+            catch(err)
+            {
+                alert(err);
+            }
         }
         //alert(params);
         var dicmsg ={

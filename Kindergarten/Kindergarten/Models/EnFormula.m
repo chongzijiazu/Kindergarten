@@ -56,6 +56,8 @@
             if(f.expression!=nil && f.expression.length>0)
             {
                 f.expression = [Base64Util Decode:f.expression];
+                //f.expression=[f.expression stringByReplacingOccurrencesOfString:@"\r\n" withString:@""];
+                //f.expression=[f.expression stringByReplacingOccurrencesOfString:@"\t" withString:@""];
                 NSString *pattern = @"\\{([^\\{\\}]+)\\}";//创建正则表达式，匹配表达式中的变量
                 NSRegularExpression *regular = [[NSRegularExpression alloc] initWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
                 //利用规则测试字符串获取匹配结果
@@ -66,8 +68,10 @@
                 for (NSTextCheckingResult *result in results)
                 {
                     newStr = [newStr stringByAppendingString:[f.expression substringWithRange:NSMakeRange(end, result.range.location-end)]];
+                    NSLog(@"%@",dicSchool[[f.expression substringWithRange:result.range]]);
                     if ([dicSchool.allKeys containsObject:[f.expression substringWithRange:result.range]]) {
-                        newStr = [newStr stringByAppendingString:dicSchool[[f.expression substringWithRange:result.range]]];
+                        NSString* tmpRet = [NSString stringWithFormat:@"%@",dicSchool[[f.expression substringWithRange:result.range]]];
+                        newStr = [newStr stringByAppendingString:tmpRet];
                     }
                     else
                     {
@@ -165,6 +169,19 @@
     for (int i=0; i<formulaArr.count; i++) {
         formula = (EnFormula*)formulaArr[i];
         if ([formula.pkId isEqualToString:mPKID]) {
+            return formula.value;
+        }
+    }
+    return nil;
+}
+
++(NSString*)getValueByName:(NSString*)mName
+{
+    NSArray* formulaArr = [self allFormulaFromDB];
+    EnFormula* formula;
+    for (int i=0; i<formulaArr.count; i++) {
+        formula = (EnFormula*)formulaArr[i];
+        if ([formula.name isEqualToString:mName]) {
             return formula.value;
         }
     }
