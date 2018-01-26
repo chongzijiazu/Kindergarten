@@ -197,9 +197,9 @@
         for (int i=0; i<levelArray.count; i++) {
             strpkId = (NSString*)levelArray[i][@"pkId"];
             strname = (NSString*)levelArray[i][@"name"];
-            if (strpkId.length==9) {
+            //if (strpkId.length==9) {
                 [tmpDict setObject:strname forKey:strpkId];
-            }
+            //}
         }
         stDict = (NSDictionary*)tmpDict;
     }
@@ -249,7 +249,14 @@
 
 -(NSString*)getThirdLevelNameByCurrentThirdLevelId:(NSString*)currentThirdLevelId
 {
-    return self.thirdLevelDic[currentThirdLevelId];
+    if (currentThirdLevelId!=nil && currentThirdLevelId.length==9) {
+        NSString* strFirstLevel = self.thirdLevelDic[[currentThirdLevelId substringToIndex:currentThirdLevelId.length-6]];
+        NSString* strSecondLevel = self.thirdLevelDic[[currentThirdLevelId substringToIndex:currentThirdLevelId.length-3]];
+        NSString* strThirdLevel =self.thirdLevelDic[currentThirdLevelId];
+        NSString* allName = [NSString stringWithFormat:@"%@/%@/%@",strFirstLevel,strSecondLevel,strThirdLevel];
+        return allName;
+    }
+    return @"";
 }
 
 -(NSString *)assLevelPath {

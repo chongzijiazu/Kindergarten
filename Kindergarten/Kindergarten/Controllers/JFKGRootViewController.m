@@ -196,7 +196,8 @@
                 //NSLog(@"%@",[dicMsg objectForKey:@"param"]);
                 NSDictionary* dicParam =[dicMsg objectForKey:@"param"];
                 self.evaluateController.currentLevelQuestionID =[dicParam objectForKey:@"thirdlevelid"];//三级指标id传给页面
-                self.evaluateController.currentLevelQuestionName=[dicParam objectForKey:@"thirdlevelname"];
+                //self.evaluateController.currentLevelQuestionName=[dicParam objectForKey:@"thirdlevelname"];
+                self.evaluateController.currentLevelQuestionName = [self.levelController getThirdLevelNameByCurrentThirdLevelId:[dicParam objectForKey:@"thirdlevelid"]];
                 [self loadLocalHtmlByFilename:@"evaluate.html"];
             }
             else if([operation isEqualToString:@"uploadData"])
