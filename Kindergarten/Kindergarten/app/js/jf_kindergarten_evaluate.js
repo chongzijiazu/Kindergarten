@@ -116,13 +116,22 @@ function addaprove()
 //选项单击取反
 function optionClicked(obj)
 {
-    //alert(obj.tag);
+    var options = $("input[name='"+obj.name+"']");
+    if(options)
+    {
+        for(var i=0;i<options.length;i++)
+        {
+            $(options[i]).parent().css("background-color","#fff");
+        }
+    }
+    
     var radio=obj;
     if (radio.tag==1)
     {
         hideFinished(radio);
         radio.checked=false;
         radio.tag=0;
+        $(radio).parent().css("background-color","#fff");
         //取消选中将答案设置为空
         var param={};
         param[radio.name]="";
@@ -136,7 +145,8 @@ function optionClicked(obj)
     {
         showFinished(radio);
         radio.checked=true;
-        radio.tag=1
+        radio.tag=1;
+        $(radio).parent().css("background-color","orange");
     }
     //alert(obj.checked);
 }
@@ -497,3 +507,13 @@ function openHelpFile()
     window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
 }
 
+//值转换
+function colorRGB2Hex(color) {
+    var rgb = color.split(',');
+    var r = parseInt(rgb[0].split('(')[1]);
+    var g = parseInt(rgb[1]);
+    var b = parseInt(rgb[2].split(')')[0]);
+    
+    var hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    return hex;
+}
