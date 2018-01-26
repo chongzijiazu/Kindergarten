@@ -235,23 +235,29 @@
             }
             else if([operation isEqualToString:@"pageDown"])
             {
-                NSString* nextThirdLevelId = [self.levelController getNextThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
-                
-                if (nextThirdLevelId!=nil && nextThirdLevelId.length==9)
-                {
-                    NSString* nextThirdLevelName = [self.levelController getThirdLevelNameByCurrentThirdLevelId:nextThirdLevelId];
-                    self.evaluateController.currentLevelQuestionID =nextThirdLevelId;
-                    self.evaluateController.currentLevelQuestionName = nextThirdLevelName;
-                    [self.evaluateController sendLevelQuestionToView];
+                BOOL isfinished = [self.levelController getFinishStateByThirdLevelID:self.evaluateController.currentLevelQuestionID];//判断当前页是否答题完成
+                if (isfinished) {
+                    NSString* nextThirdLevelId = [self.levelController getNextThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
+                    
+                    if (nextThirdLevelId!=nil && nextThirdLevelId.length==9)
+                    {
+                        NSString* nextThirdLevelName = [self.levelController getThirdLevelNameByCurrentThirdLevelId:nextThirdLevelId];
+                        self.evaluateController.currentLevelQuestionID =nextThirdLevelId;
+                        self.evaluateController.currentLevelQuestionName = nextThirdLevelName;
+                        [self.evaluateController sendLevelQuestionToView];
+                    }
+                    else
+                    {
+                        NSString* funMessage = @"alert('当前页，已是最后一页');";
+                        [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                            NSLog(@"response: %@ error: %@", response, error);
+                        }];
+                    }
                 }
                 else
                 {
-                    NSString* funMessage = @"alert('当前页，已是最后一页');";
-                    [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-                        NSLog(@"response: %@ error: %@", response, error);
-                    }];
+                    [self showAlertView:@"当前指标尚有为完成项目，是否离开次页面"];
                 }
-                
             }
             else if([operation isEqualToString:@"pageUp"])
             {
@@ -453,6 +459,25 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+- (void)showAlertView:(NSString *)message
+{
+    NSString *title = @"提示";
+    UIAlertController *alertController;
+    alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        
+        
+    }];
+    [alertController addAction:OKAction];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 @end
 

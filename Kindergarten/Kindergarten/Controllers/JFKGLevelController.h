@@ -27,5 +27,6 @@
 -(NSString*)getNextThirdLevelIdByCurrentThirdLevelId:(NSString*)currentThirdLevelId;
 -(BOOL)saveFormulaValue:(NSDictionary*)dicFormula;
 -(NSString*)getThirdLevelNameByCurrentThirdLevelId:(NSString*)currentThirdLevelId;
+-(BOOL)getFinishStateByThirdLevelID:(NSString*)thirdlevelid;
 
 @end

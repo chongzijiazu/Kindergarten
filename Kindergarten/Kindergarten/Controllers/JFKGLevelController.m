@@ -127,6 +127,23 @@
     return nil;
 }
 
+//计算按三级指标的完成状态
+-(BOOL)getFinishStateByThirdLevelID:(NSString*)thirdlevelid
+{
+    NSString* strSql=@"SELECT COUNT(question.fkLevel)-SUM(length(answer)) result FROM tbl_ass_quesstion question LEFT JOIN tbl_ass_process process ON question.pkId=process.fkQuestionid WHERE question.fkLevel='%@' GROUP BY question.fkLevel";
+    strSql = [NSString stringWithFormat:strSql,thirdlevelid];
+    NSArray* resultArray = [[SQLiteManager shareInstance] querySQL:strSql];
+    if (resultArray!=nil && resultArray.count==0) {
+        if (resultArray[0][@"result"]!=nil) {
+            int ret =  [resultArray[0][@"result"] intValue];
+            if (ret==0) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 //计算表达式的值
 -(void)calculateFormula
 {
