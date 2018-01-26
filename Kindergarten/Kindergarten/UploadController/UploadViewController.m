@@ -166,10 +166,11 @@
              }
          }
         }
-    failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
+    {
               NSLog(@"上传失败.%@",error);
-        NSString* strErr = [NSString stringWithFormat:@"%@",error];
-        [self showErrorAlertView:[NSString stringWithFormat:@"上传失败,是否重新上传评估数据(%@)",strErr]];
+        //NSString* strErr = [NSString stringWithFormat:@"%@",error];
+        [self showErrorAlertView:@"上传失败,是否重新上传评估数据"];
           }];
 }
 

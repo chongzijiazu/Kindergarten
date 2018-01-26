@@ -10,6 +10,7 @@
 #import "SQLiteManager.h"
 #import "JFKGEvaluateController.h"
 #import "EnProcessInfo.h"
+#import "JFKGCommonController.h"
 
 @interface JFKGAproveController()
 {
@@ -213,6 +214,64 @@
     }
     
     return false;
+}
+
+//判断是否可继续追加证据
+-(BOOL)isMayAppend:(NSString*)questionid
+{
+    NSString* strSql = @"SELECT attachmentpath,oldattachmentpath FROM tbl_ass_process WHERE fkQuestionid='%@';";
+    strSql = [NSString stringWithFormat:strSql,questionid];
+    NSArray* proArray = [[SQLiteManager shareInstance] querySQL:strSql];
+    if (proArray!=nil && proArray.count==1) {
+        int attachmentCount=0;
+        int oldattachmentCount=0;
+        NSString* attachmentpath = proArray[0][@"attachmentpath"];
+        NSString* oldattachmentpath = proArray[0][@"oldattachmentpath"];
+        if (attachmentpath!=nil && attachmentpath.length>0) {
+            NSArray* attachmentArra = [attachmentpath componentsSeparatedByString:@","];
+            attachmentCount = attachmentArra.count;
+        }
+        if (oldattachmentpath!=nil && oldattachmentpath.length>0) {
+            NSArray* oldattachmentArra = [oldattachmentpath componentsSeparatedByString:@","];
+            oldattachmentCount = oldattachmentArra.count;
+        }
+        int haveAproveCount = attachmentCount+oldattachmentCount;
+        int maxCount = [self maxAproveNum];
+        if (haveAproveCount>=maxCount) {
+            
+            NSString* scriptStr = [NSString stringWithFormat:@"showAlertMessage('%@');",@"该题已达到可添加证据最大数量。"];
+            //NSLog(@"%@",strQuesAprove);
+            [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
+            return false;
+        }
+        
+    }
+    
+    return true;
+}
+
+//从配置文件取值
+-(int)maxAproveNum {
+    int maxNum=0;
+    NSString* strResult = [JFKGCommonController getBaseInfo];
+    NSDictionary* dicLoginfo = [GlobalUtil dictionaryWithJsonString:strResult];
+    if (dicLoginfo!=nil && dicLoginfo.count>0) {
+        NSDictionary* dicParam = dicLoginfo[@"paramInfo"];
+        if (dicParam!=nil && dicParam.count>0) {
+            NSString* attachment_max = dicParam[@"attachments.max"];
+            if (attachment_max!=nil && attachment_max.length>0) {
+                maxNum = [attachment_max intValue];
+            }
+        }
+    }
+    else
+    {
+        maxNum=12;
+    }
+    
+    return maxNum;
 }
 
 @end

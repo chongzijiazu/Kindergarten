@@ -147,17 +147,15 @@
                     if ((j+1)%3==0) {
                         strAproveItems = [strAproveItems stringByAppendingString:@"</tr><tr>"];
                     }
-                    if ((j+1)==array.count && array.count>=self.maxAproveNum) {//最后一个元素
-                        strAproveItems = [strAproveItems substringToIndex:strAproveItems.length-4];
-                    }
+                    
                 }
-                if (array.count<self.maxAproveNum)
-                {
-                    NSString* aproveItemId = [self getAproveItemIdByAttachments:strAttachments andSeqLevel:QAArray[i][@"seqlevel"]];
-                    tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:aproveItemId andType:0 andFKQuestionid:QAArray[i][@"questionid"] andFKLevel:QAArray[i][@"fklevel"]];
-                    strAproveItems= [strAproveItems stringByAppendingString:[tmpAproveItem description]];
+                
+                //末尾追加可添加项
+                NSString* aproveItemId = [self getAproveItemIdByAttachments:strAttachments andSeqLevel:QAArray[i][@"seqlevel"]];
+                tmpAproveItem = [EnAproveItem aproveItemWithApproveItemId:aproveItemId andType:0 andFKQuestionid:QAArray[i][@"questionid"] andFKLevel:QAArray[i][@"fklevel"]];
+                strAproveItems= [strAproveItems stringByAppendingString:[tmpAproveItem description]];
                     strAproveItems = [strAproveItems stringByAppendingString:@"</tr>"];
-                }
+                
                 [dicQuesAprove setObject:strAproveItems forKey:@"aproveitem"];
                 [dicQuesAprove setObject:[QAArray[i][@"questionid"] stringByAppendingString:@"_aprove"] forKey:@"aproveid"];
             }
@@ -193,7 +191,7 @@
     if(![attachments isEqualToString:@"(null)"] && attachments!=nil && attachments.length>0)//有附件证据
     {
         NSMutableArray* tmpArray = [[NSMutableArray alloc]init];
-        for (int i=0; i<self.maxAproveNum; i++)
+        for (int i=0; i<self.maxAproveNum+1; i++)
         {
             [tmpArray addObject:[NSString stringWithFormat:@"%d",(i+1)]];
         }
@@ -299,7 +297,7 @@
     return _levelHTMLPath;
 }
 
-//从配置文件取值，暂时定义为12
+//从配置文件取值
 -(int)maxAproveNum {
     NSString* strResult = [JFKGCommonController getBaseInfo];
     NSDictionary* dicLoginfo = [GlobalUtil dictionaryWithJsonString:strResult];
@@ -319,6 +317,7 @@
     
     return _maxAproveNum;
 }
+
 
 @end
 

@@ -14,13 +14,15 @@
 @synthesize fkQuestionid=_fkQuestionid;
 @synthesize attachmentpath=_attachmentpath;
 @synthesize answer=_answer;
+@synthesize oldattachmentpath = _oldattachmentpath;
 
--(instancetype)initWithfkQuestionid:(NSString *)mFKQuestionid andAttachmentPath:(NSString*)mattachmentpath andAnswer:(NSString *)manswer
+-(instancetype)initWithfkQuestionid:(NSString *)mFKQuestionid andAttachmentPath:(NSString*)mattachmentpath andAnswer:(NSString *)manswer andOldattachmentpath:(NSString *)moldattachment
 {
     if (self = [super init]) {
         self.fkQuestionid = mFKQuestionid;
         self.attachmentpath = mattachmentpath;
         self.answer = manswer;
+        self.oldattachmentpath = moldattachment;
     }
     return self;
 }
@@ -32,12 +34,12 @@
 }
 -(BOOL)insertSelfToDB{
     //插入对象的SQL语句
-    NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO 'tbl_ass_process' (fkQuestionid,attachmentpath,answer) VALUES ('%@','%@','%@');",self.fkQuestionid,self.attachmentpath,self.answer];
+    NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO 'tbl_ass_process' (fkQuestionid,attachmentpath,answer,oldattachmentpath) VALUES ('%@','%@','%@','%@');",self.fkQuestionid,self.attachmentpath,self.answer,self.oldattachmentpath];
     return [[SQLiteManager shareInstance] execSQL:insertSQL];
 }
 +(NSArray *)allProcessInfoFromDB{
     //查询表中所有数据的SQL语句
-    NSString *SQL = @"SELECT fkQuestionid,attachmentpath,answer FROM 'tbl_ass_process'";
+    NSString *SQL = @"SELECT fkQuestionid,attachmentpath,answer,oldattachmentpath FROM 'tbl_ass_process'";
     //取出数据库用户表中所有数据
     NSArray *allProcessDictArr = [[SQLiteManager shareInstance] querySQL:SQL];
     NSLog(@"%@",allProcessDictArr);
@@ -171,7 +173,7 @@
 +(NSString*)toJsonProcessInfo
 {
     //查询表中所有数据的SQL语句
-    NSString *SQL = @"SELECT fkQuestionid,attachmentpath,answer FROM 'tbl_ass_process' WHERE LENGTH(answer)>0";
+    NSString *SQL = @"SELECT fkQuestionid,attachmentpath,answer,oldattachmentpath FROM 'tbl_ass_process' WHERE LENGTH(answer)>0";
     //取出数据库用户表中所有有答案的数据
     NSArray *allProcessDictArr = [[SQLiteManager shareInstance] querySQL:SQL];
     NSArray* outputArray = [self toOutputArray:allProcessDictArr];
@@ -193,18 +195,10 @@
     if (realArray!=nil && realArray.count>0) {
         NSMutableArray* outputArray = [[NSMutableArray alloc] init];
     
-        NSMutableArray* tmpAttachmentArray;
+        NSArray* tmpAttachmentArray;
         for (int i=0; i<realArray.count; i++) {
             NSMutableDictionary* dicProcess = [[NSMutableDictionary alloc] init];
-            tmpAttachmentArray = [[NSMutableArray alloc] init];
-            NSString* strAttachment = realArray[i][@"attachmentpath"];
-            if (strAttachment!=nil && strAttachment.length>0) {
-                NSArray* attachments = [strAttachment componentsSeparatedByString:@","];
-                for (int j=0; j<attachments.count; j++) {
-                    NSString* newAttach = [attachments[j] stringByAppendingString:@".jpg"];
-                    [tmpAttachmentArray addObject:newAttach];
-                }
-            }
+            tmpAttachmentArray = [self getAttachmentForOutput:realArray[i][@"attachmentpath"] andOldPath:realArray[i][@"oldattachmentpath"]];
             [dicProcess setObject:[GlobalUtil jsonStringWithObject:tmpAttachmentArray] forKey:@"attachmentpath"];
             [dicProcess setObject:realArray[i][@"fkQuestionid"] forKey:@"fkQuestionid"];
             [dicProcess setObject:realArray[i][@"answer"] forKey:@"answer"];
@@ -216,6 +210,46 @@
     {
         return nil;
     }
+}
+
+//处理证据路径，拼接上原来的老路径
++(NSArray*)getAttachmentForOutput:(NSString*)strAttachment andOldPath:(NSString*)oldattachmentpath
+{
+    NSMutableArray* tmpAttachmentArray = [[NSMutableArray alloc] init];
+    if (strAttachment!=nil && strAttachment.length>0) {
+        NSArray* attachments = [strAttachment componentsSeparatedByString:@","];
+        for (int j=0; j<attachments.count; j++) {
+            NSString* strFullName = [self getFullNameByName:attachments[j]];
+            if (strFullName!=nil && strFullName.length>0) {
+                [tmpAttachmentArray addObject:strFullName];
+            }
+        }
+    }
+    if (oldattachmentpath!=nil && oldattachmentpath.length>0) {
+        NSArray* oldattachments = [oldattachmentpath componentsSeparatedByString:@","];
+        for (int i=0; i<oldattachments.count; i++) {
+            [tmpAttachmentArray addObject:oldattachments[i]];
+        }
+    }
+    
+    return tmpAttachmentArray;
+}
+
++(NSString*)getFullNameByName:(NSString*)proveName
+{
+    NSFileManager* fileM = [NSFileManager defaultManager];
+    NSString* proveitempath = [GlobalUtil getAproveItemPath];
+    NSArray* provefileArra = [fileM contentsOfDirectoryAtPath: proveitempath error:nil];
+    if (provefileArra!=nil && provefileArra.count>0) {
+        for (int i=0; i<provefileArra.count; i++) {
+            NSString* provefilename = provefileArra[i];
+            if ([provefilename containsString:proveName]) {
+                return provefilename;
+            }
+        }
+    }
+    
+    return nil;
 }
 
 @end

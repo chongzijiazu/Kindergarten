@@ -53,10 +53,12 @@
         NSDictionary* dicTmp;
         for (int i=0; i<arrProc.count; i++) {
             dicTmp=arrProc[i];
+            NSString* oldattachment=@"";
             proc = [[EnProcessInfo alloc] init];
             proc.fkQuestionid = dicTmp[@"fkQuestionid"];
             proc.answer=dicTmp[@"answer"];
-            proc.attachmentpath=[self getNeedAttachmentpath:dicTmp[@"attachmentpath"]];
+            proc.attachmentpath=[self getNeedAttachmentpath:dicTmp[@"attachmentpath"] andoldattachment:&oldattachment];
+            proc.oldattachmentpath = oldattachment;
             
             if (![proc insertSelfToDB]) {
                 return false;
@@ -67,7 +69,7 @@
 }
 
 //处理接受到的附件证据，剔除jpg(jpeg)以外的路径，并去掉jpg(jpeg）
--(NSString*)getNeedAttachmentpath:(NSString*)strAttachArray
+-(NSString*)getNeedAttachmentpath:(NSString*)strAttachArray andoldattachment:(NSString**)outOldAttachment
 {
     NSData *jsonData = [strAttachArray dataUsingEncoding:NSUTF8StringEncoding];
     NSError *err;
@@ -78,12 +80,22 @@
         NSString* strNewAttach = [[NSString alloc] init];
         for (int i = 0;i<attachArray.count; i++) {
             NSString * strOldAttach = attachArray[i];
-            if ([strOldAttach containsString:@"jpg"] || [strOldAttach containsString:@"jpeg"]) {
+            if ([strOldAttach containsString:@"jpg"] || [strOldAttach containsString:@"jpeg"] || [strOldAttach containsString:@"png"] || [strOldAttach containsString:@"bmp"]) {
                 strOldAttach = [strOldAttach componentsSeparatedByString:@"."][0];
                 strOldAttach = [strOldAttach stringByAppendingString:@","];
                 strNewAttach = [strNewAttach stringByAppendingString:strOldAttach];
             }
+            else
+            {
+                *outOldAttachment = [NSString stringWithFormat:@"%@,%@",*outOldAttachment,strOldAttach];
+            }
         }
+        
+        if (outOldAttachment!=nil && (*outOldAttachment).length>0) {
+            //去掉开头的逗号
+            *outOldAttachment = [(*outOldAttachment) substringFromIndex:1];
+        }
+        
         if (strNewAttach!=nil && strNewAttach.length>0) {
             return [strNewAttach substringToIndex:strNewAttach.length-1];
         }

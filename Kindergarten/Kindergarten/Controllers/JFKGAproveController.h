@@ -15,5 +15,6 @@
 @property (nonatomic, weak) UIViewController *currentVC;
 
 - (void)getAproveByAproveItemId:(NSString*)aproveitemid andQuestionId:(NSString*)mquestionid andFKLevel:(NSString*)fklevel;
+-(BOOL)isMayAppend:(NSString*)questionid;
 
 @end

@@ -46,7 +46,7 @@ static SQLiteManager *instance;
 -(BOOL)creatTable{
     //创建表的SQL语句
     //评估过程表
-    NSString *creatProcessTable = @"CREATE TABLE IF NOT EXISTS 'tbl_ass_process' ( 'fkQuestionid' TEXT NOT NULL PRIMARY KEY,'attachmentpath' TEXT,'answer' TEXT);";
+    NSString *creatProcessTable = @"CREATE TABLE IF NOT EXISTS 'tbl_ass_process' ( 'fkQuestionid' TEXT NOT NULL PRIMARY KEY,'attachmentpath' TEXT,'answer' TEXT,'oldattachmentpath' TEXT);";
     
     //评估试题表
     NSString *creatQuestionTable = @"CREATE TABLE IF NOT EXISTS 'tbl_ass_quesstion' ( 'pkId' TEXT NOT NULL PRIMARY KEY,'fkLevel' TEXT,'seqLevel' TEXT,'fkFormula' TEXT,'contenttip' TEXT,'content' TEXT,'description' TEXT,'seq' INTEGER,'type' INTEGER,'weight' REAL,'veto' INTEGER,'appendprove' INTEGER,'calculated' INTEGER,'deleted' INTEGER,'questionnum' INTEGER);";

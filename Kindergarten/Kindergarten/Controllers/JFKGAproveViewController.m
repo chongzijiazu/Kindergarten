@@ -48,17 +48,24 @@
 {
     if (self.aproveItemId!=nil && self.aproveItemId.length>0) {
         NSString *filePath = [GlobalUtil getAproveItemPath];
-        filePath= [filePath stringByAppendingPathComponent:[self.aproveItemId stringByAppendingString:@".jpg"]];
-        if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
-        {
-            NSData *imageData = [NSData dataWithContentsOfFile:filePath];
-            UIImage *image = [UIImage imageWithData:imageData];
-            self.aproveImageView.image = image;
+        filePath= [filePath stringByAppendingPathComponent:self.aproveItemId];
+        NSArray* extenssionArray = [NSArray arrayWithObjects:@".jpg",@".jpeg",@".png",@".bmp", nil];
+        NSFileManager* fileM = [NSFileManager defaultManager];
+        for (int i=0; i<extenssionArray.count; i++) {
+            NSString* tmpFilepath = [filePath stringByAppendingString:extenssionArray[i]];
+            if([fileM fileExistsAtPath:tmpFilepath])
+            {
+                NSData *imageData = [NSData dataWithContentsOfFile:tmpFilepath];
+                UIImage *image = [UIImage imageWithData:imageData];
+                self.aproveImageView.image = image;
+                break;
+            }
+            else
+            {
+                //[self.navigationController popViewControllerAnimated:NO];
+            }
         }
-        else
-        {
-            //[self.navigationController popViewControllerAnimated:NO];
-        }
+        
     }
 }
 
@@ -68,20 +75,26 @@
     BOOL isgood = [process deleteAttachmentPathByQuestionId:self.questionid andNeedDeletedAttachmentPath:self.aproveItemId];
     if (isgood) {
         NSString *filePath = [GlobalUtil getAproveItemPath];
-        filePath= [filePath stringByAppendingPathComponent:[self.aproveItemId stringByAppendingString:@".jpg"]];
-        if([[NSFileManager defaultManager] fileExistsAtPath:filePath])
-        {
-            BOOL isDeleted = [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-            if (isDeleted) {
-                //处理页面证据
-                JFKGEvaluateController* evaluateC = [[JFKGEvaluateController alloc]init];
-                NSString* strQuesAprove=[evaluateC getQuestionAproveByThirdLevelId:self.fklevel];
-                NSString* scriptStr = [NSString stringWithFormat:@"showLevelAprove(%@);",strQuesAprove];
-                //NSLog(@"%@",strQuesAprove);
-                [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-                    NSLog(@"response: %@ error: %@", response, error);
-                }];
-                [self.navigationController popViewControllerAnimated:NO];
+        filePath= [filePath stringByAppendingPathComponent:self.aproveItemId];
+        NSArray* extenssionArray = [NSArray arrayWithObjects:@".jpg",@".jpeg",@".png",@".bmp", nil];
+        NSFileManager* fileM = [NSFileManager defaultManager];
+        for (int i=0; i<extenssionArray.count; i++) {
+            NSString* tmpFilepath = [filePath stringByAppendingString:extenssionArray[i]];
+            if([fileM fileExistsAtPath:tmpFilepath])
+            {
+                BOOL isDeleted = [[NSFileManager defaultManager] removeItemAtPath:tmpFilepath error:nil];
+                if (isDeleted) {
+                    //处理页面证据
+                    JFKGEvaluateController* evaluateC = [[JFKGEvaluateController alloc]init];
+                    NSString* strQuesAprove=[evaluateC getQuestionAproveByThirdLevelId:self.fklevel];
+                    NSString* scriptStr = [NSString stringWithFormat:@"showLevelAprove(%@);",strQuesAprove];
+                    //NSLog(@"%@",strQuesAprove);
+                    [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                        NSLog(@"response: %@ error: %@", response, error);
+                    }];
+                    [self.navigationController popViewControllerAnimated:NO];
+                }
+                break;
             }
         }
     }
