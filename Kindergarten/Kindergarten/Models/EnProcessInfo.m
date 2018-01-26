@@ -122,7 +122,7 @@
             }
             else//插入
             {
-                EnProcessInfo* process = [[EnProcessInfo alloc] initWithfkQuestionid:key andAttachmentPath:@"" andAnswer:dicQuesAns[key]];
+                EnProcessInfo* process = [[EnProcessInfo alloc] initWithfkQuestionid:key andAttachmentPath:@"" andAnswer:dicQuesAns[key] andOldattachmentpath:@""];
                 if (![process insertSelfToDB]) {
                     return false;
                 }

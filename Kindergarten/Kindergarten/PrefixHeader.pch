@@ -22,8 +22,8 @@
 #import "ZipUtil.h"
 
 //#define baseUrlString @"http://10.3.1.147:8080/kindergarten/evaluation/app/"
-#define baseUrlString @"http://10.3.1.147:8080/kindergarten/evaluation/app/"
-#define OnlineUrlString @"http://10.3.1.147:8080/kindergarten/evaluation/login.do"
+#define baseUrlString @"http://10.3.1.145:8080/kindergarten/evaluation/app/"
+#define OnlineUrlString @"http://10.3.1.145:8080/kindergarten/evaluation/login.do"
 
 
 #define userDefault [NSUserDefaults standardUserDefaults]

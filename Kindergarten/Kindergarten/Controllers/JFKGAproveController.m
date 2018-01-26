@@ -208,7 +208,7 @@
         }
         else if(attachpathArray.count==0)//新作答，无答题纪录
         {
-            EnProcessInfo* process = [[EnProcessInfo alloc] initWithfkQuestionid:_questionid andAttachmentPath:_aproveItemName andAnswer:@""];
+            EnProcessInfo* process = [[EnProcessInfo alloc] initWithfkQuestionid:_questionid andAttachmentPath:_aproveItemName andAnswer:@"" andOldattachmentpath:@""];
             return [process insertSelfToDB];
         }
     }

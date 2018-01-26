@@ -20,7 +20,7 @@
 @property(strong,nonatomic)NSString* answer;
 @property(strong,nonatomic)NSString* oldattachmentpath;
 
--(instancetype)initWithfkQuestionid:(NSString *)mFKQuestionid andAttachmentPath:(NSString*)mattachmentpath andAnswer:(NSString *)manswer;
+-(instancetype)initWithfkQuestionid:(NSString *)mFKQuestionid andAttachmentPath:(NSString*)mattachmentpath andAnswer:(NSString *)manswer andOldattachmentpath:(NSString *)moldattachment;
 -(instancetype)initWithDict:(NSDictionary *)dict;
 //将本身插入数据库
 -(BOOL)insertSelfToDB;
