@@ -44,7 +44,7 @@ function showLevelAnswer(args)
             op.checked=true;
             op.tag=1;
             //将有答案的的试题标记为已完成
-            showFinished(op);
+            //showFinished(op);
             $(op).parent().css("background-color","orange");
         }
     }
@@ -144,7 +144,7 @@ function optionClicked(obj)
     }
     else
     {
-        showFinished(radio);
+        //showFinished(radio);
         radio.checked=true;
         radio.tag=1;
         $(radio).parent().css("background-color","orange");
