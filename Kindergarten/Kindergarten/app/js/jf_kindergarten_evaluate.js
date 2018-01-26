@@ -159,18 +159,43 @@ function showFinished(obj)
 
 function proveItemClick(aproveitemid,aproveitemtype,questionid,fklevel)
 {
+    var isChosen = isQuestionChosen(questionid);//判断是否已做答
     //alert(questionid);
-    var param ={
-        "type":aproveitemtype,
-        "id":aproveitemid,
-        "questionid":questionid,
-        "fklevel":fklevel
-    };
-    var dicmsg ={
-        "operation":"clickaprove",
-        "param":param
-    };
-    window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
+    if(isChosen)
+    {
+        var param ={
+            "type":aproveitemtype,
+            "id":aproveitemid,
+            "questionid":questionid,
+            "fklevel":fklevel
+        };
+        var dicmsg ={
+            "operation":"clickaprove",
+            "param":param
+        };
+        window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
+    }
+    else
+    {
+        alert("该试题尚未作答，不允许添加证据。");
+    }
+}
+
+//判断当前题是否已选择选项
+function isQuestionChosen(questionid)
+{
+    var options = $("input[name='"+questionid+"']");
+    if(options)
+    {
+        for(var i=0;i<options.length;i++)
+        {
+            if(options[i].checked)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 

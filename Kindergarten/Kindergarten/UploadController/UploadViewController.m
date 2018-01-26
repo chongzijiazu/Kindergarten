@@ -32,10 +32,15 @@
     //self.uploadProgress.progress=0.5;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self uploadEvaluateData];//开始上传数据
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView]; //初始化界面
-    [self uploadEvaluateData];//开始上传数据
+
 }
 
 //初始化界面
@@ -80,6 +85,7 @@
             [self uploadFile:uploadFilepath toUrl:[HTTPInterface uploadevaluatedata]];
         }
     }
+    
 }
 
 -(BOOL)zipUploadFile
@@ -111,9 +117,10 @@
             return false;
         }
     }
-    else
+    else //无评估答案直接退出，默认成功
     {
-        return false;
+        [self showSucessAlertView:@"上传成功!"];
+        //return false;
     }
     return true;
 }

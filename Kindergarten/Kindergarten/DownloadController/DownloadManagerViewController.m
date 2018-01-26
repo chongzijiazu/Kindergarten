@@ -161,22 +161,27 @@
     
     //处理公式信息，解压公式压缩包，将公式信息倒入数据库中
     NSString* formulazipPath = [downloadfilesPath stringByAppendingPathComponent:@"formula.zip"];
-    if (![ZipUtil UZipArchive:formulazipPath  toPath:downloadfilesPath])
+    long long filesize = [GlobalUtil fileSizeAtPath:formulazipPath];
+    if(filesize!=0)
     {
-        return false;
-    }
-    else
-    {
-        if(![EnFormula loadFormulaXMLToDB])
+        if (![ZipUtil UZipArchive:formulazipPath  toPath:downloadfilesPath])
         {
             return false;
         }
-     }
+        else
+        {
+            if(![EnFormula loadFormulaXMLToDB])
+            {
+                return false;
+            }
+        }
+    }
+    
     
     //处理以评估数据，解压保存答案信息，解压保存证据信息
     NSString* attachmentzipPath = [downloadfilesPath stringByAppendingPathComponent:@"proves.zip"];
     NSString *aprovesPath = [GlobalUtil getAprovePath];
-    long long filesize = [GlobalUtil fileSizeAtPath:attachmentzipPath];
+    filesize = [GlobalUtil fileSizeAtPath:attachmentzipPath];
     if(filesize!=0)
     {
         if (![ZipUtil UZipArchive:attachmentzipPath  toPath:aprovesPath])

@@ -103,7 +103,7 @@ function calculateFormula(dicFormula)
             }
             catch(err)
             {
-                alert(err);
+                //alert(err);
             }
         }
         //alert(params);
