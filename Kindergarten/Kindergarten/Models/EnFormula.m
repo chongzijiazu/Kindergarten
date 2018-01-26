@@ -157,7 +157,7 @@
     NSMutableDictionary* dicRet = [[NSMutableDictionary alloc]init];
     for (int i=0; i<formulaArr.count; i++) {
         formula = (EnFormula*)formulaArr[i];
-        [dicRet setObject:formula.value forKey:formula.name];
+        [dicRet setObject:formula.value forKey:[NSString stringWithFormat:@"{%@}",formula.name]];
     }
     return dicRet;
 }

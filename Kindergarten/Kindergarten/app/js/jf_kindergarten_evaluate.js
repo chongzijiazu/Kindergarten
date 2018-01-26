@@ -45,6 +45,7 @@ function showLevelAnswer(args)
             op.tag=1;
             //将有答案的的试题标记为已完成
             showFinished(op);
+            $(op).parent().css("background-color","orange");
         }
     }
 }
