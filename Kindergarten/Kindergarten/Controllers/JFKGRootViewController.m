@@ -443,8 +443,20 @@
 {
     NSString* nextThirdLevelId = [self.levelController getNextThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
     
+    
     if (nextThirdLevelId!=nil && nextThirdLevelId.length==9)
     {
+        //根据三级指标编码的前三位（一级指标编码）判断，是否进入下一个指标
+        NSString* currentFirstLevel = [self.evaluateController.currentLevelQuestionID substringToIndex:3];
+        NSString* nextFirstLevel = [nextThirdLevelId substringToIndex:3];
+        if (![currentFirstLevel isEqualToString:nextFirstLevel]) {
+            NSString* funMessage = @"alert('将进入下一评估指标');";
+            [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
+        }
+        
+        
         NSString* nextThirdLevelName = [self.levelController getThirdLevelNameByCurrentThirdLevelId:nextThirdLevelId];
         self.evaluateController.currentLevelQuestionID =nextThirdLevelId;
         self.evaluateController.currentLevelQuestionName = nextThirdLevelName;
