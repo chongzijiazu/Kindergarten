@@ -519,3 +519,9 @@ function colorRGB2Hex(color) {
     var hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
     return hex;
 }
+
+//根据题号滚动到该试题
+function scrollToQuestion(questionid)
+{
+    $("html,body").animate({scrollTop: $("tr[scrollid = 'scroll_"+questionid+"']").offset().top}, 800);
+}

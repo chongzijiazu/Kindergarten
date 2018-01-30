@@ -506,7 +506,12 @@
     [alertController addAction:OKAction];
     
     [alertController addAction:[UIAlertAction actionWithTitle:@"继续答题" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
+        NSString* questionid = [self.commonController getFirsitNotFinishedQues:self.evaluateController.currentLevelQuestionID];
+        NSString* funMessage = @"scrollToQuestion('%@');";
+        funMessage = [NSString stringWithFormat:funMessage,questionid];
+        [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            NSLog(@"response: %@ error: %@", response, error);
+        }];
     }]];
     
     [self presentViewController:alertController animated:YES completion:nil];
@@ -526,8 +531,16 @@
     [alertController addAction:OKAction];
     
     [alertController addAction:[UIAlertAction actionWithTitle:@"继续答题" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSString* questionid = [self.commonController getFirsitNotFinishedQues:self.evaluateController.currentLevelQuestionID];
+        NSString* funMessage = @"scrollToQuestion('%@');";
+        funMessage = [NSString stringWithFormat:funMessage,questionid];
+        [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            NSLog(@"response: %@ error: %@", response, error);
+        }];
         
     }]];
+    
+    
     
     [self presentViewController:alertController animated:YES completion:nil];
 }

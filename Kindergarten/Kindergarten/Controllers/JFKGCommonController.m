@@ -11,6 +11,7 @@
 #import "EnFormula.h"
 #import "EnOption.h"
 #import "XMLDictionary.h"
+#import "SQLiteManager.h"
 
 @implementation JFKGCommonController
 
@@ -269,7 +270,7 @@
     [self.currentVC presentViewController:alertController animated:YES completion:nil];
 }
 
-//将试卷中的描述信息图片拷贝至html根目录
+//将试卷中的描述信息图片拷贝至html根目录(该方法已弃用)
 +(void)copyFileToAppDesc
 {
     NSString* basePath = [[NSBundle mainBundle] bundlePath];
@@ -279,6 +280,19 @@
         NSString* descPath =[downloadpath stringByAppendingPathComponent:@"paper"];
         BOOL isgood = [[NSFileManager defaultManager] copyItemAtPath:descPath toPath:basePath error:NULL];
     }
+}
+
+//根据三级指标编码获取该编码下第一个未答试题编码
+-(NSString*)getFirsitNotFinishedQues:(NSString*)thirdLevelId
+{
+    NSString* strSql = @"SELECT question.pkId questionid FROM tbl_ass_quesstion question LEFT JOIN tbl_ass_process process ON question.pkId=process.fkQuestionid WHERE question.fkLevel='%@' AND (length(process.answer)=0 OR process.answer ISNULL) ORDER BY question.seq";
+    strSql = [NSString stringWithFormat:strSql,thirdLevelId];
+    NSArray* resultArray = [[SQLiteManager shareInstance] querySQL:strSql];
+    if (resultArray!=nil && resultArray.count>0)
+    {
+        return resultArray[0][@"questionid"];
+    }
+    return nil;
 }
 
 @end

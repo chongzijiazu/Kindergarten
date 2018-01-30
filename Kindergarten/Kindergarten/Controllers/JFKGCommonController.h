@@ -23,5 +23,6 @@
 +(EnPaper*)getPaperFromXMLPaper;
 -(void)showHelpFile:(NSString*)helpfilepath;
 +(void)copyFileToAppDesc;
+-(NSString*)getFirsitNotFinishedQues:(NSString*)thirdLevelId;
 
 @end
