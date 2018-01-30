@@ -269,13 +269,14 @@
     [self.currentVC presentViewController:alertController animated:YES completion:nil];
 }
 
+//将试卷中的描述信息图片拷贝至html根目录
 +(void)copyFileToAppDesc
 {
     NSString* basePath = [[NSBundle mainBundle] bundlePath];
     basePath = [basePath stringByAppendingString:@"/app/desc"];
     if (![[NSFileManager defaultManager] fileExistsAtPath:basePath]) {
         NSString* downloadpath = [GlobalUtil getDownloadFilesPath];
-        NSString* descPath =[downloadpath stringByAppendingPathComponent:@"desc"];
+        NSString* descPath =[downloadpath stringByAppendingPathComponent:@"paper"];
         BOOL isgood = [[NSFileManager defaultManager] copyItemAtPath:descPath toPath:basePath error:NULL];
     }
 }

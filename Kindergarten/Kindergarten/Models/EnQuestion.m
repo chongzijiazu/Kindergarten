@@ -89,13 +89,12 @@
 }
 
 //翻译题目解释信息中的图片
-//<img src="desc/login.png">
 -(NSString*)translateDesc:(NSString*)strDesc
 {
     if (strDesc==nil && strDesc.length==0) {
         return @"";
     }
-    NSString* imageHtml = @"<img src=\"desc/%@\">";
+    NSString* imageHtml = @"<img src=\"desc/%@/%@\">";
     NSString *pattern = @"\\{([^\\{\\}]+)\\}";//创建正则表达式，匹配表达式中的变量
     NSRegularExpression *regular = [[NSRegularExpression alloc] initWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
     //利用规则测试字符串获取匹配结果
@@ -106,7 +105,7 @@
     for (NSTextCheckingResult *result in results)
     {
         newStr = [newStr stringByAppendingString:[strDesc substringWithRange:NSMakeRange(end, result.range.location-end)]];
-        NSString* strTmp = [NSString stringWithFormat:imageHtml,[strDesc substringWithRange:NSMakeRange(result.range.location+1, result.range.length-2)]];
+        NSString* strTmp = [NSString stringWithFormat:imageHtml,self.pkId,[strDesc substringWithRange:NSMakeRange(result.range.location+1, result.range.length-2)]];
         newStr = [newStr stringByAppendingString:strTmp];
         end = (int)result.range.location+(int)result.range.length;
     }
@@ -188,7 +187,7 @@
     strTip=[strTip stringByReplacingOccurrencesOfString:@"\r\n" withString:@""];
     //NSLog(@"%@",self.contenttip);
     self.content = [self.content stringByReplacingOccurrencesOfString:@"\r\n" withString:@""];
-    //self.desc = [self.desc stringByReplacingOccurrencesOfString:@"NEW_LINE" withString:@"<br/>"];
+    self.desc = [self.desc stringByReplacingOccurrencesOfString:@"NEW_LINE" withString:@"<br/>"];
     NSString* questionHtml;
     if (strTip!=nil && strTip.length>0) {
         questionHtml = [NSString stringWithFormat:@"<div style=\"font-size: 18px;\">%d.%@<span style=\"color: red; font-weight: bold;display:%@\">（关键指标）</span><img src=\"images/question.png\" /><a id=\"%@_desclink\" onclick=\"showQuesDesc(this.id)\" href=\"#\"><span>查看题目解释<span><span sdesc=\"%@\" id=\"%@_desc\" /></a> <font style=\"display:none; font-size: 18px; border: 2px solid orange; padding: 4px;border-radius: 4px; font-weight: bold;\" color=\"orange\" id=\"quesFinish_%@\">已完成</font></div><hr/><div id=\"%@\">%@</div><div class=\"questips\"><img src=\"images/result.png\" /><span>%@</span></div>",self.questionnum,self.content,strVeto,self.pkId,self.desc,self.pkId,self.pkId,self.pkId,optionHtml,strTip];
