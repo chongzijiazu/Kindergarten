@@ -237,46 +237,24 @@
             {
                 BOOL isfinished = [self.levelController getFinishStateByThirdLevelID:self.evaluateController.currentLevelQuestionID];//判断当前页是否答题完成
                 if (isfinished) {
-                    NSString* nextThirdLevelId = [self.levelController getNextThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
-                    
-                    if (nextThirdLevelId!=nil && nextThirdLevelId.length==9)
-                    {
-                        NSString* nextThirdLevelName = [self.levelController getThirdLevelNameByCurrentThirdLevelId:nextThirdLevelId];
-                        self.evaluateController.currentLevelQuestionID =nextThirdLevelId;
-                        self.evaluateController.currentLevelQuestionName = nextThirdLevelName;
-                        [self.evaluateController sendLevelQuestionToView];
-                    }
-                    else
-                    {
-                        NSString* funMessage = @"alert('当前页，已是最后一页');";
-                        [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-                            NSLog(@"response: %@ error: %@", response, error);
-                        }];
-                    }
+                    [self pagedown];//下一页
                 }
                 else
                 {
-                    [self showAlertView:@"当前指标尚有为完成项目，是否离开次页面"];
+                    [self showAlertViewForPageDown:@"当前指标尚有为完成项目，是否离开此页面"];
                 }
             }
             else if([operation isEqualToString:@"pageUp"])
             {
-                NSString* preThirdLevelId = [self.levelController getPreThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
-                
-                if (preThirdLevelId!=nil && preThirdLevelId.length==9)
-                {
-                    NSString* preThirdLevelName = [self.levelController getThirdLevelNameByCurrentThirdLevelId:preThirdLevelId];
-                    self.evaluateController.currentLevelQuestionID =preThirdLevelId;
-                    self.evaluateController.currentLevelQuestionName = preThirdLevelName;
-                    [self.evaluateController sendLevelQuestionToView];
+                BOOL isfinished = [self.levelController getFinishStateByThirdLevelID:self.evaluateController.currentLevelQuestionID];//判断当前页是否答题完成
+                if (isfinished) {
+                    [self pageup];//上一页
                 }
                 else
                 {
-                    NSString* funMessage = @"alert('当前页，已是第一页');";
-                    [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-                        NSLog(@"response: %@ error: %@", response, error);
-                    }];
+                    [self showAlertViewForPageUp:@"当前指标尚有为完成项目，是否离开此页面"];
                 }
+                
             }
             else if([operation isEqualToString:@"clickaprove"])
             {
@@ -460,14 +438,77 @@
  }
  */
 
-- (void)showAlertView:(NSString *)message
+//下一页
+-(void)pagedown
+{
+    NSString* nextThirdLevelId = [self.levelController getNextThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
+    
+    if (nextThirdLevelId!=nil && nextThirdLevelId.length==9)
+    {
+        NSString* nextThirdLevelName = [self.levelController getThirdLevelNameByCurrentThirdLevelId:nextThirdLevelId];
+        self.evaluateController.currentLevelQuestionID =nextThirdLevelId;
+        self.evaluateController.currentLevelQuestionName = nextThirdLevelName;
+        [self.evaluateController sendLevelQuestionToView];
+    }
+    else
+    {
+        NSString* funMessage = @"alert('当前页，已是最后一页');";
+        [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            NSLog(@"response: %@ error: %@", response, error);
+        }];
+    }
+}
+
+//上一页
+-(void)pageup
+{
+    NSString* preThirdLevelId = [self.levelController getPreThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
+    
+    if (preThirdLevelId!=nil && preThirdLevelId.length==9)
+    {
+        NSString* preThirdLevelName = [self.levelController getThirdLevelNameByCurrentThirdLevelId:preThirdLevelId];
+        self.evaluateController.currentLevelQuestionID =preThirdLevelId;
+        self.evaluateController.currentLevelQuestionName = preThirdLevelName;
+        [self.evaluateController sendLevelQuestionToView];
+    }
+    else
+    {
+        NSString* funMessage = @"alert('当前页，已是第一页');";
+        [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            NSLog(@"response: %@ error: %@", response, error);
+        }];
+    }
+}
+
+- (void)showAlertViewForPageDown:(NSString *)message
 {
     NSString *title = @"提示";
     UIAlertController *alertController;
     alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        //点击确定进入下一页
+        [self pagedown];
         
+    }];
+    [alertController addAction:OKAction];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)showAlertViewForPageUp:(NSString *)message
+{
+    NSString *title = @"提示";
+    UIAlertController *alertController;
+    alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        //点击确定进入下一页
+        [self pageup];
         
     }];
     [alertController addAction:OKAction];
