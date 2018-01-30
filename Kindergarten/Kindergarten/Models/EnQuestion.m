@@ -94,23 +94,36 @@
     if (strDesc==nil && strDesc.length==0) {
         return @"";
     }
-    NSString* imageHtml = @"<img src=\"desc/%@/%@\">";
+    //NSString* imageHtml = @"<img class=\"modal-dialog\" style=\"width:80%;\" src=\"desc/%@/%@\">";
+    NSString* imageHtml = @"<img class=\"modal-dialog\" style=\"width:80%;\" src='%@'>";
     NSString *pattern = @"\\{([^\\{\\}]+)\\}";//创建正则表达式，匹配表达式中的变量
     NSRegularExpression *regular = [[NSRegularExpression alloc] initWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:nil];
     //利用规则测试字符串获取匹配结果
     NSArray *results = [regular matchesInString:strDesc options:0 range:NSMakeRange(0, strDesc.length)];
     //NSLog(@"%@",results);
     NSString* newStr = [[NSString alloc] init];
+    NSString* imageSource=[[NSString alloc] init];
     int end=0;
     for (NSTextCheckingResult *result in results)
     {
         newStr = [newStr stringByAppendingString:[strDesc substringWithRange:NSMakeRange(end, result.range.location-end)]];
-        NSString* strTmp = [NSString stringWithFormat:imageHtml,self.pkId,[strDesc substringWithRange:NSMakeRange(result.range.location+1, result.range.length-2)]];
+        imageSource = [self getShaHeImageByQuestionId:self.pkId andImageName:[strDesc substringWithRange:NSMakeRange(result.range.location+1, result.range.length-2)]];
+        NSString* strTmp = [NSString stringWithFormat:imageHtml,imageSource];
         newStr = [newStr stringByAppendingString:strTmp];
         end = (int)result.range.location+(int)result.range.length;
     }
     newStr = [newStr stringByAppendingString:[strDesc substringWithRange:NSMakeRange(end, strDesc.length-end)]];
     return [Base64Util Encode:newStr];
+}
+
+//将沙盒图片序列化
+-(NSString*)getShaHeImageByQuestionId:(NSString*)questionid andImageName:(NSString*)imagename
+{
+    NSString* paperPath = [[GlobalUtil getDownloadFilesPath] stringByAppendingPathComponent:@"paper"];
+    NSString* imagePath = [paperPath stringByAppendingPathComponent:[questionid stringByAppendingPathComponent:imagename]];
+    NSData *imageData=[NSData dataWithContentsOfFile:imagePath];//imagePath :沙盒图片路径
+    NSString *imageSource = [NSString stringWithFormat:@"data:image/jpg;base64,%@",[imageData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed]];
+    return imageSource;
 }
 
 
@@ -190,11 +203,11 @@
     self.desc = [self.desc stringByReplacingOccurrencesOfString:@"NEW_LINE" withString:@"<br/>"];
     NSString* questionHtml;
     if (strTip!=nil && strTip.length>0) {
-        questionHtml = [NSString stringWithFormat:@"<div style=\"font-size: 18px;\">%d.%@<span style=\"color: red; font-weight: bold;display:%@\">（关键指标）</span><img src=\"images/question.png\" /><a id=\"%@_desclink\" onclick=\"showQuesDesc(this.id)\" href=\"#\"><span>查看题目解释<span><span sdesc=\"%@\" id=\"%@_desc\" /></a> <font style=\"display:none; font-size: 18px; border: 2px solid orange; padding: 4px;border-radius: 4px; font-weight: bold;\" color=\"orange\" id=\"quesFinish_%@\">已完成</font></div><hr/><div id=\"%@\">%@</div><div class=\"questips\"><img src=\"images/result.png\" /><span>%@</span></div>",self.questionnum,self.content,strVeto,self.pkId,self.desc,self.pkId,self.pkId,self.pkId,optionHtml,strTip];
+        questionHtml = [NSString stringWithFormat:@"<div class=\"quescontent\">%d.%@<span style=\"color: red; font-weight: bold;display:%@\">（关键指标）</span><a id=\"%@_desclink\" onclick=\"showQuesDesc(this.id)\" href=\"#\"><img src=\"images/question.png\" /><span sdesc=\"%@\" id=\"%@_desc\" /></a><div style=\"font-size:22px\" class=\"questips\"><span>%@</span></div><hr/><font style=\"display:none; font-size: 18px; border: 2px solid orange; padding: 4px;border-radius: 4px; font-weight: bold;\" color=\"orange\" id=\"quesFinish_%@\">已完成</font></div><hr/><div class=\"quescontent\" id=\"%@\">%@</div>",self.questionnum,self.content,strVeto,self.pkId,self.desc,self.pkId,strTip,self.pkId,self.pkId,optionHtml];
     }
     else
     {
-        questionHtml = [NSString stringWithFormat:@"<div style=\"font-size: 18px;\">%d.%@<span style=\"color: red; font-weight: bold;display:%@\">（关键指标）</span><img src=\"images/question.png\" /><a id=\"%@_desclink\" onclick=\"showQuesDesc(this.id)\" href=\"#\"><span>查看题目解释<span><span sdesc=\"%@\" id=\"%@_desc\" /></a> <font style=\"display:none; font-size: 18px; border: 2px solid orange; padding: 4px;border-radius: 4px; font-weight: bold;\" color=\"orange\" id=\"quesFinish_%@\">已完成</font></div><hr/><div id=\"%@\">%@</div>",self.questionnum,self.content,strVeto,self.pkId,self.desc,self.pkId,self.pkId,self.pkId,optionHtml];
+        questionHtml = [NSString stringWithFormat:@"<div class=\"quescontent\">%d.%@<span style=\"color: red; font-weight: bold;display:%@\">（关键指标）</span><a id=\"%@_desclink\" onclick=\"showQuesDesc(this.id)\" href=\"#\"><img src=\"images/question.png\" /><span sdesc=\"%@\" id=\"%@_desc\" /></a> <font style=\"display:none; font-size: 18px; border: 2px solid orange; padding: 4px;border-radius: 4px; font-weight: bold;\" color=\"orange\" id=\"quesFinish_%@\">已完成</font></div><hr/><div class=\"quescontent\" id=\"%@\">%@</div>",self.questionnum,self.content,strVeto,self.pkId,self.desc,self.pkId,self.pkId,self.pkId,optionHtml];
     }
     
     return questionHtml;

@@ -232,7 +232,7 @@
 //根据三级指标读取试题
 -(NSString*)readLevelQuestionByLevelId:(NSString*)levelid
 {
-    [JFKGCommonController copyFileToAppDesc];//将卷子中解释信息的图片文件拷贝到baseurl目录中的desc文件夹
+    //[JFKGCommonController copyFileToAppDesc];//将卷子中解释信息的图片文件拷贝到baseurl目录中的desc文件夹(已采用base64图片方式加载，弃用此方法)
     NSString* levelQPath = [self.levelHTMLPath stringByAppendingPathComponent:[levelid stringByAppendingString:@".txt"]];
     if (![[NSFileManager defaultManager] fileExistsAtPath:levelQPath])
     {

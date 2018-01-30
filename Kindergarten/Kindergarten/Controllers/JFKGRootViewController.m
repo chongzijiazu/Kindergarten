@@ -241,7 +241,7 @@
                 }
                 else
                 {
-                    [self showAlertViewForPageDown:@"当前指标尚有为完成项目，是否离开此页面"];
+                    [self showAlertViewForPageDown:@"当前三级指标下还有评估试题尚未答完，确认离开本页？"];
                 }
             }
             else if([operation isEqualToString:@"pageUp"])
@@ -252,7 +252,7 @@
                 }
                 else
                 {
-                    [self showAlertViewForPageUp:@"当前指标尚有为完成项目，是否离开此页面"];
+                    [self showAlertViewForPageUp:@"当前三级指标下还有评估试题尚未答完，确认离开本页？"];
                 }
                 
             }
@@ -450,7 +450,7 @@
         NSString* currentFirstLevel = [self.evaluateController.currentLevelQuestionID substringToIndex:3];
         NSString* nextFirstLevel = [nextThirdLevelId substringToIndex:3];
         if (![currentFirstLevel isEqualToString:nextFirstLevel]) {
-            NSString* funMessage = @"alert('将进入下一评估指标');";
+            NSString* funMessage = @"alert('您即将离开当前一级指标，进入下一个一级指标评估答题页面');";
             [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
                 NSLog(@"response: %@ error: %@", response, error);
             }];
@@ -464,7 +464,7 @@
     }
     else
     {
-        NSString* funMessage = @"alert('当前页，已是最后一页');";
+        NSString* funMessage = @"alert('当前三级指标已是末页');";
         [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
             NSLog(@"response: %@ error: %@", response, error);
         }];
@@ -485,7 +485,7 @@
     }
     else
     {
-        NSString* funMessage = @"alert('当前页，已是第一页');";
+        NSString* funMessage = @"alert('当前三级指标已经是首页');";
         [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
             NSLog(@"response: %@ error: %@", response, error);
         }];
@@ -494,18 +494,18 @@
 
 - (void)showAlertViewForPageDown:(NSString *)message
 {
-    NSString *title = @"提示";
+    NSString *title = @"提示信息";
     UIAlertController *alertController;
     alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认离开" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         //点击确定进入下一页
         [self pagedown];
         
     }];
     [alertController addAction:OKAction];
     
-    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:@"继续答题" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }]];
     
@@ -514,18 +514,18 @@
 
 - (void)showAlertViewForPageUp:(NSString *)message
 {
-    NSString *title = @"提示";
+    NSString *title = @"提示信息";
     UIAlertController *alertController;
     alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确认离开" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         //点击确定进入下一页
         [self pageup];
         
     }];
     [alertController addAction:OKAction];
     
-    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:@"继续答题" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }]];
     

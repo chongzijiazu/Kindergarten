@@ -75,11 +75,11 @@ A.园舍独立，产权清晰，规划科学，布局合理，民办园自有房
     self.content = [Base64Util Decode:self.content];
     NSString* optionHtml;
     if (self.disabled==1) {
-        optionHtml = [NSString stringWithFormat:@"<label base64=\"true\" class=\"radio-inline\"><input disabled readonly=\"true\" type=\"radio\" name=\"%@\" id=\"%@\" value=\"%@\" onclick=\"optionClicked(this)\"/>%@.%@</label><br></br>",self.fkQuestion,self.pkId,self.optionValue,self.optionValue,self.content];
+        optionHtml = [NSString stringWithFormat:@"<label base64=\"true\" class=\"radio-inline\"><input disabled readonly=\"true\" type=\"radio\" name=\"%@\" id=\"%@\" value=\"%@\" onclick=\"optionClicked(this)\"/><span>%@.%@</span></label><br/>",self.fkQuestion,self.pkId,self.optionValue,self.optionValue,self.content];
     }
     else
     {
-        optionHtml = [NSString stringWithFormat:@"<label base64=\"true\" class=\"radio-inline\"><input type=\"radio\" name=\"%@\" id=\"%@\" value=\"%@\" onclick=\"optionClicked(this)\"/>%@.%@</label><br></br>",self.fkQuestion,self.pkId,self.optionValue,self.optionValue,self.content];
+        optionHtml = [NSString stringWithFormat:@"<label base64=\"true\" class=\"radio-inline\"><input type=\"radio\" name=\"%@\" id=\"%@\" value=\"%@\" onclick=\"optionClicked(this)\"/><span>%@.%@</span></label><br/>",self.fkQuestion,self.pkId,self.optionValue,self.optionValue,self.content];
     }
     
     return optionHtml;

@@ -57,7 +57,7 @@
     for (int i=0; i<self.questionArray.count; i++) {
         question = (EnQuestion*)self.questionArray[i];
         aprove = [EnAprove aproveWithPkId:question.pkId andSeqLevel:question.seqLevel andAproveItemNum:0];
-        questionAndProveHtml = [NSString stringWithFormat:@"<table class=\"table table-condensed\"><thead><tr><td style=\"vertical-align: middle; background-color: white; width: 69%%; \">%@</td><td style=\"vertical-align: middle; width: 1%%;\"></td><td style=\"vertical-align: middle; background-color: white; width: 30%%;\">%@</td></tr></thead></table>",[question description],[aprove description]];
+        questionAndProveHtml = [NSString stringWithFormat:@"<table class=\"table table-condensed\"><thead><tr><td style=\"vertical-align: middle; background-color: white; width: 74%%; \">%@</td><td style=\"vertical-align: middle; width: 1%%;\"></td><td style=\"vertical-align: middle; background-color: white; width: 25%%;\">%@</td></tr></thead></table>",[question description],[aprove description]];
         
         levelHtml= [levelHtml stringByAppendingString:questionAndProveHtml];
     }

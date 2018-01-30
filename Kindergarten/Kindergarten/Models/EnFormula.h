@@ -14,6 +14,7 @@
 @property(nonatomic,copy)NSString* pkId;
 @property(nonatomic,copy)NSString* name;
 @property(nonatomic,copy)NSString* expression;
+@property(nonatomic,copy)NSString* memo;
 @property(nonatomic,copy)NSString* value;
 +(BOOL)loadFormulaXMLToDB;
 +(NSArray *)allFormulaFromDB;

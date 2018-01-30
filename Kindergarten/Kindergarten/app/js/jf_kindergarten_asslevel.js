@@ -358,7 +358,7 @@ function Base64() {
     }
 }
 
-function openHelpFile()
+function openHelp()
 {
     //alert("hello");
     var dicmsg ={

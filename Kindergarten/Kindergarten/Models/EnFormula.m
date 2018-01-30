@@ -21,7 +21,7 @@
 }
 -(BOOL)insertSelfToDB{
     //插入对象的SQL语句
-    NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO 'tbl_formula' (pkId,name,expression,value) VALUES ('%@','%@','%@','%@');",self.pkId,self.name,self.expression,self.value];
+    NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO 'tbl_formula' (pkId,name,expression,memo,value) VALUES ('%@','%@','%@','%@','%@');",self.pkId,self.name,self.expression,self.memo,self.value];
     return [[SQLiteManager shareInstance] execSQL:insertSQL];
 }
 
@@ -34,7 +34,7 @@
 
 +(NSArray *)allFormulaFromDB{
     //查询表中所有数据的SQL语句
-    NSString *SQL = @"SELECT pkId,name,expression,value FROM 'tbl_formula'";
+    NSString *SQL = @"SELECT pkId,name,expression,memo,value FROM 'tbl_formula'";
     //取出数据库用户表中所有数据
     NSArray *allFormulaDictArr = [[SQLiteManager shareInstance] querySQL:SQL];
     NSLog(@"%@",allFormulaDictArr);
@@ -103,17 +103,26 @@
     NSString* xmlPath = [GlobalUtil getFormulaXMLPathPath];
     XMLDictionaryParser* parser = [[XMLDictionaryParser alloc] init];
     NSDictionary* dicFormula = [parser dictionaryWithFile:xmlPath];
-    
-    NSArray* formulaArray = dicFormula[@"formula"];
     EnFormula* f;
     NSDictionary* dicF;
-    for (int i=0; i<formulaArray.count; i++) {
-        dicF = (NSDictionary*)formulaArray[i];
+    if ([dicFormula[@"formula"] isKindOfClass:[NSDictionary class]]) {
+        dicF = (NSDictionary*)dicFormula[@"formula"];
         f = [[EnFormula alloc] initWithDict:dicF];
         if (![f insertSelfToDB]) {
             return false;
         }
+    }
+    else
+    {
+        NSArray* formulaArray = dicFormula[@"formula"];
+        for (int i=0; i<formulaArray.count; i++) {
+            dicF = (NSDictionary*)formulaArray[i];
+            f = [[EnFormula alloc] initWithDict:dicF];
+            if (![f insertSelfToDB]) {
+                return false;
+            }
         
+        }
     }
     
     return true;

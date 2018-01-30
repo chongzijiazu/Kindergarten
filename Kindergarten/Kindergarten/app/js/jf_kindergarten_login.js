@@ -1,4 +1,4 @@
-function login()
+function mb_user_login()
 {
     //alert("hello");
     var edt_account=document.getElementById("edt_account");

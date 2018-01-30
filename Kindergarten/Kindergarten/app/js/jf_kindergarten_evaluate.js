@@ -11,7 +11,7 @@ function logout()
 }
 
 //返回操作
-function goback()
+function backPage()
 {
     saveQuestionAnswer();//返回操作时，保存答案
     //alert("goback");
@@ -45,7 +45,7 @@ function showLevelAnswer(args)
             op.tag=1;
             //将有答案的的试题标记为已完成
             //showFinished(op);
-            $(op).parent().css("background-color","orange");
+            $(op).parent().css("background-color","#aadeff");
         }
     }
 }
@@ -147,7 +147,7 @@ function optionClicked(obj)
         //showFinished(radio);
         radio.checked=true;
         radio.tag=1;
-        $(radio).parent().css("background-color","orange");
+        $(radio).parent().css("background-color","#aadeff");
     }
     //alert(obj.checked);
 }
@@ -259,6 +259,7 @@ function showQuesDesc(pkId)
     var tContent = $("#"+pkId+"_desc").attr("sdesc");
     tContent=base.decode(tContent);
     tContent = tContent.replace(/NEW_LINE/g, '<br/>');
+    tContent = "<p class='quesDesc'>"+tContent+"</p>"
     $("#tipModalBody").html(tContent);
     $('#tipModal').modal({show:true,backdrop:false,keyboard:false});
 }
@@ -280,7 +281,7 @@ function loadBaseInfo(pageData,thirdlevelname){
                 $("#s" + pinfo).html(personInfo[pinfo]);
             }
             $("#school_name").html(kindergarteninfo.name);
-            $("#thirdlevelname").html(thirdlevelname);
+            $("#levelnameid").html(thirdlevelname);
             if(headData.evaluateTimeInfo){
                 //alert(headData.evaluateTimeInfo.beginTime);
                 $("#eva_starttime").html(headData.evaluateTimeInfo.beginTime);
@@ -498,7 +499,7 @@ function Base64() {
     }
 }
 
-function openHelpFile()
+function openHelp()
 {
     //alert("hello");
     var dicmsg ={

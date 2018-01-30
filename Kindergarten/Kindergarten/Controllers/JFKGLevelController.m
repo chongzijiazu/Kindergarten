@@ -134,7 +134,8 @@
     strSql = [NSString stringWithFormat:strSql,thirdlevelid];
     NSArray* resultArray = [[SQLiteManager shareInstance] querySQL:strSql];
     if (resultArray!=nil && resultArray.count==1) {
-        if (resultArray[0][@"result"]!=nil) {
+        NSString* strRet = resultArray[0][@"result"];
+        if (strRet!=nil && strRet.length>0) {
             int ret =  [resultArray[0][@"result"] intValue];
             if (ret==0) {
                 return true;
