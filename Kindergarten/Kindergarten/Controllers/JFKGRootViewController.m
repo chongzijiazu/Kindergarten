@@ -461,6 +461,7 @@
         self.evaluateController.currentLevelQuestionID =nextThirdLevelId;
         self.evaluateController.currentLevelQuestionName = nextThirdLevelName;
         [self.evaluateController sendLevelQuestionToView];
+        [self scrollToFirstNotFinishedQuestion];
     }
     else
     {
@@ -482,6 +483,7 @@
         self.evaluateController.currentLevelQuestionID =preThirdLevelId;
         self.evaluateController.currentLevelQuestionName = preThirdLevelName;
         [self.evaluateController sendLevelQuestionToView];
+        [self scrollToFirstNotFinishedQuestion];
     }
     else
     {
@@ -490,6 +492,17 @@
             NSLog(@"response: %@ error: %@", response, error);
         }];
     }
+}
+
+//滚动到第一个未答试题(当前三级节点)
+-(void)scrollToFirstNotFinishedQuestion
+{
+    NSString* questionid = [self.commonController getFirsitNotFinishedQues:self.evaluateController.currentLevelQuestionID];
+    NSString* funMessage = @"scrollToQuestion('%@');";
+    funMessage = [NSString stringWithFormat:funMessage,questionid];
+    [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+        NSLog(@"response: %@ error: %@", response, error);
+    }];
 }
 
 - (void)showAlertViewForPageDown:(NSString *)message
@@ -506,12 +519,7 @@
     [alertController addAction:OKAction];
     
     [alertController addAction:[UIAlertAction actionWithTitle:@"继续答题" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        NSString* questionid = [self.commonController getFirsitNotFinishedQues:self.evaluateController.currentLevelQuestionID];
-        NSString* funMessage = @"scrollToQuestion('%@');";
-        funMessage = [NSString stringWithFormat:funMessage,questionid];
-        [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-            NSLog(@"response: %@ error: %@", response, error);
-        }];
+        [self scrollToFirstNotFinishedQuestion];
     }]];
     
     [self presentViewController:alertController animated:YES completion:nil];
@@ -531,12 +539,7 @@
     [alertController addAction:OKAction];
     
     [alertController addAction:[UIAlertAction actionWithTitle:@"继续答题" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        NSString* questionid = [self.commonController getFirsitNotFinishedQues:self.evaluateController.currentLevelQuestionID];
-        NSString* funMessage = @"scrollToQuestion('%@');";
-        funMessage = [NSString stringWithFormat:funMessage,questionid];
-        [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-            NSLog(@"response: %@ error: %@", response, error);
-        }];
+        [self scrollToFirstNotFinishedQuestion];
         
     }]];
     
