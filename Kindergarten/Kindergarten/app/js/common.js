@@ -10,7 +10,7 @@ var resource_test_webroot = "https://oss.qszhiku.com/";
 // var api_test_webroot = "http://127.0.0.1/quality_assessment/quality_assessment_api/index.php/";
 
 // var api_test_webroot = "http://183.63.140.254:7004/quality_assessment_api/index.php/";
-var api_test_webroot = "https://api.qszhiku.com/index.php/";
+var api_test_webroot = "http://192.168.1.104:8070/kindergarten/";
 // var api_test_webroot = "http://127.0.0.1/prototype/index.php/";
 // var api_183_webroot = "http://183.63.140.254:7004/quality_assessment_api/index.php/";
 
@@ -96,7 +96,7 @@ var api_test_webroot = "https://api.qszhiku.com/index.php/";
  * 參數1:        $account     用户名称
  * 參數2:        $password    密码
  */
-var api_prototype_user_qa_login = api_test_webroot + "UserController/qa_login";
+var api_prototype_user_qa_login = api_test_webroot + "evaluation/app/login.do";
 
 /*
  *  獲取选项内容
@@ -436,9 +436,4 @@ var api_download_docx = api_test_webroot + "ExportDocxController/download_docx";
 var api_prototype_check_src_success = api_test_webroot + "AssProcessController/check_src_success";
 
 
-/*友盟统计代码*/
-var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cspan id='cnzz_stat_icon_1267282437'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1267282437' type='text/javascript'%3E%3C/script%3E"));
-$(document).ready(function() {
-	$("#cnzz_stat_icon_1267282437").hide();
-});
+
