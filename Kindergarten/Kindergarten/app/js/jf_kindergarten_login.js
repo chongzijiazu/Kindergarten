@@ -30,3 +30,18 @@ function online_login()
     //将用户名、密码传递到OC代码中，调用接口进行登录
     window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
 }
+
+//显示历史登录成功的账号
+function showAccounts(historyAccounts)
+{
+    //alert(historyAccounts[historyAccounts.length-1]);
+    if(historyAccounts)
+    {
+        $("#edt_account").typeahead({
+                                    source: historyAccounts
+                                    });
+        
+        var lastAccount = historyAccounts[historyAccounts.length-1];
+        $("#edt_account").val(lastAccount);
+    }
+}

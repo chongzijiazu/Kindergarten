@@ -212,6 +212,18 @@
     return [downloadfilePath stringByAppendingPathComponent:@"level/level.xml"];
 }
 
+//获取account.txt账户文件路径
++(NSString*)getAccountFilePath
+{
+    // 获取Caches目录路径
+    NSString *cachesDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+    NSString* accountPath = [cachesDir stringByAppendingPathComponent:@"account.txt"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:accountPath]) {
+        [[NSFileManager defaultManager] createFileAtPath:accountPath contents:nil attributes:nil];
+    }
+    return accountPath;
+}
+
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString
 {
     //NSLog(@"%@",jsonString);

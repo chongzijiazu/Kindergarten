@@ -23,14 +23,12 @@
         }];
         return;
     }
-     NSLog(@"login");
+     //NSLog(@"login");
      NSData* usernameData = [username dataUsingEncoding:NSUTF8StringEncoding];
-     username = [usernameData base64EncodedStringWithOptions:1];
-     password = [Encryption md5:password];
-     NSDictionary *dict = @{@"account": username, @"password": password};
-     
-     __weak typeof (self) weakSelf = self;
-     
+     NSString* username64 = [usernameData base64EncodedStringWithOptions:1];
+     NSString* passwordMD5 = [Encryption md5:password];
+     NSDictionary *dict = @{@"account": username64, @"password": passwordMD5};
+     //__weak typeof (self) weakSelf = self;
      [HttpRequestModel httpRequest:[HTTPInterface login] withParamters:dict isPost:NO success:^(id  _Nullable responseObject)
      {
          NSDictionary* dicResponse = [NSJSONSerialization JSONObjectWithData:responseObject
@@ -42,7 +40,11 @@
               //登录成功，则保存登录信息（将院所，系统参数先保存到本地文件中，加载数据的时候再做处理）
              NSString* strLoginfo = [GlobalUtil jsonStringWithObject:dicResponse];
              [self saveLoginInfoToDocument:strLoginfo];
+             
+             //登录成功记录用户名，保存到account.txt文件中
+             [self saveAccountToCatch:username];
      
+             //进入下载页面
               DownloadManagerViewController* downloadManagerVC = [[DownloadManagerViewController alloc] init];
               downloadManagerVC.delegate = self;
               [self.currentVC presentViewController:downloadManagerVC animated:YES completion:nil];
@@ -97,6 +99,50 @@
         return false;
     }
     return true;
+}
+
+//保存用户名到catch下的account.txt文件，用逗号分隔
+-(void)saveAccountToCatch:(NSString*)username
+{
+    NSString* accountPath = [GlobalUtil getAccountFilePath];
+    if (accountPath!=nil) {
+        //[username writeToFile:accountPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        NSFileHandle *fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:accountPath];
+        [fileHandle seekToEndOfFile];  //将节点跳到文件的末尾
+        username = [@"," stringByAppendingString:username];
+        NSData* stringData  = [username dataUsingEncoding:NSUTF8StringEncoding];
+        [fileHandle writeData:stringData]; //追加写入数据
+        [fileHandle closeFile];
+    }
+}
+
+//读取帐号记录，以json形式返回
+-(NSString*)readAccountFromCatch
+{
+    NSString* accountPath = [GlobalUtil getAccountFilePath];
+    if (accountPath!=nil)
+    {
+        NSString* strAccount = [NSString stringWithContentsOfFile:accountPath encoding:NSUTF8StringEncoding error:nil];
+        if (strAccount!=nil) {
+            NSArray* accountArray = [strAccount componentsSeparatedByString:@","];
+            NSString* jsonAccount = [GlobalUtil jsonStringWithObject:accountArray];
+            return jsonAccount;
+        }
+    }
+    return @"";
+}
+
+//将记录的帐号发送到页面显示
+-(void)sendAccountToView
+{
+    NSString* accounts = [self readAccountFromCatch];
+    if(accounts!=nil && accounts.length>0) {
+        NSString* scriptStr = [NSString stringWithFormat:@"showAccounts(%@);",accounts];
+        
+        [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            NSLog(@"response: %@ error: %@", response, error);
+        }];
+    }
 }
 
 @end

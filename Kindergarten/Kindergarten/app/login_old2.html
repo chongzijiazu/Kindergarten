@@ -34,20 +34,17 @@
     <script src="js/jf_kindergarten_login.js"></script>
 
 <script>
-	/*function online_login(){
-		window.location.href="http://10.3.1.147:8080/kindergarten/evaluation/login.do";
-	}*/
+	
 	$(document).ready(function() {
-        /*var historyAccounts =["111","222"];//= jsInterface.getHistoryAccount();
+		var historyAccounts = jsInterface.getHistoryAccount();
 		
-		//var historyAccounts = eval("(" + historyAccounts + ")");
+		var historyAccounts = eval("(" + historyAccounts + ")"); 
 		$("#edt_account").typeahead({
 			source: historyAccounts
 		});
 		
-		//var lastAccount = jsInterface.getLastAccount();
-        var lastAccount ="222";
-		$("#edt_account").val(lastAccount);*/
+		var lastAccount = jsInterface.getLastAccount();
+		$("#edt_account").val(lastAccount);
 		
 		var b_version = check_browser_version();
 		if(b_version){
@@ -129,7 +126,6 @@
 					}
 			});
 		})
-		$('#selectModal').modal();
 	});
 
 	function goto_play_video(check_type){
@@ -522,35 +518,11 @@ function jsGotoCategory(){
 	}
 }
 </script>
-
-<style>
-	.btn-primary{
-		background-image: -webkit-linear-gradient(top, #2bbd58 0%, #5dd080 100%);
-		background-image: -o-linear-gradient(top, #2bbd58 0%, #5dd080 100%);
-		background-image: -webkit-gradient(linear, left top, left bottom, from(#2bbd58), to(#5dd080));
-		background-image: linear-gradient(to bottom, #2bbd58 0%, #5dd080 100%);
-		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff2bbd58', endColorstr='#ff5dd080', GradientType=0);
-		filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-		background-repeat: repeat-x;
-		border-color: #2bbd58;
-	}
-	.btn-primary:hover {
-		color: #fff;
-		background-color: #2bbd58;
-		border-color: #2bbd58;
-	}
-	
-	.btn-primary:active{
-		color: #fff;
-		background-color: #2bbd58 !important;
-		border-color: #2bbd58;
-	}
-</style>
 </head>
 <body>
 	<div class="row bg">
 		<div class="col-md-12 logo_img">
-			<img src="images/login/logo.png" width="162" alt="" style="height:70px;margin-top:5px;">
+			<img src="images/login/logo.png" width="162" alt="">
 		</div>
 		<div class="container">
 			<div class="row">
@@ -585,6 +557,10 @@ function jsGotoCategory(){
 		        <div class=" text-center bottom_zi_class">
 		        	<img src="images/login/logo_zi.png" width="230">
 		        </div>
+		        <div class=" text-center bottom_zi_class">
+		        	 <a href="#" style="font-size:20px;float:right" onclick="online_login();">切换在线评估</a>
+		        </div>
+		       
 		    </div>
 		</div>
 		
@@ -602,73 +578,8 @@ function jsGotoCategory(){
 	  <a class="close" title="close"></a>
 	  <div id="overlay-player"></div>
 	</div>
-	
-	
-	
-	<div class="mb_alert_box modal fade in" id="selectModal" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block; padding-right: 17px;"> 
-	   <div id="ta_class">
-	    <div id="tb_class">
-	     <div class="modal-dialog">
-	      <div class="modal-content">
-	       <div class="modal-title" id="myModalLabel">
-	        <p class="col-md-12 col-sm-12 col-xs-12 text-center" style="font-size:30px;padding-top:20px;">进入评估系统前，请选择评估模式</p>
-	       </div>
-	       <div class="text-center" style="padding:0px 30px 5px 30px;">
-				<table style="border-collapse:separate; border-spacing:0px 10px;">
-					<tr style="vertical-align:bottom;">
-						<td colspan="3" style="height:2px;"><hr style="background-color:#868686;height:1px;border:none;padding:0px;margin:0px;"/></td>
-					</tr>
-					<tr style="vertical-align:bottom;">
-						<td style="width:75%;vertical-align:bottom;text-align:left">
-							 <span style="font-size:18px;">在线评估适用于：</span><br/>
-							 评估过程中网络情况良好，<br/>
-							 能正常连接到互联网（WIFI或流量）
-						</td>
-						<td style="width:5%">
-						</td>
-						<td style="width:20%;vertical-align:bottom;">
-							<button type="button" class="btn btn-primary" style="width:100%;font-size:26px;" onclick="online_login();">
-								在线评估
-							</button>
-						</td>
-					</tr>
-					<tr style="vertical-align:bottom;">
-						<td colspan="3"><hr style="background-color:#868686;height:1px;border:none;padding:0px;margin:0px;"/></td>
-					</tr>
-					<tr style="vertical-align:bottom;">
-						<td style="width:75%;vertical-align:bottom;text-align:left">
-							 <span style="font-size:18px;">离线评估适用于：</span><br/>
-							 评估过程中可能出现网络中断或<br/>网络不佳的情况（如幼儿园园区无法覆盖网络）
-						</td>
-						<td style="width:5%">
-						</td>
-						<td style="width:20%;vertical-align:bottom;">
-							<button type="button" class="btn btn-primary" style="width:100%;font-size:26px;" onclick="offline_login();">
-								离线评估
-							</button>
-						</td>
-					</tr>
-				</table>
-	       </div>
-	      </div>
-	     </div>
-	    </div>
-	   </div>
-	  </div>
-	
 	<script>
-		function loginReturn(errorMsg){
-			//errorMsg = eval("(" + errorMsg + ")"); 
-			if(errorMsg.success == "0"){
-				jsInterface.hide();
-				create_alert_box_ajax_error("提示",errorMsg.message, 1);
-			}
-		}
-		function offline_login(){
-            
-			$('#selectModal').modal('hide');
-            //alert($('#selectModal').modal('hide'));
-		}
+		
 	</script>
 </body>
 </html>

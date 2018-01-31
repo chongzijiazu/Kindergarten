@@ -30,5 +30,6 @@
 +(long long) fileSizeAtPath:(NSString*)filePath;
 +(NSString*)getAproveItemPath;
 +(NSString*)getUploadZipPath;
++(NSString*)getAccountFilePath;
 @end
 

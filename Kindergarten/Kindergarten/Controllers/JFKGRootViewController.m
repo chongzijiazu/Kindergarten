@@ -353,6 +353,10 @@
     {
         [self.evaluateController sendLevelQuestionToView];
     }
+    else if ([htmlname isEqualToString:@"login.html"])
+    {
+        [self.loginController sendAccountToView];//向页面发送记录的帐号信息
+    }
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {

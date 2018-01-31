@@ -16,5 +16,6 @@
 @property (nonatomic, weak) UIViewController *currentVC;
 
 -(void)loginByUsername:(NSString*)username andPassword:(NSString*)password;
+-(void)sendAccountToView;
 
 @end
