@@ -310,10 +310,11 @@
     if (navigationAction.navigationType == WKNavigationTypeLinkActivated
         && ![hostname containsString:@".baidu.com"]) {
         // 对于跨域，需要手动跳转
-        [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
+        //[[UIApplication sharedApplication] openURL:navigationAction.request.URL];
         
         // 不允许web内跳转
-        decisionHandler(WKNavigationActionPolicyCancel);
+        //decisionHandler(WKNavigationActionPolicyCancel);
+        decisionHandler(WKNavigationActionPolicyAllow);
     } else {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
