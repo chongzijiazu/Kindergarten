@@ -368,3 +368,13 @@ function openHelp()
     window.webkit.messageHandlers.AppModel.postMessage(dicmsg);
 }
 
+//根据题号滚动到该试题
+function scrollToLevel(levelid)
+{
+    //alert(levelid);
+    if(levelid)
+    {
+        $("html,body").animate({scrollTop: $("td[id = '"+levelid+"']").offset().top}, 800);
+    }
+}
+
