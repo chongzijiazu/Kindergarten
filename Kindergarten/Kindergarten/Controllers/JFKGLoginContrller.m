@@ -107,12 +107,15 @@
     NSString* accountPath = [GlobalUtil getAccountFilePath];
     if (accountPath!=nil) {
         //[username writeToFile:accountPath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-        NSFileHandle *fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:accountPath];
-        [fileHandle seekToEndOfFile];  //将节点跳到文件的末尾
-        username = [@"," stringByAppendingString:username];
-        NSData* stringData  = [username dataUsingEncoding:NSUTF8StringEncoding];
-        [fileHandle writeData:stringData]; //追加写入数据
-        [fileHandle closeFile];
+        NSString* strAccount = [NSString stringWithContentsOfFile:accountPath encoding:NSUTF8StringEncoding error:nil];
+        if (![strAccount containsString:username]) {
+            NSFileHandle *fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:accountPath];
+            [fileHandle seekToEndOfFile];  //将节点跳到文件的末尾
+            username = [@"," stringByAppendingString:username];
+            NSData* stringData  = [username dataUsingEncoding:NSUTF8StringEncoding];
+            [fileHandle writeData:stringData]; //追加写入数据
+            [fileHandle closeFile];
+        }
     }
 }
 

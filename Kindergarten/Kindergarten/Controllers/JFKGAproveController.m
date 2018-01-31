@@ -239,7 +239,7 @@
         int maxCount = [self maxAproveNum];
         if (haveAproveCount>=maxCount) {
             
-            NSString* scriptStr = [NSString stringWithFormat:@"showAlertMessage('%@');",@"该题已达到可添加证据最大数量。"];
+            NSString* scriptStr = [NSString stringWithFormat:@"showAlertMessage('%@');",[NSString stringWithFormat:@"上传的证据文件已达到最大个数%d个",maxCount]];
             //NSLog(@"%@",strQuesAprove);
             [self.webView evaluateJavaScript:scriptStr completionHandler:^(id _Nullable response, NSError * _Nullable error) {
                 NSLog(@"response: %@ error: %@", response, error);
