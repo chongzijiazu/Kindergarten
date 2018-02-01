@@ -24,5 +24,6 @@
 -(void)showHelpFile:(NSString*)helpfilepath;
 +(void)copyFileToAppDesc;
 -(NSString*)getFirsitNotFinishedQues:(NSString*)thirdLevelId;
+-(void)downloadFileFromUrl:(NSURL*)url toPath:(NSString*)destpath;
 
 @end

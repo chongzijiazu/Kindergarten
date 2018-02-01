@@ -12,6 +12,7 @@
 #import "EnOption.h"
 #import "XMLDictionary.h"
 #import "SQLiteManager.h"
+#import "AFNetworking.h"
 
 @implementation JFKGCommonController
 
@@ -293,6 +294,52 @@
         return resultArray[0][@"questionid"];
     }
     return nil;
+}
+
+//按请求将文件下载到制定目录下
+-(void)downloadFileFromUrl:(NSURL*)url toPath:(NSString*)destpath
+{
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    NSString* strCookie =[self readCurrentCookie];
+    [request addValue:strCookie forHTTPHeaderField:@"Cookie"];
+    NSLog(@"%@",request);
+    
+    MBProgressHUD* hud = [MBProgressHUD showMessage:@"正在导出..."];
+    //下载
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.timeoutIntervalForRequest = 30; //设置请求超时时间
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil  destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL* destUrl = [NSURL URLWithString:destpath];
+        return destUrl;
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        [hud hide:YES];
+        if (error)
+        {
+            NSLog(@"Error:%@",error);
+            
+        }
+        else
+        {
+            NSLog(@"File downloaded to: %@", filePath);
+        }
+    }];
+    //重新开始下载
+    [downloadTask resume];
+}
+
+- (NSString*)readCurrentCookie{
+
+        NSHTTPCookieStorage*cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        NSMutableString *cookieString = [[NSMutableString alloc] init];
+        for (NSHTTPCookie*cookie in [cookieJar cookies]) {
+            [cookieString appendFormat:@"%@=%@;",cookie.name,cookie.value];
+        }
+        //删除最后一个“；”
+        [cookieString deleteCharactersInRange:NSMakeRange(cookieString.length - 1, 1)];
+        return cookieString;
 }
 
 @end

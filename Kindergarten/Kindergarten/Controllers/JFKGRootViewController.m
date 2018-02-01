@@ -86,6 +86,12 @@
     {
         [self loadLocalHtmlByFilename:@"login.html"];
     }
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:@selector(backMain:)];
+}
+
+-(void)backMain:(id)sender{
+    [self goback];
 }
 
 //加载本地html页面，根据html文件名称
@@ -179,6 +185,7 @@
                 NSURL* url = [NSURL URLWithString:OnlineUrlString];
                 NSURLRequest* request = [NSURLRequest requestWithURL:url];
                 [self.webView loadRequest:request];
+                //self.navigationController.navigationBar.hidden = NO;
             }
             
             
@@ -307,15 +314,20 @@
 
 #pragma mark - WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    NSString *hostname = navigationAction.request.URL.host.lowercaseString;
-    if (navigationAction.navigationType == WKNavigationTypeLinkActivated
-        && ![hostname containsString:@".baidu.com"]) {
+    //NSString *hostname = navigationAction.request.URL.host.lowercaseString;
+    NSString* hosturl = [navigationAction.request.URL path];
+    if (navigationAction.navigationType == WKNavigationTypeOther
+        && [hosturl containsString:@"download.do"]) {
         // 对于跨域，需要手动跳转
         //[[UIApplication sharedApplication] openURL:navigationAction.request.URL];
         
-        // 不允许web内跳转
-        //decisionHandler(WKNavigationActionPolicyCancel);
-        decisionHandler(WKNavigationActionPolicyAllow);
+        // 取消下载请求
+        decisionHandler(WKNavigationActionPolicyCancel);
+        NSString* funMessage = @"alert('请到电脑端导出查看文件');";
+        [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            NSLog(@"response: %@ error: %@", response, error);
+        }];
+        
     } else {
         decisionHandler(WKNavigationActionPolicyAllow);
     }
@@ -324,6 +336,20 @@
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler {
+    
+   /* NSHTTPURLResponse *response = (NSHTTPURLResponse *)navigationResponse.response;
+    //NSLog(@"%@",response.URL);
+    NSString* responseUrl = [response.URL path];
+    if ([responseUrl containsString:@"main.do"]) {
+        NSArray *cookies =[NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:response.URL];
+        NSLog(@"%@",cookies);
+        for (NSHTTPCookie *cookie in cookies) {
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+            NSLog(@"%@",cookie);
+        }
+    }*/
+    
+    
     decisionHandler(WKNavigationResponsePolicyAllow);
     NSLog(@"%s", __FUNCTION__);
 }
@@ -363,6 +389,7 @@
     else if ([htmlname isEqualToString:@"login.html"])
     {
         [self.loginController sendAccountToView];//向页面发送记录的帐号信息
+        //self.navigationController.navigationBar.hidden = YES;
     }
 }
 
