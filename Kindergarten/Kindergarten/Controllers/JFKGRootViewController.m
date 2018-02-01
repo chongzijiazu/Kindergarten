@@ -315,9 +315,9 @@
 #pragma mark - WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     //NSString *hostname = navigationAction.request.URL.host.lowercaseString;
-    NSString* hosturl = [navigationAction.request.URL path];
+    NSString* hosturl = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
     if (navigationAction.navigationType == WKNavigationTypeOther
-        && [hosturl containsString:@"download.do"]) {
+        && [hosturl containsString:@"download.do?exporttype=2"]) {
         // 对于跨域，需要手动跳转
         //[[UIApplication sharedApplication] openURL:navigationAction.request.URL];
         
