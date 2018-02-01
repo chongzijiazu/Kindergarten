@@ -153,8 +153,8 @@
     NSString* optionHtml=@"";
     EnOption* option;
     if (self.calculated) {
-        NSString* ans = [EnFormula getValueByName:self.fkFormula];
-        if (ans!=nil&&([@"ABCD" containsString:ans])) {
+        NSString* ans = [EnFormula getValueByPKID:self.fkFormula];
+        if (ans!=nil&&([@"ABCDEFGHIJKLMNOPQRSTUVWXYZ" containsString:ans])) {
             NSDictionary *dic1 = [NSDictionary dictionaryWithObject:ans forKey:self.pkId];
             [EnProcessInfo saveQuestionAnswer:dic1];
         }

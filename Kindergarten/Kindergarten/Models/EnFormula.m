@@ -37,7 +37,7 @@
     NSString *SQL = @"SELECT pkId,name,expression,memo,value FROM 'tbl_formula'";
     //取出数据库用户表中所有数据
     NSArray *allFormulaDictArr = [[SQLiteManager shareInstance] querySQL:SQL];
-    NSLog(@"%@",allFormulaDictArr);
+    //NSLog(@"%@",allFormulaDictArr);
     //将字典数组转化为模型数组
     NSMutableArray *modelArrM = [[NSMutableArray alloc] init];
     for (NSDictionary *dict in allFormulaDictArr) {

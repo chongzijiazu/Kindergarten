@@ -97,7 +97,7 @@ function calculateFormula(dicFormula)
             //alert(expression);
             try
             {
-                var value = eval(expression);
+                var value = eval('(function(){'+expression+'})()');
                 //alert(value);
                 params[key]=value;
             }
