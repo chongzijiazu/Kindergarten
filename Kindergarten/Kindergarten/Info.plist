@@ -47,5 +47,9 @@
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>UIMainStoryboardFile~iphone</key>
+    <string></string>
+    <key>UIMainStoryboardFile~ipad</key>
+    <string></string>
 </dict>
 </plist>

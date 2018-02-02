@@ -19,11 +19,11 @@
 //登出操作
 -(void)logout
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"登出后将清空评估数据，请确保评估数据已上传" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"系统退出后，评估数据将被清除，请确认评估数据已上传!" preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         NSLog(@"点击取消");
     }]];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alertController addAction:[UIAlertAction actionWithTitle:@"退出系统" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         //清空ticketid
         [userDefault setObject:@"" forKey:@"ticketid"];

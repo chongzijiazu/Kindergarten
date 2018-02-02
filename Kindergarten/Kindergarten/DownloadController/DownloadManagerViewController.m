@@ -298,7 +298,7 @@
         if (error)
         {
             NSLog(@"Error:%@",error);
-            [self showAlertView:@"下载失败,是否从新下载评估数据"];
+            [self showAlertView:@"当前网络状态不佳，无法加载信息，请重试!"];
             
         }
         else
@@ -321,7 +321,7 @@
     UIAlertController *alertController;
     alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"重试" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         //清空数据
         [GlobalUtil deleteAllDocumentsFile];
         //从新下载数据

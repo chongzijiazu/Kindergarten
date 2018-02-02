@@ -503,7 +503,7 @@
     }
     else
     {
-        NSString* funMessage = @"alert('当前三级指标已是末页');";
+        NSString* funMessage = @"alert('已在末页!');";
         [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
             NSLog(@"response: %@ error: %@", response, error);
         }];
@@ -525,7 +525,7 @@
     }
     else
     {
-        NSString* funMessage = @"alert('当前三级指标已经是首页');";
+        NSString* funMessage = @"alert('已在首页!');";
         [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
             NSLog(@"response: %@ error: %@", response, error);
         }];
@@ -545,7 +545,7 @@
 
 - (void)showAlertViewForPageDown:(NSString *)message
 {
-    NSString *title = @"提示信息";
+    NSString *title = @"提示";
     UIAlertController *alertController;
     alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
@@ -565,7 +565,7 @@
 
 - (void)showAlertViewForPageUp:(NSString *)message
 {
-    NSString *title = @"提示信息";
+    NSString *title = @"提示";
     UIAlertController *alertController;
     alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     

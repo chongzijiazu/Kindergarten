@@ -119,7 +119,7 @@
     }
     else //无评估答案直接退出，默认成功
     {
-        [self showSucessAlertView:@"上传成功!"];
+        [self showSucessAlertView:@"数据上传成功!"];
         //return false;
     }
     return true;
@@ -148,29 +148,29 @@
          NSDictionary* dicResponse = [NSJSONSerialization JSONObjectWithData:responseObject
                                                                      options:NSJSONReadingMutableContainers
                                                                        error:nil];
-         NSLog(@"上传成功.%@",dicResponse);
+         //NSLog(@"上传成功.%@",dicResponse);
          if ([dicResponse[@"success"] isEqualToString:@"1"]) {
              //上传成功则清理数据，退出到登录页面
-             [self showSucessAlertView:@"上传成功!"];
+             [self showSucessAlertView:@"数据上传成功!"];
          }
          else
          {
              NSString* errmsg =dicResponse[@"message"];
              if (errmsg!=nil && errmsg.length>0) {
-                 errmsg = [NSString stringWithFormat:@"上传失败,是否重新上传评估数据(%@)",errmsg];
+                 errmsg = [NSString stringWithFormat:@"数据上传失败，请重试(%@)",errmsg];
                  [self showErrorAlertView:errmsg];
              }
              else
              {
-                 [self showErrorAlertView:@"上传失败,是否重新上传评估数据"];
+                 [self showErrorAlertView:@"数据上传失败，请重试!"];
              }
          }
         }
     failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
     {
-              NSLog(@"上传失败.%@",error);
+              //NSLog(@"上传失败.%@",error);
         //NSString* strErr = [NSString stringWithFormat:@"%@",error];
-        [self showErrorAlertView:@"上传失败,是否重新上传评估数据"];
+        [self showErrorAlertView:@"数据上传失败，请重试!"];
           }];
 }
 
@@ -203,7 +203,7 @@
     UIAlertController *alertController;
     alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"重试" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         
         //从新上传数据
         [self uploadEvaluateData];
