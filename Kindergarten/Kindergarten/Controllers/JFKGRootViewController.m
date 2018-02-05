@@ -317,7 +317,7 @@
     //NSString *hostname = navigationAction.request.URL.host.lowercaseString;
     NSString* hosturl = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
     if (navigationAction.navigationType == WKNavigationTypeOther
-        && [hosturl containsString:@"download.do?exporttype=2"]) {
+        && [hosturl containsString:@"download.do?exporttype="]) {
         // 对于跨域，需要手动跳转
         //[[UIApplication sharedApplication] openURL:navigationAction.request.URL];
         
