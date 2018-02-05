@@ -18,6 +18,9 @@
 #import "JFKGCommonController.h"
 
 @interface DownloadManagerViewController ()
+{
+
+}
 
 @end
 
@@ -126,19 +129,20 @@
     {
         if(self.currentDownloadCount == 5)//下载完成
         {
-            self.lbl_downloadState.text =  @"数据加载中...";
-            if([self processDownloadData])//处理下载完的数据
-            {
-                //下载及加载数据完成，向页面发送成功消息
-                if (self.delegate!=nil) {
-                    [self.delegate sendIsSuccess:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if([self processDownloadData])//处理下载完的数据
+                {
+                    //下载及加载数据完成，向页面发送成功消息
+                    if (self.delegate!=nil) {
+                        [self.delegate sendIsSuccess:YES];
+                    }
+                    [self dismissViewControllerAnimated:NO completion:nil];
                 }
-                [self dismissViewControllerAnimated:NO completion:nil];
-            }
-            else
-            {
-                [self showAlertView:@"加载数据失败,是否从新下载评估数据"];
-            }
+                else
+                {
+                    [self showAlertView:@"加载数据失败,是否从新下载评估数据"];
+                }
+            });
         }
         else
         {
@@ -253,7 +257,7 @@
 
 -(void)deleteExistDownloadFile
 {
-    self.currentDownloadCount = 1;//重置当前下载个数
+    self.currentDownloadCount = 0;//重置当前下载个数
     //Document路径
     NSString* downloadPath = [GlobalUtil getDownloadFilesPath];
     if([[NSFileManager defaultManager] fileExistsAtPath:downloadPath])
@@ -303,12 +307,12 @@
         }
         else
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.lbl_downloadState.text =  [NSString  stringWithFormat:@"%@%d%@",@"正在下载评估资源(", ++self.currentDownloadCount,@"/5)"];
-            });
+            self.currentDownloadCount++;
+            [self performSelectorOnMainThread:@selector(showLabelDownloadState) withObject:nil waitUntilDone:YES];
+            //NSLog(@"%d",self.currentDownloadCount);
             [self.downloadArray removeObject:toFilename]; //移除下载完成的文件
             [self downloadEvalutionData]; //下载下一个文件
-            NSLog(@"File downloaded to: %@", filePath);
+            //NSLog(@"File downloaded to: %@", filePath);
         }
     }];
     //重新开始下载
@@ -339,6 +343,14 @@
     }]];
     
     [self presentViewController:alertController animated:YES completion:nil];
+}
+
+-(void)showLabelDownloadState
+{
+    self.lbl_downloadState.text =  [NSString  stringWithFormat:@"%@%d%@",@"正在下载评估资源(", self.currentDownloadCount,@"/5)"];
+    if (self.currentDownloadCount==5) {
+        self.lbl_downloadState.text=@"下载完成，正在加载数据";
+    }
 }
 
 - (void)didReceiveMemoryWarning {

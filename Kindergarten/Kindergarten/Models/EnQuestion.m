@@ -152,23 +152,33 @@
 {
     NSString* optionHtml=@"";
     EnOption* option;
-    if (self.calculated) {
+    if (self.calculated)//计算题
+    {
         NSString* ans = [EnFormula getValueByPKID:self.fkFormula];
         if (ans!=nil&&([@"ABCDEFGHIJKLMNOPQRSTUVWXYZ" containsString:ans])) {
             NSDictionary *dic1 = [NSDictionary dictionaryWithObject:ans forKey:self.pkId];
             [EnProcessInfo saveQuestionAnswer:dic1];
+            
+            for (int i=0; i<self.optionArray.count; i++)
+            {
+                option = (EnOption*)self.optionArray[i];
+                option.disabled=1;
+                optionHtml=[optionHtml stringByAppendingString:[option description]];
+            }
         }
-        
-        
-        for (int i=0; i<self.optionArray.count; i++) {
-            option = (EnOption*)self.optionArray[i];
-            option.disabled=1;
-            optionHtml=[optionHtml stringByAppendingString:[option description]];
+        else//在计算公式表中未找到匹配的答案，则可选
+        {
+            for (int i=0; i<self.optionArray.count; i++)
+            {
+                option = (EnOption*)self.optionArray[i];
+                optionHtml=[optionHtml stringByAppendingString:[option description]];
+            }
         }
     }
-    else
+    else//非计算题
     {
-        for (int i=0; i<self.optionArray.count; i++) {
+        for (int i=0; i<self.optionArray.count; i++)
+        {
             option = (EnOption*)self.optionArray[i];
             optionHtml=[optionHtml stringByAppendingString:[option description]];
         }
