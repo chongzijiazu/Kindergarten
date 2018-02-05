@@ -249,7 +249,7 @@
                 }
                 else
                 {
-                    [self showAlertViewForPageDown:@"当前三级指标下还有评估试题尚未答完，确认离开本页？                          ."];
+                    [self showAlertViewForPageDown:@"当前三级指标下还有评估试题尚未答完，确认离开本页"];
                 }
             }
             else if([operation isEqualToString:@"pageUp"])
@@ -260,7 +260,7 @@
                 }
                 else
                 {
-                    [self showAlertViewForPageUp:@"当前三级指标下还有评估试题尚未答完，确认离开本页？                          ."];
+                    [self showAlertViewForPageUp:@"当前三级指标下还有评估试题尚未答完，确认离开本页？"];
                 }
                 
             }
@@ -488,7 +488,7 @@
         NSString* currentFirstLevel = [self.evaluateController.currentLevelQuestionID substringToIndex:3];
         NSString* nextFirstLevel = [nextThirdLevelId substringToIndex:3];
         if (![currentFirstLevel isEqualToString:nextFirstLevel]) {
-            NSString* funMessage = @"alert('您即将离开当前一级指标，进入下一个一级指标评估答题面                               .');";
+            NSString* funMessage = @"alert('您即将离开当前一级指标，进入下一个一级指标评估答题面');";
             [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
                 NSLog(@"response: %@ error: %@", response, error);
             }];
