@@ -157,7 +157,7 @@
          {
              NSString* errmsg =dicResponse[@"message"];
              if (errmsg!=nil && errmsg.length>0) {
-                 errmsg = [NSString stringWithFormat:@"数据上传失败，请重试(%@)",errmsg];
+                 //errmsg = [NSString stringWithFormat:@"数据上传失败，请重试(%@)",errmsg];
                  [self showErrorAlertView:errmsg];
              }
              else
