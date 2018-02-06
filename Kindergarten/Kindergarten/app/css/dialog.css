@@ -1,0 +1,90 @@
+    	.modal-header,.ui-dialog-header {
+			/*padding: 15px;*/
+			/*background-color: #F87172;*/
+			/*border-bottom: 1px solid #68cbd0 !important;*/
+			/*text-align:center;*/
+			padding-top:4px;
+			border-bottom : none !important;
+		}
+		
+		.modal-header h4, .ui-dialog-title {
+			/*text-align:center;*/
+			color:#fff;
+			font-size:22px;
+		    font-weight: normal !important;
+		    padding-top:0px !important;
+		    
+		}
+		
+		.ui-dialog-content{
+			min-height:80px;	
+		}
+				
+		.modal-body,.ui-dialog-body{
+			font-size:20px;
+			min-height: 120px;
+		}
+		
+		.ui-dialog-body{
+			width : 400px;
+			text-align : left !important;
+		}
+		
+		.ui-dialog-footer {
+			/*
+		    padding: 15px !important;
+		    text-align: center !important;
+		    border-top: 1px solid #e5e5e5 !important;
+		    */
+		    text-align: center !important;
+		}
+		
+		.ui-dialog-button{
+			font-size:20px !important;
+			float:none !important;
+		}
+		
+		.ui-dialog {
+			font-family: "Microsoft YaHei" !important;
+		}
+		
+		.ui-dialog-footer button.ui-dialog-autofocus {
+			/*
+		    background-color: #f0ad4e !important;
+		    border-color: #eea236 !important;
+		    */
+		    background-color: #68cbd0 !important;
+		    border-color: #68cbd0 !important;
+		    font-size:20px;
+		    
+		}
+		
+		.ui-dialog-footer button.ui-dialog-autofocus:hover {
+		    /*
+		    background-color: #ec971f !important;
+		    border-color: #d58512 !important;
+		    */
+		    background-color: #31b0d5 !important;
+		    border-color: #269abc !important;
+		    font-size:20px;
+		    
+		}
+		
+		 .modal-content:not(#jfdialog),.ui-dialog{
+		    background: url(../images/head_bgi.png) #fff no-repeat;
+	  		border: 8px solid #68cbd0 !important;
+		}
+		.modal-footer{
+			text-align:center;
+			border-top:none;
+		}
+		.modal-footer .btn{
+			font-size:20px;
+		}
+		.btn-info{
+			background-color:#68cbd0
+		}
+		.close,.close:hover,.ui-dialog-close,ui-dialog-close:hover{
+			opacity : 1 !important;
+		}
+		
