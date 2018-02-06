@@ -6,13 +6,11 @@
   <title>Kindergarten</title>
   <!-- Tell the browser to be responsive to screen width -->
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/dialog.css">
-  
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="css/loading.css"/>
   <script src="jquery/jquery.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
-  <script src="js/dialog.js"></script>
-  <script src="js/jf_kindergarten_evaluate.js"></script>
+  <script src="js/jf_kindergarten_asslevel.js"></script>
   <style>
 	#table > thead > tr > th,
 	#table > thead > tr > td {
@@ -41,6 +39,20 @@
 	  text-align:left; 
 	  margin:auto;
 	}
+  #levelTableId > tbody > tr > th,
+  #levelTableId > tfoot > tr > th,
+  #levelTableId > tbody > tr > td,
+  #levelTableId > tfoot > tr > td {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      padding-right: 8px;
+      padding-left:8px;
+      line-height: 1.42857143;
+      vertical-align: middle;
+      border-top: 1px solid #ddd;
+      text-align:left;
+      margin:auto;
+  }
 	.nav>li>a:focus, .nav>li>a:hover {
 		text-decoration: none;
 		background-color: #68cbd0;
@@ -49,61 +61,14 @@
 		border-color: #337ab7;
 		background-color: #68cbd0;
 	}
-	
-	.radio-inline{
-		margin-top:0;
-    	background-color: #FFF;
-    	display:block;
-	}
-	.radio-inline+.radio-inline {
-		margin-top:10px;
-		margin-left:0px;
-	}
-	.questips{
-		font-size:16px;color:blue;margin-top:10px;margin-bottom:10px;
-	}
-	.evidence img{
-		margin-bottom:10px;
-		margin-right:4px;
-		cursor : pointer;
-		width:10%;
-    	height:10%;
-	}
-	.container{
-		width:100%;margin:0px auto;
-	}
-	.finished{
-		color:orange;font-size:18px;border: 2px solid orange;
-		padding: 4px;border-radius: 4px;font-weight: bold;
-		display:none;
-	}
 	.modal-header {
 		padding: 15px;
 		border-bottom: 1px solid #68cbd0;
-	}
-	.quescontent {
-		font-family: "Microsoft YaHei";
-		font-size:26px;
-	}
-	
-	.quesDesc{
-		font-family: "Microsoft YaHei";
-		font-size:20px;
-	}
-	
-	.radio-inline input{
-		width:26px;
-		height:26px;
-	}
-	.radio-inline span{
-		margin-left:10px;
 	}
 	.ftable td:nth-child(odd){background-color:#e8ecef}
 	.stable tr:nth-of-type(1){background-color:#e8ecef}
 	.stable tr:nth-of-type(2){background-color:#e8ecef}
 	.stable tr:nth-of-type(3){background-color:white}
-	
-	
   </style>
 </head>
 <body style="background-color:#f5f5f5">
@@ -122,7 +87,7 @@
 				</td>
 				<td style="text-align:center;width:40%">
 					<!-- middle-->
-					<span class="logo" style="font-size:25px;color:white"><b>幼儿园办园行为督导评估系统</b></span>
+					<span class="logo" style="font-size:25px;color:white;" ><b>幼儿园办园行为督导评估系统</b></span>
 				</td>
 				<td style="width:30%;text-align:right;">
 					<table style="float:right">
@@ -141,7 +106,7 @@
 								  <li>
 									<div class="row">
 									  <div class="col-xs-4" style="text-align:right">
-										<b>姓名：</b>
+										姓名：
 									  </div>
 									  <div class="col-xs-4" style="text-align:left" id="sname">
 										
@@ -150,7 +115,7 @@
 									<li class="divider"></li>
 									<div class="row">
 									  <div class="col-xs-4" style="text-align:right">
-										<b>手机号：</b>
+										手机号：
 									  </div>
 									  <div class="col-xs-4" style="text-align:left" id="sphone">
 										
@@ -159,7 +124,7 @@
 									<li class="divider"></li>
 									<div class="row">
 									  <div class="col-xs-4" style="text-align:right">
-										<b>EMail：</b>
+										EMail：
 									  </div>
 									  <div class="col-xs-4" style="text-align:left" id="semail">
 										
@@ -171,7 +136,7 @@
 								  <li class="divider"></li>
 								  <li class="user-footer">
 									<div class="pull-right" style="padding-right:50px;">
-									  <a href="#" class="btn btn-danger btn-flat" onclick="logout();">退出</a>
+									  <a href="#" class="btn btn-default btn-flat" onclick="logout();">注销</a>
 									</div>
 								  </li>
 								</ul>		
@@ -188,72 +153,85 @@
 			<table class="table table-condensed">
 				<thead>
 				  <tr>
-					 <td style="width:4%;vertical-align:middle">
+					 <td style="width:54px;vertical-align:middle">
 						<img src="images/school.png"></img>
 					</td>
-					<td style="vertical-align:middle;width:25%;">
+					<td style="vertical-align:middle">
 						<div style="color:#FF9F4B;">
 							幼儿园名称：
 						</div>
-						<div style="background-color:#FFE4CC;padding:5px;border:1px solid #FF9F4B;border-radius:5px;" id="school_name"></div>
+						<div style="background-color:#FFE4CC;padding:5px;border:1px solid #FF9F4B;border-radius:10px;" id="school_name"> </div>
 					</td>
-					<td style="width:4%;vertical-align:middle"><img src="images/asslevel.png"></img> </td>
-					<td style="vertical-align:middle;width:25%;">
-						<div style="color:#5dc77d;">
-							评估指标：
+					<td style="width:54px;vertical-align:middle"><img src="images/time.png"></img> </td>
+					<td style="vertical-align:middle;">
+						<div style="color:#73C8F7;">
+							开始时间：
 						</div>
-						<div style="background-color:#d3ffe0;padding:5px;border:solid thin #5dc77d;border-radius:5px;" id="levelnameid"></div></td>
-					<td style="width:15%;vertical-align:middle;text-align:center;cursor:pointer;">
-						<div style="cursor:pointer;"  onclick="backPage();" title="返回指标列表">
-							<img src="images/back.png" ></img>
-                            <br/><span>返回列表</span>
-                        </div>
+						<div style="background-color:#E2F7FF;padding:5px;border:1px solid #73C8F7;border-radius:10px;" id="eva_starttime"></div></td>
+					 <td style="width:54px;vertical-align:middle">
+						<img src="images/timeend.png"></img>
 					</td>
-					<!--<td style="width:60px;">
-						<img src="images/submit.png"></img>
-						<span>确认开始</span>
-					</td>-->
+					<td style="vertical-align:middle;">
+						<div style="color:#F87172;">
+							结束时间：
+						</div>
+						<div style="background-color:#FEEEEC;padding:5px;border:1px solid #F87172;border-radius:10px;" id="eva_endtime"></div>
+					</td>
+					 <td style="width:60px;vertical-align:middle" onclick="uploadData();">
+						<img src="images/upload.png" style="width:64px;"></img>
+						<span>上传数据</span>
+					</td>
 				  </tr>
 				</thead>
 			  </table>
 		</div>
 	</div>
   </div>
-  <!-- <div class="container" style="width:100%;margin:0px auto;">
-	<div class="panel panel-default">
-		<div class="panel-body row row-eq-height" style="padding:10px;text-align:right">
-			<div class="col-xs-8">
-			</div>
-			<label class="control-label col-xs-2" for="name" style="padding-right:0px;width:150px;vertical-align:middle;padding-top:7px;">查看其它评估数据：</label>
-			<div class="col-xs-2">
-				<select class="form-control">
-					<option>自评*</option>
-					<option>督评*</option>
-					<option>复评1</option>
-					<option>复评2</option>
-					<option>复评3</option>
-				</select>
-			</div>
-		</div>
+  <div class="container" style="width:100%;margin:0px auto;">
+	<div class="jumbotron" style="background-color:white;">
+	  <table class="table table-bordered" id="levelTableId">
+        <thead style="font-size:23px;">
+          <tr>
+            <th style="width:20%;background-color:#E2F3A8;text-align:center;">一级指标</th>
+            <th style="width:25%;background-color:#E2F3A8;text-align:center;">二级指标</th>
+            <th style="width:47%;background-color:#E2F3A8;text-align:center;">三级指标</th>
+			<th style="width:8%;background-color:#E2F3A8;text-align:center;">完成</th>
+          </tr>
+        </thead>
+        <tbody id="asslevelid" style="color:#337ab7;font-size:20px;">
+          <!-- <tr>
+            <td style="background-color:#EBF7C2;padding-left:5%;">A1环境支持C1园舍</td>
+            <td style="background-color:#FDFFF5;padding-left:8%;">B1园舍与场地C1</td>
+            <td style="background-color:#FEF0FA;padding-left:20%;">C1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华1园舍建筑中华</td>
+			<td style="background-color:#FEFBFD;text-align:center;"><img src="images/finish.png"></img></td>
+          </tr>
+          <tr>
+			<td style="background-color:#EBF7C2;padding-left:5%;">A1环境支持C1园舍</td>
+			<td style="background-color:#FDFFF5;padding-left:8%;">B1园舍与场地C1</td>
+            <td style="background-color:#FEF0FA;padding-left:20%;"><a href="http://www.baidu.com" target="_blank">C2户外场地</td>
+			<td style="background-color:#FEFBFD;text-align:center;"><img src="images/finish.png"></img></td>
+		  </tr>
+          <tr>
+			<td style="background-color:#EBF7C2;padding-left:5%;">A1环境支持C1园舍</td>
+            <td style="background-color:#FDFFF5;padding-left:8%;">B1园舍与场地</td>
+            <td style="background-color:#FEF0FA;padding-left:20%;">C3区角设置</td>
+			<td style="background-color:#FEFBFD;text-align:center;"><img src="images/finish.png"></img></td>
+          </tr> -->
+        </tbody>
+      </table>
 	</div>
-  </div> -->
+  </div>
   
-  <div class="container" style="width:100%;margin:0px auto;" id="levelQuestion">
-  </div>
-  <div class="container" style="width:100%;margin-bottom:20px;">
-  	<div style="text-align:center;width:100%">
-		<a href="#" onclick="pageUp()"><img src="images/pageup.png" style="margin-right:100px;cursor:pointer;width:12%"></img></a>
-		<a href="#" onclick="pageDown()"><img src="images/pagedown.png" style="cursor:pointer;width:12%"></img></a>
-	</div>
-  </div>
+  
+    
   
   <!-- 模态框（Modal） -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"><img src="images/head_quit_blue.png"></span></button>
-        <h4 class="modal-title">园所信息</h4>
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" style="text-align:center;color:#68cbd0">幼儿园信息</h4>
       </div>
       <div class="modal-body">
        <table class="table table-bordered ftable">
@@ -561,7 +539,7 @@
        </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info pull-center" data-dismiss="modal" id="cancel">关闭</button>
+        <button type="button" class="btn btn-default pull-rigth" data-dismiss="modal" id="cancel">返回</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -569,57 +547,18 @@
   <!-- /.modal-dialog -->
   
   
-  
   <!-- 模态框（Modal） -->
-  <div class="modal fade" id="tipModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width:80%;">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true"><img src="images/head_quit_blue.png"></span></button>
-	        <h4 class="modal-title">题目解释</h4>
-	      </div>
-	      <div class="modal-body" id="tipModalBody">
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-info pull-rigth" data-dismiss="modal" >关闭</button>
-	      </div>
-	    </div>
-	  </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
+<!--<div class="modal fade" id="myLoadingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" backdrop="static" data-keyboard="false">
+	<div class="spinner">
+		  <div class="bounce1"></div>
+		  <div class="bounce2"></div>
+		  <div class="bounce3"></div>
+		</div>
+</div>-->
   
-  
-  <!-- 模态框（Modal） -->
-  <div class="modal fade" id="picModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  	<div class="modal-dialog" style="width:80%;">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true"><img src="images/head_quit_blue.png"></span></button>
-	        <h4 class="modal-title">查看证据</h4>
-	      </div>
-	      <div class="modal-body" id="picModalBody">
-	      	<img id="picModalImg" src="" deletePic="" style="width:100%"></img>
-	      </div>
-	      <div class="modal-footer">
-	      	<button type="button" class="btn btn-info" data-dismiss="modal">关闭</button>
-	        <button type="button" class="btn btn-info" onclick="deleteFile(this);">删除</button>
-	      </div>
-	    </div>
-	  </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-  
-  <div class="modal fade" id="modal-tips"></div>
-  <div class="modal fade" id="modal-logout"></div>
-  
-  <!-- 下一个一级指标确认框 -->
- <div class="modal fade" id="modal-nextlevel1"></div>
   <script>
   	
+    
   </script>
 </body>
 </html>

@@ -7,11 +7,8 @@
   <!-- Tell the browser to be responsive to screen width -->
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/dialog.css">
-  
   <script src="jquery/jquery.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
-  <script src="js/dialog.js"></script>
   <script src="js/jf_kindergarten_evaluate.js"></script>
   <style>
 	#table > thead > tr > th,
@@ -102,8 +99,6 @@
 	.stable tr:nth-of-type(1){background-color:#e8ecef}
 	.stable tr:nth-of-type(2){background-color:#e8ecef}
 	.stable tr:nth-of-type(3){background-color:white}
-	
-	
   </style>
 </head>
 <body style="background-color:#f5f5f5">
@@ -141,7 +136,7 @@
 								  <li>
 									<div class="row">
 									  <div class="col-xs-4" style="text-align:right">
-										<b>姓名：</b>
+										姓名：
 									  </div>
 									  <div class="col-xs-4" style="text-align:left" id="sname">
 										
@@ -150,7 +145,7 @@
 									<li class="divider"></li>
 									<div class="row">
 									  <div class="col-xs-4" style="text-align:right">
-										<b>手机号：</b>
+										手机号：
 									  </div>
 									  <div class="col-xs-4" style="text-align:left" id="sphone">
 										
@@ -159,7 +154,7 @@
 									<li class="divider"></li>
 									<div class="row">
 									  <div class="col-xs-4" style="text-align:right">
-										<b>EMail：</b>
+										EMail：
 									  </div>
 									  <div class="col-xs-4" style="text-align:left" id="semail">
 										
@@ -171,7 +166,7 @@
 								  <li class="divider"></li>
 								  <li class="user-footer">
 									<div class="pull-right" style="padding-right:50px;">
-									  <a href="#" class="btn btn-danger btn-flat" onclick="logout();">退出</a>
+									  <a href="#" class="btn btn-default btn-flat" onclick="logout();">注销</a>
 									</div>
 								  </li>
 								</ul>		
@@ -252,8 +247,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"><img src="images/head_quit_blue.png"></span></button>
-        <h4 class="modal-title">园所信息</h4>
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" style="text-align:center;color:#68cbd0">幼儿园信息</h4>
       </div>
       <div class="modal-body">
        <table class="table table-bordered ftable">
@@ -561,7 +556,7 @@
        </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info pull-center" data-dismiss="modal" id="cancel">关闭</button>
+        <button type="button" class="btn btn-default pull-rigth" data-dismiss="modal" id="cancel">返回</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -576,13 +571,13 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true"><img src="images/head_quit_blue.png"></span></button>
-	        <h4 class="modal-title">题目解释</h4>
+	          <span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" style="text-align:center;color:#68cbd0">解释信息</h4>
 	      </div>
 	      <div class="modal-body" id="tipModalBody">
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-info pull-rigth" data-dismiss="modal" >关闭</button>
+	        <button type="button" class="btn btn-default pull-rigth" data-dismiss="modal" id="cancel">返回</button>
 	      </div>
 	    </div>
 	  </div>
@@ -597,15 +592,15 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true"><img src="images/head_quit_blue.png"></span></button>
-	        <h4 class="modal-title">查看证据</h4>
+	          <span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" style="text-align:center;color:#68cbd0">证据信息</h4>
 	      </div>
 	      <div class="modal-body" id="picModalBody">
 	      	<img id="picModalImg" src="" deletePic="" style="width:100%"></img>
 	      </div>
 	      <div class="modal-footer">
-	      	<button type="button" class="btn btn-info" data-dismiss="modal">关闭</button>
-	        <button type="button" class="btn btn-info" onclick="deleteFile(this);">删除</button>
+	      	<button type="button" class="btn btn-default pull-rigth" data-dismiss="modal" id="cancel">返回</button>
+	        <button type="button" class="btn btn-primary" onclick="deleteFile(this);">删除</button>
 	      </div>
 	    </div>
 	  </div>
@@ -613,11 +608,7 @@
   </div>
   <!-- /.modal-dialog -->
   
-  <div class="modal fade" id="modal-tips"></div>
-  <div class="modal fade" id="modal-logout"></div>
   
-  <!-- 下一个一级指标确认框 -->
- <div class="modal fade" id="modal-nextlevel1"></div>
   <script>
   	
   </script>

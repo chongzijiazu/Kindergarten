@@ -8,8 +8,10 @@
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="css/loading.css"/>
+  <link rel="stylesheet" href="css/dialog.css">
   <script src="jquery/jquery.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/dialog.js"></script>
   <script src="js/jf_kindergarten_asslevel.js"></script>
   <style>
 	#table > thead > tr > th,
@@ -39,20 +41,23 @@
 	  text-align:left; 
 	  margin:auto;
 	}
-  #levelTableId > tbody > tr > th,
-  #levelTableId > tfoot > tr > th,
-  #levelTableId > tbody > tr > td,
-  #levelTableId > tfoot > tr > td {
-      padding-top: 8px;
-      padding-bottom: 8px;
-      padding-right: 8px;
-      padding-left:8px;
-      line-height: 1.42857143;
-      vertical-align: middle;
-      border-top: 1px solid #ddd;
-      text-align:left;
-      margin:auto;
-  }
+	
+	
+	#levelTableId > tbody > tr > th,
+	#levelTableId > tfoot > tr > th,
+	#levelTableId > tbody > tr > td,
+	#levelTableId > tfoot > tr > td {
+	  padding-top: 8px;
+	  padding-bottom: 8px;
+	  padding-right: 8px;
+	  padding-left:8px;
+	  line-height: 1.42857143;
+	  vertical-align: middle;
+	  border-top: 1px solid #ddd;
+	  text-align:left; 
+	  margin:auto;
+	}
+	
 	.nav>li>a:focus, .nav>li>a:hover {
 		text-decoration: none;
 		background-color: #68cbd0;
@@ -70,6 +75,7 @@
 	.stable tr:nth-of-type(2){background-color:#e8ecef}
 	.stable tr:nth-of-type(3){background-color:white}
   </style>
+  
 </head>
 <body style="background-color:#f5f5f5">
 	<div class="main-header" style="background-color:#68cbd0;margin-bottom:5px;">
@@ -106,7 +112,7 @@
 								  <li>
 									<div class="row">
 									  <div class="col-xs-4" style="text-align:right">
-										姓名：
+										<b>姓名：</b>
 									  </div>
 									  <div class="col-xs-4" style="text-align:left" id="sname">
 										
@@ -115,7 +121,7 @@
 									<li class="divider"></li>
 									<div class="row">
 									  <div class="col-xs-4" style="text-align:right">
-										手机号：
+										<b>手机号：</b>
 									  </div>
 									  <div class="col-xs-4" style="text-align:left" id="sphone">
 										
@@ -124,7 +130,7 @@
 									<li class="divider"></li>
 									<div class="row">
 									  <div class="col-xs-4" style="text-align:right">
-										EMail：
+										<b>EMail：</b>
 									  </div>
 									  <div class="col-xs-4" style="text-align:left" id="semail">
 										
@@ -136,7 +142,7 @@
 								  <li class="divider"></li>
 								  <li class="user-footer">
 									<div class="pull-right" style="padding-right:50px;">
-									  <a href="#" class="btn btn-default btn-flat" onclick="logout();">注销</a>
+									  <a href="#" class="btn btn-danger btn-flat" onclick="logout();">退出</a>
 									</div>
 								  </li>
 								</ul>		
@@ -190,12 +196,12 @@
   <div class="container" style="width:100%;margin:0px auto;">
 	<div class="jumbotron" style="background-color:white;">
 	  <table class="table table-bordered" id="levelTableId">
-        <thead style="font-size:23px;">
+        <thead style="font-size:20px;">
           <tr>
-            <th style="width:20%;background-color:#E2F3A8;text-align:center;">一级指标</th>
-            <th style="width:25%;background-color:#E2F3A8;text-align:center;">二级指标</th>
-            <th style="width:47%;background-color:#E2F3A8;text-align:center;">三级指标</th>
-			<th style="width:8%;background-color:#E2F3A8;text-align:center;">完成</th>
+            <td style="width:20%;background-color:#E2F3A8;text-align:center;vertical-align: middle;">一级指标</td>
+            <td style="width:25%;background-color:#E2F3A8;text-align:center;vertical-align: middle;">二级指标</td>
+            <td style="width:45%;background-color:#E2F3A8;text-align:center;vertical-align: middle;">三级指标</td>
+			<td style="width:10%;background-color:#E2F3A8;text-align:center;vertical-align: middle;">完成</td>
           </tr>
         </thead>
         <tbody id="asslevelid" style="color:#337ab7;font-size:20px;">
@@ -230,8 +236,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" style="text-align:center;color:#68cbd0">幼儿园信息</h4>
+          <span aria-hidden="true"><img src="images/head_quit_blue.png"></span></span></button>
+        <h4 class="modal-title">园所信息</h4>
       </div>
       <div class="modal-body">
        <table class="table table-bordered ftable">
@@ -539,7 +545,7 @@
        </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-rigth" data-dismiss="modal" id="cancel">返回</button>
+        <button type="button" class="btn btn-info pull-center" data-dismiss="modal" id="cancel">关闭</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -555,7 +561,9 @@
 		  <div class="bounce3"></div>
 		</div>
 </div>-->
-  
+
+
+
   <script>
   	
     
