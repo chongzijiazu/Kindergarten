@@ -117,9 +117,9 @@
             return false;
         }
     }
-    else //无评估答案直接退出，默认成功
+    else //无评估答案不能上传数据，提示其请先作答试题在提交数据
     {
-        [self showSucessAlertView:@"数据上传成功!"];
+        [self showNoAnswerAlertView:@"请先作答试题再上传数据!"];
         //return false;
     }
     return true;
@@ -224,6 +224,21 @@
     
     UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         [self uploadSuccess];
+    }];
+    [alertController addAction:OKAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+//无答案（无作答试题）弹出页面
+- (void)showNoAnswerAlertView:(NSString *)message
+{
+    NSString *title = @"提示";
+    UIAlertController *alertController;
+    alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *OKAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        [self dismissViewControllerAnimated:NO completion:nil];
     }];
     [alertController addAction:OKAction];
     
