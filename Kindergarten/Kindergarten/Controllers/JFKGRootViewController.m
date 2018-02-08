@@ -567,11 +567,10 @@
         
     }]];
     
-    
-    
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+//隐藏状态栏
 -(BOOL)prefersStatusBarHidden{
     return YES;
 }
