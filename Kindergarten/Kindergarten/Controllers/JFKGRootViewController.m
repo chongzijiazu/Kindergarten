@@ -177,7 +177,7 @@
         // NSDictionary, and NSNull类型
         NSLog(@"didReceiveScriptMessage：%@", (NSString*)message.body);
         NSString* htmlname= [[self.webView.URL path] lastPathComponent];
-        if ([htmlname isEqualToString:@"main.do"])
+        if ([htmlname isEqualToString:@"main.do"])//在线端入口页
         {
             //NSDictionary* dicParams = message.body;
             NSDictionary* dicMsg = message.body;
@@ -187,14 +187,6 @@
                 NSDictionary* dicParams = [dicMsg objectForKey:@"param"];
                 //NSLog(@"%@",[dicParams objectForKey:@"username"]);
                 [self.loginController loginByUsername:[dicParams objectForKey:@"username"] andPassword:[dicParams objectForKey:@"password"]];
-            }
-            else if([operation isEqualToString:@"logonline"])
-            {
-                //NSLog(@"HELLO");
-                NSURL* url = [NSURL URLWithString:OnlineUrlString];
-                NSURLRequest* request = [NSURLRequest requestWithURL:url];
-                [self.webView loadRequest:request];
-                //self.navigationController.navigationBar.hidden = NO;
             }
         }
         else if ([htmlname isEqualToString:@"asslevel.html"])
@@ -578,6 +570,10 @@
     
     
     [self presentViewController:alertController animated:YES completion:nil];
+}
+
+-(BOOL)prefersStatusBarHidden{
+    return YES;
 }
 
 @end
