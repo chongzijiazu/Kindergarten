@@ -307,6 +307,15 @@
                 [self.commonController showHelpFile:hepfilePath];
             }
         }
+        else if ([htmlname isEqualToString:@"offline.html"])
+        {
+            NSDictionary* dicMsg = message.body;
+            NSString* operation = [dicMsg objectForKey:@"operation"];
+            if ([operation isEqualToString:@"refresh"])
+            {
+                [self toOnlineLogin];
+            }
+        }
     }
     
 }
@@ -349,7 +358,12 @@
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
     NSLog(@"%s", __FUNCTION__);
-    
+   
+    NSString* strUrl = error.userInfo[@"NSErrorFailingURLStringKey"];
+    if(strUrl!=nil && [strUrl containsString:@"login.do"])
+    {
+        [self loadLocalHtmlByFilename:@"offline.html"];
+    }
 }
 
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation {
@@ -380,10 +394,9 @@
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
-    
+    NSLog(@"%s", __FUNCTION__);
+   
 }
-
-
 
 - (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
     NSLog(@"%s", __FUNCTION__);
