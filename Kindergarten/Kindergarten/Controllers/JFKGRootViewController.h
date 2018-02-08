@@ -11,6 +11,7 @@
 @interface JFKGRootViewController : UIViewController
 
 -(void)loadLocalHtmlByFilename:(NSString*)htmlFilename;
+-(void)toOnlineLogin;
 
 
 @end

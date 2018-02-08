@@ -184,15 +184,12 @@
     [userDefault setObject:@"" forKey:@"isFormulaCalculated"];
     
     //清理本地数据（文件及数据库）
-    //[GlobalUtil deleteExistDownloadFile]; //删除下载的文件
-    //[GlobalUtil deleteAssLevelFile]; //删除评估指标文件
-    //[GlobalUtil deleteLevelHtmlFile]; //删除试题html文件
     [GlobalUtil deleteAllDocumentsFile];//
     
     
     //回到登录页面
     JFKGRootViewController* rooVC = (JFKGRootViewController*)self.currentVC;
-    [rooVC loadLocalHtmlByFilename:@"login.html"];
+    [rooVC toOnlineLogin];
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 

@@ -309,7 +309,6 @@
         {
             self.currentDownloadCount++;
             [self performSelectorOnMainThread:@selector(showLabelDownloadState) withObject:nil waitUntilDone:YES];
-            //NSLog(@"%d",self.currentDownloadCount);
             [self.downloadArray removeObject:toFilename]; //移除下载完成的文件
             [self downloadEvalutionData]; //下载下一个文件
             //NSLog(@"File downloaded to: %@", filePath);
@@ -335,7 +334,7 @@
     [alertController addAction:OKAction];
     
     [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        //下载失败，取消下载后，将清空个人登录信息数据(ticketid,院所信息等（待完善）)
+        //下载失败，取消下载后，将清空个人登录信息数据(ticketid)
         [userDefault setObject:@"" forKey:@"ticketid"];
         //清空数据
         [GlobalUtil deleteAllDocumentsFile];

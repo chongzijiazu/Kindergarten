@@ -82,12 +82,21 @@
     {
         [self loadLocalHtmlByFilename:@"asslevel.html"];
     }
-    else //为登录用户进入登录页面
+    else //未登录用户进入登录页面
     {
-        [self loadLocalHtmlByFilename:@"login.html"];
+        //[self loadLocalHtmlByFilename:@"login.html"];
+        [self toOnlineLogin];
     }
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:@selector(backMain:)];
+    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStyleDone target:self action:@selector(backMain:)];
+}
+
+//导航到在线登录页
+-(void)toOnlineLogin
+{
+    NSURL* url = [NSURL URLWithString:OnlineUrlString];
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    [self.webView loadRequest:request];
 }
 
 -(void)backMain:(id)sender{
@@ -168,7 +177,7 @@
         // NSDictionary, and NSNull类型
         NSLog(@"didReceiveScriptMessage：%@", (NSString*)message.body);
         NSString* htmlname= [[self.webView.URL path] lastPathComponent];
-        if ([htmlname isEqualToString:@"login.html"])
+        if ([htmlname isEqualToString:@"main.do"])
         {
             //NSDictionary* dicParams = message.body;
             NSDictionary* dicMsg = message.body;
@@ -187,8 +196,6 @@
                 [self.webView loadRequest:request];
                 //self.navigationController.navigationBar.hidden = NO;
             }
-            
-            
         }
         else if ([htmlname isEqualToString:@"asslevel.html"])
         {
@@ -336,20 +343,6 @@
 }
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler {
-    
-   /* NSHTTPURLResponse *response = (NSHTTPURLResponse *)navigationResponse.response;
-    //NSLog(@"%@",response.URL);
-    NSString* responseUrl = [response.URL path];
-    if ([responseUrl containsString:@"main.do"]) {
-        NSArray *cookies =[NSHTTPCookie cookiesWithResponseHeaderFields:[response allHeaderFields] forURL:response.URL];
-        NSLog(@"%@",cookies);
-        for (NSHTTPCookie *cookie in cookies) {
-            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
-            NSLog(@"%@",cookie);
-        }
-    }*/
-    
-    
     decisionHandler(WKNavigationResponsePolicyAllow);
     NSLog(@"%s", __FUNCTION__);
 }
@@ -364,6 +357,7 @@
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
     NSLog(@"%s", __FUNCTION__);
+    
 }
 
 - (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation {
@@ -386,11 +380,11 @@
     {
         [self.evaluateController sendLevelQuestionToView];
     }
-    else if ([htmlname isEqualToString:@"login.html"])
+    /*else if ([htmlname isEqualToString:@"login.html"])
     {
         [self.loginController sendAccountToView];//向页面发送记录的帐号信息
         //self.navigationController.navigationBar.hidden = YES;
-    }
+    }*/
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
