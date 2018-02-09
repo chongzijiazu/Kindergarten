@@ -25,11 +25,11 @@
 //#define OnlineUrlString @"http://123.56.21.76/kindergarten/evaluation/logout.do"
 
 #define baseUrlString @"http://10.3.1.147:8080/kindergarten/evaluation/app/"
-#define OnlineUrlString @"http://10.3.1.14:8080/kindergarten/evaluation/logout.do"
+#define OnlineUrlString @"http://10.3.1.147:8080/kindergarten/evaluation/logout.do"
 
 
-//#define baseUrlString @"http://117.107.184.153:9191/kindergarten/evaluation/app/"
-//#define OnlineUrlString @"http://117.107.184.153:9191/kindergarten/evaluation/logout.do"
+//#define baseUrlString @"http://192.168.1.108:8080/kindergarten/evaluation/app/"
+//#define OnlineUrlString @"http://192.168.1.108:8080/kindergarten/evaluation/logout.do"
 
 
 #define userDefault [NSUserDefaults standardUserDefaults]
@@ -37,3 +37,6 @@
 #define TICKETID ([NSString stringWithFormat:@"%@",[userDefault objectForKey:@"ticketid"]])
 #define ISDOWNLOADSUCCESS ([NSString stringWithFormat:@"%@",[userDefault objectForKey:@"isDownloadSuccess"]])
 #define ISFORMULACALCULATED ([NSString stringWithFormat:@"%@",[userDefault objectForKey:@"isFormulaCalculated"]])
+
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM()== UIUserInterfaceIdiomPad)

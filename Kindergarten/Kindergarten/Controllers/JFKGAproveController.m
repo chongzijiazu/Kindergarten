@@ -64,7 +64,15 @@
             weakSelf.picker = [[UIImagePickerController alloc]init];
             weakSelf.picker.delegate = weakSelf;
             weakSelf.picker.allowsEditing = YES;//是否可以对原图进行编辑
-            weakSelf.picker.modalPresentationStyle = UIModalPresentationCurrentContext;
+            
+            if(IS_IPAD)//判断机型如果是pad则横屏
+            {
+                weakSelf.picker.modalPresentationStyle = UIModalPresentationCurrentContext;
+            }
+            else
+            {
+                weakSelf.picker.modalPresentationStyle = UIModalPresentationPopover;
+            }
                                           
             //设置图片选择器的数据来源为 手机相册
             weakSelf.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -84,8 +92,7 @@
     [alertC addAction:cameraAction];
     [alertC addAction:photoAction];
     [alertC addAction:cancelAction];
-    
-    //判断设备类型，是否为ipad
+
     [self.currentVC presentViewController:alertC animated:YES completion:nil];
     
 }
