@@ -1,4 +1,4 @@
-function refresh()
+function reload()
 {
     var dicmsg ={
         "operation":"refresh",

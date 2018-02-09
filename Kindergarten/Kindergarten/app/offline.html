@@ -18,10 +18,21 @@
 	  left: 50%;
 	  transform: translate(-50%, -50%);
 	}
+	.vertical-center-new{
+	    border-radius: 20px;
+	    width: 520px;
+	    height: 166px;
+	    margin: auto;
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	}
   </style>
 </head>
 <body style="background-color:#f2f3f9">
-	<div class="vertical-center">
+	<div class="vertical-center-new">
 		<table>
 			<tr>
 				<td>
@@ -32,11 +43,12 @@
 					<div style="background-image:url(images/bg1.png);width:280px;height:166px;text-align:center;vertical-align:middle;padding-top:30px;">
 						<span style="font-size:20px;font-weight:bold">无网络哦~</span><br/>
 						<span style="font-size:18px;">请检查您的设备是否连接网络</span><br/><br/>
-                        <button type="button" class="btn btn-info pull-center" data-dismiss="modal" id="cancel" onclick="refresh();">刷新</button>
+						<button type="button" class="btn btn-info pull-center" onclick="reload();">刷新</button>
 					</div>
 				</td>
 			</tr>
 		</table>
 	</div>
+	
 </body>
 </html>
