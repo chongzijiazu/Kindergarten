@@ -360,7 +360,7 @@
     NSLog(@"%s", __FUNCTION__);
    
     NSString* strUrl = error.userInfo[@"NSErrorFailingURLStringKey"];
-    if(strUrl!=nil && [strUrl containsString:@"login.do"])
+    if(strUrl!=nil && ([strUrl containsString:@"logout.do"]||[strUrl containsString:@"login.do"]))
     {
         [self loadLocalHtmlByFilename:@"offline.html"];
     }

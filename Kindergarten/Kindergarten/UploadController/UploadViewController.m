@@ -168,7 +168,7 @@
         }
     failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
     {
-              //NSLog(@"上传失败.%@",error);
+        NSLog(@"上传失败.%@",error);
         //NSString* strErr = [NSString stringWithFormat:@"%@",error];
         [self showErrorAlertView:@"数据上传失败，请重试!"];
           }];
