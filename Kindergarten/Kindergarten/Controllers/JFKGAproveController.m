@@ -61,22 +61,24 @@
     {
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
         {
-            weakSelf.picker = [[UIImagePickerController alloc]init];
+            weakSelf.picker = [[UIImagePickerController alloc] init];
             weakSelf.picker.delegate = weakSelf;
-            weakSelf.picker.allowsEditing = YES;//是否可以对原图进行编辑
-            
+            weakSelf.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            // 编辑模式
+            weakSelf.picker.allowsEditing=YES;
             if(IS_IPAD)//判断机型如果是pad则横屏
             {
-                weakSelf.picker.modalPresentationStyle = UIModalPresentationCurrentContext;
+                UIPopoverController *pop=[[UIPopoverController alloc]initWithContentViewController:weakSelf.picker];
+                CGRect r = CGRectMake(self.currentVC.view.bounds.size.width/3*2, self.currentVC.view.bounds.size.height/2+60, 0, 0);
+                [pop presentPopoverFromRect:r inView:self.currentVC.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
             }
             else
             {
                 weakSelf.picker.modalPresentationStyle = UIModalPresentationPopover;
+                [weakSelf.currentVC presentViewController:weakSelf.picker animated:YES completion:nil];
             }
-                                          
-            //设置图片选择器的数据来源为 手机相册
-            weakSelf.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            [weakSelf.currentVC presentViewController:weakSelf.picker animated:YES completion:nil];
+            
+            
         }
         else
         {

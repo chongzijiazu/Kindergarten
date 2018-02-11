@@ -17,6 +17,7 @@
 #import "JFKGAproveViewController.h"
 #import "JFKGProcessInfoController.h"
 #import "SQLiteManager.h"
+#import "DeviceDirectionManager.h"
 
 
 @interface JFKGRootViewController ()<WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate>
@@ -173,6 +174,20 @@
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
     if ([message.name isEqualToString:@"AppModel"])
     {
+        NSDictionary* dicMsg = message.body;
+        NSString* operation = [dicMsg objectForKey:@"operation"];
+        if ([operation isEqualToString:@"webphoto"])
+        {
+            NSDictionary* dicParams = [dicMsg objectForKey:@"param"];
+            NSString* isStart =[dicParams objectForKey:@"isstart"];
+            if ([isStart isEqualToString:@"1"]) {
+                [DeviceDirectionManager shareInstance].isRight=0;
+            }
+            else
+            {
+                [DeviceDirectionManager shareInstance].isRight=1;
+            }
+        }
         // 打印所传过来的参数，只支持NSNumber, NSString, NSDate, NSArray,
         // NSDictionary, and NSNull类型
         NSLog(@"didReceiveScriptMessage：%@", (NSString*)message.body);
@@ -187,6 +202,23 @@
                 NSDictionary* dicParams = [dicMsg objectForKey:@"param"];
                 //NSLog(@"%@",[dicParams objectForKey:@"username"]);
                 [self.loginController loginByUsername:[dicParams objectForKey:@"username"] andPassword:[dicParams objectForKey:@"password"]];
+            }
+        }
+        else if([htmlname isEqualToString:@"direction"])
+        {
+            NSDictionary* dicMsg = message.body;
+            NSString* operation = [dicMsg objectForKey:@"operation"];
+            if ([operation isEqualToString:@"webphoto"])
+            {
+                NSDictionary* dicParams = [dicMsg objectForKey:@"param"];
+                NSString* isStart =[dicParams objectForKey:@"isstart"];
+                if ([isStart isEqualToString:@"1"]) {
+                    [DeviceDirectionManager shareInstance].isRight=0;
+                }
+                else
+                {
+                    [DeviceDirectionManager shareInstance].isRight=1;
+                }
             }
         }
         else if ([htmlname isEqualToString:@"asslevel.html"])

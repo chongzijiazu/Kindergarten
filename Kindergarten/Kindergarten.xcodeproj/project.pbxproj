@@ -25,6 +25,7 @@
 		E652B392200CAC2400495147 /* EnAprove.m in Sources */ = {isa = PBXBuildFile; fileRef = E652B391200CAC2400495147 /* EnAprove.m */; };
 		E653F18A200629D200AAC54A /* DownloadManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E653F189200629D200AAC54A /* DownloadManagerViewController.m */; };
 		E65B6D0C201097870077102C /* JFKGAproveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65B6D0B201097870077102C /* JFKGAproveViewController.m */; };
+		E66729B3202FD50C00EC7D11 /* DeviceDirectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E66729B2202FD50C00EC7D11 /* DeviceDirectionManager.m */; };
 		E668E33E200EF2F70023FFBC /* JFKGProcessInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E668E33D200EF2F70023FFBC /* JFKGProcessInfoController.m */; };
 		E668E342200EF77B0023FFBC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E668E341200EF77B0023FFBC /* libsqlite3.tbd */; };
 		E668E345200EF9DA0023FFBC /* SQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E668E344200EF9DA0023FFBC /* SQLiteManager.m */; };
@@ -90,6 +91,8 @@
 		E653F189200629D200AAC54A /* DownloadManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DownloadManagerViewController.m; sourceTree = "<group>"; };
 		E65B6D0A201097870077102C /* JFKGAproveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGAproveViewController.h; sourceTree = "<group>"; };
 		E65B6D0B201097870077102C /* JFKGAproveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGAproveViewController.m; sourceTree = "<group>"; };
+		E66729B1202FD50C00EC7D11 /* DeviceDirectionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceDirectionManager.h; sourceTree = "<group>"; };
+		E66729B2202FD50C00EC7D11 /* DeviceDirectionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceDirectionManager.m; sourceTree = "<group>"; };
 		E668E33C200EF2F70023FFBC /* JFKGProcessInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGProcessInfoController.h; sourceTree = "<group>"; };
 		E668E33D200EF2F70023FFBC /* JFKGProcessInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGProcessInfoController.m; sourceTree = "<group>"; };
 		E668E341200EF77B0023FFBC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -312,6 +315,8 @@
 				E6EF8E3B2004B8A800A96B04 /* MBProgressHUD */,
 				E60FD1F0200A0AE70080A07E /* GlobalUtil.h */,
 				E60FD1F1200A0AE70080A07E /* GlobalUtil.m */,
+				E66729B1202FD50C00EC7D11 /* DeviceDirectionManager.h */,
+				E66729B2202FD50C00EC7D11 /* DeviceDirectionManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -542,6 +547,7 @@
 				E6FEC8692011E9E50052D561 /* Base64Util.m in Sources */,
 				E60FD1EC2009E8390080A07E /* JFKGLoginContrller.m in Sources */,
 				E6F47E1A200DC87900CE111B /* EnAproveItem.m in Sources */,
+				E66729B3202FD50C00EC7D11 /* DeviceDirectionManager.m in Sources */,
 				E60461392005B6DC00135F7C /* Encryption.m in Sources */,
 				E6FD1B04200B62CC00E83675 /* JFKGCommonController.m in Sources */,
 				E653F18A200629D200AAC54A /* DownloadManagerViewController.m in Sources */,
@@ -697,6 +703,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Kindergarten/PrefixHeader.pch";
 				INFOPLIST_FILE = Kindergarten/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayanginfo.Kindergarten;
 				PRODUCT_NAME = "办园评估";
@@ -715,6 +722,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Kindergarten/PrefixHeader.pch";
 				INFOPLIST_FILE = Kindergarten/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.huayanginfo.Kindergarten;
 				PRODUCT_NAME = "办园评估";
