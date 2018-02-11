@@ -93,6 +93,7 @@
 		E65B6D0B201097870077102C /* JFKGAproveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGAproveViewController.m; sourceTree = "<group>"; };
 		E66729B1202FD50C00EC7D11 /* DeviceDirectionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceDirectionManager.h; sourceTree = "<group>"; };
 		E66729B2202FD50C00EC7D11 /* DeviceDirectionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceDirectionManager.m; sourceTree = "<group>"; };
+		E66729B4202FEE8B00EC7D11 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		E668E33C200EF2F70023FFBC /* JFKGProcessInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JFKGProcessInfoController.h; sourceTree = "<group>"; };
 		E668E33D200EF2F70023FFBC /* JFKGProcessInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JFKGProcessInfoController.m; sourceTree = "<group>"; };
 		E668E341200EF77B0023FFBC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -446,7 +447,6 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 			);
 			mainGroup = E67AB1CE20044FF500AD83C9;
@@ -579,6 +579,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				E67AB1E620044FF500AD83C9 /* Base */,
+				E66729B4202FEE8B00EC7D11 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -590,6 +591,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -646,6 +648,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
