@@ -36,6 +36,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBar.hidden = YES;
+    [DeviceDirectionManager shareInstance].isRight=1;
 }
 
 - (void)viewDidLoad {

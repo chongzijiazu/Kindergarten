@@ -106,9 +106,9 @@
     UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];//编辑后的图片
     
     //设置image的尺寸
-    CGSize imagesize = image.size;
-    imagesize.height = 200;
-    imagesize.width = 200;
+    //CGSize imagesize = image.size;
+    //imagesize.height = 200;
+    //imagesize.width = 200;
     
     //对图片大小进行压缩
     //image = [self imageWithImage:image scaledToSize:imagesize];
