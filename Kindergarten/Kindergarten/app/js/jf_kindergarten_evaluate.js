@@ -117,21 +117,13 @@ function addaprove()
 //选项单击取反
 function optionClicked(obj)
 {
-    var options = $("input[name='"+obj.name+"']");
-    if(options)
-    {
-        for(var i=0;i<options.length;i++)
-        {
-            $(options[i]).parent().css("background-color","#fff");
-        }
-    }
-    
     var radio=obj;
-    if (radio.tag==1)
+    var parentColor =$(radio).parent().css("background-color");
+    if (colorRGB2Hex(parentColor)=='#aadeff')
     {
-        hideFinished(radio);
+        //alert(1);
+        //hideFinished(radio);
         radio.checked=false;
-        radio.tag=0;
         $(radio).parent().css("background-color","#fff");
         //取消选中将答案设置为空
         var param={};
@@ -144,12 +136,18 @@ function optionClicked(obj)
     }
     else
     {
+        var options = $("input[name='"+obj.name+"']");
+        if(options)
+        {
+            for(var i=0;i<options.length;i++)
+            {
+                $(options[i]).parent().css("background-color","#fff");
+            }
+        }
         //showFinished(radio);
         radio.checked=true;
-        radio.tag=1;
         $(radio).parent().css("background-color","#aadeff");
     }
-    //alert(obj.checked);
 }
 
 function hideFinished(obj)
