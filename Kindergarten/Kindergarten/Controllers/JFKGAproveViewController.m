@@ -39,6 +39,7 @@
     self.aproveImageView =[[UIImageView alloc]init];
     self.aproveImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.aproveImageView.frame = CGRectMake(0,64, self.view.frame.size.width, self.view.frame.size.height-64);
+    //self.aproveImageView.frame = self.view.frame;
     [self.view addSubview:self.aproveImageView];
     
     [self showAprove];

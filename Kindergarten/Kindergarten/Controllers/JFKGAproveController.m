@@ -69,7 +69,7 @@
             if(IS_IPAD)//判断机型如果是pad则横屏
             {
                 UIPopoverController *pop=[[UIPopoverController alloc]initWithContentViewController:weakSelf.picker];
-                CGRect r = CGRectMake(self.currentVC.view.bounds.size.width/3*2, self.currentVC.view.bounds.size.height/2+60, 0, 0);
+                CGRect r = CGRectMake(self.currentVC.view.bounds.size.width/3*2, self.currentVC.view.bounds.size.height/2,0,0);
                 [pop presentPopoverFromRect:r inView:self.currentVC.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
             }
             else
@@ -112,9 +112,9 @@
     
     //对图片大小进行压缩
     //image = [self imageWithImage:image scaledToSize:imagesize];
-    NSData *imageData = UIImageJPEGRepresentation(image,0.008);
+    //NSData *imageData = UIImageJPEGRepresentation(image,1.0);
     
-    UIImage *compressionImage = [UIImage imageWithData:imageData];
+    //UIImage *compressionImage = [UIImage imageWithData:imageData];
     /*if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)
     {
         UIImageWriteToSavedPhotosAlbum(compressionImage, nil, nil, nil);//把图片存到图片库
@@ -126,7 +126,7 @@
     }*/
     
     NSString* imageN = [_aproveItemName stringByAppendingString:@".jpg"];
-    [self saveImage:compressionImage withName:imageN];
+    [self saveImage:image withName:imageN];
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
