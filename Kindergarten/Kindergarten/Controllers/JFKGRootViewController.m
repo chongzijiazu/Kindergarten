@@ -549,6 +549,16 @@
     
     if (preThirdLevelId!=nil && preThirdLevelId.length==9)
     {
+        //根据三级指标编码的前三位（一级指标编码）判断，是否进入下一个指标
+        NSString* currentFirstLevel = [self.evaluateController.currentLevelQuestionID substringToIndex:3];
+        NSString* preFirstLevelId = [preThirdLevelId substringToIndex:3];
+        if (![currentFirstLevel isEqualToString:preFirstLevelId]) {
+            NSString* funMessage = @"alert('即将进入下一个一级指标!');";
+            [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
+        }
+        
         NSString* preThirdLevelName = [self.levelController getThirdLevelNameByCurrentThirdLevelId:preThirdLevelId];
         self.evaluateController.currentLevelQuestionID =preThirdLevelId;
         self.evaluateController.currentLevelQuestionName = preThirdLevelName;
