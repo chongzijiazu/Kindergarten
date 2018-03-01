@@ -424,6 +424,12 @@
         [self.loginController sendAccountToView];//向页面发送记录的帐号信息
         //self.navigationController.navigationBar.hidden = YES;
     }*/
+    // 禁止放大缩小
+    /*NSString *injectionJSString = @"var script = document.createElement('meta');"
+    "script.name = 'viewport';"
+    "script.content=\"width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\";"
+    "document.getElementsByTagName('head')[0].appendChild(script);";
+    [self.webView evaluateJavaScript:injectionJSString completionHandler:nil];*/
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
