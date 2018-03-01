@@ -254,6 +254,15 @@ function calculateBaseInfo(){
         }
     }
     
+    var info47 = $("#info47").html();
+    if(info47 != ""){
+        if(parseInt(info47) == 0 ){
+            $("#info47").html("否");
+        }else{
+            $("#info47").html("是");
+        }
+    }
+    
 }
 
 function Base64() {

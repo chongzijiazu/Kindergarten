@@ -251,6 +251,7 @@ function saveQuestionAnswer()
 //查看试题描述信息
 function showQuesDesc(pkId)
 {
+    //alert(pkId);
     var idArr= pkId.split("_");
     pkId=idArr[0];
     var base = new Base64();
@@ -377,6 +378,14 @@ function calculateBaseInfo(){
         }
     }
     
+    var info47 = $("#info47").html();
+    if(info47 != ""){
+        if(parseInt(info47) == 0 ){
+            $("#info47").html("否");
+        }else{
+            $("#info47").html("是");
+        }
+    }
 }
 
 function decodeViewBase64()
@@ -521,5 +530,9 @@ function colorRGB2Hex(color) {
 //根据题号滚动到该试题
 function scrollToQuestion(questionid)
 {
-    $("html,body").animate({scrollTop: $("tr[scrollid = 'scroll_"+questionid+"']").offset().top}, 800);
+    //alert(questionid);
+    if(questionid)
+    {
+        $("html,body").animate({scrollTop: $("tr[scrollid = 'scroll_"+questionid+"']").offset().top}, 800);
+    }
 }

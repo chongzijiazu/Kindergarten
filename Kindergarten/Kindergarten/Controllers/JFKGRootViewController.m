@@ -578,11 +578,14 @@
 -(void)scrollToFirstNotFinishedQuestion
 {
     NSString* questionid = [self.commonController getFirsitNotFinishedQues:self.evaluateController.currentLevelQuestionID];
-    NSString* funMessage = @"scrollToQuestion('%@');";
-    funMessage = [NSString stringWithFormat:funMessage,questionid];
-    [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-        NSLog(@"response: %@ error: %@", response, error);
-    }];
+    if (questionid!=NULL && questionid.length>0) {
+        NSString* funMessage = @"scrollToQuestion('%@');";
+        funMessage = [NSString stringWithFormat:funMessage,questionid];
+        [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+            NSLog(@"response: %@ error: %@", response, error);
+        }];
+    }
+    
 }
 
 - (void)showAlertViewForPageDown:(NSString *)message
