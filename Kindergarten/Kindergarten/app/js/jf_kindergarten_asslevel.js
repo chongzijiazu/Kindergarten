@@ -245,12 +245,12 @@ function calculateBaseInfo(){
         }
     }
     
-    var info47 = $("#info47").html();
-    if(info47 != ""){
-        if(parseInt(info47) == 0 ){
-            $("#info47").html("否");
-        }else if(parseInt(info47) == 1){
-            $("#info47").html("是");
+    var info55 = $("#info55").html();
+    if(info55 != ""){
+        if(parseInt(info55) == 0 ){
+            $("#info55").html("否");
+        }else{
+            $("#info55").html("是");
         }
     }
     
