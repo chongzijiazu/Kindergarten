@@ -409,11 +409,14 @@
     if ([htmlname isEqualToString:@"asslevel.html"])
     {
         [self.levelController sendLevelTableToView];//向页面发送评估指标数据
-        NSString* funMessage = @"scrollToLevel('%@');";
-        funMessage = [NSString stringWithFormat:funMessage,self.evaluateController.currentLevelQuestionID];
-        [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-            NSLog(@"response: %@ error: %@", response, error);
-        }];
+        if(self.evaluateController.currentLevelQuestionID!=nil)
+        {
+            NSString* funMessage = @"scrollToLevel('%@');";
+            funMessage = [NSString stringWithFormat:funMessage,self.evaluateController.currentLevelQuestionID];
+            [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
+        }
     }
     else if([htmlname isEqualToString:@"evaluate.html"])
     {
