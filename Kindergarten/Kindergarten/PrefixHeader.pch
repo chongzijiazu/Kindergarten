@@ -21,18 +21,18 @@
 #import "Base64Util.h"
 #import "ZipUtil.h"
 
-//#define baseUrlString @"https://pinggu.zjzku.com/kindergarten/evaluation/app/"
-//#define OnlineUrlString @"https://pinggu.zjzku.com/kindergarten/evaluation/logout.do"
+#define baseUrlString @"https://pinggu.zjzku.com/kindergarten/evaluation/app/"
+#define OnlineUrlString @"https://pinggu.zjzku.com/kindergarten/evaluation/logout.do"
 
 //#define baseUrlString @"http://123.56.21.76:8181/kindergarten/evaluation/app/"
 //#define OnlineUrlString @"http://123.56.21.76:8181/kindergarten/evaluation/logout.do"
 
-#define baseUrlString @"http://10.3.1.147:8080/kindergarten/evaluation/app/"
-#define OnlineUrlString @"http://10.3.1.147:8080/kindergarten/evaluation/logout.do"
+//#define baseUrlString @"http://10.3.1.145:8080/kindergarten/evaluation/app/"
+//#define OnlineUrlString @"http://10.3.1.145:8080/kindergarten/evaluation/logout.do"
 
 
-//#define baseUrlString @"http://192.168.1.74:8080/kindergarten/evaluation/app/"
-//#define OnlineUrlString @"http://192.168.1.74:8080/kindergarten/evaluation/logout.do"
+//#define baseUrlString @"http://192.168.1.136:8070/kindergarten/evaluation/app/"
+//#define OnlineUrlString @"http://192.168.1.136:8070/kindergarten/evaluation/logout.do"
 
 
 #define userDefault [NSUserDefaults standardUserDefaults]
