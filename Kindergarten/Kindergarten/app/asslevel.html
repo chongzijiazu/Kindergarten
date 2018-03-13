@@ -78,82 +78,71 @@
   
 </head>
 <body style="background-color:#f5f5f5">
-	<div class="main-header" style="background-color:#68cbd0;margin-bottom:5px;">
-		<table style="width:100%">
-			<tr>
-				<td style="width:30%">
-					<!-- left -->
-					<img src="images/logo.png" class="logo" style="margin:20px;">
-					  <!-- mini logo for sidebar mini 50x50 pixels -->
-					  <!-- <span class="logo-mini"><b>求真</b></span>
-					  <span class="logo-mini"><b>务实</b></span>
-					  <span class="logo-mini"><b>弘道</b></span>
-					  <span class="logo-mini"><b>创新</b></span> -->
-					</img>
-				</td>
-				<td style="text-align:center;width:40%">
-					<!-- middle-->
-					<span class="logo" style="font-size:25px;color:white;" ><b>幼儿园办园行为督导评估系统</b></span>
-				</td>
-				<td style="width:30%;text-align:right;">
-					<table style="float:right">
-						<tr>
-                            <td style="padding-right:20px; text-align:center" data-toggle="modal" data-target="#myModal"><img src="images/modify.png"></img><br/><span class="hidden-xs" style="color:#fff;font-size:18px;">园所信息</span></td>
-							<td style="padding-right:20px; text-align:center" onclick="openHelp();"><img src="images/help.png"></img><br/><span class="hidden-xs" style="color:#fff;font-size:18px;">评估服务</span></td>
-							<td class="dropdown" style="padding-right:20px; text-align:center">
-								<span class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="display:inline;">
-								  <!-- The user image in the navbar-->
-								  <img src="images/person.png" class="logo">
-								  <!-- hidden-xs hides the username on small devices so only the image appears. -->
-								  <span class="hidden-xs"><b></b></span>
-                                  <br/><span class="hidden-xs" style="color:#fff;font-size:18px;">个人信息</span>
-								</span>
-								<ul class="dropdown-menu" style="width:250px;margin-left:-220px;">
-								  <!-- Menu Body -->
-								  <li>
-									<div class="row">
-									  <div class="col-xs-4" style="text-align:right">
-										<b>姓名：</b>
-									  </div>
-									  <div class="col-xs-4" style="text-align:left" id="sname">
-										
-									  </div>
-									</div>
-									<li class="divider"></li>
-									<div class="row">
-									  <div class="col-xs-4" style="text-align:right">
-										<b>手机号：</b>
-									  </div>
-									  <div class="col-xs-4" style="text-align:left" id="sphone">
-										
-									  </div>
-									</div>
-									<li class="divider"></li>
-									<div class="row">
-									  <div class="col-xs-4" style="text-align:right">
-										<b>EMail：</b>
-									  </div>
-									  <div class="col-xs-4" style="text-align:left" id="semail">
-										
-									  </div>
-									</div>
-									<!-- /.row -->
-								  </li>
-								  <!-- Menu Footer-->
-								  <li class="divider"></li>
-								  <li class="user-footer">
-									<div class="pull-right" style="padding-right:50px;">
-									  <a href="#" class="btn btn-danger btn-flat" onclick="logout();">退出</a>
-									</div>
-								  </li>
-								</ul>		
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-  </div>
+    <div class="main-header" style="background-color:#68cbd0;margin-bottom:5px;padding:20px;"">
+        <table style="width:100%">
+        <tr>
+        <td style="width:20%">
+        <!-- left -->
+        <!--<img src="images/logo.png" class="logo" style="margin:20px;">-->
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <!-- <span class="logo-mini"><b>求真</b></span>
+        <span class="logo-mini"><b>务实</b></span>
+        <span class="logo-mini"><b>弘道</b></span>
+        <span class="logo-mini"><b>创新</b></span> -->
+        </img>
+        </td>
+        <td style="text-align:center;width:50%">
+        <!-- middle-->
+        <span class="logo" style="font-size:25px;color:white;" ><b>教育部幼儿园办园行为督导评估系统</b></span>
+        </td>
+        <td style="width:30%;text-align:right;">
+        <table style="float:right">
+        <tr>
+        <td style="padding-right:20px;text-align:center;" data-toggle="modal" data-target="#myModal"><img src="images/modify.png"></img><br/><span class="hidden-xs" style="color:#fff;font-size:15px;">园所信息</span></td>
+        <td style="padding-right:20px;text-align:center;" onclick="openHelp();"><img src="images/help.png"></img><br/><span class="hidden-xs" style="color:#fff;font-size:15px;">评估服务</span></td>
+        <td class="dropdown" style="padding-right:20px;text-align:center;">
+        <span class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="display:inline;">
+        <!-- The user image in the navbar-->
+        <img src="images/person.png" class="logo">
+        <!-- hidden-xs hides the username on small devices so only the image appears. -->
+        
+        <br/><span class="hidden-xs" style="color:#fff;font-size:15px;">个人信息</span>
+        </span>
+        <ul class="dropdown-menu" style="width:250px;margin-left:-220px;">
+        <!-- Menu Body -->
+        <li>
+        <div>
+        <b>&nbsp;&nbsp;&nbsp;姓名：</b>
+        <span id="sname"></span>
+        </div>
+        <li class="divider"></li>
+        <div>
+        <b>手机号：</b>
+        <span id="sphone"></span>
+        </div>
+        <li class="divider"></li>
+        <div>
+        <b>&nbsp;&nbsp;EMail：</b>
+        <span id="semail"></span>
+        </div>
+        <!-- /.row -->
+        </li>
+        <!-- Menu Footer-->
+        <li class="divider"></li>
+        <li class="user-footer">
+        <div class="pull-right" style="padding-right:50px;">
+        <a href="#" class="btn btn-danger btn-flat" onclick="logout();">退出</a>
+        </div>
+        </li>
+        </ul>
+        </td>
+        </tr>
+        
+        </table>
+        </td>
+        </tr>
+        </table>
+        </div>
   <div class="container" style="width:100%;margin:0px auto;">
 	<div class="panel panel-default">
 		<div class="panel-body">
@@ -311,7 +300,7 @@
                                   <td colspan="5" align="center">在园(班)人数</td>
                               </tr>
                               <tr>
-                                  <td>在园人数合计</td>
+                                  <td>合计</td>
                                   <td>托班</td>
                                   <td>小班</td>
                                   <td>中班</td>
@@ -336,7 +325,7 @@
                                   <td colspan="6" align="center"><label class="tishi" name="zhigongsum">教职工数</label></td>
                               </tr>
                               <tr>
-                                  <td>教职工数合计</td>
+                                  <td>合计</td>
                                   <td>园长</td>
                                   <td>专任教师</td>
                                   <td>保健医</td>
@@ -362,8 +351,8 @@
                                   <td>研究生毕业</td>
                                   <td>本科毕业</td>
                                   <td>专科毕业</td>
-                                  <td>高中阶段毕业</td>
-                                  <td>高中阶段以下毕业</td>
+                                  <td>高中毕业</td>
+                                  <td>高中以下</td>
                               </tr>
                               <tr>
                                   <td id="info32"></td>
@@ -384,10 +373,10 @@
                                   <td colspan="5" align="center">保育员学历</td>
                               </tr>
                               <tr>
-                                  <td>本科毕业及以上</td>
+                                  <td>本科及以上</td>
                                   <td>专科毕业</td>
-                                  <td>高中阶段毕业</td>
-                                  <td>高中阶段以下毕业</td>
+                                  <td>高中阶业</td>
+                                  <td>高中以下</td>
                               </tr>
                               <tr>
                                   <td id="info58"></td>
@@ -512,7 +501,7 @@
                                   <td id="info63"></td>
                               </tr>
                               <tr>
-                                  <td>学前教育专业毕业的专任教师数</td>
+                                  <td>学前教育专业毕业专任教师数</td>
                                   <td id="info30"></td>
                               </tr>
                               <tr>
