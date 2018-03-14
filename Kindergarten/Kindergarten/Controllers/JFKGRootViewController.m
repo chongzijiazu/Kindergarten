@@ -355,22 +355,35 @@
 
 #pragma mark - WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    //NSString *hostname = navigationAction.request.URL.host.lowercaseString;
+    NSString *hostname = navigationAction.request.URL.host.lowercaseString;
     NSString* hosturl = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if (navigationAction.navigationType == WKNavigationTypeOther
-        && [hosturl containsString:@"download.do?exporttype="]) {
+    if (navigationAction.navigationType == WKNavigationTypeLinkActivated
+        && ![hostname containsString:@"pinggu.zjzku.com"]) {
         // 对于跨域，需要手动跳转
-        //[[UIApplication sharedApplication] openURL:navigationAction.request.URL];
+        [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
         
-        // 取消下载请求
+        // 不允许web内跳转
         decisionHandler(WKNavigationActionPolicyCancel);
-        NSString* funMessage = @"alert('请到电脑端导出查看文件!');";
-        [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
-            NSLog(@"response: %@ error: %@", response, error);
-        }];
+    }
+    else
+    {
+        if (navigationAction.navigationType == WKNavigationTypeOther
+            && [hosturl containsString:@"download.do?exporttype="]) {
+            // 对于跨域，需要手动跳转
+            //[[UIApplication sharedApplication] openURL:navigationAction.request.URL];
         
-    } else {
-        decisionHandler(WKNavigationActionPolicyAllow);
+            // 取消下载请求
+            decisionHandler(WKNavigationActionPolicyCancel);
+            NSString* funMessage = @"alert('请到电脑端导出查看文件!');";
+            [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
+        
+        }
+        else
+        {
+            decisionHandler(WKNavigationActionPolicyAllow);
+        }
     }
     
     NSLog(@"%s", __FUNCTION__);
