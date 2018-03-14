@@ -421,6 +421,22 @@
     else if([htmlname isEqualToString:@"evaluate.html"])
     {
         [self.evaluateController sendLevelQuestionToView];
+        
+        
+        NSString* preThirdLevelId = [self.levelController getPreThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
+        if (preThirdLevelId==nil) {
+            NSString* funMessage = @"$('#imgPageUp').hide()";
+            [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
+        }
+        NSString* nextThirdLevelId = [self.levelController getNextThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
+        if (nextThirdLevelId==nil) {
+            NSString* funMessage = @"$('#imgPageDown').hide()";
+            [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
+        }
     }
     /*else if ([htmlname isEqualToString:@"login.html"])
     {
@@ -522,9 +538,23 @@
 {
     NSString* nextThirdLevelId = [self.levelController getNextThirdLevelIdByCurrentThirdLevelId:self.evaluateController.currentLevelQuestionID];
     
-    
     if (nextThirdLevelId!=nil && nextThirdLevelId.length==9)
     {
+        //最后一页，隐藏下一页
+        NSString* nextNextThirdLevelId = [self.levelController getNextThirdLevelIdByCurrentThirdLevelId:nextThirdLevelId];
+        if (nextNextThirdLevelId==nil) {
+            NSString* funMessage = @"$('#imgPageDown').hide()";
+            [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
+        }
+        else
+        {
+            NSString* funMessage = @"$('#imgPageUp').show()";
+            [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
+        }
         //根据三级指标编码的前三位（一级指标编码）判断，是否进入下一个指标
         NSString* currentFirstLevel = [self.evaluateController.currentLevelQuestionID substringToIndex:3];
         NSString* nextFirstLevel = [nextThirdLevelId substringToIndex:3];
@@ -545,6 +575,7 @@
     else
     {
         NSString* funMessage = @"alert('已在末页!');";
+        //NSString* funMessage = @"$('#imgPageDown').hide()";
         [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
             NSLog(@"response: %@ error: %@", response, error);
         }];
@@ -558,6 +589,21 @@
     
     if (preThirdLevelId!=nil && preThirdLevelId.length==9)
     {
+        //第一页，隐藏上一页
+        NSString* prePreThirdLevelId = [self.levelController getPreThirdLevelIdByCurrentThirdLevelId:preThirdLevelId];
+        if (prePreThirdLevelId==nil) {
+            NSString* funMessage = @"$('#imgPageUp').hide()";
+            [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
+        }
+        else
+        {
+            NSString* funMessage = @"$('#imgPageDown').show()";
+            [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
+                NSLog(@"response: %@ error: %@", response, error);
+            }];
+        }
         //根据三级指标编码的前三位（一级指标编码）判断，是否进入下一个指标
         NSString* currentFirstLevel = [self.evaluateController.currentLevelQuestionID substringToIndex:3];
         NSString* preFirstLevelId = [preThirdLevelId substringToIndex:3];
@@ -577,6 +623,7 @@
     else
     {
         NSString* funMessage = @"alert('已在首页!');";
+        //NSString* funMessage = @"$('#imgPageUp').hide()";
         [self.webView evaluateJavaScript:funMessage completionHandler:^(id _Nullable response, NSError * _Nullable error) {
             NSLog(@"response: %@ error: %@", response, error);
         }];
