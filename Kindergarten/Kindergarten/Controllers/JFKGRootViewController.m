@@ -357,7 +357,7 @@
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     NSString *hostname = navigationAction.request.URL.host.lowercaseString;
     NSString* hosturl = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
-    if (navigationAction.navigationType == WKNavigationTypeLinkActivated
+    /*if (navigationAction.navigationType == WKNavigationTypeLinkActivated
         && ![hostname containsString:@"pinggu.zjzku.com"]) {
         // 对于跨域，需要手动跳转
         [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
@@ -366,7 +366,7 @@
         decisionHandler(WKNavigationActionPolicyCancel);
     }
     else
-    {
+    {*/
         if (navigationAction.navigationType == WKNavigationTypeOther
             && [hosturl containsString:@"download.do?exporttype="]) {
             // 对于跨域，需要手动跳转
@@ -384,7 +384,7 @@
         {
             decisionHandler(WKNavigationActionPolicyAllow);
         }
-    }
+    //}
     
     NSLog(@"%s", __FUNCTION__);
 }
