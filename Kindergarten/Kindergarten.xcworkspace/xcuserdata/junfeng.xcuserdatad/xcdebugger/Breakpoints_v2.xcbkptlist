@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kindergarten/Controllers/JFKGRootViewController.m"
-            timestampString = "542770263.469509"
+            timestampString = "543470306.354964"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "419"
-            endingLineNumber = "419"
+            startingLineNumber = "420"
+            endingLineNumber = "420"
             landmarkName = "-webView:didFinishNavigation:"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kindergarten/Controllers/JFKGRootViewController.m"
-            timestampString = "542770263.469596"
+            timestampString = "543470306.35545"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "428"
-            endingLineNumber = "428"
+            startingLineNumber = "429"
+            endingLineNumber = "429"
             landmarkName = "-webView:didFinishNavigation:"
             landmarkType = "7">
          </BreakpointContent>
@@ -86,7 +86,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kindergarten/Controllers/JFKGLoginContrller.m"
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kindergarten/Controllers/JFKGRootViewController.m"
-            timestampString = "542770263.469727"
+            timestampString = "543470306.355785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "436"
-            endingLineNumber = "436"
+            startingLineNumber = "437"
+            endingLineNumber = "437"
             landmarkName = "-webView:didFinishNavigation:"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kindergarten/Controllers/JFKGRootViewController.m"
-            timestampString = "542770263.469816"
+            timestampString = "543470306.35607"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "639"
-            endingLineNumber = "639"
+            startingLineNumber = "640"
+            endingLineNumber = "640"
             landmarkName = "-pageup"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kindergarten/Controllers/JFKGRootViewController.m"
-            timestampString = "542770263.469878"
+            timestampString = "543470306.3563401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "606"
-            endingLineNumber = "606"
+            startingLineNumber = "607"
+            endingLineNumber = "607"
             landmarkName = "-pageup"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kindergarten/Controllers/JFKGRootViewController.m"
-            timestampString = "542770263.469931"
+            timestampString = "543470306.356606"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "439"
-            endingLineNumber = "439"
+            startingLineNumber = "440"
+            endingLineNumber = "440"
             landmarkName = "-webView:didFinishNavigation:"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kindergarten/Controllers/JFKGRootViewController.m"
-            timestampString = "542770263.469978"
+            timestampString = "543470306.356864"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "615"
-            endingLineNumber = "615"
+            startingLineNumber = "616"
+            endingLineNumber = "616"
             landmarkName = "-pageup"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,12 +202,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kindergarten/Controllers/JFKGRootViewController.m"
-            timestampString = "542770263.470024"
+            timestampString = "543470306.357124"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "566"
-            endingLineNumber = "566"
+            startingLineNumber = "567"
+            endingLineNumber = "567"
             landmarkName = "-pagedown"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kindergarten/Controllers/JFKGRootViewController.m"
+            timestampString = "543470306.357384"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "-toOnlineLogin"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kindergarten/Controllers/JFKGRootViewController.m"
+            timestampString = "543470306.357633"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "357"
+            endingLineNumber = "357"
+            landmarkName = "-webView:decidePolicyForNavigationAction:decisionHandler:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
