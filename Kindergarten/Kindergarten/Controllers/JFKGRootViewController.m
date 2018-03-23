@@ -356,6 +356,10 @@
 #pragma mark - WKNavigationDelegate
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     NSString *hostname = navigationAction.request.URL.host.lowercaseString;
+    if (hostname==nil) {
+        decisionHandler(WKNavigationActionPolicyAllow);
+        return;
+    }
     NSLog(@"%ld",navigationAction.navigationType);
     NSString* hosturl = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
     if (navigationAction.navigationType == WKNavigationTypeOther
