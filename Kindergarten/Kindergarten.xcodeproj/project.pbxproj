@@ -704,7 +704,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9ZG8H4TMWQ;
+				DEVELOPMENT_TEAM = 495W836UVX;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Kindergarten/PrefixHeader.pch";
 				INFOPLIST_FILE = Kindergarten/Info.plist;
@@ -727,7 +727,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9ZG8H4TMWQ;
+				DEVELOPMENT_TEAM = 495W836UVX;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Kindergarten/PrefixHeader.pch";
 				INFOPLIST_FILE = Kindergarten/Info.plist;

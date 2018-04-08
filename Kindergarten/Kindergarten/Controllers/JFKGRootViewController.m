@@ -362,6 +362,13 @@
     }
     NSLog(@"%ld",navigationAction.navigationType);
     NSString* hosturl = [NSString stringWithFormat:@"%@",navigationAction.request.URL];
+    if ([[hosturl lowercaseString] containsString:@"jypg.org.cn/prove"] || [[hosturl lowercaseString] containsString:@"jypg.org.cn/help"]) {
+        [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
+        
+        // 证据和帮助文档不允许web内跳转
+        decisionHandler(WKNavigationActionPolicyCancel);
+        return;
+    }
     if (navigationAction.navigationType == WKNavigationTypeOther
         && ![hostname containsString:@"jypg.org.cn"]) {
         // 对于跨域，需要手动跳转

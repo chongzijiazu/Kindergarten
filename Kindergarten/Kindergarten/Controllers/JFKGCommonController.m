@@ -219,7 +219,8 @@
 
 -(void)showHelpFile:(NSString*)helpfilepath
 {
-    if (helpfilepath!=nil&&helpfilepath.length>0) {
+    if (helpfilepath!=nil&&helpfilepath.length>0)
+    {
         _docController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:helpfilepath]];
         _docController.delegate = self;
         CGRect rect = CGRectMake(self.currentVC.view.frame.size.width/2-100, 0, 200, 200);
@@ -232,8 +233,9 @@
             [_docController presentOpenInMenuFromRect:rect inView:self.currentVC.view animated:YES];
         }
     }
+    else
     {
-        [self showAlertView:@"无帮助文档"];
+        [self showAlertView:@"尚无文档"];
     }
 }
 
